@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // PERSONNEL SUBMISSION</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 45px 60px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            padding-bottom: 18px;
+            margin-bottom: 32px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.30);
+        }
+
+        .title {
+            font-size: 24px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            margin-top: 8px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        .status {
+            text-align: right;
+
+            font-size: 9px;
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.5;
+        }
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro {
+            margin-bottom: 28px;
+
+            padding: 18px 22px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            font-size: 11px;
+            line-height: 1.9;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.7;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form {
+            max-width: 1000px;
+        }
+
+        .panel {
+            padding: 26px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        .panel-title {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.5;
+
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .field-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+
+            margin-bottom: 18px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            letter-spacing: 0.8px;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        input {
+            height: 45px;
+        }
+
+        textarea {
+            min-height: 120px;
+
+            resize: vertical;
+
+            line-height: 1.7;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+
+            background:
+                rgba(255,255,255,0.025);
+        }
+
+        .hint {
+            margin-top: 6px;
+
+            font-size: 8px;
+
+            line-height: 1.6;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.3;
+        }
+
+        /* =========================
+           FILE INPUT
+        ========================= */
+
+        .file-input {
+            padding: 12px;
+
+            border:
+                1px dashed
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        input[type="file"] {
+            border: none;
+
+            padding: 0;
+
+            background: transparent;
+
+            color: #fff;
+
+            height: auto;
+        }
+
+        input[type="file"]::file-selector-button {
+            margin-right: 12px;
+
+            padding: 9px 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           SUBMIT
+        ========================= */
+
+        .submit-area {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-top: 25px;
+        }
+
+        .submit-button {
+            padding: 14px 22px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.45);
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background:
+                rgba(255,255,255,0.06);
+
+            border-color:
+                rgba(255,255,255,0.75);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.4;
+
+            cursor: not-allowed;
+        }
+
+        .form-status {
+            font-size: 9px;
+
+            line-height: 1.7;
+
+            letter-spacing: 1px;
+
+            opacity: 0.5;
+        }
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+        }
+
+        .result.visible {
+            display: block;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.32;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 22px 18px;
+            }
+
+            .header {
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+            }
+
+            .title {
+                font-size: 17px;
+            }
+
+            .field-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .submit-area {
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                PERSONNEL SUBMISSION // EXTERNAL
+            </div>
+
+        </div>
+
+        <div class="status">
+            CHANNEL: SECURE<br>
+            STATUS: ACCEPTING
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         INTRO
+    ========================= -->
+
+    <section class="intro">
+
+        &gt; PERSONNEL RECORD SUBMISSION CHANNEL OPEN.
+
+        <br>
+
+        Submit the information requested below.
+
+        <br>
+
+        All submissions are reviewed before
+        being added to the CIGA personnel database.
+
+        <br><br>
+
+        Submission does not guarantee approval.
+
+    </section>
+
+
+    <!-- =========================
+         FORM
+    ========================= -->
+
+    <form
+        class="form"
+        id="submissionForm"
+    >
+
+
+        <!-- BASIC INFORMATION -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // ENTITY INFORMATION
+            </div>
+
+
+            <div class="field-grid">
+
+
+                <div class="field">
+
+                    <label for="name">
+                        DISPLAY NAME *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="alias">
+                        ALIAS
+                    </label>
+
+                    <input
+                        type="text"
+                        id="alias"
+                        name="alias"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="description">
+                        SHORT DESCRIPTION *
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        required
+                    ></textarea>
+
+                    <div class="hint">
+                        A short description of the entity/person.
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="primary_activity">
+                        PRIMARY ACTIVITY
+                    </label>
+
+                    <input
+                        type="text"
+                        id="primary_activity"
+                        name="primary_activity"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="location">
+                        LOCATION
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="affiliation">
+                        AFFILIATION
+                    </label>
+
+                    <input
+                        type="text"
+                        id="affiliation"
+                        name="affiliation"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="origin">
+                        ORIGIN
+                    </label>
+
+                    <input
+                        type="text"
+                        id="origin"
+                        name="origin"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- CONNECTIONS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // KNOWN CONNECTIONS
+            </div>
+
+
+            <div class="field-grid">
+
+
+                <div class="field">
+
+                    <label for="twitch">
+                        TWITCH
+                    </label>
+
+                    <input
+                        type="url"
+                        id="twitch"
+                        name="twitch"
+                        placeholder="https://twitch.tv/..."
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="youtube">
+                        YOUTUBE
+                    </label>
+
+                    <input
+                        type="url"
+                        id="youtube"
+                        name="youtube"
+                        placeholder="https://youtube.com/..."
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="tiktok">
+                        TIKTOK
+                    </label>
+
+                    <input
+                        type="url"
+                        id="tiktok"
+                        name="tiktok"
+                        placeholder="https://tiktok.com/@..."
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="discord">
+                        DISCORD
+                    </label>
+
+                    <input
+                        type="url"
+                        id="discord"
+                        name="discord"
+                        placeholder="https://discord.gg/..."
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- IMAGE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // IDENTIFICATION IMAGE
+            </div>
+
+
+            <div class="field">
+
+                <label for="photo">
+                    SUBJECT IMAGE
+                </label>
+
+                <div class="file-input">
+
+                    <input
+                        type="file"
+                        id="photo"
+                        name="photo"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+                </div>
+
+
+                <div class="hint">
+
+                    PNG, JPG or WEBP.
+                    Maximum recommended size: 5 MB.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LORE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // LORE / INCIDENT INFORMATION
+            </div>
+
+
+            <div class="field">
+
+                <label for="notes">
+                    NOTES
+                </label>
+
+                <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Incidents, history, additional information..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="submit-area">
+
+                <div class="form-status">
+                    &gt; REVIEW REQUIRED<br>
+                    &gt; STATUS: PENDING
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                    id="submitButton"
+                >
+                    SUBMIT RECORD
+                </button>
+
+            </div>
+
+
+            <div
+                class="result"
+                id="result"
+            ></div>
+
+        </section>
+
+
+    </form>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // EXTERNAL SUBMISSION CHANNEL
+        </span>
+
+        <span>
+            ALL SUBMISSIONS ARE REVIEWED
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const { createClient } =
+        supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       FORM
+    ========================================== */
+
+    const form =
+        document.getElementById(
+            "submissionForm"
+        );
+
+
+    const submitButton =
+        document.getElementById(
+            "submitButton"
+        );
+
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "PROCESSING...";
+
+            result.classList.remove(
+                "visible"
+            );
+
+
+            try {
+
+                const formData =
+                    new FormData(form);
+
+
+                /* =========================
+                   BASIC DATA
+                ========================= */
+
+                const name =
+                    formData.get("name");
+
+                const alias =
+                    formData.get("alias");
+
+                const description =
+                    formData.get("description");
+
+                const primaryActivity =
+                    formData.get(
+                        "primary_activity"
+                    );
+
+                const location =
+                    formData.get("location");
+
+                const affiliation =
+                    formData.get("affiliation");
+
+                const origin =
+                    formData.get("origin");
+
+                const twitch =
+                    formData.get("twitch");
+
+                const youtube =
+                    formData.get("youtube");
+
+                const tiktok =
+                    formData.get("tiktok");
+
+                const discord =
+                    formData.get("discord");
+
+                const notes =
+                    formData.get("notes");
+
+
+                /* =========================
+                   IMAGE
+                ========================= */
+
+                const imageFile =
+                    document.getElementById(
+                        "photo"
+                    ).files[0];
+
+
+                let photoUrl = null;
+
+
+                if (imageFile) {
+
+
+                    /* =========================
+                       VALIDATE IMAGE
+                    ========================= */
+
+                    const allowedTypes = [
+                        "image/png",
+                        "image/jpeg",
+                        "image/webp"
+                    ];
+
+
+                    if (
+                        !allowedTypes.includes(
+                            imageFile.type
+                        )
+                    ) {
+
+                        throw new Error(
+                            "INVALID_IMAGE_TYPE"
+                        );
+
+                    }
+
+
+                    if (
+                        imageFile.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        throw new Error(
+                            "IMAGE_TOO_LARGE"
+                        );
+
+                    }
+
+
+                    /* =========================
+                       UNIQUE IMAGE NAME
+                    ========================= */
+
+                    const fileExtension =
+                        imageFile.name
+                            .split(".")
+                            .pop()
+                            .toLowerCase();
+
+
+                    const uniqueName =
+                        `${crypto.randomUUID()}.${fileExtension}`;
+
+
+                    const storagePath =
+                        `submissions/${uniqueName}`;
+
+
+                    /* =========================
+                       UPLOAD IMAGE
+                    ========================= */
+
+                    submitButton.textContent =
+                        "UPLOADING IMAGE...";
+
+
+                    const {
+                        error:
+                        uploadError
+                    } = await db.storage
+
+                        .from("personnel")
+
+                        .upload(
+                            storagePath,
+                            imageFile,
+                            {
+                                contentType:
+                                    imageFile.type,
+
+                                upsert: false
+                            }
+                        );
+
+
+                    if (uploadError) {
+
+                        console.error(
+                            "IMAGE UPLOAD ERROR:",
+                            uploadError
+                        );
+
+                        throw new Error(
+                            "IMAGE_UPLOAD_FAILED"
+                        );
+
+                    }
+
+
+                    /* =========================
+                       PUBLIC URL
+                    ========================= */
+
+                    const {
+                        data:
+                        publicData
+                    } = db.storage
+
+                        .from("personnel")
+
+                        .getPublicUrl(
+                            storagePath
+                        );
+
+
+                    photoUrl =
+                        publicData.publicUrl;
+
+                }
+
+
+                /* =========================
+                   CREATE SUBMISSION
+                ========================= */
+
+                submitButton.textContent =
+                    "SUBMITTING RECORD...";
+
+
+                const submission = {
+
+                    name:
+                        name,
+
+                    alias:
+                        alias,
+
+                    description:
+                        description,
+
+                    primary_activity:
+                        primaryActivity,
+
+                    location:
+                        location,
+
+                    affiliation:
+                        affiliation,
+
+                    origin:
+                        origin,
+
+                    twitch:
+                        twitch,
+
+                    youtube:
+                        youtube,
+
+                    tiktok:
+                        tiktok,
+
+                    discord:
+                        discord,
+
+                    photo:
+                        photoUrl,
+
+                    notes:
+                        notes,
+
+                    submission_status:
+                        "PENDING"
+
+                };
+
+
+                const {
+                    error:
+                    submissionError
+                } = await db
+
+                    .from(
+                        "personnel_submissions"
+                    )
+
+                    .insert(
+                        [submission]
+                    );
+
+
+                if (submissionError) {
+
+                    console.error(
+                        "SUBMISSION ERROR:",
+                        submissionError
+                    );
+
+
+                    throw new Error(
+                        "SUBMISSION_FAILED"
+                    );
+
+                }
+
+
+                /* =========================
+                   SUCCESS
+                ========================= */
+
+                result.innerHTML = `
+
+                    &gt; SUBMISSION RECEIVED.
+
+                    <br>
+
+                    &gt; RECORD STATUS:
+                    PENDING REVIEW.
+
+                    <br>
+
+                    &gt; IDENTIFICATION IMAGE:
+                    ${photoUrl
+                        ? "UPLOADED"
+                        : "NOT PROVIDED"
+                    }
+
+                    <br>
+
+                    &gt; CIGA PERSONNEL WILL REVIEW
+                    THE SUBMISSION BEFORE ACTIVATION.
+
+                `;
+
+                result.classList.add(
+                    "visible"
+                );
+
+
+                form.reset();
+
+
+            } catch (error) {
+
+                console.error(
+                    "FORM ERROR:",
+                    error
+                );
+
+
+                let message =
+                    "&gt; SUBMISSION FAILED.";
+
+
+                if (
+                    error.message ===
+                    "INVALID_IMAGE_TYPE"
+                ) {
+
+                    message = `
+                        &gt; INVALID IMAGE FORMAT.<br>
+                        &gt; USE PNG, JPG OR WEBP.
+                    `;
+
+                }
+
+
+                else if (
+                    error.message ===
+                    "IMAGE_TOO_LARGE"
+                ) {
+
+                    message = `
+                        &gt; IMAGE TOO LARGE.<br>
+                        &gt; MAXIMUM SIZE: 5 MB.
+                    `;
+
+                }
+
+
+                else if (
+                    error.message ===
+                    "IMAGE_UPLOAD_FAILED"
+                ) {
+
+                    message = `
+                        &gt; IMAGE UPLOAD FAILED.<br>
+                        &gt; RECORD WAS NOT SUBMITTED.
+                    `;
+
+                }
+
+
+                result.innerHTML =
+                    message;
+
+                result.classList.add(
+                    "visible"
+                );
+
+            }
+
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "SUBMIT RECORD";
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

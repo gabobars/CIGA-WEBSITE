@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // ADMINISTRATION</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 40px 55px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            padding-bottom: 16px;
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.30);
+        }
+
+        .title {
+            font-size: 22px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            margin-top: 8px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        .header-status {
+            text-align: right;
+
+            font-size: 9px;
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            margin-bottom: 28px;
+
+            padding: 17px 20px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            font-size: 11px;
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.65;
+        }
+
+
+        /* =========================
+           ACCESS DENIED
+        ========================= */
+
+        .message {
+            max-width: 700px;
+
+            margin: 100px auto;
+
+            padding: 25px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            font-size: 11px;
+            line-height: 2;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.7;
+        }
+
+        .message-title {
+            font-size: 18px;
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            padding: 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        .stat-label {
+            font-size: 8px;
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 9px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+            padding: 25px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        .panel-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+
+            opacity: 0.5;
+
+            padding-bottom: 11px;
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           SUBMISSIONS
+        ========================= */
+
+        .submission {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 20px;
+
+            padding: 18px;
+
+            margin-bottom: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .submission:hover {
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.4);
+        }
+
+        .submission-id {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+
+            margin-bottom: 8px;
+        }
+
+        .submission-name {
+            font-size: 15px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .submission-meta {
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+        .submission-status {
+            display: flex;
+
+            align-items:
+                center;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.5;
+        }
+
+        .submission-status::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            margin-right: 8px;
+
+            background: #fff;
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .actions {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 11px 15px;
+
+            background: #000;
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            font-family: inherit;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background:
+                rgba(255,255,255,0.06);
+
+            border-color:
+                rgba(255,255,255,0.6);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+
+            cursor: not-allowed;
+        }
+
+        .logout {
+            float: right;
+        }
+
+
+        /* =========================
+           REVIEW
+        ========================= */
+
+        .review-panel {
+            display: none;
+        }
+
+        .review-panel.visible {
+            display: block;
+        }
+
+        .review-top {
+            display: grid;
+
+            grid-template-columns:
+                200px
+                1fr;
+
+            gap: 30px;
+
+            margin-bottom: 25px;
+        }
+
+        .review-photo {
+            width: 170px;
+            height: 210px;
+
+            object-fit: cover;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            background: #080808;
+
+            filter: grayscale(100%);
+        }
+
+        .review-photo-unavailable {
+            width: 170px;
+            height: 210px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.30);
+
+            font-size: 9px;
+            line-height: 1.6;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+        }
+
+        .review-subject {
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .review-subject-label {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 10px;
+        }
+
+        .review-subject-name {
+            font-size: 28px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 15px;
+        }
+
+        .review-subject-description {
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.7;
+        }
+
+
+        /* =========================
+           REVIEW DATA
+        ========================= */
+
+        .review-data {
+            display: grid;
+
+            grid-template-columns:
+                180px
+                1fr;
+
+            gap: 13px 20px;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+        .review-label {
+            opacity: 0.35;
+
+            letter-spacing: 1.5px;
+        }
+
+        .review-value {
+            opacity: 0.85;
+
+            letter-spacing: 0.8px;
+
+            word-break:
+                break-word;
+        }
+
+
+        /* =========================
+           SOCIALS
+        ========================= */
+
+        .social-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 10px;
+        }
+
+        .social {
+            padding: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            background:
+                rgba(255,255,255,0.02);
+        }
+
+        .social-name {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 6px;
+        }
+
+        .social-url {
+            font-size: 9px;
+
+            letter-spacing: 0.5px;
+
+            word-break:
+                break-all;
+
+            opacity: 0.75;
+        }
+
+
+        /* =========================
+           REVIEW ACTIONS
+        ========================= */
+
+        .review-actions {
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .approve {
+            border-color:
+                rgba(255,255,255,0.55);
+        }
+
+        .reject {
+            opacity: 0.65;
+        }
+
+
+        /* =========================
+           CONFIRMATION BOX
+        ========================= */
+
+        .confirmation {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            background:
+                rgba(255,255,255,0.025);
+        }
+
+        .confirmation.visible {
+            display: block;
+        }
+
+        .confirmation-title {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+
+            opacity: 0.8;
+        }
+
+        .confirmation-text {
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.6;
+
+            margin-bottom: 17px;
+        }
+
+        .confirmation-actions {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .confirmation-yes {
+            border-color:
+                rgba(255,255,255,0.55);
+        }
+
+        .confirmation-no {
+            opacity: 0.55;
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.7;
+        }
+
+        .result.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            padding: 20px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-top: 30px;
+
+            padding-top: 14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.3;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 22px 18px;
+            }
+
+            .header {
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+            }
+
+            .title {
+                font-size: 17px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .submission {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .submission-status {
+                justify-content:
+                    flex-start;
+            }
+
+            .review-top {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .social-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .review-data {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .review-actions {
+                flex-direction:
+                    column;
+            }
+
+            .confirmation-actions {
+                flex-direction:
+                    column;
+            }
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                ADMINISTRATION // RESTRICTED
+            </div>
+
+        </div>
+
+        <div class="header-status">
+
+            CLEARANCE: ADMIN<br>
+            CHANNEL: SECURE
+
+        </div>
+
+    </header>
+
+
+    <!-- TERMINAL -->
+
+    <section class="terminal">
+
+        <div>
+            &gt; VERIFYING ADMINISTRATOR SESSION...
+        </div>
+
+        <div id="terminalStatus">
+            &gt; WAITING FOR AUTHORIZATION...
+        </div>
+
+    </section>
+
+
+    <!-- ACCESS DENIED -->
+
+    <section
+        class="message"
+        id="deniedMessage"
+    >
+
+        <div class="message-title">
+            ACCESS DENIED
+        </div>
+
+        <div>
+            &gt; ADMINISTRATOR CLEARANCE REQUIRED.
+        </div>
+
+        <div>
+            &gt; THIS ATTEMPT HAS BEEN LOGGED.
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+
+    <main
+        class="dashboard"
+        id="dashboard"
+    >
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    ADMIN STATUS
+                </div>
+
+                <div class="stat-value">
+                    VERIFIED
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    PENDING SUBMISSIONS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="pendingCount"
+                >
+                    --
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    DATABASE
+                </div>
+
+                <div class="stat-value">
+                    ONLINE
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUBMISSIONS -->
+
+        <section
+            class="panel"
+            id="submissionPanel"
+        >
+
+            <div class="panel-title">
+                // PENDING PERSONNEL SUBMISSIONS
+            </div>
+
+            <div id="submissionList">
+
+                <div class="empty">
+                    &gt; LOADING SUBMISSIONS...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REVIEW PANEL -->
+
+        <section
+            class="panel review-panel"
+            id="reviewPanel"
+        >
+
+            <div class="panel-title">
+                // SUBMISSION REVIEW
+            </div>
+
+
+            <div id="reviewContent">
+            </div>
+
+
+            <!-- CONFIRMATION -->
+
+            <div
+                class="confirmation"
+                id="confirmation"
+            >
+
+                <div
+                    class="confirmation-title"
+                    id="confirmationTitle"
+                >
+                    // CONFIRM ACTION
+                </div>
+
+                <div
+                    class="confirmation-text"
+                    id="confirmationText"
+                >
+                    CONFIRMATION REQUIRED.
+                </div>
+
+                <div class="confirmation-actions">
+
+                    <button
+                        class="confirmation-yes"
+                        id="confirmationYes"
+                    >
+                        CONFIRM
+                    </button>
+
+                    <button
+                        class="confirmation-no"
+                        id="confirmationNo"
+                    >
+                        CANCEL
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="reviewResult"
+            ></div>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="review-actions">
+
+                <button
+                    class="reject"
+                    id="rejectButton"
+                >
+                    REJECT RECORD
+                </button>
+
+
+                <button
+                    class="approve"
+                    id="approveButton"
+                >
+                    APPROVE RECORD
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- LOGOUT -->
+
+        <button
+            class="logout"
+            id="logoutButton"
+        >
+            TERMINATE SESSION
+        </button>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // ADMINISTRATION
+        </span>
+
+        <span>
+            ALL ADMINISTRATIVE ACCESS IS LOGGED
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const { createClient } =
+        supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
+
+    const deniedMessage =
+        document.getElementById(
+            "deniedMessage"
+        );
+
+    const terminalStatus =
+        document.getElementById(
+            "terminalStatus"
+        );
+
+    const pendingCount =
+        document.getElementById(
+            "pendingCount"
+        );
+
+    const submissionList =
+        document.getElementById(
+            "submissionList"
+        );
+
+    const reviewPanel =
+        document.getElementById(
+            "reviewPanel"
+        );
+
+    const reviewContent =
+        document.getElementById(
+            "reviewContent"
+        );
+
+    const reviewResult =
+        document.getElementById(
+            "reviewResult"
+        );
+
+    const approveButton =
+        document.getElementById(
+            "approveButton"
+        );
+
+    const rejectButton =
+        document.getElementById(
+            "rejectButton"
+        );
+
+    const confirmation =
+        document.getElementById(
+            "confirmation"
+        );
+
+    const confirmationTitle =
+        document.getElementById(
+            "confirmationTitle"
+        );
+
+    const confirmationText =
+        document.getElementById(
+            "confirmationText"
+        );
+
+    const confirmationYes =
+        document.getElementById(
+            "confirmationYes"
+        );
+
+    const confirmationNo =
+        document.getElementById(
+            "confirmationNo"
+        );
+
+
+    let currentSubmission = null;
+
+    let pendingAction = null;
+
+
+    /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       ADMIN CHECK
+    ========================================== */
+
+    async function checkAdmin() {
+
+        const {
+            data: {
+                user
+            }
+        } =
+            await db.auth.getUser();
+
+
+        if (!user) {
+
+            terminalStatus.textContent =
+                "> NO ACTIVE SESSION.";
+
+            deniedMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from("admins")
+
+                .select(
+                    "user_id, role"
+                )
+
+                .eq(
+                    "user_id",
+                    user.id
+                )
+
+                .eq(
+                    "role",
+                    "ADMIN"
+                )
+
+                .maybeSingle();
+
+
+        if (
+            error ||
+            !data
+        ) {
+
+            console.error(
+                "ADMIN CHECK ERROR:",
+                error
+            );
+
+            await db.auth.signOut();
+
+            terminalStatus.textContent =
+                "> ADMINISTRATOR VERIFICATION FAILED.";
+
+            deniedMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        terminalStatus.textContent =
+            "> ADMINISTRATOR VERIFIED.";
+
+        deniedMessage.style.display =
+            "none";
+
+        dashboard.classList.add(
+            "visible"
+        );
+
+        loadSubmissions();
+
+    }
+
+
+    /* ==========================================
+       LOAD SUBMISSIONS
+    ========================================== */
+
+    async function loadSubmissions() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "personnel_submissions"
+                )
+
+                .select("*")
+
+                .eq(
+                    "submission_status",
+                    "PENDING"
+                )
+
+                .order(
+                    "id",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "SUBMISSION LOAD ERROR:",
+                error
+            );
+
+            submissionList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; SUBMISSION DATABASE ERROR.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        pendingCount.textContent =
+            data.length;
+
+
+        if (
+            data.length === 0
+        ) {
+
+            submissionList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; NO PENDING SUBMISSIONS.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        submissionList.innerHTML =
+            "";
+
+
+        data.forEach(
+            submission => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "submission";
+
+
+                item.innerHTML = `
+
+                    <div>
+
+                        <div class="submission-id">
+
+                            SUBMISSION_${String(
+                                submission.id
+                            ).padStart(3, "0")}
+
+                        </div>
+
+
+                        <div class="submission-name">
+
+                            [
+
+                            ${escapeHTML(
+                                submission.name ||
+                                "UNKNOWN"
+                            ).toUpperCase()}
+
+                            ]
+
+                        </div>
+
+
+                        <div class="submission-meta">
+
+                            ALIAS:
+                            ${escapeHTML(
+                                submission.alias ||
+                                "UNAVAILABLE"
+                            )}
+
+                            <br>
+
+                            ACTIVITY:
+                            ${escapeHTML(
+                                submission.primary_activity ||
+                                "UNAVAILABLE"
+                            )}
+
+                            <br>
+
+                            STATUS:
+                            PENDING REVIEW
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <button
+                                class="reviewButton"
+                                data-id="${submission.id}"
+                            >
+                                REVIEW
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="submission-status">
+
+                        PENDING
+
+                    </div>
+
+                `;
+
+
+                submissionList.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".reviewButton"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            openReview(
+                                Number(
+                                    button.dataset.id
+                                )
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* ==========================================
+       OPEN REVIEW
+    ========================================== */
+
+    async function openReview(
+        submissionId
+    ) {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "personnel_submissions"
+                )
+
+                .select("*")
+
+                .eq(
+                    "id",
+                    submissionId
+                )
+
+                .eq(
+                    "submission_status",
+                    "PENDING"
+                )
+
+                .single();
+
+
+        if (
+            error ||
+            !data
+        ) {
+
+            showReviewResult(
+                "> SUBMISSION COULD NOT BE LOADED."
+            );
+
+            return;
+
+        }
+
+
+        currentSubmission =
+            data;
+
+
+        const photo =
+            data.photo &&
+            data.photo.trim() !== ""
+
+                ? `
+
+                    <img
+                        src="${escapeHTML(data.photo)}"
+                        alt="SUBJECT IMAGE"
+                        class="review-photo"
+                    >
+
+                `
+
+                : `
+
+                    <div class="review-photo-unavailable">
+
+                        IMAGE<br>
+                        UNAVAILABLE
+
+                    </div>
+
+                `;
+
+
+        reviewContent.innerHTML = `
+
+            <div class="review-top">
+
+
+                <div>
+
+                    ${photo}
+
+                </div>
+
+
+                <div class="review-subject">
+
+                    <div class="review-subject-label">
+                        DESIGNATION
+                    </div>
+
+                    <div class="review-subject-name">
+
+                        ${escapeHTML(
+                            data.name ||
+                            "UNKNOWN"
+                        ).toUpperCase()}
+
+                    </div>
+
+
+                    <div class="review-subject-description">
+
+                        ${escapeHTML(
+                            data.description ||
+                            "NO DESCRIPTION PROVIDED."
+                        )}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // ENTITY INFORMATION
+                </div>
+
+
+                <div class="review-data">
+
+
+                    <div class="review-label">
+                        ALIAS
+                    </div>
+
+                    <div class="review-value">
+
+                        ${escapeHTML(
+                            data.alias ||
+                            "UNAVAILABLE"
+                        )}
+
+                    </div>
+
+
+                    <div class="review-label">
+                        PRIMARY ACTIVITY
+                    </div>
+
+                    <div class="review-value">
+
+                        ${escapeHTML(
+                            data.primary_activity ||
+                            "UNAVAILABLE"
+                        )}
+
+                    </div>
+
+
+                    <div class="review-label">
+                        LOCATION
+                    </div>
+
+                    <div class="review-value">
+
+                        ${escapeHTML(
+                            data.location ||
+                            "UNAVAILABLE"
+                        )}
+
+                    </div>
+
+
+                    <div class="review-label">
+                        AFFILIATION
+                    </div>
+
+                    <div class="review-value">
+
+                        ${escapeHTML(
+                            data.affiliation ||
+                            "UNAVAILABLE"
+                        )}
+
+                    </div>
+
+
+                    <div class="review-label">
+                        ORIGIN
+                    </div>
+
+                    <div class="review-value">
+
+                        ${escapeHTML(
+                            data.origin ||
+                            "UNAVAILABLE"
+                        )}
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // KNOWN CONNECTIONS
+                </div>
+
+
+                <div class="social-grid">
+
+
+                    <div class="social">
+
+                        <div class="social-name">
+                            TWITCH
+                        </div>
+
+                        <div class="social-url">
+
+                            ${escapeHTML(
+                                data.twitch ||
+                                "UNAVAILABLE"
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="social">
+
+                        <div class="social-name">
+                            YOUTUBE
+                        </div>
+
+                        <div class="social-url">
+
+                            ${escapeHTML(
+                                data.youtube ||
+                                "UNAVAILABLE"
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="social">
+
+                        <div class="social-name">
+                            TIKTOK
+                        </div>
+
+                        <div class="social-url">
+
+                            ${escapeHTML(
+                                data.tiktok ||
+                                "UNAVAILABLE"
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="social">
+
+                        <div class="social-name">
+                            DISCORD
+                        </div>
+
+                        <div class="social-url">
+
+                            ${escapeHTML(
+                                data.discord ||
+                                "UNAVAILABLE"
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // LORE / INCIDENT INFORMATION
+                </div>
+
+
+                <div class="review-value">
+
+                    ${escapeHTML(
+                        data.notes ||
+                        "NO ADDITIONAL INFORMATION PROVIDED."
+                    ).replace(
+                        /\n/g,
+                        "<br>"
+                    )}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        confirmation.classList.remove(
+            "visible"
+        );
+
+
+        reviewResult.classList.remove(
+            "visible"
+        );
+
+
+        reviewPanel.classList.add(
+            "visible"
+        );
+
+
+        reviewPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    /* ==========================================
+       SHOW CONFIRMATION
+    ========================================== */
+
+    function showConfirmation(
+        action
+    ) {
+
+        pendingAction =
+            action;
+
+
+        confirmation.classList.add(
+            "visible"
+        );
+
+
+        if (
+            action === "approve"
+        ) {
+
+            confirmationTitle.textContent =
+                "// APPROVAL CONFIRMATION";
+
+
+            confirmationText.innerHTML =
+                "&gt; CONFIRM APPROVAL OF THIS PERSONNEL RECORD?<br>" +
+                "&gt; A NEW FILE WILL BE CREATED IN THE PERSONNEL DATABASE.";
+
+        }
+
+
+        if (
+            action === "reject"
+        ) {
+
+            confirmationTitle.textContent =
+                "// REJECTION CONFIRMATION";
+
+
+            confirmationText.innerHTML =
+                "&gt; CONFIRM REJECTION OF THIS PERSONNEL RECORD?<br>" +
+                "&gt; THE SUBMISSION WILL BE ARCHIVED AS REJECTED.";
+
+        }
+
+
+        confirmation.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+
+    /* ==========================================
+       CANCEL CONFIRMATION
+    ========================================== */
+
+    confirmationNo.addEventListener(
+        "click",
+        function() {
+
+            pendingAction =
+                null;
+
+            confirmation.classList.remove(
+                "visible"
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       CONFIRM ACTION
+    ========================================== */
+
+    confirmationYes.addEventListener(
+        "click",
+        async function() {
+
+            if (
+                !currentSubmission ||
+                !pendingAction
+            ) {
+
+                return;
+
+            }
+
+
+            const action =
+                pendingAction;
+
+
+            pendingAction =
+                null;
+
+
+            confirmation.classList.remove(
+                "visible"
+            );
+
+
+            if (
+                action === "approve"
+            ) {
+
+                await approveCurrentSubmission();
+
+            }
+
+
+            if (
+                action === "reject"
+            ) {
+
+                await rejectCurrentSubmission();
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       APPROVE BUTTON
+    ========================================== */
+
+    approveButton.addEventListener(
+        "click",
+        function() {
+
+            if (!currentSubmission) {
+                return;
+            }
+
+            showConfirmation(
+                "approve"
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       APPROVE
+    ========================================== */
+
+    async function approveCurrentSubmission() {
+
+        approveButton.disabled =
+            true;
+
+        rejectButton.disabled =
+            true;
+
+
+        try {
+
+            const {
+                data: existingPersonnel,
+                error: personnelQueryError
+            } =
+                await db
+
+                    .from("personnel")
+
+                    .select(
+                        "file_number"
+                    );
+
+
+            if (
+                personnelQueryError
+            ) {
+
+                throw personnelQueryError;
+
+            }
+
+
+            let highestNumber =
+                0;
+
+
+            existingPersonnel.forEach(
+                person => {
+
+                    const number =
+                        parseInt(
+                            person.file_number,
+                            10
+                        );
+
+
+                    if (
+                        !Number.isNaN(number) &&
+                        number > highestNumber
+                    ) {
+
+                        highestNumber =
+                            number;
+
+                    }
+
+                }
+            );
+
+
+            const nextFileNumber =
+                String(
+                    highestNumber + 1
+                ).padStart(
+                    3,
+                    "0"
+                );
+
+
+            const personnelRecord = {
+
+                file_number:
+                    nextFileNumber,
+
+                name:
+                    currentSubmission.name,
+
+                alias:
+                    currentSubmission.alias,
+
+                status:
+                    currentSubmission.status ||
+                    "ACTIVE",
+
+                clearance:
+                    "OPERATIVE",
+
+                observation:
+                    "ONGOING",
+
+                threat_level:
+                    "UNASSESSED",
+
+                description:
+                    currentSubmission.description,
+
+                primary_activity:
+                    currentSubmission.primary_activity,
+
+                location:
+                    currentSubmission.location,
+
+                affiliation:
+                    currentSubmission.affiliation,
+
+                origin:
+                    currentSubmission.origin,
+
+                twitch:
+                    currentSubmission.twitch,
+
+                youtube:
+                    currentSubmission.youtube,
+
+                tiktok:
+                    currentSubmission.tiktok,
+
+                discord:
+                    currentSubmission.discord,
+
+                photo:
+                    currentSubmission.photo,
+
+                visible:
+                    true
+
+            };
+
+
+            const {
+                error:
+                insertPersonnelError
+            } =
+                await db
+
+                    .from("personnel")
+
+                    .insert(
+                        [personnelRecord]
+                    );
+
+
+            if (
+                insertPersonnelError
+            ) {
+
+                throw insertPersonnelError;
+
+            }
+
+
+            const {
+                error:
+                updateSubmissionError
+            } =
+                await db
+
+                    .from(
+                        "personnel_submissions"
+                    )
+
+                    .update({
+                        submission_status:
+                            "APPROVED"
+                    })
+
+                    .eq(
+                        "id",
+                        currentSubmission.id
+                    );
+
+
+            if (
+                updateSubmissionError
+            ) {
+
+                throw updateSubmissionError;
+
+            }
+
+
+            showReviewResult(
+                `> RECORD APPROVED.<br>` +
+                `> FILE_${nextFileNumber} CREATED.<br>` +
+                `> PERSONNEL DATABASE UPDATED.`
+            );
+
+
+            currentSubmission =
+                null;
+
+
+            reviewContent.innerHTML =
+                "";
+
+
+            await loadSubmissions();
+
+
+        } catch (error) {
+
+            console.error(
+                "APPROVAL ERROR:",
+                error
+            );
+
+
+            showReviewResult(
+                "> APPROVAL FAILED.<br>" +
+                "> PERSONNEL RECORD WAS NOT CONFIRMED."
+            );
+
+        }
+
+
+        approveButton.disabled =
+            false;
+
+        rejectButton.disabled =
+            false;
+
+    }
+
+
+    /* ==========================================
+       REJECT BUTTON
+    ========================================== */
+
+    rejectButton.addEventListener(
+        "click",
+        function() {
+
+            if (!currentSubmission) {
+                return;
+            }
+
+            showConfirmation(
+                "reject"
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       REJECT
+    ========================================== */
+
+    async function rejectCurrentSubmission() {
+
+        approveButton.disabled =
+            true;
+
+        rejectButton.disabled =
+            true;
+
+
+        const {
+            error
+        } =
+            await db
+
+                .from(
+                    "personnel_submissions"
+                )
+
+                .update({
+
+                    submission_status:
+                        "REJECTED"
+
+                })
+
+                .eq(
+                    "id",
+                    currentSubmission.id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "REJECTION ERROR:",
+                error
+            );
+
+
+            showReviewResult(
+                "> REJECTION FAILED."
+            );
+
+        } else {
+
+            showReviewResult(
+                "> RECORD REJECTED.<br>" +
+                "> SUBMISSION ARCHIVED."
+            );
+
+
+            currentSubmission =
+                null;
+
+
+            reviewContent.innerHTML =
+                "";
+
+
+            await loadSubmissions();
+
+        }
+
+
+        approveButton.disabled =
+            false;
+
+        rejectButton.disabled =
+            false;
+
+    }
+
+
+    /* ==========================================
+       RESULT
+    ========================================== */
+
+    function showReviewResult(
+        message
+    ) {
+
+        reviewResult.innerHTML =
+            message;
+
+        reviewResult.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    document
+        .getElementById(
+            "logoutButton"
+        )
+        .addEventListener(
+            "click",
+            async function() {
+
+                await db.auth.signOut();
+
+                window.location.href =
+                    "admin.html";
+
+            }
+        );
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    checkAdmin();
+
+</script>
+
+</body>
+
+</html>

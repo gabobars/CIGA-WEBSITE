@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CIGA SYSTEMS // ADMINISTRATION</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+        }
+
+        .screen {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+        }
+
+        .panel {
+            width: min(500px, 92vw);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.28);
+
+            padding: 30px;
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        .title {
+            font-size: 23px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+
+            margin-bottom: 30px;
+        }
+
+        .terminal {
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            padding:
+                15px 18px;
+
+            margin-bottom: 25px;
+
+            background:
+                rgba(255,255,255,0.02);
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.65;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        input {
+            width: 100%;
+
+            height: 44px;
+
+            padding: 0 13px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+        }
+
+        input:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+        .button {
+            width: 100%;
+
+            height: 45px;
+
+            margin-top: 8px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.4);
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background:
+                rgba(255,255,255,0.06);
+
+            border-color:
+                rgba(255,255,255,0.7);
+        }
+
+        .button:disabled {
+            opacity: 0.45;
+
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 18px;
+
+            padding: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.65;
+
+            display: none;
+        }
+
+        .message.visible {
+            display: block;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 20px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+        }
+
+        .back:hover {
+            opacity: 1;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="screen">
+
+    <section class="panel">
+
+        <div class="title">
+            CIGA SYSTEMS
+        </div>
+
+        <div class="subtitle">
+            ADMINISTRATION // RESTRICTED
+        </div>
+
+
+        <div class="terminal">
+
+            &gt; SECURE ADMIN CHANNEL DETECTED.<br>
+            &gt; AUTHENTICATION REQUIRED.<br>
+            &gt; CLEARANCE VERIFICATION ENABLED.
+
+        </div>
+
+
+        <form id="loginForm">
+
+            <div class="field">
+
+                <label for="email">
+                    ADMIN IDENTIFIER
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    required
+                    autocomplete="username"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="password">
+                    ACCESS CODE
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    required
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="button"
+                id="loginButton"
+            >
+                AUTHENTICATE
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <a
+            href="home.html"
+            class="back"
+        >
+            &lt;&lt; RETURN TO SYSTEM
+        </a>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const { createClient } =
+        supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+
+    const loginButton =
+        document.getElementById(
+            "loginButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "AUTHENTICATING...";
+
+
+            message.classList.remove(
+                "visible"
+            );
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value;
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            const {
+                data,
+                error
+            } = await db.auth.signInWithPassword({
+
+                email:
+                    email,
+
+                password:
+                    password
+
+            });
+
+
+            if (error) {
+
+                console.error(
+                    "AUTH ERROR:",
+                    error
+                );
+
+
+                message.textContent =
+                    "> AUTHENTICATION FAILED.";
+
+
+                message.classList.add(
+                    "visible"
+                );
+
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "AUTHENTICATE";
+
+                return;
+            }
+
+
+            /*
+                Authentication succeeded.
+
+                The next page will verify
+                that this authenticated user
+                actually exists in the admins table.
+            */
+
+            window.location.href =
+                "admin-panel.html";
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
