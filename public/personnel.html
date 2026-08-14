@@ -140,7 +140,9 @@
             padding: 20px;
 
             display: grid;
-            grid-template-columns: 1fr auto;
+
+            /* text | status | photo */
+            grid-template-columns: 1fr auto 80px;
 
             gap: 20px;
 
@@ -210,6 +212,38 @@
             border-radius: 50%;
 
             box-shadow: 0 0 8px rgba(255,255,255,0.7);
+        }
+
+        /* =========================
+           FILE PHOTO
+        ========================= */
+
+        .file-photo {
+            width: 70px;
+            height: 85px;
+
+            object-fit: cover;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            background: #080808;
+
+            filter: grayscale(100%);
+
+            font-size: 8px;
+
+            line-height: 1.4;
+
+            letter-spacing: 1px;
+
+            text-align: center;
+
+            opacity: 0.85;
         }
 
         /* =========================
@@ -294,7 +328,12 @@
             }
 
             .file {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr auto 60px;
+            }
+
+            .file-photo {
+                width: 55px;
+                height: 68px;
             }
 
             .file-status {
@@ -304,6 +343,23 @@
             .footer {
                 flex-direction: column;
                 gap: 8px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .file {
+                grid-template-columns: 1fr 60px;
+            }
+
+            .file-status {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .file-photo {
+                grid-column: 2;
+                grid-row: 1 / span 2;
             }
         }
     </style>
@@ -362,10 +418,6 @@
                 // PERSONNEL DIRECTORY
             </div>
 
-            <!--
-                Supabase vai colocar os ficheiros aqui
-            -->
-
             <div id="personnelList">
 
                 <div class="database-message">
@@ -411,10 +463,10 @@
         ========================================== */
 
         const SUPABASE_URL =
-            "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+            "COLOCA_AQUI_O_PROJECT_URL";
 
         const SUPABASE_KEY =
-            "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+            "COLOCA_AQUI_A_TUA_PUBLISHABLE_KEY";
 
 
         /* ==========================================
@@ -540,8 +592,7 @@
 
 
                 /*
-                    Later we will create ONE universal
-                    file.html page and send the ID there.
+                    Universal file page.
                 */
 
                 fileLink.href =
@@ -572,6 +623,47 @@
                     ).toUpperCase();
 
 
+                /*
+                    Get this person's photo
+                    from the Supabase photo field.
+                */
+
+                const photo =
+                    person.photo &&
+                    person.photo.trim() !== ""
+                        ? person.photo
+                        : "";
+
+
+                let photoHTML;
+
+
+                if (photo) {
+
+                    photoHTML = `
+
+                        <img
+                            src="${photo}"
+                            alt="${name}"
+                            class="file-photo"
+                        >
+
+                    `;
+
+                } else {
+
+                    photoHTML = `
+
+                        <div class="file-photo">
+                            IMAGE<br>
+                            UNAVAILABLE
+                        </div>
+
+                    `;
+
+                }
+
+
                 fileLink.innerHTML = `
 
                     <div class="file">
@@ -597,6 +689,8 @@
                         <div class="file-status">
                             AVAILABLE
                         </div>
+
+                        ${photoHTML}
 
                     </div>
 
