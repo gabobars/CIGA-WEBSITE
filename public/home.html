@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,6 +345,64 @@
 
 
         /* =========================
+           CLASSIFIED
+        ========================= */
+
+        .classified-button {
+            cursor: default;
+        }
+
+        .classified-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .classified-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 14px;
+        }
+
+        .classified-option {
+            display: block;
+
+            padding: 9px 10px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            background: rgba(255,255,255,0.02);
+
+            font-family: inherit;
+
+            font-size: 8px;
+
+            letter-spacing: 1.3px;
+
+            opacity: 0.55;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .classified-option:hover {
+            background: rgba(255,255,255,0.06);
+
+            border-color: rgba(255,255,255,0.55);
+
+            opacity: 1;
+        }
+
+
+        /* =========================
            FOOTER
         ========================= */
 
@@ -387,6 +446,7 @@
             }
         }
 
+
         @media (max-width: 600px) {
 
             .home {
@@ -427,6 +487,7 @@
 
 <body>
 
+
     <!-- =========================
          WELCOME SCREEN
     ========================= -->
@@ -455,6 +516,7 @@
         <header class="header">
 
             <div>
+
                 <div class="header-title">
                     CIGA SYSTEMS
                 </div>
@@ -462,6 +524,7 @@
                 <div class="header-subtitle">
                     INTERNAL OPERATIONS NETWORK
                 </div>
+
             </div>
 
             <div class="operator">
@@ -481,8 +544,11 @@
                 </div>
 
                 <div class="status-value online">
+
                     <span class="online-dot"></span>
+
                     ONLINE
+
                 </div>
 
             </div>
@@ -527,10 +593,12 @@
                 <div class="directive">
 
                     <div class="directive-main">
+
                         CIGA SYSTEMS operates through four
                         primary directives.
                         All operations are conducted under
                         controlled authorization.
+
                     </div>
 
                     <div class="directive-list">
@@ -606,56 +674,89 @@
 
             <div class="systems-grid">
 
-               <button
-    class="system-button"
-    onclick="window.location.href='personnel.html'"
->
-    <span class="system-button-title">
-        PERSONNEL FILES
-    </span>
 
-    <span class="system-button-status">
-        ACCESS AVAILABLE
-    </span>
-</button>
+                <button
+                    class="system-button"
+                    onclick="window.location.href='personnel.html'"
+                >
 
+                    <span class="system-button-title">
+                        PERSONNEL FILES
+                    </span>
 
-              <button
-    class="system-button"
-    onclick="window.location.href='communications.html'"
->
-    <span class="system-button-title">
-        COMMUNICATIONS
-    </span>
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
 
-    <span class="system-button-status">
-        ACCESS AVAILABLE
-    </span>
-</button>
-
-            <button
-    class="system-button"
-    onclick="window.location.href='archives.html'"
->
-    <span class="system-button-title">
-        ARCHIVES
-    </span>
-
-    <span class="system-button-status">
-        ACCESS AVAILABLE
-    </span>
-</button>
+                </button>
 
 
-                <button class="system-button">
+                <button
+                    class="system-button"
+                    onclick="window.location.href='communications.html'"
+                >
+
+                    <span class="system-button-title">
+                        COMMUNICATIONS
+                    </span>
+
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="system-button"
+                    onclick="window.location.href='archives.html'"
+                >
+
+                    <span class="system-button-title">
+                        ARCHIVES
+                    </span>
+
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <!-- CLASSIFIED -->
+
+                <div class="system-button classified-button">
+
                     <span class="system-button-title">
                         CLASSIFIED
                     </span>
 
                     <span class="system-button-status">
-                        CLEARANCE REQUIRED
+                        ACCESS RESTRICTED
                     </span>
-                </button>
+
+
+                    <div class="classified-options">
+
+                        <a
+                            href="admin.html"
+                            class="classified-option"
+                        >
+                            ADMINISTRATIVE ACCESS
+                        </a>
+
+
+                        <a
+                            href="submission.html"
+                            class="classified-option"
+                        >
+                            PERSONNEL SUBMISSION
+                        </a>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
@@ -680,10 +781,15 @@
     <script>
 
         const welcomeScreen =
-            document.getElementById("welcomeScreen");
+            document.getElementById(
+                "welcomeScreen"
+            );
+
 
         const home =
-            document.getElementById("home");
+            document.getElementById(
+                "home"
+            );
 
 
         /*
@@ -693,7 +799,9 @@
 
         setTimeout(() => {
 
-            welcomeScreen.classList.add("hidden");
+            welcomeScreen.classList.add(
+                "hidden"
+            );
 
         }, 1800);
 
@@ -705,11 +813,22 @@
 
         setTimeout(() => {
 
-            home.classList.add("visible");
+            home.classList.add(
+                "visible"
+            );
 
         }, 2400);
 
     </script>
 
+
 </body>
 </html>
+```
+
+Agora o `CLASSIFIED` não manda imediatamente para o login. Dentro dele aparecem:
+
+**ADMINISTRATIVE ACCESS** → `admin.html`
+**PERSONNEL SUBMISSION** → `submission.html`
+
+O resto do Home ficou igual.
