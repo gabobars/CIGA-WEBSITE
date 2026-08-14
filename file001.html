@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CIGA SYSTEMS // FILE_001</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+
+            font-family: "OCR A", "Courier New", monospace;
+
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 45px 60px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            padding-bottom: 18px;
+            margin-bottom: 32px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.30);
+        }
+
+        .title {
+            font-size: 25px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            margin-top: 9px;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+
+            opacity: 0.50;
+        }
+
+        .header-status {
+            text-align: right;
+
+            font-size: 11px;
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.60;
+        }
+
+        /* =========================
+           SUBJECT HEADER
+        ========================= */
+
+        .subject-header {
+            display: grid;
+
+            grid-template-columns: 250px 1fr 220px;
+
+            gap: 35px;
+
+            padding: 30px;
+
+            margin-bottom: 26px;
+
+            border: 1px solid rgba(255,255,255,0.28);
+
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-area {
+            border-right: 1px solid rgba(255,255,255,0.16);
+
+            padding-right: 30px;
+        }
+
+        .photo-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 14px;
+        }
+
+        .photo {
+            width: 185px;
+            height: 230px;
+
+            display: block;
+
+            object-fit: cover;
+
+            border: 1px solid rgba(255,255,255,0.42);
+
+            background: #080808;
+
+            filter: grayscale(100%);
+        }
+
+        .photo-caption {
+            margin-top: 11px;
+
+            font-size: 9px;
+            letter-spacing: 1.5px;
+
+            opacity: 0.40;
+        }
+
+        /* =========================
+           SUBJECT
+        ========================= */
+
+        .subject-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .label {
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+
+            margin-bottom: 10px;
+        }
+
+        .subject-name {
+            font-size: 34px;
+            letter-spacing: 5px;
+
+            margin-bottom: 20px;
+        }
+
+        .description {
+            max-width: 720px;
+
+            font-size: 14px;
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.76;
+        }
+
+        /* =========================
+           CLASSIFICATION
+        ========================= */
+
+        .classification {
+            text-align: right;
+        }
+
+        .classification-block {
+            margin-bottom: 20px;
+        }
+
+        .classification-value {
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            padding: 19px 22px;
+
+            margin-bottom: 28px;
+
+            border-left: 2px solid rgba(255,255,255,0.50);
+
+            background: rgba(255,255,255,0.025);
+
+            font-size: 12px;
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.72;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+        }
+
+        /* =========================
+           PANEL
+        ========================= */
+
+        .panel {
+            padding: 28px;
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            background: rgba(255,255,255,0.015);
+        }
+
+        .panel-title {
+            font-size: 11px;
+            letter-spacing: 3px;
+
+            opacity: 0.52;
+
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .info {
+            display: grid;
+
+            grid-template-columns: 180px 1fr;
+
+            gap: 15px 22px;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .info-label {
+            opacity: 0.38;
+
+            letter-spacing: 1.5px;
+        }
+
+        .info-value {
+            opacity: 0.90;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           INCIDENTS
+        ========================= */
+
+        .incident {
+            padding: 16px;
+
+            margin-bottom: 12px;
+
+            border: 1px solid rgba(255,255,255,0.17);
+
+            background: rgba(255,255,255,0.02);
+        }
+
+        .incident-id {
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.50;
+
+            margin-bottom: 9px;
+        }
+
+        .incident-text {
+            font-size: 12px;
+
+            line-height: 1.85;
+
+            opacity: 0.75;
+        }
+
+        /* =========================
+           OBSERVATION
+        ========================= */
+
+        .observation {
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.74;
+        }
+
+        /* =========================
+           CONNECTIONS
+        ========================= */
+
+        .connections {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .connection {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 75px;
+
+            padding: 14px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .connection:hover {
+            background: rgba(255,255,255,0.06);
+
+            border-color: rgba(255,255,255,0.60);
+
+            transform: translateY(-2px);
+        }
+
+        .connection-name {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 7px;
+        }
+
+        .connection-user {
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.45;
+        }
+
+        /* =========================
+           REDACTED
+        ========================= */
+
+        .redacted {
+            display: inline-block;
+
+            background: #fff;
+            color: #000;
+
+            padding: 2px 7px;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           WARNING
+        ========================= */
+
+        .warning {
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            background: rgba(255,255,255,0.025);
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.72;
+        }
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 28px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+        }
+
+        .back:hover {
+            opacity: 1;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 32px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid rgba(255,255,255,0.20);
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.34;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .page {
+                padding: 28px;
+            }
+
+            .subject-header {
+                grid-template-columns: 210px 1fr;
+            }
+
+            .classification {
+                grid-column: 1 / -1;
+
+                display: grid;
+
+                grid-template-columns: repeat(4, 1fr);
+
+                gap: 15px;
+
+                padding-top: 20px;
+
+                border-top: 1px solid rgba(255,255,255,0.15);
+
+                text-align: left;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .page {
+                padding: 18px;
+            }
+
+            .header {
+                gap: 20px;
+
+                align-items: flex-start;
+            }
+
+            .title {
+                font-size: 18px;
+            }
+
+            .header-status {
+                font-size: 8px;
+            }
+
+            .subject-header {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-area {
+                border-right: none;
+
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+
+                padding-right: 0;
+
+                padding-bottom: 22px;
+            }
+
+            .classification {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .subject-name {
+                font-size: 23px;
+            }
+
+            .description,
+            .observation,
+            .incident-text {
+                font-size: 11px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+
+                gap: 4px;
+            }
+
+            .info-label {
+                margin-top: 7px;
+            }
+
+            .connections {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                ENTITY RECORD // INTERNAL
+            </div>
+
+        </div>
+
+        <div class="header-status">
+            RECORD: FILE_001<br>
+            STATUS: ACTIVE
+        </div>
+
+    </header>
+
+
+    <!-- SUBJECT -->
+
+    <section class="subject-header">
+
+        <!-- PHOTO -->
+
+        <div class="photo-area">
+
+            <div class="photo-label">
+                IDENTIFICATION IMAGE
+            </div>
+
+            <img
+                src="./subject001.png"
+                alt="SUBJECT 001"
+                class="photo"
+            >
+
+            <div class="photo-caption">
+                SUBJECT // VISUAL RECORD
+            </div>
+
+        </div>
+
+
+        <!-- SUBJECT INFORMATION -->
+
+        <div class="subject-info">
+
+            <div class="label">
+                DESIGNATION
+            </div>
+
+            <div class="subject-name">
+                GABOBARS
+            </div>
+
+            <div class="description">
+
+                Digital entity currently operating
+                independently across multiple
+                communication and broadcast networks.
+
+                <br><br>
+
+                Subject remains active and continues
+                to demonstrate repeated contact with
+                CIGA-related systems.
+
+            </div>
+
+        </div>
+
+
+        <!-- CLASSIFICATION -->
+
+        <div class="classification">
+
+            <div class="classification-block">
+
+                <div class="label">
+                    STATUS
+                </div>
+
+                <div class="classification-value">
+                    ACTIVE
+                </div>
+
+            </div>
+
+            <div class="classification-block">
+
+                <div class="label">
+                    CLEARANCE
+                </div>
+
+                <div class="classification-value">
+                    OPERATIVE
+                </div>
+
+            </div>
+
+            <div class="classification-block">
+
+                <div class="label">
+                    OBSERVATION
+                </div>
+
+                <div class="classification-value">
+                    ONGOING
+                </div>
+
+            </div>
+
+            <div class="classification-block">
+
+                <div class="label">
+                    THREAT LEVEL
+                </div>
+
+                <div class="classification-value">
+                    UNASSESSED
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TERMINAL -->
+
+    <section class="terminal">
+
+        <div>
+            &gt; OPENING ENTITY RECORD...
+        </div>
+
+        <div>
+            &gt; SUBJECT IDENTIFIED: GABOBARS
+        </div>
+
+        <div>
+            &gt; RECORD STATUS: ACTIVE
+        </div>
+
+        <div>
+            &gt; PREVIOUS INCIDENT INVOLVEMENT: DETECTED
+        </div>
+
+        <div>
+            &gt; OBSERVATION PROTOCOL: ENABLED
+        </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <section class="grid">
+
+
+        <!-- ENTITY INFORMATION -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // ENTITY INFORMATION
+            </div>
+
+            <div class="info">
+
+                <div class="info-label">
+                    DESIGNATION
+                </div>
+
+                <div class="info-value">
+                    GABOBARS
+                </div>
+
+                <div class="info-label">
+                    KNOWN ALIAS
+                </div>
+
+                <div class="info-value">
+                    GABO
+                </div>
+
+                <div class="info-label">
+                    ENTITY STATUS
+                </div>
+
+                <div class="info-value">
+                    ACTIVE
+                </div>
+
+                <div class="info-label">
+                    PRIMARY ACTIVITY
+                </div>
+
+                <div class="info-value">
+                    DIGITAL BROADCASTING
+                </div>
+
+                <div class="info-label">
+                    CURRENT LOCATION
+                </div>
+
+                <div class="info-value">
+                    <span class="redacted">
+                        UNAVAILABLE
+                    </span>
+                </div>
+
+                <div class="info-label">
+                    AFFILIATION
+                </div>
+
+                <div class="info-value">
+                    <span class="redacted">
+                        UNDISCLOSED
+                    </span>
+                </div>
+
+                <div class="info-label">
+                    ORIGIN
+                </div>
+
+                <div class="info-value">
+                    <span class="redacted">
+                        DATA INCOMPLETE
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INCIDENTS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // INCIDENT RECORDS
+            </div>
+
+            <div class="incident">
+
+                <div class="incident-id">
+                    INCIDENT_001 // CONFIRMED
+                </div>
+
+                <div class="incident-text">
+
+                    Subject presence confirmed during
+                    a classified event.
+
+                    Further details remain restricted.
+
+                </div>
+
+            </div>
+
+            <div class="incident">
+
+                <div class="incident-id">
+                    INCIDENT_002 // ARCHIVED
+                </div>
+
+                <div class="incident-text">
+
+                    Subject detected in proximity to
+                    an unidentified anomaly.
+
+                    No intervention was authorized.
+
+                </div>
+
+            </div>
+
+            <div class="incident">
+
+                <div class="incident-id">
+                    INCIDENT_003 // RESTRICTED
+                </div>
+
+                <div class="incident-text">
+
+                    Subject involvement suspected.
+
+                    Available records remain incomplete.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OBSERVATION -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // BEHAVIOURAL ASSESSMENT
+            </div>
+
+            <div class="observation">
+
+                Subject demonstrates a persistent
+                tendency toward independent operation.
+
+                <br><br>
+
+                Repeated interaction with digital
+                systems has been observed.
+
+                <br><br>
+
+                Subject appears capable of adapting
+                to unfamiliar systems without
+                external assistance.
+
+                <br><br>
+
+                Subject continues normal activity
+                despite ongoing observation.
+
+            </div>
+
+            <div class="warning">
+
+                OBSERVATION STATUS: ACTIVE<br>
+                DIRECT INTERVENTION: NOT REQUIRED
+
+            </div>
+
+        </section>
+
+
+<!-- CONNECTIONS -->
+
+<section class="panel">
+
+    <div class="panel-title">
+        // KNOWN CONNECTIONS
+    </div>
+
+    <div class="connections">
+
+        <a
+            href="https://www.twitch.tv/gabobars"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="connection"
+        >
+            <span class="connection-name">
+                TWITCH
+            </span>
+
+            <span class="connection-user">
+                @GABOBARS
+            </span>
+        </a>
+
+
+        <a
+            href="https://www.youtube.com/@gabobars"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="connection"
+        >
+            <span class="connection-name">
+                YOUTUBE
+            </span>
+
+            <span class="connection-user">
+                @GABOBARS
+            </span>
+        </a>
+
+
+        <a
+            href="https://www.tiktok.com/@gabobars"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="connection"
+        >
+            <span class="connection-name">
+                TIKTOK
+            </span>
+
+            <span class="connection-user">
+                @GABOBARS
+            </span>
+        </a>
+
+
+        <a
+            href="https://discord.gg/GrqEaJrfXu"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="connection"
+        >
+            <span class="connection-name">
+                DISCORD
+            </span>
+
+            <span class="connection-user">
+                GABOBARS
+            </span>
+        </a>
+
+    </div>
+
+    <div class="warning">
+
+        ALL KNOWN CONNECTIONS ARE
+        MONITORED BY CIGA SYSTEMS.
+
+    </div>
+
+</section>
+
+
+        <!-- CURRENT STATUS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // CURRENT STATUS
+            </div>
+
+            <div class="info">
+
+                <div class="info-label">
+                    STATUS
+                </div>
+
+                <div class="info-value">
+                    ACTIVE
+                </div>
+
+                <div class="info-label">
+                    ACTIVITY
+                </div>
+
+                <div class="info-value">
+                    ONGOING
+                </div>
+
+                <div class="info-label">
+                    MONITORING
+                </div>
+
+                <div class="info-value">
+                    ENABLED
+                </div>
+
+                <div class="info-label">
+                    INTERVENTION
+                </div>
+
+                <div class="info-value">
+                    NOT REQUIRED
+                </div>
+
+            </div>
+
+            <div class="warning">
+
+                SUBJECT REMAINS UNAFFECTED.
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERNAL NOTE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // INTERNAL NOTE
+            </div>
+
+            <div class="observation">
+
+                Subject has displayed unusual interest
+                in CIGA systems and internal material.
+
+                <br><br>
+
+                Nature of this relationship remains
+
+                <span class="redacted">
+                    UNDETERMINED
+                </span>
+
+                at current clearance level.
+
+                <br><br>
+
+                Further observation is recommended.
+
+            </div>
+
+            <div class="warning">
+
+                NEXT REVIEW:
+                <span class="redacted">
+                    CLASSIFIED
+                </span>
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+
+    <!-- BACK -->
+
+    <a
+        href="personnel.html"
+        class="back"
+    >
+        &lt;&lt; RETURN TO PERSONNEL DATABASE
+    </a>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // FILE_001
+        </span>
+
+        <span>
+            ALL ACCESS IS LOGGED
+        </span>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

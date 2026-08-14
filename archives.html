@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // ARCHIVES</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 45px 60px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.30);
+        }
+
+        .title {
+            font-size: 24px;
+
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            margin-top: 9px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        .header-status {
+            text-align: right;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            margin-bottom: 28px;
+
+            padding: 18px 21px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.70;
+        }
+
+
+        /* =========================
+           ARCHIVE DIRECTORY
+        ========================= */
+
+        .directory {
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            padding: 27px;
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+        .directory-title {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.52;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           FILE LIST
+        ========================= */
+
+        .archive-list {
+            display: grid;
+
+            gap: 10px;
+        }
+
+
+        .archive-file {
+            width: 100%;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding: 17px 19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            background:
+                rgba(255,255,255,0.015);
+
+            color: #fff;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            cursor: default;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .archive-file:hover {
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.35);
+
+            transform:
+                translateX(4px);
+        }
+
+
+        /* =========================
+           FILE INFORMATION
+        ========================= */
+
+        .archive-id {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.50;
+
+            margin-bottom: 6px;
+        }
+
+        .archive-name {
+            font-size: 13px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .archive-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.42;
+        }
+
+
+        .redacted-bar {
+            display: inline-block;
+
+            width: 85px;
+
+            height: 9px;
+
+            background: #fff;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.32;
+        }
+
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 27px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+        }
+
+        .back:hover {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .page {
+                padding: 20px;
+            }
+
+            .header {
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .title {
+                font-size: 17px;
+            }
+
+            .header-status {
+                font-size: 8px;
+            }
+
+            .directory {
+                padding: 17px;
+            }
+
+            .archive-file {
+                align-items: flex-start;
+
+                gap: 15px;
+
+                flex-direction: column;
+            }
+
+            .archive-status {
+                justify-content:
+                    flex-start;
+            }
+
+            .footer {
+                flex-direction: column;
+
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                ARCHIVE DATABASE // INTERNAL
+            </div>
+
+        </div>
+
+
+        <div class="header-status">
+
+            DATABASE: ONLINE<br>
+            RECORDS: 10
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         TERMINAL
+    ========================= -->
+
+    <section class="terminal">
+
+        <div>
+            &gt; ACCESSING ARCHIVE DATABASE...
+        </div>
+
+        <div>
+            &gt; INDEXING HISTORICAL RECORDS...
+        </div>
+
+        <div>
+            &gt; 10 RECORDS FOUND.
+        </div>
+
+        <div>
+            &gt; DISPLAYING AVAILABLE RECORDS...
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DIRECTORY
+    ========================= -->
+
+    <section class="directory">
+
+        <div class="directory-title">
+            // ARCHIVE DIRECTORY
+        </div>
+
+
+        <div class="archive-list">
+
+
+            <!-- ARCHIVE 001 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_001
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 002 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_002
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 003 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_003
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 004 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_004
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 005 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_005
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 006 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_006
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 007 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_007
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 008 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_008
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 009 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_009
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE 010 -->
+
+            <div class="archive-file">
+
+                <div>
+
+                    <div class="archive-id">
+                        ARCHIVE_010
+                    </div>
+
+                    <div class="archive-name">
+                        [ REDACTED ]
+                    </div>
+
+                </div>
+
+                <div class="archive-status">
+
+                    <span class="redacted-bar"></span>
+
+                    REDACTED
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- BACK -->
+
+    <a
+        href="home.html"
+        class="back"
+    >
+        &lt;&lt; RETURN TO SYSTEM
+    </a>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // ARCHIVE DATABASE
+        </span>
+
+        <span>
+            ALL ACCESS IS LOGGED
+        </span>
+
+    </footer>
+
+
+</div>
+
+</body>
+
+</html>

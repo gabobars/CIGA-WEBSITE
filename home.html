@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CIGA SYSTEMS // INTERNAL</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            font-family: "OCR A", "Courier New", monospace;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
+
+        .welcome-screen {
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            z-index: 100;
+
+            opacity: 1;
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            transform: translate(-50%, -55%);
+
+            pointer-events: none;
+        }
+
+        .welcome-logo {
+            width: 230px;
+            max-width: 55vw;
+
+            margin-bottom: 35px;
+        }
+
+        .welcome-text {
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .welcome-text::before {
+            content: "[ ";
+        }
+
+        .welcome-text::after {
+            content: " ]";
+        }
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        .home {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 35px 50px;
+
+            opacity: 0;
+
+            transition: opacity 1s ease;
+        }
+
+        .home.visible {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            padding-bottom: 14px;
+            margin-bottom: 30px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.35);
+        }
+
+        .header-title {
+            font-size: 22px;
+            letter-spacing: 4px;
+        }
+
+        .header-subtitle {
+            margin-top: 7px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+        .operator {
+            text-align: right;
+
+            font-size: 10px;
+            letter-spacing: 1px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .status-box {
+            border: 1px solid rgba(255,255,255,0.25);
+
+            padding: 16px 18px;
+
+            background: rgba(255,255,255,0.015);
+        }
+
+        .status-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 8px;
+        }
+
+        .status-value {
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .online {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .online-dot {
+            width: 6px;
+            height: 6px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+
+        /* =========================
+           MAIN GRID
+        ========================= */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            border: 1px solid rgba(255,255,255,0.25);
+
+            background: rgba(255,255,255,0.015);
+
+            padding: 24px;
+        }
+
+        .panel-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+
+            opacity: 0.5;
+
+            margin-bottom: 20px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           DIRECTIVE
+        ========================= */
+
+        .directive {
+            font-size: 14px;
+            line-height: 1.9;
+            letter-spacing: 1px;
+        }
+
+        .directive-main {
+            margin-bottom: 20px;
+
+            opacity: 0.9;
+        }
+
+        .directive-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .directive-item {
+            padding: 10px 12px;
+
+            border-left: 2px solid rgba(255,255,255,0.5);
+
+            background: rgba(255,255,255,0.02);
+        }
+
+
+        /* =========================
+           SYSTEM LOG
+        ========================= */
+
+        .logs {
+            font-size: 11px;
+            line-height: 2;
+
+            letter-spacing: 1px;
+        }
+
+        .log {
+            opacity: 0.75;
+        }
+
+        .log-time {
+            opacity: 0.35;
+
+            margin-right: 10px;
+        }
+
+
+        /* =========================
+           SYSTEMS
+        ========================= */
+
+        .systems-panel {
+            margin-bottom: 30px;
+        }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 12px;
+        }
+
+        .system-button {
+            min-height: 85px;
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            text-align: left;
+
+            padding: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .system-button:hover {
+            background: rgba(255,255,255,0.06);
+
+            border-color: rgba(255,255,255,0.65);
+
+            transform: translateY(-2px);
+        }
+
+        .system-button-title {
+            display: block;
+
+            font-size: 11px;
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .system-button-status {
+            display: block;
+
+            font-size: 8px;
+            letter-spacing: 1px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding-top: 15px;
+
+            border-top: 1px solid rgba(255,255,255,0.2);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .home {
+                padding: 25px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .systems-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .status-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .home {
+                padding: 18px;
+            }
+
+            .welcome-logo {
+                width: 180px;
+            }
+
+            .welcome-text {
+                font-size: 12px;
+            }
+
+            .header {
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .header-title {
+                font-size: 16px;
+            }
+
+            .operator {
+                font-size: 8px;
+            }
+
+            .directive-list {
+                grid-template-columns: 1fr;
+            }
+
+            .systems-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         WELCOME SCREEN
+    ========================= -->
+
+    <section class="welcome-screen" id="welcomeScreen">
+
+        <img
+            src="logo.png"
+            alt="CIGA"
+            class="welcome-logo"
+        >
+
+        <div class="welcome-text">
+            WELCOME OPERATIVE
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <main class="home" id="home">
+
+        <header class="header">
+
+            <div>
+                <div class="header-title">
+                    CIGA SYSTEMS
+                </div>
+
+                <div class="header-subtitle">
+                    INTERNAL OPERATIONS NETWORK
+                </div>
+            </div>
+
+            <div class="operator">
+                OPERATIVE: 001<br>
+                SESSION: ACTIVE
+            </div>
+
+        </header>
+
+
+        <section class="status-bar">
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    SYSTEM STATUS
+                </div>
+
+                <div class="status-value online">
+                    <span class="online-dot"></span>
+                    ONLINE
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    NETWORK STATUS
+                </div>
+
+                <div class="status-value">
+                    SECURE
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    CLEARANCE LEVEL
+                </div>
+
+                <div class="status-value">
+                    OPERATIVE
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="main-grid">
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // PRIMARY DIRECTIVE
+                </div>
+
+                <div class="directive">
+
+                    <div class="directive-main">
+                        CIGA SYSTEMS operates through four
+                        primary directives.
+                        All operations are conducted under
+                        controlled authorization.
+                    </div>
+
+                    <div class="directive-list">
+
+                        <div class="directive-item">
+                            CONTAIN
+                        </div>
+
+                        <div class="directive-item">
+                            INTERCEPT
+                        </div>
+
+                        <div class="directive-item">
+                            GUARD
+                        </div>
+
+                        <div class="directive-item">
+                            APPREHEND
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // SYSTEM LOG
+                </div>
+
+                <div class="logs">
+
+                    <div class="log">
+                        <span class="log-time">22:41:03</span>
+                        ACCESS GRANTED
+                    </div>
+
+                    <div class="log">
+                        <span class="log-time">22:41:04</span>
+                        OPERATIVE IDENTIFIED
+                    </div>
+
+                    <div class="log">
+                        <span class="log-time">22:41:05</span>
+                        DATABASE INITIALIZED
+                    </div>
+
+                    <div class="log">
+                        <span class="log-time">22:41:07</span>
+                        SESSION ESTABLISHED
+                    </div>
+
+                    <div class="log">
+                        <span class="log-time">22:41:09</span>
+                        CONNECTION SECURE
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel systems-panel">
+
+            <div class="panel-title">
+                // AVAILABLE SYSTEMS
+            </div>
+
+            <div class="systems-grid">
+
+               <button
+    class="system-button"
+    onclick="window.location.href='personnel.html'"
+>
+    <span class="system-button-title">
+        PERSONNEL FILES
+    </span>
+
+    <span class="system-button-status">
+        ACCESS AVAILABLE
+    </span>
+</button>
+
+
+              <button
+    class="system-button"
+    onclick="window.location.href='communications.html'"
+>
+    <span class="system-button-title">
+        COMMUNICATIONS
+    </span>
+
+    <span class="system-button-status">
+        ACCESS AVAILABLE
+    </span>
+</button>
+
+            <button
+    class="system-button"
+    onclick="window.location.href='archives.html'"
+>
+    <span class="system-button-title">
+        ARCHIVES
+    </span>
+
+    <span class="system-button-status">
+        ACCESS AVAILABLE
+    </span>
+</button>
+
+
+                <button class="system-button">
+                    <span class="system-button-title">
+                        CLASSIFIED
+                    </span>
+
+                    <span class="system-button-status">
+                        CLEARANCE REQUIRED
+                    </span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+
+            <span>
+                CIGA SYSTEMS // INTERNAL USE ONLY
+            </span>
+
+            <span>
+                ALL ACCESS IS LOGGED
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        const welcomeScreen =
+            document.getElementById("welcomeScreen");
+
+        const home =
+            document.getElementById("home");
+
+
+        /*
+            Welcome screen stays visible
+            for 1.8 seconds.
+        */
+
+        setTimeout(() => {
+
+            welcomeScreen.classList.add("hidden");
+
+        }, 1800);
+
+
+        /*
+            Home fades in slightly after
+            the welcome screen disappears.
+        */
+
+        setTimeout(() => {
+
+            home.classList.add("visible");
+
+        }, 2400);
+
+    </script>
+
+</body>
+</html>
