@@ -1,12 +1,22 @@
 name: Supabase Keepalive
 
 on:
+  schedule:
+    - cron: "17 4 * * *"
+
   workflow_dispatch:
 
 jobs:
-  test:
+  keepalive:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test workflow
-        run: echo "CIGA WORKFLOW OK"
+      - name: Ping Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          curl --fail-with-body \
+            "${SUPABASE_URL}/rest/v1/personnel?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}"
