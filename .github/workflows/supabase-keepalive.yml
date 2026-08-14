@@ -1,11 +1,12 @@
 name: Supabase Keepalive
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test
+      - name: Test workflow
         run: echo "CIGA WORKFLOW OK"
