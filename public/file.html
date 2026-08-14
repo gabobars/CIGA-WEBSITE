@@ -595,6 +595,10 @@
 
     <script>
 
+        /* ==========================================
+           SUPABASE
+        ========================================== */
+
         const SUPABASE_URL =
             "https://ryefnjxwyjpeuwyoqbil.supabase.co";
 
@@ -617,11 +621,9 @@
             document.getElementById("app");
 
 
-        /*
-            Get the ID from:
-
-            file.html?id=1
-        */
+        /* ==========================================
+           GET FILE ID
+        ========================================== */
 
         const params =
             new URLSearchParams(
@@ -632,6 +634,55 @@
         const personId =
             params.get("id");
 
+
+        /* ==========================================
+           SOCIAL USERNAME
+        ========================================== */
+
+        function getUsername(url) {
+
+            if (!url || url === "#") {
+                return "UNAVAILABLE";
+            }
+
+
+            try {
+
+                const parsedUrl =
+                    new URL(url);
+
+
+                let username =
+                    parsedUrl.pathname
+                        .split("/")
+                        .filter(Boolean)
+                        .pop();
+
+
+                if (!username) {
+                    return "UNAVAILABLE";
+                }
+
+
+                if (username.startsWith("@")) {
+                    return username;
+                }
+
+
+                return "@" + username;
+
+            } catch (error) {
+
+                return "EXTERNAL LINK";
+
+            }
+
+        }
+
+
+        /* ==========================================
+           LOAD FILE
+        ========================================== */
 
         async function loadFile() {
 
@@ -682,6 +733,10 @@
         }
 
 
+        /* ==========================================
+           MESSAGE
+        ========================================== */
+
         function showMessage(text) {
 
             app.innerHTML = `
@@ -706,7 +761,14 @@
         }
 
 
-        function safe(value, fallback = "UNAVAILABLE") {
+        /* ==========================================
+           SAFE VALUE
+        ========================================== */
+
+        function safe(
+            value,
+            fallback = "UNAVAILABLE"
+        ) {
 
             if (
                 value === null ||
@@ -722,6 +784,10 @@
 
         }
 
+
+        /* ==========================================
+           REDACTED VALUE
+        ========================================== */
 
         function redacted(value) {
 
@@ -743,10 +809,15 @@
 
             }
 
+
             return text;
 
         }
 
+
+        /* ==========================================
+           RENDER FILE
+        ========================================== */
 
         function renderFile(person) {
 
@@ -827,36 +898,74 @@
 
 
             const twitch =
-                safe(person.twitch, "#");
+                safe(
+                    person.twitch,
+                    "#"
+                );
 
 
             const youtube =
-                safe(person.youtube, "#");
+                safe(
+                    person.youtube,
+                    "#"
+                );
 
 
             const tiktok =
-                safe(person.tiktok, "#");
+                safe(
+                    person.tiktok,
+                    "#"
+                );
 
 
             const discord =
-                safe(person.discord, "#");
+                safe(
+                    person.discord,
+                    "#"
+                );
 
+
+            /* =========================
+               SOCIAL USERNAMES
+            ========================= */
+
+            const twitchUser =
+                getUsername(twitch);
+
+
+            const youtubeUser =
+                getUsername(youtube);
+
+
+            const tiktokUser =
+                getUsername(tiktok);
+
+
+            /* =========================
+               PHOTO
+            ========================= */
 
             const photo =
                 person.photo &&
                 person.photo.trim() !== ""
-                 ? person.photo
-                                     : "";
+                    ? person.photo
+                    : "";
 
 
             document.title =
                 `CIGA SYSTEMS // FILE_${fileNumber}`;
 
 
+            /* =========================
+               PAGE
+            ========================= */
+
             app.innerHTML = `
 
                 <main class="page">
 
+
+                    <!-- HEADER -->
 
                     <header class="header">
 
@@ -882,6 +991,8 @@
                     </header>
 
 
+                    <!-- TERMINAL -->
+
                     <section class="terminal">
 
                         <div>
@@ -906,8 +1017,12 @@
                     </section>
 
 
+                    <!-- SUBJECT HEADER -->
+
                     <section class="subject-header">
 
+
+                        <!-- PHOTO -->
 
                         <div class="photo-area">
 
@@ -915,33 +1030,33 @@
                                 IDENTIFICATION IMAGE
                             </div>
 
-                          ${
-    photo
-        ? `
-            <img
-                src="${photo}"
-                alt="${name}"
-                class="photo"
-            >
-        `
-        : `
-            <div
-                class="photo"
-                style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    text-align:center;
-                    font-size:10px;
-                    letter-spacing:2px;
-                    opacity:0.4;
-                "
-            >
-                IMAGE<br>
-                UNAVAILABLE
-            </div>
-        `
-}
+                            ${
+                                photo
+                                    ? `
+                                        <img
+                                            src="${photo}"
+                                            alt="${name}"
+                                            class="photo"
+                                        >
+                                    `
+                                    : `
+                                        <div
+                                            class="photo"
+                                            style="
+                                                display:flex;
+                                                align-items:center;
+                                                justify-content:center;
+                                                text-align:center;
+                                                font-size:10px;
+                                                letter-spacing:2px;
+                                                opacity:0.4;
+                                            "
+                                        >
+                                            IMAGE<br>
+                                            UNAVAILABLE
+                                        </div>
+                                    `
+                            }
 
                             <div class="photo-caption">
                                 SUBJECT // VISUAL RECORD
@@ -949,6 +1064,8 @@
 
                         </div>
 
+
+                        <!-- SUBJECT -->
 
                         <div class="subject-info">
 
@@ -966,6 +1083,8 @@
 
                         </div>
 
+
+                        <!-- CLASSIFICATION -->
 
                         <div class="classification">
 
@@ -1027,8 +1146,12 @@
                     </section>
 
 
+                    <!-- CONTENT -->
+
                     <section class="grid">
 
+
+                        <!-- ENTITY INFORMATION -->
 
                         <section class="panel">
 
@@ -1108,6 +1231,8 @@
                         </section>
 
 
+                        <!-- INCIDENT RECORDS -->
+
                         <section class="panel">
 
                             <div class="panel-title">
@@ -1173,6 +1298,8 @@
                         </section>
 
 
+                        <!-- BEHAVIOURAL ASSESSMENT -->
+
                         <section class="panel">
 
                             <div class="panel-title">
@@ -1211,6 +1338,8 @@
                         </section>
 
 
+                        <!-- KNOWN CONNECTIONS -->
+
                         <section class="panel">
 
                             <div class="panel-title">
@@ -1233,7 +1362,7 @@
                                     </span>
 
                                     <span class="connection-user">
-                                        @GABOBARS
+                                        ${twitchUser}
                                     </span>
 
                                 </a>
@@ -1251,7 +1380,7 @@
                                     </span>
 
                                     <span class="connection-user">
-                                        @GABOBARS
+                                        ${youtubeUser}
                                     </span>
 
                                 </a>
@@ -1269,7 +1398,7 @@
                                     </span>
 
                                     <span class="connection-user">
-                                        @GABOBARS
+                                        ${tiktokUser}
                                     </span>
 
                                 </a>
@@ -1305,6 +1434,8 @@
 
                         </section>
 
+
+                        <!-- CURRENT STATUS -->
 
                         <section class="panel">
 
@@ -1364,6 +1495,8 @@
                         </section>
 
 
+                        <!-- INTERNAL NOTE -->
+
                         <section class="panel">
 
                             <div class="panel-title">
@@ -1411,6 +1544,8 @@
                     </section>
 
 
+                    <!-- BACK -->
+
                     <a
                         href="personnel.html"
                         class="back"
@@ -1418,6 +1553,8 @@
                         &lt;&lt; RETURN TO PERSONNEL DATABASE
                     </a>
 
+
+                    <!-- FOOTER -->
 
                     <footer class="footer">
 
@@ -1438,6 +1575,10 @@
 
         }
 
+
+        /* ==========================================
+           START
+        ========================================== */
 
         loadFile();
 
