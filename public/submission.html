@@ -20,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
 
         * {
@@ -313,12 +314,13 @@
 
         input::placeholder,
         textarea::placeholder {
-            color: rgba(
-                255,
-                255,
-                255,
-                0.35
-            );
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
         }
 
 
@@ -692,6 +694,7 @@
                 CIGA SYSTEMS
             </div>
 
+
             <div class="subtitle">
                 PERSONNEL SUBMISSION // EXTERNAL
             </div>
@@ -762,6 +765,7 @@
                         DISPLAY NAME *
                     </label>
 
+
                     <input
                         type="text"
                         id="name"
@@ -778,6 +782,7 @@
                         ALIAS
                     </label>
 
+
                     <input
                         type="text"
                         id="alias"
@@ -793,14 +798,19 @@
                         SHORT DESCRIPTION *
                     </label>
 
+
                     <textarea
                         id="description"
                         name="description"
                         required
                     ></textarea>
 
+
                     <div class="hint">
-                        A short description of the entity/person.
+
+                        A short description of the
+                        entity/person.
+
                     </div>
 
                 </div>
@@ -811,6 +821,7 @@
                     <label for="primary_activity">
                         PRIMARY ACTIVITY
                     </label>
+
 
                     <input
                         type="text"
@@ -827,6 +838,7 @@
                         LOCATION
                     </label>
 
+
                     <input
                         type="text"
                         id="location"
@@ -841,6 +853,7 @@
                     <label for="affiliation">
                         AFFILIATION
                     </label>
+
 
                     <input
                         type="text"
@@ -857,6 +870,7 @@
                         ORIGIN
                     </label>
 
+
                     <input
                         type="text"
                         id="origin"
@@ -864,7 +878,6 @@
                     >
 
                 </div>
-
 
             </div>
 
@@ -889,6 +902,7 @@
                         TWITCH
                     </label>
 
+
                     <input
                         type="url"
                         id="twitch"
@@ -904,6 +918,7 @@
                     <label for="youtube">
                         YOUTUBE
                     </label>
+
 
                     <input
                         type="url"
@@ -921,6 +936,7 @@
                         TIKTOK
                     </label>
 
+
                     <input
                         type="url"
                         id="tiktok"
@@ -937,6 +953,7 @@
                         DISCORD
                     </label>
 
+
                     <input
                         type="url"
                         id="discord"
@@ -945,7 +962,6 @@
                     >
 
                 </div>
-
 
             </div>
 
@@ -1085,8 +1101,9 @@
         "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
 
 
-    const { createClient } =
-        supabase;
+    const {
+        createClient
+    } = supabase;
 
 
     const db =
@@ -1094,6 +1111,14 @@
             SUPABASE_URL,
             SUPABASE_KEY
         );
+
+
+    /* ==========================================
+       CIGA RELAY
+    ========================================== */
+
+    const CIGA_RELAY_URL =
+        "https://cigadiscordwebhook.ciga-hq.workers.dev/";
 
 
     /* ==========================================
@@ -1117,6 +1142,101 @@
             "result"
         );
 
+
+    /* ==========================================
+       GET CIGA IDENTITY
+    ========================================== */
+
+    function cigaGetIdentity() {
+
+        const node =
+            localStorage.getItem(
+                "ciga_node_id"
+            ) ||
+            "UNASSIGNED";
+
+
+        const operative =
+            localStorage.getItem(
+                "ciga_operative_id"
+            ) ||
+            "UNASSIGNED";
+
+
+        return {
+            node,
+            operative
+        };
+
+    }
+
+
+    /* ==========================================
+       SEND DISCORD RELAY
+    ========================================== */
+
+    async function cigaSendSubmissionRelay(
+        data
+    ) {
+
+        try {
+
+            const response =
+                await fetch(
+                    CIGA_RELAY_URL,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                data
+                            )
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                const errorText =
+                    await response.text();
+
+
+                console.error(
+                    "CIGA RELAY ERROR:",
+                    errorText
+                );
+
+
+                return false;
+
+            }
+
+
+            return true;
+
+        } catch (error) {
+
+            console.error(
+                "CIGA RELAY REQUEST ERROR:",
+                error
+            );
+
+
+            return false;
+
+        }
+
+    }
+
+
+    /* ==========================================
+       FORM SUBMIT
+    ========================================== */
 
     form.addEventListener(
         "submit",
@@ -1223,6 +1343,14 @@
 
 
                 /* =========================
+                   CIGA IDENTITY
+                ========================= */
+
+                const identity =
+                    cigaGetIdentity();
+
+
+                /* =========================
                    IMAGE
                 ========================= */
 
@@ -1237,7 +1365,6 @@
 
 
                 if (imageFile) {
-
 
                     /* =========================
                        VALIDATE IMAGE
@@ -1289,11 +1416,7 @@
 
 
                     const uniqueName =
-                        `${
-                            crypto.randomUUID()
-                        }.${
-                            fileExtension
-                        }`;
+                        `${crypto.randomUUID()}.${fileExtension}`;
 
 
                     const storagePath =
@@ -1313,11 +1436,9 @@
                         uploadError
                     } =
                         await db.storage
-
                             .from(
                                 "personnel"
                             )
-
                             .upload(
                                 storagePath,
                                 imageFile,
@@ -1355,11 +1476,9 @@
                         publicData
                     } =
                         db.storage
-
                             .from(
                                 "personnel"
                             )
-
                             .getPublicUrl(
                                 storagePath
                             );
@@ -1427,22 +1546,29 @@
 
 
                 const {
+                    data:
+                    submissionData,
+
                     error:
                     submissionError
                 } =
                     await db
-
                         .from(
                             "personnel_submissions"
                         )
-
                         .insert(
                             [submission]
-                        );
+                        )
+                        .select(
+                            "id"
+                        )
+                        .single();
 
 
                 if (
                     submissionError
+                    ||
+                    !submissionData
                 ) {
 
                     console.error(
@@ -1459,12 +1585,61 @@
 
 
                 /* =========================
+                   SUBMISSION ID
+                ========================= */
+
+                const submissionId =
+                    submissionData.id;
+
+
+                /* =========================
+                   DISCORD RELAY
+                ========================= */
+
+                submitButton.textContent =
+                    "TRANSMITTING...";
+
+
+                const relaySuccessful =
+                    await cigaSendSubmissionRelay({
+
+                        node:
+                            identity.node,
+
+                        operative:
+                            identity.operative,
+
+                        submission_id:
+                            submissionId,
+
+                        name:
+                            name
+
+                    });
+
+
+                /* =========================
                    SUCCESS
                 ========================= */
 
                 result.innerHTML = `
 
                     &gt; SUBMISSION RECEIVED.
+
+                    <br>
+
+                    &gt; RECORD ID:
+                    ${submissionId}
+
+                    <br>
+
+                    &gt; NODE:
+                    ${identity.node}
+
+                    <br>
+
+                    &gt; OPERATIVE:
+                    ${identity.operative}
 
                     <br>
 
@@ -1484,6 +1659,22 @@
 
                     &gt; CIGA PERSONNEL WILL REVIEW
                     THE SUBMISSION BEFORE ACTIVATION.
+
+                    ${
+                        relaySuccessful
+                            ? `
+                                <br><br>
+
+                                &gt; CIGA TRANSMISSION:
+                                DISPATCHED.
+                            `
+                            : `
+                                <br><br>
+
+                                &gt; CIGA TRANSMISSION:
+                                DELIVERY DELAYED.
+                            `
+                    }
 
                 `;
 
@@ -1556,6 +1747,24 @@
                         <br>
 
                         &gt; RECORD WAS NOT SUBMITTED.
+
+                    `;
+
+                }
+
+
+                else if (
+                    error.message ===
+                    "SUBMISSION_FAILED"
+                ) {
+
+                    message = `
+
+                        &gt; SUBMISSION DATABASE ERROR.
+
+                        <br>
+
+                        &gt; RECORD WAS NOT ACCEPTED.
 
                     `;
 
