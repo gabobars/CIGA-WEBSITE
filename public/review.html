@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // PERSONNEL REVIEW</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding:
+                45px 60px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
+        }
+
+
+        .title {
+            font-size: 24px;
+
+            letter-spacing: 4px;
+        }
+
+
+        .subtitle {
+            margin-top: 8px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+        }
+
+
+        .security {
+            text-align: right;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .system-status {
+            margin-bottom: 24px;
+
+            padding:
+                15px 18px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           ACCESS DENIED
+        ========================= */
+
+        .denied {
+            display: none;
+
+            padding: 30px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+        }
+
+
+        .denied.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           REVIEW PANEL
+        ========================= */
+
+        .review {
+            display: none;
+
+            max-width: 1100px;
+        }
+
+
+        .review.visible {
+            display: block;
+        }
+
+
+        .panel {
+            padding: 26px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+        }
+
+
+        .panel-title {
+            padding-bottom: 12px;
+
+            margin-bottom: 22px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.58;
+        }
+
+
+        /* =========================
+           SUBJECT HEADER
+        ========================= */
+
+        .subject-header {
+            display: flex;
+
+            gap: 25px;
+
+            align-items:
+                flex-start;
+        }
+
+
+        .subject-image {
+            width: 180px;
+
+            height: 180px;
+
+            object-fit: cover;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+        }
+
+
+        .subject-placeholder {
+            width: 180px;
+
+            height: 180px;
+
+            display: flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align: center;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.35;
+        }
+
+
+        .subject-info {
+            flex: 1;
+        }
+
+
+        .subject-name {
+            font-size: 24px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .subject-meta {
+            font-size: 10px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.65;
+        }
+
+
+        /* =========================
+           DATA GRID
+        ========================= */
+
+        .data-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px 30px;
+        }
+
+
+        .data-item {
+            padding-bottom: 12px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+        }
+
+
+        .data-label {
+            margin-bottom: 5px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.42;
+        }
+
+
+        .data-value {
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           DESCRIPTION / NOTES
+        ========================= */
+
+        .text-block {
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            letter-spacing: 0.7px;
+
+            white-space: pre-wrap;
+
+            opacity: 0.80;
+        }
+
+
+        /* =========================
+           LINKS
+        ========================= */
+
+        .links {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+
+        .link-button {
+            display: inline-block;
+
+            padding:
+                9px 13px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .link-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .action-button {
+            padding:
+                13px 18px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+        }
+
+
+        .action-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+        }
+
+
+        .accept {
+            border-color:
+                rgba(
+                    150,
+                    255,
+                    150,
+                    0.45
+                );
+        }
+
+
+        .reject {
+            border-color:
+                rgba(
+                    255,
+                    120,
+                    120,
+                    0.45
+                );
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        .result.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding:
+                    22px 18px;
+            }
+
+
+            .header {
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .title {
+                font-size: 18px;
+            }
+
+
+            .subject-header {
+                flex-direction:
+                    column;
+            }
+
+
+            .subject-image,
+            .subject-placeholder {
+                width: 140px;
+                height: 140px;
+            }
+
+
+            .subject-name {
+                font-size: 18px;
+            }
+
+
+            .data-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .actions {
+                flex-direction:
+                    column;
+            }
+
+
+            .action-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                PERSONNEL REVIEW // INTERNAL
+            </div>
+
+        </div>
+
+
+        <div class="security">
+
+            CHANNEL: RESTRICTED<br>
+
+            CLEARANCE: ADMIN REQUIRED
+
+        </div>
+
+    </header>
+
+
+    <div
+        class="system-status"
+        id="systemStatus"
+    >
+        &gt; AUTHENTICATING REVIEW SESSION...
+    </div>
+
+
+    <div
+        class="denied"
+        id="denied"
+    >
+
+        &gt; ACCESS DENIED.
+
+        <br><br>
+
+        This personnel record is classified.
+
+        <br>
+
+        Administrative clearance is required
+        to access the internal archive.
+
+    </div>
+
+
+    <main
+        class="review"
+        id="review"
+    >
+
+
+        <!-- =========================
+             SUBJECT
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // PERSONNEL RECORD
+            </div>
+
+
+            <div class="subject-header">
+
+
+                <div id="imageContainer"></div>
+
+
+                <div class="subject-info">
+
+                    <div
+                        class="subject-name"
+                        id="subjectName"
+                    >
+                        UNKNOWN
+                    </div>
+
+
+                    <div
+                        class="subject-meta"
+                        id="subjectMeta"
+                    >
+                        RECORD: UNKNOWN
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             IDENTITY
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // ENTITY INFORMATION
+            </div>
+
+
+            <div
+                class="data-grid"
+                id="identityGrid"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             DESCRIPTION
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // DESCRIPTION
+            </div>
+
+
+            <div
+                class="text-block"
+                id="description"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             NOTES
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // LORE / INCIDENT INFORMATION
+            </div>
+
+
+            <div
+                class="text-block"
+                id="notes"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             CONNECTIONS
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // KNOWN CONNECTIONS
+            </div>
+
+
+            <div
+                class="links"
+                id="links"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // PERSONNEL DISPOSITION
+            </div>
+
+
+            <div
+                class="data-grid"
+                id="statusGrid"
+            ></div>
+
+
+            <div class="actions">
+
+                <button
+                    class="action-button accept"
+                    id="acceptButton"
+                    type="button"
+                >
+                    ✓ ACCEPT PERSONNEL
+                </button>
+
+
+                <button
+                    class="action-button reject"
+                    id="rejectButton"
+                    type="button"
+                >
+                    ✕ REJECT PERSONNEL
+                </button>
+
+            </div>
+
+
+            <div
+                class="result"
+                id="result"
+            ></div>
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const {
+        createClient
+    } = supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const systemStatus =
+        document.getElementById(
+            "systemStatus"
+        );
+
+
+    const denied =
+        document.getElementById(
+            "denied"
+        );
+
+
+    const review =
+        document.getElementById(
+            "review"
+        );
+
+
+    const subjectName =
+        document.getElementById(
+            "subjectName"
+        );
+
+
+    const subjectMeta =
+        document.getElementById(
+            "subjectMeta"
+        );
+
+
+    const imageContainer =
+        document.getElementById(
+            "imageContainer"
+        );
+
+
+    const identityGrid =
+        document.getElementById(
+            "identityGrid"
+        );
+
+
+    const description =
+        document.getElementById(
+            "description"
+        );
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        );
+
+
+    const links =
+        document.getElementById(
+            "links"
+        );
+
+
+    const statusGrid =
+        document.getElementById(
+            "statusGrid"
+        );
+
+
+    const acceptButton =
+        document.getElementById(
+            "acceptButton"
+        );
+
+
+    const rejectButton =
+        document.getElementById(
+            "rejectButton"
+        );
+
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    /* ==========================================
+       GET SUBMISSION ID
+    ========================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const submissionId =
+        params.get(
+            "id"
+        );
+
+
+    /* ==========================================
+       AUTHENTICATION
+    ========================================== */
+
+    async function verifyAdmin() {
+
+        systemStatus.textContent =
+            "> VERIFYING ADMINISTRATIVE CLEARANCE...";
+
+
+        const {
+            data: sessionData,
+            error: sessionError
+        } =
+            await db.auth.getSession();
+
+
+        if (
+            sessionError
+            ||
+            !sessionData.session
+        ) {
+
+            denyAccess(
+                "NO ACTIVE ADMIN SESSION"
+            );
+
+            return false;
+
+        }
+
+
+        const userId =
+            sessionData.session.user.id;
+
+
+        const {
+            data: adminData,
+            error: adminError
+        } =
+            await db
+                .from("admins")
+                .select(
+                    "user_id, role"
+                )
+                .eq(
+                    "user_id",
+                    userId
+                )
+                .eq(
+                    "role",
+                    "ADMIN"
+                )
+                .maybeSingle();
+
+
+        if (
+            adminError
+            ||
+            !adminData
+        ) {
+
+            denyAccess(
+                "ADMIN CLEARANCE NOT FOUND"
+            );
+
+            return false;
+
+        }
+
+
+        systemStatus.textContent =
+            "> ADMINISTRATIVE CLEARANCE VERIFIED.";
+
+        return true;
+
+    }
+
+
+    /* ==========================================
+       DENY ACCESS
+    ========================================== */
+
+    function denyAccess(
+        reason
+    ) {
+
+        systemStatus.textContent =
+            `> ${reason}.`;
+
+        denied.classList.add(
+            "visible"
+        );
+
+        review.classList.remove(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       LOAD SUBMISSION
+    ========================================== */
+
+    async function loadSubmission() {
+
+        if (!submissionId) {
+
+            denyAccess(
+                "SUBMISSION ID NOT PROVIDED"
+            );
+
+            return;
+
+        }
+
+
+        const isAdmin =
+            await verifyAdmin();
+
+
+        if (!isAdmin) {
+            return;
+        }
+
+
+        systemStatus.textContent =
+            "> LOADING PERSONNEL RECORD...";
+
+
+        const {
+            data,
+            error
+        } =
+            await db
+                .from(
+                    "personnel_submissions"
+                )
+                .select("*")
+                .eq(
+                    "id",
+                    submissionId
+                )
+                .maybeSingle();
+
+
+        if (
+            error
+            ||
+            !data
+        ) {
+
+            console.error(
+                "SUBMISSION LOAD ERROR:",
+                error
+            );
+
+
+            denyAccess(
+                "PERSONNEL RECORD NOT FOUND"
+            );
+
+            return;
+
+        }
+
+
+        renderSubmission(
+            data
+        );
+
+
+        systemStatus.textContent =
+            "> PERSONNEL RECORD LOADED // CLEARANCE VERIFIED.";
+
+    }
+
+
+    /* ==========================================
+       RENDER SUBMISSION
+    ========================================== */
+
+    function renderSubmission(
+        data
+    ) {
+
+        review.classList.add(
+            "visible"
+        );
+
+
+        denied.classList.remove(
+            "visible"
+        );
+
+
+        /* =========================
+           SUBJECT
+        ========================= */
+
+        subjectName.textContent =
+            data.name ||
+            "UNKNOWN";
+
+
+        subjectMeta.textContent =
+            `RECORD ID: ${data.id} // STATUS: ${
+                data.submission_status ||
+                "UNKNOWN"
+            }`;
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        imageContainer.innerHTML =
+            "";
+
+
+        if (data.photo) {
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.src =
+                data.photo;
+
+
+            image.alt =
+                "Personnel identification image";
+
+
+            image.className =
+                "subject-image";
+
+
+            imageContainer.appendChild(
+                image
+            );
+
+        } else {
+
+            const placeholder =
+                document.createElement(
+                    "div"
+                );
+
+
+            placeholder.className =
+                "subject-placeholder";
+
+
+            placeholder.textContent =
+                "NO IDENTIFICATION IMAGE";
+
+
+            imageContainer.appendChild(
+                placeholder
+            );
+
+        }
+
+
+        /* =========================
+           IDENTITY GRID
+        ========================= */
+
+        identityGrid.innerHTML =
+            "";
+
+
+        addDataItem(
+            identityGrid,
+            "DISPLAY NAME",
+            data.name
+        );
+
+
+        addDataItem(
+            identityGrid,
+            "ALIAS",
+            data.alias
+        );
+
+
+        addDataItem(
+            identityGrid,
+            "PRIMARY ACTIVITY",
+            data.primary_activity
+        );
+
+
+        addDataItem(
+            identityGrid,
+            "LOCATION",
+            data.location
+        );
+
+
+        addDataItem(
+            identityGrid,
+            "AFFILIATION",
+            data.affiliation
+        );
+
+
+        addDataItem(
+            identityGrid,
+            "ORIGIN",
+            data.origin
+        );
+
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        description.textContent =
+            data.description ||
+            "NO DESCRIPTION PROVIDED";
+
+
+        /* =========================
+           NOTES
+        ========================= */
+
+        notes.textContent =
+            data.notes ||
+            "NO ADDITIONAL NOTES";
+
+
+        /* =========================
+           LINKS
+        ========================= */
+
+        links.innerHTML =
+            "";
+
+
+        addLink(
+            links,
+            "TWITCH",
+            data.twitch
+        );
+
+
+        addLink(
+            links,
+            "YOUTUBE",
+            data.youtube
+        );
+
+
+        addLink(
+            links,
+            "TIKTOK",
+            data.tiktok
+        );
+
+
+        addLink(
+            links,
+            "DISCORD",
+            data.discord
+        );
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        statusGrid.innerHTML =
+            "";
+
+
+        addDataItem(
+            statusGrid,
+            "SUBMISSION ID",
+            data.id
+        );
+
+
+        addDataItem(
+            statusGrid,
+            "SUBMISSION STATUS",
+            data.submission_status
+        );
+
+
+        addDataItem(
+            statusGrid,
+            "STATUS",
+            data.status || "PENDING"
+        );
+
+
+        /* =========================
+           BUTTON STATE
+        ========================= */
+
+        const currentStatus =
+            String(
+                data.submission_status ||
+                "PENDING"
+            ).toUpperCase();
+
+
+        if (
+            currentStatus === "ACCEPTED"
+        ) {
+
+            acceptButton.disabled =
+                true;
+
+            rejectButton.disabled =
+                true;
+
+        }
+
+    }
+
+
+    /* ==========================================
+       DATA ITEM
+    ========================================== */
+
+    function addDataItem(
+        container,
+        label,
+        value
+    ) {
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "data-item";
+
+
+        const labelElement =
+            document.createElement(
+                "div"
+            );
+
+
+        labelElement.className =
+            "data-label";
+
+
+        labelElement.textContent =
+            label;
+
+
+        const valueElement =
+            document.createElement(
+                "div"
+            );
+
+
+        valueElement.className =
+            "data-value";
+
+
+        valueElement.textContent =
+            value ||
+            "NOT PROVIDED";
+
+
+        item.appendChild(
+            labelElement
+        );
+
+
+        item.appendChild(
+            valueElement
+        );
+
+
+        container.appendChild(
+            item
+        );
+
+    }
+
+
+    /* ==========================================
+       LINK
+    ========================================== */
+
+    function addLink(
+        container,
+        label,
+        url
+    ) {
+
+        if (!url) {
+            return;
+        }
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.className =
+            "link-button";
+
+
+        link.href =
+            url;
+
+
+        link.target =
+            "_blank";
+
+
+        link.rel =
+            "noopener noreferrer";
+
+
+        link.textContent =
+            label;
+
+
+        container.appendChild(
+            link
+        );
+
+    }
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadSubmission();
+
+</script>
+
+
+</body>
+
+</html>
