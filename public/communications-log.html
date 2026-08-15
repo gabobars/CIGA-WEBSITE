@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // COMMUNICATIONS</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 45px 60px;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.30);
+
+        }
+
+
+        .title {
+
+            font-size: 24px;
+
+            letter-spacing: 4px;
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 9px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+        }
+
+
+        .header-status {
+
+            text-align: right;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+
+            margin-bottom: 28px;
+
+            padding: 18px 21px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.70;
+
+        }
+
+
+        /* =========================
+           DIRECTORY
+        ========================= */
+
+        .directory {
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            padding: 27px;
+
+            background:
+                rgba(255,255,255,0.015);
+
+        }
+
+
+        .directory-title {
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.52;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+
+        }
+
+
+        /* =========================
+           COMMUNICATION LIST
+        ========================= */
+
+        .communication-list {
+
+            display: grid;
+
+            gap: 10px;
+
+        }
+
+
+        .communication-link {
+
+            display: block;
+
+            color: #fff;
+
+            text-decoration: none;
+
+        }
+
+
+        .communication-item {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 20px;
+
+            padding: 18px 19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            background:
+                rgba(255,255,255,0.015);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+
+            cursor: pointer;
+
+        }
+
+
+        .communication-link:hover
+        .communication-item {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.40);
+
+            transform:
+                translateX(4px);
+
+        }
+
+
+        /* =========================
+           MESSAGE INFORMATION
+        ========================= */
+
+        .communication-id {
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .communication-subject {
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .communication-meta {
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.58;
+
+        }
+
+
+        .communication-status {
+
+            display: flex;
+
+            align-items:
+                center;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            white-space: nowrap;
+
+        }
+
+
+        .communication-status::before {
+
+            content: "";
+
+            width: 6px;
+
+            height: 6px;
+
+            margin-right: 8px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+        }
+
+
+        /* =========================
+           LOADING / EMPTY / ERROR
+        ========================= */
+
+        .database-message {
+
+            padding: 20px;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+        }
+
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+
+            display: inline-block;
+
+            margin-top: 27px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+
+        }
+
+
+        .back:hover {
+
+            opacity: 1;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.32;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .page {
+
+                padding: 20px;
+
+            }
+
+
+            .header {
+
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .title {
+
+                font-size: 17px;
+
+            }
+
+
+            .header-status {
+
+                font-size: 8px;
+
+            }
+
+
+            .directory {
+
+                padding: 17px;
+
+            }
+
+
+            .communication-item {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 15px;
+
+            }
+
+
+            .communication-status {
+
+                justify-content:
+                    flex-start;
+
+            }
+
+
+            .footer {
+
+                flex-direction:
+                    column;
+
+                gap: 8px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                COMMUNICATIONS DATABASE // INTERNAL
+            </div>
+
+        </div>
+
+
+        <div class="header-status">
+
+            DATABASE:
+            <span id="databaseStatus">
+                CONNECTING
+            </span>
+
+            <br>
+
+            RECORDS:
+            <span id="recordCount">
+                --
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         TERMINAL
+    ========================= -->
+
+    <section class="terminal">
+
+        <div>
+            &gt; ACCESSING COMMUNICATIONS DATABASE...
+        </div>
+
+        <div id="terminalIndex">
+            &gt; INDEXING TRANSMISSION RECORDS...
+        </div>
+
+        <div id="terminalCount">
+            &gt; WAITING FOR DATABASE RESPONSE...
+        </div>
+
+        <div id="terminalDisplay">
+            &gt; RETRIEVING AVAILABLE TRANSMISSIONS...
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DIRECTORY
+    ========================= -->
+
+    <section class="directory">
+
+        <div class="directory-title">
+            // COMMUNICATIONS DIRECTORY
+        </div>
+
+
+        <div
+            class="communication-list"
+            id="communicationList"
+        >
+
+            <div class="database-message">
+
+                &gt; LOADING COMMUNICATION DATABASE...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BACK
+    ========================= -->
+
+    <a
+        href="home.html"
+        class="back"
+    >
+        &lt;&lt; RETURN TO SYSTEM
+    </a>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // COMMUNICATIONS DATABASE
+        </span>
+
+        <span>
+            ALL ACCESS IS LOGGED
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const {
+        createClient
+    } = supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const communicationList =
+        document.getElementById(
+            "communicationList"
+        );
+
+
+    const databaseStatus =
+        document.getElementById(
+            "databaseStatus"
+        );
+
+
+    const recordCount =
+        document.getElementById(
+            "recordCount"
+        );
+
+
+    const terminalIndex =
+        document.getElementById(
+            "terminalIndex"
+        );
+
+
+    const terminalCount =
+        document.getElementById(
+            "terminalCount"
+        );
+
+
+    const terminalDisplay =
+        document.getElementById(
+            "terminalDisplay"
+        );
+
+
+    /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       LOAD COMMUNICATIONS
+    ========================================== */
+
+    async function loadCommunications() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "communications"
+                )
+
+                .select(`
+                    id,
+                    message_id,
+                    sender,
+                    recipient,
+                    subject,
+                    classification,
+                    status,
+                    visible,
+                    created_at
+                `)
+
+                .eq(
+                    "visible",
+                    true
+                )
+
+                .order(
+                    "id",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        /* =========================
+           DATABASE ERROR
+        ========================= */
+
+        if (error) {
+
+            console.error(
+                "COMMUNICATION DATABASE ERROR:",
+                error
+            );
+
+
+            databaseStatus.textContent =
+                "ERROR";
+
+
+            recordCount.textContent =
+                "ERR";
+
+
+            terminalIndex.textContent =
+                "> COMMUNICATION DATABASE ERROR.";
+
+
+            terminalCount.textContent =
+                "> TRANSMISSION INDEXING FAILED.";
+
+
+            terminalDisplay.textContent =
+                "> NO TRANSMISSIONS COULD BE RETRIEVED.";
+
+
+            communicationList.innerHTML = `
+
+                <div class="database-message">
+
+                    &gt; DATABASE ERROR.<br><br>
+
+                    &gt; ${escapeHTML(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =========================
+           DATABASE ONLINE
+        ========================= */
+
+        databaseStatus.textContent =
+            "ONLINE";
+
+
+        const communications =
+            data || [];
+
+
+        recordCount.textContent =
+            communications.length;
+
+
+        terminalIndex.textContent =
+            "> INDEXING TRANSMISSION RECORDS...";
+
+
+        terminalCount.textContent =
+            `> ${communications.length} TRANSMISSION${
+                communications.length === 1
+                    ? ""
+                    : "S"
+            } FOUND.`;
+
+
+        terminalDisplay.textContent =
+            "> DISPLAYING AVAILABLE TRANSMISSIONS...";
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        if (
+            communications.length === 0
+        ) {
+
+            communicationList.innerHTML = `
+
+                <div class="database-message">
+
+                    &gt; NO PUBLIC COMMUNICATION RECORDS AVAILABLE.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =========================
+           CREATE LIST
+        ========================= */
+
+        communicationList.innerHTML =
+            "";
+
+
+        communications.forEach(
+            communication => {
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.className =
+                    "communication-link";
+
+
+                link.href =
+                    `communication.html?id=${
+                        encodeURIComponent(
+                            communication.id
+                        )
+                    }`;
+
+
+                link.innerHTML = `
+
+                    <div class="communication-item">
+
+
+                        <div>
+
+                            <div
+                                class="communication-id"
+                            >
+
+                                ${escapeHTML(
+                                    communication.message_id
+                                )}
+
+                            </div>
+
+
+                            <div
+                                class="communication-subject"
+                            >
+
+                                [
+                                ${escapeHTML(
+                                    communication.subject ||
+                                    "UNTITLED TRANSMISSION"
+                                ).toUpperCase()}
+                                ]
+
+                            </div>
+
+
+                            <div
+                                class="communication-meta"
+                            >
+
+                                FROM:
+                                ${escapeHTML(
+                                    communication.sender ||
+                                    "UNKNOWN"
+                                )}
+
+                                <br>
+
+                                TO:
+                                ${escapeHTML(
+                                    communication.recipient ||
+                                    "UNKNOWN"
+                                )}
+
+                                <br>
+
+                                CLASSIFICATION:
+                                ${escapeHTML(
+                                    communication.classification ||
+                                    "UNSPECIFIED"
+                                )}
+
+                                <br>
+
+                                STATUS:
+                                ${escapeHTML(
+                                    communication.status ||
+                                    "UNSPECIFIED"
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="communication-status"
+                        >
+
+                            OPEN TRANSMISSION
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+
+                communicationList.appendChild(
+                    link
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadCommunications();
+
+</script>
+
+</body>
+
+</html>
