@@ -225,7 +225,13 @@
             max-height: 220px;
             overflow-y: auto;
             overflow-x: hidden;
-            scrollbar-width: thin;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .logs::-webkit-scrollbar {
+            display: none;
         }
 
         .log {
@@ -1284,6 +1290,14 @@
                     logElement
                 );
             });
+
+
+            /* =========================
+               AUTO SCROLL
+            ========================= */
+
+            systemLogs.scrollTop =
+                systemLogs.scrollHeight;
         }
 
 
