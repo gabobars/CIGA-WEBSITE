@@ -1009,7 +1009,6 @@
 
 <body>
 
-
     <!-- =========================
          WELCOME SCREEN
     ========================= -->
@@ -1024,7 +1023,6 @@
             alt="CIGA"
             class="welcome-logo"
         >
-
 
         <div class="welcome-text">
             WELCOME OPERATIVE
@@ -1042,7 +1040,6 @@
         id="home"
     >
 
-
         <header class="header">
 
             <div>
@@ -1051,20 +1048,15 @@
                     CIGA SYSTEMS
                 </div>
 
-
                 <div class="header-subtitle">
                     INTERNAL OPERATIONS NETWORK
                 </div>
 
             </div>
 
-
             <div class="operator">
-
                 OPERATIVE: 001<br>
-
                 SESSION: ACTIVE
-
             </div>
 
         </header>
@@ -1076,13 +1068,11 @@
 
         <section class="status-bar">
 
-
             <div class="status-box">
 
                 <div class="status-label">
                     SYSTEM STATUS
                 </div>
-
 
                 <div class="status-value online">
 
@@ -1101,7 +1091,6 @@
                     NETWORK STATUS
                 </div>
 
-
                 <div class="status-value">
                     SECURE
                 </div>
@@ -1114,7 +1103,6 @@
                 <div class="status-label">
                     CLEARANCE LEVEL
                 </div>
-
 
                 <div class="status-value">
                     OPERATIVE
@@ -1131,25 +1119,20 @@
 
         <section class="main-grid">
 
-
             <div class="panel">
 
                 <div class="panel-title">
                     // PRIMARY DIRECTIVE
                 </div>
 
-
                 <div class="directive">
 
                     <div class="directive-main">
-
                         CIGA SYSTEMS operates through four
                         primary directives.
                         All operations are conducted under
                         controlled authorization.
-
                     </div>
-
 
                     <div class="directive-list">
 
@@ -1157,16 +1140,13 @@
                             CONTAIN
                         </div>
 
-
                         <div class="directive-item">
                             INTERCEPT
                         </div>
 
-
                         <div class="directive-item">
                             GUARD
                         </div>
-
 
                         <div class="directive-item">
                             APPREHEND
@@ -1184,7 +1164,6 @@
                 <div class="panel-title">
                     // SYSTEM LOG
                 </div>
-
 
                 <div
                     class="logs"
@@ -1206,7 +1185,6 @@
                 // LIVE OPERATION
             </div>
 
-
             <div
                 class="live-operation"
                 id="liveOperation"
@@ -1218,7 +1196,6 @@
                         CURRENT OPERATION STATUS
                     </div>
 
-
                     <div class="live-main-status">
 
                         <span
@@ -1226,21 +1203,17 @@
                             id="liveStatusDot"
                         ></span>
 
-
                         <span id="liveStatusText">
                             OFFLINE
                         </span>
 
                     </div>
 
-
                     <div class="live-info">
-
 
                         <div class="live-info-label">
                             OPERATIVE
                         </div>
-
 
                         <div
                             class="live-info-value"
@@ -1249,11 +1222,9 @@
                             UNAVAILABLE
                         </div>
 
-
                         <div class="live-info-label">
                             PLATFORM
                         </div>
-
 
                         <div
                             class="live-info-value"
@@ -1262,11 +1233,9 @@
                             UNAVAILABLE
                         </div>
 
-
                         <div class="live-info-label">
                             OPERATION
                         </div>
-
 
                         <div
                             class="live-info-value"
@@ -1305,7 +1274,6 @@
                 // AVAILABLE SYSTEMS
             </div>
 
-
             <div class="systems-grid">
 
 
@@ -1323,7 +1291,6 @@
                     <span class="system-button-title">
                         PERSONNEL FILES
                     </span>
-
 
                     <span class="system-button-status">
                         ACCESS AVAILABLE
@@ -1347,7 +1314,6 @@
                         COMMUNICATIONS
                     </span>
 
-
                     <span class="system-button-status">
                         ACCESS AVAILABLE
                     </span>
@@ -1369,7 +1335,6 @@
                     <span class="system-button-title">
                         ARCHIVES
                     </span>
-
 
                     <span class="system-button-status">
                         ACCESS AVAILABLE
@@ -1393,7 +1358,6 @@
                         CIGA TRANSMISSIONS
                     </span>
 
-
                     <span class="system-button-status">
                         DATABASE ACCESS
                     </span>
@@ -1409,14 +1373,11 @@
                         CLASSIFIED
                     </span>
 
-
                     <span class="system-button-status">
                         ACCESS RESTRICTED
                     </span>
 
-
                     <div class="classified-options">
-
 
                         <a
                             href="admin.html"
@@ -1428,7 +1389,6 @@
                         >
                             ADMINISTRATIVE ACCESS
                         </a>
-
 
                         <a
                             href="submission.html"
@@ -1445,7 +1405,6 @@
 
                 </div>
 
-
             </div>
 
         </section>
@@ -1460,7 +1419,6 @@
             <span>
                 CIGA SYSTEMS // INTERNAL USE ONLY
             </span>
-
 
             <span>
                 ALL ACCESS IS LOGGED
@@ -1562,7 +1520,7 @@
 
 
         /* =========================
-           STORAGE KEYS
+           STORAGE
         ========================= */
 
         const CIGA_LOG_KEY =
@@ -1575,6 +1533,19 @@
 
         const CIGA_NEXT_PAGE_KEY =
             "ciga_next_page";
+
+
+        /* =========================
+           GLOBAL EVENTS CACHE
+        ========================= */
+
+        let cigaGlobalEvents = [];
+
+
+        let cigaLogsRendering = false;
+
+
+        let cigaLogsRenderQueued = false;
 
 
         /* =========================
@@ -1631,6 +1602,11 @@
 
             } catch (error) {
 
+                console.error(
+                    "LOCAL LOG READ ERROR:",
+                    error
+                );
+
                 return [];
 
             }
@@ -1646,12 +1622,23 @@
             logs
         ) {
 
-            sessionStorage.setItem(
-                CIGA_LOG_KEY,
-                JSON.stringify(
-                    logs
-                )
-            );
+            try {
+
+                sessionStorage.setItem(
+                    CIGA_LOG_KEY,
+                    JSON.stringify(
+                        logs
+                    )
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "LOCAL LOG SAVE ERROR:",
+                    error
+                );
+
+            }
 
         }
 
@@ -1690,7 +1677,22 @@
             );
 
 
+            /*
+                Render immediately using
+                the local cache.
+
+                This means clicking a button
+                does not depend on Supabase.
+            */
+
             cigaRenderLogs();
+
+
+            /*
+                Refresh global events separately.
+            */
+
+            cigaRefreshGlobalEvents();
 
         }
 
@@ -1707,67 +1709,6 @@
                 CIGA_NEXT_PAGE_KEY,
                 page
             );
-
-        }
-
-
-        /* =========================
-           LOAD GLOBAL EVENTS
-        ========================= */
-
-        async function cigaLoadGlobalEvents() {
-
-            const cutoff =
-                new Date(
-                    Date.now() -
-                    (24 * 60 * 60 * 1000)
-                ).toISOString();
-
-
-            const {
-                data,
-                error
-            } = await db
-
-                .from(
-                    "ciga_events"
-                )
-
-                .select(
-                    "id, event_type, message, source, created_at"
-                )
-
-                .eq(
-                    "visible",
-                    true
-                )
-
-                .gte(
-                    "created_at",
-                    cutoff
-                )
-
-                .order(
-                    "created_at",
-                    {
-                        ascending: true
-                    }
-                );
-
-
-            if (error) {
-
-                console.error(
-                    "CIGA EVENTS DATABASE ERROR:",
-                    error
-                );
-
-                return [];
-
-            }
-
-
-            return data || [];
 
         }
 
@@ -1818,17 +1759,108 @@
 
 
         /* =========================
-           RENDER COMBINED LOGS
+           LOAD GLOBAL EVENTS
         ========================= */
 
-        async function cigaRenderLogs() {
+        async function cigaLoadGlobalEvents() {
+
+            const cutoff =
+                new Date(
+                    Date.now() -
+                    (
+                        24 *
+                        60 *
+                        60 *
+                        1000
+                    )
+                ).toISOString();
+
+
+            const {
+                data,
+                error
+            } = await db
+
+                .from(
+                    "ciga_events"
+                )
+
+                .select(
+                    "id, event_type, message, source, created_at"
+                )
+
+                .eq(
+                    "visible",
+                    true
+                )
+
+                .gte(
+                    "created_at",
+                    cutoff
+                )
+
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA EVENTS DATABASE ERROR:",
+                    error
+                );
+
+
+                return null;
+
+            }
+
+
+            return data || [];
+
+        }
+
+
+        /* =========================
+           REFRESH GLOBAL EVENTS
+        ========================= */
+
+        async function cigaRefreshGlobalEvents() {
+
+            const events =
+                await cigaLoadGlobalEvents();
+
+
+            if (
+                events === null
+            ) {
+
+                return;
+
+            }
+
+
+            cigaGlobalEvents =
+                events;
+
+
+            cigaRenderLogs();
+
+        }
+
+
+        /* =========================
+           BUILD COMBINED LOGS
+        ========================= */
+
+        function cigaBuildCombinedLogs() {
 
             const localLogs =
                 cigaGetLogs();
-
-
-            const globalEvents =
-                await cigaLoadGlobalEvents();
 
 
             const combinedLogs =
@@ -1836,11 +1868,14 @@
 
 
             /* =========================
-               LOCAL EVENTS
+               LOCAL
             ========================= */
 
             localLogs.forEach(
-                (log, index) => {
+                (
+                    log,
+                    index
+                ) => {
 
                     combinedLogs.push({
 
@@ -1872,13 +1907,13 @@
 
 
             /* =========================
-               GLOBAL EVENTS
+               GLOBAL
             ========================= */
 
-            globalEvents.forEach(
+            cigaGlobalEvents.forEach(
                 event => {
 
-                    const eventTimestamp =
+                    const timestamp =
                         new Date(
                             event.created_at
                         ).getTime();
@@ -1888,10 +1923,10 @@
 
                         timestamp:
                             Number.isNaN(
-                                eventTimestamp
+                                timestamp
                             )
                                 ? 0
-                                : eventTimestamp,
+                                : timestamp,
 
                         time:
                             cigaFormatEventTime(
@@ -1925,126 +1960,162 @@
             );
 
 
-            /* =========================
-               LAST 12 EVENTS
-            ========================= */
+            return combinedLogs;
 
-            const visibleLogs =
-                combinedLogs.slice(
-                    -12
-                );
+        }
 
 
-            /* =========================
-               CLEAR DISPLAY
-            ========================= */
+        /* =========================
+           RENDER LOGS
+        ========================= */
 
-            systemLogs.innerHTML =
-                "";
-
-
-            /* =========================
-               EMPTY
-            ========================= */
+        function cigaRenderLogs() {
 
             if (
-                visibleLogs.length === 0
+                cigaLogsRendering
             ) {
 
-                const empty =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                empty.className =
-                    "log log-empty";
-
-
-                empty.textContent =
-                    "SYSTEM LOG EMPTY.";
-
-
-                systemLogs.appendChild(
-                    empty
-                );
-
+                cigaLogsRenderQueued =
+                    true;
 
                 return;
 
             }
 
 
-            /* =========================
-               RENDER EVENTS
-            ========================= */
+            cigaLogsRendering =
+                true;
 
-            visibleLogs.forEach(
-                log => {
 
-                    const logElement =
+            try {
+
+                const combinedLogs =
+                    cigaBuildCombinedLogs();
+
+
+                const visibleLogs =
+                    combinedLogs.slice(
+                        -12
+                    );
+
+
+                systemLogs.innerHTML =
+                    "";
+
+
+                if (
+                    visibleLogs.length === 0
+                ) {
+
+                    const empty =
                         document.createElement(
                             "div"
                         );
 
 
-                    logElement.className =
-                        log.source === "CIGA"
-                            ? "log log-global"
-                            : "log";
+                    empty.className =
+                        "log log-empty";
 
 
-                    const time =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    time.className =
-                        "log-time";
-
-
-                    time.textContent =
-                        log.time;
-
-
-                    const source =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    source.className =
-                        "log-source";
-
-
-                    source.textContent =
-                        log.source;
-
-
-                    logElement.appendChild(
-                        time
-                    );
-
-
-                    logElement.appendChild(
-                        source
-                    );
-
-
-                    logElement.appendChild(
-                        document.createTextNode(
-                            log.message
-                        )
-                    );
+                    empty.textContent =
+                        "SYSTEM LOG EMPTY.";
 
 
                     systemLogs.appendChild(
-                        logElement
+                        empty
                     );
 
+
+                    return;
+
                 }
-            );
+
+
+                visibleLogs.forEach(
+                    log => {
+
+                        const logElement =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        logElement.className =
+                            log.source === "CIGA"
+                                ? "log log-global"
+                                : "log";
+
+
+                        const time =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        time.className =
+                            "log-time";
+
+
+                        time.textContent =
+                            log.time;
+
+
+                        const source =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        source.className =
+                            "log-source";
+
+
+                        source.textContent =
+                            log.source;
+
+
+                        logElement.appendChild(
+                            time
+                        );
+
+
+                        logElement.appendChild(
+                            source
+                        );
+
+
+                        logElement.appendChild(
+                            document.createTextNode(
+                                log.message
+                            )
+                        );
+
+
+                        systemLogs.appendChild(
+                            logElement
+                        );
+
+                    }
+                );
+
+            } finally {
+
+                cigaLogsRendering =
+                    false;
+
+
+                if (
+                    cigaLogsRenderQueued
+                ) {
+
+                    cigaLogsRenderQueued =
+                        false;
+
+                    cigaRenderLogs();
+
+                }
+
+            }
 
         }
 
@@ -2375,6 +2446,13 @@
 
 
         /* =========================
+           INITIAL GLOBAL LOAD
+        ========================= */
+
+        cigaRefreshGlobalEvents();
+
+
+        /* =========================
            WELCOME SCREEN
         ========================= */
 
@@ -2402,7 +2480,7 @@
                 );
 
 
-                await cigaRenderLogs();
+                cigaRenderLogs();
 
 
                 await cigaLoadLiveStatus();
@@ -2413,7 +2491,7 @@
 
 
         /* =========================
-           REFRESH
+           REFRESH LIVE STATUS
         ========================= */
 
         setInterval(
@@ -2422,8 +2500,12 @@
         );
 
 
+        /* =========================
+           REFRESH GLOBAL EVENTS
+        ========================= */
+
         setInterval(
-            cigaRenderLogs,
+            cigaRefreshGlobalEvents,
             10000
         );
 
