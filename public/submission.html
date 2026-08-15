@@ -1114,7 +1114,7 @@
 
 
     /* ==========================================
-       CIGA RELAY
+       CIGA RELAY WORKER
     ========================================== */
 
     const CIGA_RELAY_URL =
@@ -1122,7 +1122,7 @@
 
 
     /* ==========================================
-       FORM
+       FORM ELEMENTS
     ========================================== */
 
     const form =
@@ -1172,7 +1172,7 @@
 
 
     /* ==========================================
-       SEND DISCORD RELAY
+       SEND SUBMISSION TO CIGA RELAY
     ========================================== */
 
     async function cigaSendSubmissionRelay(
@@ -1235,7 +1235,7 @@
 
 
     /* ==========================================
-       FORM SUBMIT
+       FORM SUBMISSION
     ========================================== */
 
     form.addEventListener(
@@ -1367,15 +1367,13 @@
                 if (imageFile) {
 
                     /* =========================
-                       VALIDATE IMAGE
+                       VALIDATE IMAGE TYPE
                     ========================= */
 
                     const allowedTypes = [
-
                         "image/png",
                         "image/jpeg",
                         "image/webp"
-
                     ];
 
 
@@ -1392,6 +1390,10 @@
                     }
 
 
+                    /* =========================
+                       VALIDATE IMAGE SIZE
+                    ========================= */
+
                     if (
                         imageFile.size >
                         5 * 1024 * 1024
@@ -1405,7 +1407,7 @@
 
 
                     /* =========================
-                       UNIQUE IMAGE NAME
+                       UNIQUE FILE NAME
                     ========================= */
 
                     const fileExtension =
@@ -1468,7 +1470,7 @@
 
 
                     /* =========================
-                       PUBLIC URL
+                       GET IMAGE URL
                     ========================= */
 
                     const {
@@ -1545,10 +1547,11 @@
                 };
 
 
-                const {
-                    data:
-                    submissionData,
+                /* =========================
+                   INSERT INTO SUPABASE
+                ========================= */
 
+                const {
                     error:
                     submissionError
                 } =
@@ -1558,18 +1561,10 @@
                         )
                         .insert(
                             [submission]
-                        )
-                        .select(
-                            "id"
-                        )
-                        .single();
+                        );
 
 
-                if (
-                    submissionError
-                    ||
-                    !submissionData
-                ) {
+                if (submissionError) {
 
                     console.error(
                         "SUBMISSION ERROR:",
@@ -1582,14 +1577,6 @@
                     );
 
                 }
-
-
-                /* =========================
-                   SUBMISSION ID
-                ========================= */
-
-                const submissionId =
-                    submissionData.id;
 
 
                 /* =========================
@@ -1610,7 +1597,7 @@
                             identity.operative,
 
                         submission_id:
-                            submissionId,
+                            "PENDING",
 
                         name:
                             name
@@ -1625,11 +1612,6 @@
                 result.innerHTML = `
 
                     &gt; SUBMISSION RECEIVED.
-
-                    <br>
-
-                    &gt; RECORD ID:
-                    ${submissionId}
 
                     <br>
 
