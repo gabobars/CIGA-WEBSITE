@@ -1596,22 +1596,25 @@
                     "TRANSMITTING...";
 
 
-                const relaySuccessful =
-                    await cigaSendSubmissionRelay({
+const relaySuccessful =
+    await cigaSendSubmissionRelay({
 
-                        node:
-                            identity.node,
+        node:
+            identity.node,
 
-                        operative:
-                            identity.operative,
+        operative:
+            identity.operative,
 
-                        submission_id:
-                            "PENDING",
+        submission_id:
+            "PENDING",
 
-                        name:
-                            name
+        name:
+            name,
 
-                    });
+        photo:
+            photoUrl
+
+    });
 
 
                 /* =========================
