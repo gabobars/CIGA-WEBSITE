@@ -7,6 +7,9 @@
     <title>CIGA SYSTEMS // INTERNAL</title>
     <link rel="icon" type="image/png" href="logo.png">
 
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
 
         * {
@@ -425,6 +428,221 @@
 
 
         /* =========================
+           LIVE OPERATION
+        ========================= */
+
+        .live-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .live-operation {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 25px;
+
+            align-items: center;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .live-operation.active {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.38
+                );
+        }
+
+
+        .live-main-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 9px;
+        }
+
+
+        .live-main-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 18px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .live-status-dot {
+            width: 7px;
+
+            height: 7px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 9px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+        }
+
+
+        .live-status-dot.offline {
+            opacity: 0.28;
+
+            box-shadow: none;
+        }
+
+
+        .live-info {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr;
+
+            gap: 6px 15px;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        .live-info-label {
+            opacity: 0.35;
+        }
+
+
+        .live-info-value {
+            opacity: 0.82;
+
+            word-break:
+                break-word;
+        }
+
+
+        .live-action {
+            display: inline-block;
+
+            padding:
+                12px 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.8px;
+
+            opacity: 0.42;
+
+            pointer-events: none;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .live-action.available {
+            opacity: 0.75;
+
+            pointer-events: auto;
+        }
+
+
+        .live-action.available:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+
+            opacity: 1;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
            SYSTEMS
         ========================= */
 
@@ -681,6 +899,12 @@
                     1fr;
             }
 
+
+            .live-operation {
+                grid-template-columns:
+                    1fr;
+            }
+
         }
 
 
@@ -728,6 +952,17 @@
             .systems-grid {
                 grid-template-columns:
                     1fr;
+            }
+
+
+            .live-info {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .live-main-status {
+                font-size: 16px;
             }
 
         }
@@ -918,6 +1153,102 @@
         </section>
 
 
+        <!-- =========================
+             LIVE OPERATION
+        ========================= -->
+
+        <section class="panel live-panel">
+
+            <div class="panel-title">
+                // LIVE OPERATION
+            </div>
+
+
+            <div
+                class="live-operation"
+                id="liveOperation"
+            >
+
+                <div>
+
+                    <div class="live-main-label">
+                        CURRENT OPERATION STATUS
+                    </div>
+
+
+                    <div class="live-main-status">
+
+                        <span
+                            class="live-status-dot offline"
+                            id="liveStatusDot"
+                        ></span>
+
+
+                        <span id="liveStatusText">
+                            OFFLINE
+                        </span>
+
+                    </div>
+
+
+                    <div class="live-info">
+
+
+                        <div class="live-info-label">
+                            OPERATIVE
+                        </div>
+
+                        <div
+                            class="live-info-value"
+                            id="liveSubject"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="live-info-label">
+                            PLATFORM
+                        </div>
+
+                        <div
+                            class="live-info-value"
+                            id="livePlatform"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="live-info-label">
+                            STREAM
+                        </div>
+
+                        <div
+                            class="live-info-value"
+                            id="liveStreamStatus"
+                        >
+                            NO ACTIVE TRANSMISSION
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    id="liveAction"
+                    class="live-action"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ACCESS TRANSMISSION
+                </a>
+
+            </div>
+
+        </section>
+
+
         <section class="panel systems-panel">
 
 
@@ -1088,6 +1419,378 @@
 
 
     <script>
+
+
+        /* =========================
+           SUPABASE
+        ========================= */
+
+        const SUPABASE_URL =
+            "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+        const SUPABASE_KEY =
+            "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+        const {
+            createClient
+        } = supabase;
+
+
+        const db =
+            createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================
+           LIVE OPERATION ELEMENTS
+        ========================= */
+
+        const liveOperation =
+            document.getElementById(
+                "liveOperation"
+            );
+
+
+        const liveStatusDot =
+            document.getElementById(
+                "liveStatusDot"
+            );
+
+
+        const liveStatusText =
+            document.getElementById(
+                "liveStatusText"
+            );
+
+
+        const liveSubject =
+            document.getElementById(
+                "liveSubject"
+            );
+
+
+        const livePlatform =
+            document.getElementById(
+                "livePlatform"
+            );
+
+
+        const liveStreamStatus =
+            document.getElementById(
+                "liveStreamStatus"
+            );
+
+
+        const liveAction =
+            document.getElementById(
+                "liveAction"
+            );
+
+
+        /* =========================
+           HTML ESCAPE
+        ========================= */
+
+        function cigaEscapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================
+           LOAD LIVE OPERATION
+        ========================= */
+
+        async function cigaLoadLiveStatus() {
+
+            const {
+                data,
+                error
+            } =
+                await db
+
+                    .from(
+                        "live_status"
+                    )
+
+                    .select(
+                        "id, is_live, subject, platform, stream_title, stream_url, updated_at"
+                    )
+
+                    .eq(
+                        "id",
+                        1
+                    )
+
+                    .maybeSingle();
+
+
+            /* =========================
+               DATABASE ERROR
+            ========================= */
+
+            if (error) {
+
+                console.error(
+                    "LIVE STATUS DATABASE ERROR:",
+                    error
+                );
+
+
+                liveStatusDot.classList.add(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "STATUS UNAVAILABLE";
+
+
+                liveSubject.textContent =
+                    "DATABASE ERROR";
+
+
+                livePlatform.textContent =
+                    "UNAVAILABLE";
+
+
+                liveStreamStatus.textContent =
+                    "LIVE STATUS COULD NOT BE RETRIEVED";
+
+
+                liveAction.classList.remove(
+                    "available"
+                );
+
+
+                liveOperation.classList.remove(
+                    "active"
+                );
+
+
+                return;
+
+            }
+
+
+            /* =========================
+               NO DATA
+            ========================= */
+
+            if (!data) {
+
+                liveStatusDot.classList.add(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "OFFLINE";
+
+
+                liveSubject.textContent =
+                    "UNAVAILABLE";
+
+
+                livePlatform.textContent =
+                    "UNAVAILABLE";
+
+
+                liveStreamStatus.textContent =
+                    "NO ACTIVE TRANSMISSION";
+
+
+                liveAction.classList.remove(
+                    "available"
+                );
+
+
+                liveOperation.classList.remove(
+                    "active"
+                );
+
+
+                return;
+
+            }
+
+
+            /* =========================
+               LIVE
+            ========================= */
+
+            if (
+                data.is_live === true
+            ) {
+
+                liveStatusDot.classList.remove(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "ACTIVE";
+
+
+                liveSubject.textContent =
+                    cigaEscapeHTML(
+                        (
+                            data.subject ||
+                            "UNKNOWN"
+                        ).toUpperCase()
+                    );
+
+
+                livePlatform.textContent =
+                    cigaEscapeHTML(
+                        (
+                            data.platform ||
+                            "TWITCH"
+                        ).toUpperCase()
+                    );
+
+
+                liveStreamStatus.textContent =
+                    "ACTIVE TRANSMISSION";
+
+
+                liveOperation.classList.add(
+                    "active"
+                );
+
+
+                /*
+                    If a stream URL exists in Supabase,
+                    use it.
+
+                    Otherwise generate a Twitch link
+                    using the subject.
+                */
+
+                let streamUrl =
+                    data.stream_url;
+
+
+                if (
+                    !streamUrl &&
+                    data.platform &&
+                    data.platform.toUpperCase() === "TWITCH" &&
+                    data.subject
+                ) {
+
+                    streamUrl =
+                        `https://twitch.tv/${encodeURIComponent(
+                            data.subject
+                        )}`;
+
+                }
+
+
+                if (streamUrl) {
+
+                    liveAction.href =
+                        streamUrl;
+
+
+                    liveAction.classList.add(
+                        "available"
+                    );
+
+                } else {
+
+                    liveAction.href =
+                        "#";
+
+
+                    liveAction.classList.remove(
+                        "available"
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =========================
+               OFFLINE
+            ========================= */
+
+            liveStatusDot.classList.add(
+                "offline"
+            );
+
+
+            liveStatusText.textContent =
+                "OFFLINE";
+
+
+            liveSubject.textContent =
+                "UNAVAILABLE";
+
+
+            livePlatform.textContent =
+                data.platform
+                    ? cigaEscapeHTML(
+                        data.platform.toUpperCase()
+                    )
+                    : "TWITCH";
+
+
+            liveStreamStatus.textContent =
+                "NO ACTIVE TRANSMISSION";
+
+
+            liveOperation.classList.remove(
+                "active"
+            );
+
+
+            liveAction.href =
+                "#";
+
+
+            liveAction.classList.remove(
+                "available"
+            );
+
+        }
 
 
         /* =========================
@@ -1419,12 +2122,37 @@
 
                 cigaRenderLogs();
 
+
+                /*
+                    Load live status when the
+                    Home becomes visible.
+                */
+
+                cigaLoadLiveStatus();
+
             },
             2400
+        );
+
+
+        /* =========================
+           LIVE STATUS REFRESH
+        ========================= */
+
+        /*
+            Check every 10 seconds.
+
+            No Twitch polling is happening here.
+            The page is only reading one small
+            Supabase row.
+        */
+
+        setInterval(
+            cigaLoadLiveStatus,
+            10000
         );
 
     </script>
 
 </body>
-
 </html>
