@@ -968,6 +968,216 @@
 
 
         /* =========================
+           COMMUNICATION CREATOR
+        ========================= */
+
+        .communication-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+        .communication-full {
+            grid-column: 1 / -1;
+        }
+
+        .communication-field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .communication-label {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+        }
+
+        .communication-input,
+        .communication-select,
+        .communication-textarea {
+            width: 100%;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 0.8px;
+        }
+
+        .communication-input,
+        .communication-select {
+            height: 42px;
+
+            padding:
+                0 12px;
+        }
+
+        .communication-textarea {
+            min-height: 230px;
+
+            padding: 12px;
+
+            resize: vertical;
+
+            line-height: 1.8;
+        }
+
+        .communication-input:focus,
+        .communication-select:focus,
+        .communication-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+        .communication-select option {
+            background: #000;
+            color: #fff;
+        }
+
+        .communication-number {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+
+        .communication-options {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 6px;
+        }
+
+        .communication-checkbox {
+            width: 14px;
+            height: 14px;
+
+            accent-color: #fff;
+        }
+
+        .communication-option-label {
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.6;
+
+            cursor: pointer;
+        }
+
+        .communication-actions {
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .communication-create-button {
+            border-color:
+                rgba(255,255,255,0.55);
+        }
+
+
+        /* =========================
+           COMMUNICATION LIST
+        ========================= */
+
+        .communication-item {
+            padding: 17px;
+
+            margin-bottom: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .communication-item:hover {
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.4);
+        }
+
+        .communication-item-id {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 7px;
+        }
+
+        .communication-item-subject {
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 9px;
+        }
+
+        .communication-item-meta {
+            font-size: 8px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+        .communication-item-status {
+            margin-top: 12px;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+
+        /* =========================
            FOOTER
         ========================= */
 
@@ -1079,6 +1289,21 @@
                     1fr;
             }
 
+            .communication-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .communication-full {
+                grid-column:
+                    auto;
+            }
+
+            .communication-actions {
+                flex-direction:
+                    column;
+            }
+
             .footer {
                 flex-direction:
                     column;
@@ -1138,6 +1363,10 @@
 
         <div>
             &gt; ARCHIVE SYSTEM: AVAILABLE
+        </div>
+
+        <div>
+            &gt; COMMUNICATIONS SYSTEM: AVAILABLE
         </div>
 
     </section>
@@ -1401,20 +1630,20 @@
                         class="archive-field archive-full"
                     >
 
-                  <label
-    class="archive-label"
-    for="archiveTitle"
->
-    ARCHIVE TITLE
-</label>
+                        <label
+                            class="archive-label"
+                            for="archiveTitle"
+                        >
+                            ARCHIVE TITLE
+                        </label>
 
-<input
-    type="text"
-    id="archiveTitle"
-    class="archive-input"
-    placeholder="INCIDENT NAME"
-    required
->
+                        <input
+                            type="text"
+                            id="archiveTitle"
+                            class="archive-input"
+                            placeholder="INCIDENT NAME"
+                            required
+                        >
 
                     </div>
 
@@ -1629,15 +1858,11 @@
                 </div>
 
 
-                <!-- RESULT -->
-
                 <div
                     class="result"
                     id="archiveResult"
                 ></div>
 
-
-                <!-- ACTIONS -->
 
                 <div class="archive-actions">
 
@@ -1679,6 +1904,290 @@
 
                 <div class="empty">
                     &gt; LOADING ARCHIVES...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COMMUNICATION CREATION
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // CREATE COMMUNICATION
+            </div>
+
+
+            <form id="communicationForm">
+
+
+                <div class="communication-grid">
+
+
+                    <!-- MESSAGE ID -->
+
+                    <div class="communication-field">
+
+                        <label class="communication-label">
+                            MESSAGE ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="communicationMessageId"
+                            class="communication-input communication-number"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <!-- CLASSIFICATION -->
+
+                    <div class="communication-field">
+
+                        <label
+                            class="communication-label"
+                            for="communicationClassification"
+                        >
+                            CLASSIFICATION
+                        </label>
+
+                        <select
+                            id="communicationClassification"
+                            class="communication-select"
+                        >
+
+                            <option value="PUBLIC">
+                                PUBLIC
+                            </option>
+
+                            <option value="INTERNAL">
+                                INTERNAL
+                            </option>
+
+                            <option value="RESTRICTED" selected>
+                                RESTRICTED
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SENDER -->
+
+                    <div class="communication-field">
+
+                        <label
+                            class="communication-label"
+                            for="communicationSender"
+                        >
+                            SENDER
+                        </label>
+
+                        <input
+                            type="text"
+                            id="communicationSender"
+                            class="communication-input"
+                            placeholder="CIGA DIRECTOR"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- RECIPIENT -->
+
+                    <div class="communication-field">
+
+                        <label
+                            class="communication-label"
+                            for="communicationRecipient"
+                        >
+                            RECIPIENT
+                        </label>
+
+                        <input
+                            type="text"
+                            id="communicationRecipient"
+                            class="communication-input"
+                            placeholder="FIELD OPERATIVE"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SUBJECT -->
+
+                    <div
+                        class="communication-field communication-full"
+                    >
+
+                        <label
+                            class="communication-label"
+                            for="communicationSubject"
+                        >
+                            SUBJECT
+                        </label>
+
+                        <input
+                            type="text"
+                            id="communicationSubject"
+                            class="communication-input"
+                            placeholder="CONTAINMENT FAILURE"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="communication-field">
+
+                        <label
+                            class="communication-label"
+                            for="communicationStatus"
+                        >
+                            STATUS
+                        </label>
+
+                        <select
+                            id="communicationStatus"
+                            class="communication-select"
+                        >
+
+                            <option value="DRAFT">
+                                DRAFT
+                            </option>
+
+                            <option value="DELIVERED" selected>
+                                DELIVERED
+                            </option>
+
+                            <option value="ARCHIVED">
+                                ARCHIVED
+                            </option>
+
+                            <option value="COMPROMISED">
+                                COMPROMISED
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PUBLIC -->
+
+                    <div class="communication-field">
+
+                        <label class="communication-label">
+                            VISIBILITY
+                        </label>
+
+                        <div class="communication-options">
+
+                            <input
+                                type="checkbox"
+                                id="communicationVisible"
+                                class="communication-checkbox"
+                            >
+
+                            <label
+                                for="communicationVisible"
+                                class="communication-option-label"
+                            >
+                                MAKE COMMUNICATION PUBLIC
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div
+                        class="communication-field communication-full"
+                    >
+
+                        <label
+                            class="communication-label"
+                            for="communicationContent"
+                        >
+                            MESSAGE CONTENT
+                        </label>
+
+                        <textarea
+                            id="communicationContent"
+                            class="communication-textarea"
+                            placeholder="Write the complete internal communication here..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="result"
+                    id="communicationResult"
+                ></div>
+
+
+                <div class="communication-actions">
+
+                    <button
+                        type="button"
+                        id="refreshCommunicationData"
+                    >
+                        REFRESH DATA
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="communication-create-button"
+                        id="createCommunicationButton"
+                    >
+                        CREATE COMMUNICATION
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             COMMUNICATION LIST
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // COMMUNICATION DATABASE
+            </div>
+
+
+            <div id="communicationList">
+
+                <div class="empty">
+                    &gt; LOADING COMMUNICATIONS...
                 </div>
 
             </div>
@@ -1885,7 +2394,6 @@
             "refreshArchiveData"
         );
 
-
     const previewStatus =
         document.getElementById(
             "previewStatus"
@@ -1924,6 +2432,76 @@
     const previewActivity =
         document.getElementById(
             "previewActivity"
+        );
+
+
+    /* ==========================================
+       COMMUNICATION ELEMENTS
+    ========================================== */
+
+    const communicationForm =
+        document.getElementById(
+            "communicationForm"
+        );
+
+    const communicationMessageId =
+        document.getElementById(
+            "communicationMessageId"
+        );
+
+    const communicationSender =
+        document.getElementById(
+            "communicationSender"
+        );
+
+    const communicationRecipient =
+        document.getElementById(
+            "communicationRecipient"
+        );
+
+    const communicationSubject =
+        document.getElementById(
+            "communicationSubject"
+        );
+
+    const communicationClassification =
+        document.getElementById(
+            "communicationClassification"
+        );
+
+    const communicationStatus =
+        document.getElementById(
+            "communicationStatus"
+        );
+
+    const communicationContent =
+        document.getElementById(
+            "communicationContent"
+        );
+
+    const communicationVisible =
+        document.getElementById(
+            "communicationVisible"
+        );
+
+    const communicationResult =
+        document.getElementById(
+            "communicationResult"
+        );
+
+    const communicationList =
+        document.getElementById(
+            "communicationList"
+        );
+
+    const createCommunicationButton =
+        document.getElementById(
+            "createCommunicationButton"
+        );
+
+    const refreshCommunicationData =
+        document.getElementById(
+            "refreshCommunicationData"
         );
 
 
@@ -2063,6 +2641,10 @@
         await prepareNextArchiveNumber();
 
         await loadArchives();
+
+        await prepareNextCommunicationId();
+
+        await loadCommunications();
 
     }
 
@@ -3777,6 +4359,476 @@
 
 
                 archiveList.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       PREPARE NEXT COMMUNICATION ID
+    ========================================== */
+
+    async function prepareNextCommunicationId() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "communications"
+                )
+
+                .select(
+                    "message_id"
+                );
+
+
+        if (error) {
+
+            console.error(
+                "COMMUNICATION ID LOAD ERROR:",
+                error
+            );
+
+
+            communicationMessageId.value =
+                "COMM-001";
+
+            return;
+
+        }
+
+
+        let highestNumber =
+            0;
+
+
+        (data || []).forEach(
+            communication => {
+
+                const match =
+                    String(
+                        communication.message_id ||
+                        ""
+                    ).match(
+                        /(\d+)/
+                    );
+
+
+                if (match) {
+
+                    const number =
+                        parseInt(
+                            match[1],
+                            10
+                        );
+
+
+                    if (
+                        !Number.isNaN(number) &&
+                        number > highestNumber
+                    ) {
+
+                        highestNumber =
+                            number;
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        communicationMessageId.value =
+            `COMM-${String(
+                highestNumber + 1
+            ).padStart(
+                3,
+                "0"
+            )}`;
+
+    }
+
+
+    /* ==========================================
+       CREATE COMMUNICATION
+    ========================================== */
+
+    communicationForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const sender =
+                communicationSender.value.trim();
+
+
+            const recipient =
+                communicationRecipient.value.trim();
+
+
+            const subject =
+                communicationSubject.value.trim();
+
+
+            const content =
+                communicationContent.value.trim();
+
+
+            if (
+                !sender ||
+                !recipient ||
+                !subject ||
+                !content
+            ) {
+
+                showCommunicationResult(
+                    "> COMMUNICATION CREATION FAILED.<br>" +
+                    "> ALL REQUIRED FIELDS MUST BE COMPLETED."
+                );
+
+                return;
+
+            }
+
+
+            createCommunicationButton.disabled =
+                true;
+
+            createCommunicationButton.textContent =
+                "CREATING COMMUNICATION...";
+
+
+            const communicationRecord = {
+
+                message_id:
+                    communicationMessageId.value,
+
+                sender:
+                    sender,
+
+                recipient:
+                    recipient,
+
+                subject:
+                    subject,
+
+                content:
+                    content,
+
+                classification:
+                    communicationClassification.value,
+
+                status:
+                    communicationStatus.value,
+
+                visible:
+                    communicationVisible.checked
+
+            };
+
+
+            const {
+                data,
+                error
+            } =
+                await db
+
+                    .from(
+                        "communications"
+                    )
+
+                    .insert(
+                        [communicationRecord]
+                    )
+
+                    .select()
+                    .single();
+
+
+            if (error) {
+
+                console.error(
+                    "COMMUNICATION CREATION ERROR:",
+                    error
+                );
+
+
+                showCommunicationResult(
+                    "> COMMUNICATION CREATION FAILED.<br>" +
+                    `> ${escapeHTML(
+                        error.message
+                    )}`
+                );
+
+
+                createCommunicationButton.disabled =
+                    false;
+
+                createCommunicationButton.textContent =
+                    "CREATE COMMUNICATION";
+
+                return;
+
+            }
+
+
+            showCommunicationResult(
+                `> COMMUNICATION CREATED.<br>` +
+                `> ${escapeHTML(
+                    data.message_id
+                )} // ${escapeHTML(
+                    data.subject
+                )}<br>` +
+                `> VISIBILITY: ${
+                    data.visible
+                        ? "PUBLIC"
+                        : "INTERNAL"
+                }`
+            );
+
+
+            communicationForm.reset();
+
+
+            communicationClassification.value =
+                "RESTRICTED";
+
+
+            communicationStatus.value =
+                "DELIVERED";
+
+
+            await prepareNextCommunicationId();
+
+            await loadCommunications();
+
+
+            createCommunicationButton.disabled =
+                false;
+
+            createCommunicationButton.textContent =
+                "CREATE COMMUNICATION";
+
+        }
+    );
+
+
+    /* ==========================================
+       SHOW COMMUNICATION RESULT
+    ========================================== */
+
+    function showCommunicationResult(
+        message
+    ) {
+
+        communicationResult.innerHTML =
+            message;
+
+        communicationResult.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       REFRESH COMMUNICATION DATA
+    ========================================== */
+
+    refreshCommunicationData.addEventListener(
+        "click",
+        async function() {
+
+            refreshCommunicationData.disabled =
+                true;
+
+            refreshCommunicationData.textContent =
+                "REFRESHING...";
+
+
+            await prepareNextCommunicationId();
+
+            await loadCommunications();
+
+
+            refreshCommunicationData.disabled =
+                false;
+
+            refreshCommunicationData.textContent =
+                "REFRESH DATA";
+
+        }
+    );
+
+
+    /* ==========================================
+       LOAD COMMUNICATIONS
+    ========================================== */
+
+    async function loadCommunications() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "communications"
+                )
+
+                .select(
+                    "id, message_id, sender, recipient, subject, classification, status, visible, created_at"
+                )
+
+                .order(
+                    "id",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "COMMUNICATION LOAD ERROR:",
+                error
+            );
+
+
+            communicationList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; COMMUNICATION DATABASE ERROR.<br>
+                    &gt; ${escapeHTML(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            communicationList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; NO COMMUNICATION RECORDS.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        communicationList.innerHTML =
+            "";
+
+
+        data.forEach(
+            communication => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "communication-item";
+
+
+                item.innerHTML = `
+
+                    <div class="communication-item-id">
+
+                        ${escapeHTML(
+                            communication.message_id
+                        )}
+
+                    </div>
+
+
+                    <div class="communication-item-subject">
+
+                        ${escapeHTML(
+                            communication.subject
+                        )}
+
+                    </div>
+
+
+                    <div class="communication-item-meta">
+
+                        FROM:
+                        ${escapeHTML(
+                            communication.sender
+                        )}
+
+                        <br>
+
+                        TO:
+                        ${escapeHTML(
+                            communication.recipient
+                        )}
+
+                        <br>
+
+                        CLASSIFICATION:
+                        ${escapeHTML(
+                            communication.classification ||
+                            "UNSPECIFIED"
+                        )}
+
+                        <br>
+
+                        STATUS:
+                        ${escapeHTML(
+                            communication.status ||
+                            "UNSPECIFIED"
+                        )}
+
+                    </div>
+
+
+                    <div class="communication-item-status">
+
+                        ${
+                            communication.visible
+                                ? "PUBLIC"
+                                : "INTERNAL"
+                        }
+
+                    </div>
+
+                `;
+
+
+                communicationList.appendChild(
                     item
                 );
 
