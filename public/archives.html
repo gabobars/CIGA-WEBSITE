@@ -11,9 +11,17 @@
     >
 
     <title>CIGA SYSTEMS // ARCHIVES</title>
-    <link rel="icon" type="image/png" href="logo.png">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
 
     <style>
 
@@ -23,8 +31,10 @@
             padding: 0;
         }
 
+
         body {
             background: #000;
+
             color: #fff;
 
             min-height: 100vh;
@@ -44,9 +54,11 @@
 
         .page {
             width: 100%;
+
             min-height: 100vh;
 
-            padding: 45px 60px;
+            padding:
+                45px 60px;
         }
 
 
@@ -69,8 +81,14 @@
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.30);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
         }
+
 
         .title {
             font-size: 24px;
@@ -78,26 +96,28 @@
             letter-spacing: 4px;
         }
 
+
         .subtitle {
             margin-top: 9px;
 
-            font-size: 11px;
+            font-size: 12px;
 
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
         }
+
 
         .header-status {
             text-align: right;
 
-            font-size: 10px;
+            font-size: 11px;
 
             line-height: 1.9;
 
             letter-spacing: 1px;
 
-            opacity: 0.55;
+            opacity: 0.65;
         }
 
 
@@ -108,14 +128,25 @@
         .terminal {
             margin-bottom: 28px;
 
-            padding: 18px 21px;
+            padding:
+                18px 21px;
 
             border-left:
                 2px solid
-                rgba(255,255,255,0.45);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
 
             background:
-                rgba(255,255,255,0.025);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
 
             font-size: 12px;
 
@@ -123,7 +154,7 @@
 
             letter-spacing: 1px;
 
-            opacity: 0.70;
+            opacity: 0.76;
         }
 
 
@@ -134,20 +165,31 @@
         .directory {
             border:
                 1px solid
-                rgba(255,255,255,0.25);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             padding: 27px;
 
             background:
-                rgba(255,255,255,0.015);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
         }
+
 
         .directory-title {
             font-size: 11px;
 
             letter-spacing: 3px;
 
-            opacity: 0.52;
+            opacity: 0.58;
 
             padding-bottom: 12px;
 
@@ -155,7 +197,12 @@
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.15);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
         }
 
 
@@ -181,14 +228,25 @@
             align-items:
                 center;
 
-            padding: 17px 19px;
+            padding:
+                17px 19px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.16);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.16
+                );
 
             background:
-                rgba(255,255,255,0.015);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
 
             color: #fff;
 
@@ -207,12 +265,23 @@
                 transform 0.2s ease;
         }
 
+
         .archive-file:hover {
             background:
-                rgba(255,255,255,0.045);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
 
             border-color:
-                rgba(255,255,255,0.35);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.40
+                );
 
             transform:
                 translateX(4px);
@@ -228,40 +297,49 @@
 
             letter-spacing: 2px;
 
-            opacity: 0.50;
+            opacity: 0.48;
 
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
 
+
         .archive-name {
-            font-size: 13px;
+            font-size: 15px;
+
+            line-height: 1.5;
 
             letter-spacing: 2px;
 
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
 
+
         .archive-subject {
-            font-size: 8px;
+            font-size: 10px;
+
+            line-height: 1.6;
 
             letter-spacing: 1.5px;
 
-            opacity: 0.40;
+            opacity: 0.52;
         }
 
 
         .archive-status {
             display: flex;
 
-            align-items: center;
+            align-items:
+                center;
 
             gap: 9px;
 
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 2px;
 
-            opacity: 0.42;
+            opacity: 0.58;
+
+            white-space: nowrap;
         }
 
 
@@ -275,11 +353,20 @@
             background: #fff;
 
             border-radius: 50%;
+
+            box-shadow:
+                0 0 7px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
         }
 
 
         /* =========================
-           LOADING / EMPTY
+           LOADING / EMPTY / ERROR
         ========================= */
 
         .archive-loading,
@@ -287,11 +374,13 @@
         .archive-error {
             padding: 20px;
 
-            font-size: 9px;
+            font-size: 11px;
+
+            line-height: 1.9;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.56;
         }
 
 
@@ -311,13 +400,18 @@
 
             border-top:
                 1px solid
-                rgba(255,255,255,0.20);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
 
             font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.32;
+            opacity: 0.40;
         }
 
 
@@ -338,8 +432,12 @@
 
             letter-spacing: 2px;
 
-            opacity: 0.48;
+            opacity: 0.54;
+
+            transition:
+                opacity 0.2s ease;
         }
+
 
         .back:hover {
             opacity: 1;
@@ -356,6 +454,7 @@
                 padding: 20px;
             }
 
+
             .header {
                 gap: 20px;
 
@@ -363,17 +462,31 @@
                     flex-start;
             }
 
+
             .title {
                 font-size: 17px;
             }
 
-            .header-status {
-                font-size: 8px;
+
+            .subtitle {
+                font-size: 10px;
             }
+
+
+            .header-status {
+                font-size: 9px;
+            }
+
+
+            .terminal {
+                font-size: 11px;
+            }
+
 
             .directory {
                 padding: 17px;
             }
+
 
             .archive-file {
                 align-items:
@@ -385,10 +498,24 @@
                     column;
             }
 
+
+            .archive-name {
+                font-size: 14px;
+            }
+
+
+            .archive-subject {
+                font-size: 9px;
+            }
+
+
             .archive-status {
                 justify-content:
                     flex-start;
+
+                font-size: 9px;
             }
+
 
             .footer {
                 flex-direction:
@@ -421,6 +548,7 @@
                 CIGA SYSTEMS
             </div>
 
+
             <div class="subtitle">
                 ARCHIVE DATABASE // INTERNAL
             </div>
@@ -431,6 +559,7 @@
         <div class="header-status">
 
             DATABASE:
+
             <span id="databaseStatus">
                 CONNECTING
             </span>
@@ -438,6 +567,7 @@
             <br>
 
             RECORDS:
+
             <span id="recordCount">
                 --
             </span>
@@ -457,13 +587,16 @@
             &gt; ACCESSING ARCHIVE DATABASE...
         </div>
 
+
         <div id="terminalIndex">
             &gt; INDEXING HISTORICAL RECORDS...
         </div>
 
+
         <div id="terminalCount">
             &gt; WAITING FOR DATABASE RESPONSE...
         </div>
+
 
         <div id="terminalDisplay">
             &gt; RETRIEVING AVAILABLE RECORDS...
@@ -479,7 +612,9 @@
     <section class="directory">
 
         <div class="directory-title">
+
             // ARCHIVE DIRECTORY
+
         </div>
 
 
@@ -507,7 +642,9 @@
         href="home.html"
         class="back"
     >
+
         &lt;&lt; RETURN TO SYSTEM
+
     </a>
 
 
@@ -518,11 +655,16 @@
     <footer class="footer">
 
         <span>
+
             CIGA SYSTEMS // ARCHIVE DATABASE
+
         </span>
 
+
         <span>
+
             ALL ACCESS IS LOGGED
+
         </span>
 
     </footer>
@@ -601,7 +743,9 @@
        HTML ESCAPE
     ========================================== */
 
-    function escapeHTML(value) {
+    function escapeHTML(
+        value
+    ) {
 
         return String(
             value ?? ""
@@ -647,7 +791,9 @@
         } =
             await db
 
-                .from("archives")
+                .from(
+                    "archives"
+                )
 
                 .select(`
                     id,
@@ -671,7 +817,8 @@
                 .order(
                     "id",
                     {
-                        ascending: true
+                        ascending:
+                            true
                     }
                 );
 
@@ -712,7 +859,9 @@
 
                 <div class="archive-error">
 
-                    &gt; DATABASE ERROR.<br><br>
+                    &gt; DATABASE ERROR.
+
+                    <br><br>
 
                     &gt; ${escapeHTML(
                         error.message
@@ -797,7 +946,9 @@
                     Array.isArray(
                         archive.personnel
                     )
+
                         ? archive.personnel[0]
+
                         : archive.personnel;
 
 
@@ -822,6 +973,7 @@
                 archiveFile.innerHTML = `
 
                     <div>
+
 
                         <div class="archive-id">
 
@@ -849,12 +1001,14 @@
                         <div class="archive-subject">
 
                             SUBJECT:
+
                             ${escapeHTML(
                                 person?.name ||
                                 "UNKNOWN"
                             ).toUpperCase()}
 
                         </div>
+
 
                     </div>
 
