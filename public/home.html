@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>CIGA SYSTEMS // INTERNAL</title>
-    <link rel="icon" type="image/png" href="logo.png">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -17,9 +27,11 @@
             padding: 0;
         }
 
+
         body {
             background: #000;
             color: #fff;
+
             min-height: 100vh;
 
             font-family:
@@ -48,7 +60,9 @@
                 );
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             z-index: 100;
@@ -76,6 +90,7 @@
 
         .welcome-logo {
             width: 230px;
+
             max-width: 55vw;
 
             margin-bottom: 35px;
@@ -84,17 +99,20 @@
 
         .welcome-text {
             font-size: 16px;
+
             letter-spacing: 2px;
         }
 
 
         .welcome-text::before {
-            content: "[ ";
+            content:
+                "[ ";
         }
 
 
         .welcome-text::after {
-            content: " ]";
+            content:
+                " ]";
         }
 
 
@@ -104,6 +122,7 @@
 
         .home {
             width: 100%;
+
             min-height: 100vh;
 
             padding:
@@ -151,6 +170,7 @@
 
         .header-title {
             font-size: 22px;
+
             letter-spacing: 4px;
         }
 
@@ -159,6 +179,7 @@
             margin-top: 7px;
 
             font-size: 11px;
+
             letter-spacing: 2px;
 
             opacity: 0.55;
@@ -169,6 +190,7 @@
             text-align: right;
 
             font-size: 11px;
+
             letter-spacing: 1px;
 
             line-height: 1.8;
@@ -232,6 +254,7 @@
 
         .status-value {
             font-size: 14px;
+
             letter-spacing: 2px;
         }
 
@@ -247,6 +270,7 @@
 
         .online-dot {
             width: 6px;
+
             height: 6px;
 
             background: #fff;
@@ -542,6 +566,7 @@
 
         .live-status-dot {
             width: 7px;
+
             height: 7px;
 
             background: #fff;
@@ -1009,6 +1034,7 @@
 
 <body>
 
+
     <!-- =========================
          WELCOME SCREEN
     ========================= -->
@@ -1040,6 +1066,7 @@
         id="home"
     >
 
+
         <header class="header">
 
             <div>
@@ -1054,6 +1081,7 @@
 
             </div>
 
+
             <div class="operator">
                 OPERATIVE: 001<br>
                 SESSION: ACTIVE
@@ -1067,6 +1095,7 @@
         ========================= -->
 
         <section class="status-bar">
+
 
             <div class="status-box">
 
@@ -1119,20 +1148,25 @@
 
         <section class="main-grid">
 
+
             <div class="panel">
 
                 <div class="panel-title">
                     // PRIMARY DIRECTIVE
                 </div>
 
+
                 <div class="directive">
 
                     <div class="directive-main">
+
                         CIGA SYSTEMS operates through four
                         primary directives.
                         All operations are conducted under
                         controlled authorization.
+
                     </div>
+
 
                     <div class="directive-list">
 
@@ -1165,6 +1199,7 @@
                     // SYSTEM LOG
                 </div>
 
+
                 <div
                     class="logs"
                     id="systemLogs"
@@ -1185,6 +1220,7 @@
                 // LIVE OPERATION
             </div>
 
+
             <div
                 class="live-operation"
                 id="liveOperation"
@@ -1196,6 +1232,7 @@
                         CURRENT OPERATION STATUS
                     </div>
 
+
                     <div class="live-main-status">
 
                         <span
@@ -1203,17 +1240,21 @@
                             id="liveStatusDot"
                         ></span>
 
+
                         <span id="liveStatusText">
                             OFFLINE
                         </span>
 
                     </div>
 
+
                     <div class="live-info">
+
 
                         <div class="live-info-label">
                             OPERATIVE
                         </div>
+
 
                         <div
                             class="live-info-value"
@@ -1222,9 +1263,11 @@
                             UNAVAILABLE
                         </div>
 
+
                         <div class="live-info-label">
                             PLATFORM
                         </div>
+
 
                         <div
                             class="live-info-value"
@@ -1233,9 +1276,11 @@
                             UNAVAILABLE
                         </div>
 
+
                         <div class="live-info-label">
                             OPERATION
                         </div>
+
 
                         <div
                             class="live-info-value"
@@ -1274,6 +1319,7 @@
                 // AVAILABLE SYSTEMS
             </div>
 
+
             <div class="systems-grid">
 
 
@@ -1291,6 +1337,7 @@
                     <span class="system-button-title">
                         PERSONNEL FILES
                     </span>
+
 
                     <span class="system-button-status">
                         ACCESS AVAILABLE
@@ -1314,6 +1361,7 @@
                         COMMUNICATIONS
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS AVAILABLE
                     </span>
@@ -1335,6 +1383,7 @@
                     <span class="system-button-title">
                         ARCHIVES
                     </span>
+
 
                     <span class="system-button-status">
                         ACCESS AVAILABLE
@@ -1358,6 +1407,7 @@
                         CIGA TRANSMISSIONS
                     </span>
 
+
                     <span class="system-button-status">
                         DATABASE ACCESS
                     </span>
@@ -1367,17 +1417,22 @@
 
                 <!-- CLASSIFIED -->
 
-                <div class="system-button classified-button">
+                <div
+                    class="system-button classified-button"
+                >
 
                     <span class="system-button-title">
                         CLASSIFIED
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS RESTRICTED
                     </span>
 
+
                     <div class="classified-options">
+
 
                         <a
                             href="admin.html"
@@ -1389,6 +1444,7 @@
                         >
                             ADMINISTRATIVE ACCESS
                         </a>
+
 
                         <a
                             href="submission.html"
@@ -1419,6 +1475,7 @@
             <span>
                 CIGA SYSTEMS // INTERNAL USE ONLY
             </span>
+
 
             <span>
                 ALL ACCESS IS LOGGED
@@ -1520,7 +1577,7 @@
 
 
         /* =========================
-           STORAGE
+           STORAGE KEYS
         ========================= */
 
         const CIGA_LOG_KEY =
@@ -1536,16 +1593,11 @@
 
 
         /* =========================
-           GLOBAL EVENTS CACHE
+           GLOBAL CACHE
         ========================= */
 
-        let cigaGlobalEvents = [];
-
-
-        let cigaLogsRendering = false;
-
-
-        let cigaLogsRenderQueued = false;
+        let cigaGlobalEvents =
+            [];
 
 
         /* =========================
@@ -1576,7 +1628,7 @@
             try {
 
                 const stored =
-                    sessionStorage.getItem(
+                    localStorage.getItem(
                         CIGA_LOG_KEY
                     );
 
@@ -1624,7 +1676,7 @@
 
             try {
 
-                sessionStorage.setItem(
+                localStorage.setItem(
                     CIGA_LOG_KEY,
                     JSON.stringify(
                         logs
@@ -1673,26 +1725,17 @@
 
 
             cigaSaveLogs(
-                logs.slice(-50)
+                logs.slice(
+                    -50
+                )
             );
 
 
             /*
-                Render immediately using
-                the local cache.
-
-                This means clicking a button
-                does not depend on Supabase.
+                Render immediately.
             */
 
             cigaRenderLogs();
-
-
-            /*
-                Refresh global events separately.
-            */
-
-            cigaRefreshGlobalEvents();
 
         }
 
@@ -1714,7 +1757,7 @@
 
 
         /* =========================
-           FORMAT EVENT TIME
+           FORMAT GLOBAL TIME
         ========================= */
 
         function cigaFormatEventTime(
@@ -1971,151 +2014,122 @@
 
         function cigaRenderLogs() {
 
+            const combinedLogs =
+                cigaBuildCombinedLogs();
+
+
+            const visibleLogs =
+                combinedLogs.slice(
+                    -12
+                );
+
+
+            systemLogs.innerHTML =
+                "";
+
+
+            /* =========================
+               EMPTY
+            ========================= */
+
             if (
-                cigaLogsRendering
+                visibleLogs.length === 0
             ) {
 
-                cigaLogsRenderQueued =
-                    true;
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "log log-empty";
+
+
+                empty.textContent =
+                    "SYSTEM LOG EMPTY.";
+
+
+                systemLogs.appendChild(
+                    empty
+                );
+
 
                 return;
 
             }
 
 
-            cigaLogsRendering =
-                true;
+            /* =========================
+               RENDER
+            ========================= */
 
+            visibleLogs.forEach(
+                log => {
 
-            try {
-
-                const combinedLogs =
-                    cigaBuildCombinedLogs();
-
-
-                const visibleLogs =
-                    combinedLogs.slice(
-                        -12
-                    );
-
-
-                systemLogs.innerHTML =
-                    "";
-
-
-                if (
-                    visibleLogs.length === 0
-                ) {
-
-                    const empty =
+                    const logElement =
                         document.createElement(
                             "div"
                         );
 
 
-                    empty.className =
-                        "log log-empty";
+                    logElement.className =
+                        log.source === "CIGA"
+                            ? "log log-global"
+                            : "log";
 
 
-                    empty.textContent =
-                        "SYSTEM LOG EMPTY.";
+                    const time =
+                        document.createElement(
+                            "span"
+                        );
 
 
-                    systemLogs.appendChild(
-                        empty
+                    time.className =
+                        "log-time";
+
+
+                    time.textContent =
+                        log.time;
+
+
+                    const source =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    source.className =
+                        "log-source";
+
+
+                    source.textContent =
+                        log.source;
+
+
+                    logElement.appendChild(
+                        time
                     );
 
 
-                    return;
+                    logElement.appendChild(
+                        source
+                    );
+
+
+                    logElement.appendChild(
+                        document.createTextNode(
+                            log.message
+                        )
+                    );
+
+
+                    systemLogs.appendChild(
+                        logElement
+                    );
 
                 }
-
-
-                visibleLogs.forEach(
-                    log => {
-
-                        const logElement =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        logElement.className =
-                            log.source === "CIGA"
-                                ? "log log-global"
-                                : "log";
-
-
-                        const time =
-                            document.createElement(
-                                "span"
-                            );
-
-
-                        time.className =
-                            "log-time";
-
-
-                        time.textContent =
-                            log.time;
-
-
-                        const source =
-                            document.createElement(
-                                "span"
-                            );
-
-
-                        source.className =
-                            "log-source";
-
-
-                        source.textContent =
-                            log.source;
-
-
-                        logElement.appendChild(
-                            time
-                        );
-
-
-                        logElement.appendChild(
-                            source
-                        );
-
-
-                        logElement.appendChild(
-                            document.createTextNode(
-                                log.message
-                            )
-                        );
-
-
-                        systemLogs.appendChild(
-                            logElement
-                        );
-
-                    }
-                );
-
-            } finally {
-
-                cigaLogsRendering =
-                    false;
-
-
-                if (
-                    cigaLogsRenderQueued
-                ) {
-
-                    cigaLogsRenderQueued =
-                        false;
-
-                    cigaRenderLogs();
-
-                }
-
-            }
+            );
 
         }
 
@@ -2148,7 +2162,7 @@
 
 
             /* =========================
-               DATABASE ERROR
+               ERROR
             ========================= */
 
             if (error) {
@@ -2378,7 +2392,9 @@
             );
 
 
-        if (!sessionStarted) {
+        if (
+            !sessionStarted
+        ) {
 
             sessionStorage.setItem(
                 CIGA_SESSION_KEY,
@@ -2446,14 +2462,14 @@
 
 
         /* =========================
-           INITIAL GLOBAL LOAD
+           INITIAL LOAD
         ========================= */
 
         cigaRefreshGlobalEvents();
 
 
         /* =========================
-           WELCOME SCREEN
+           WELCOME
         ========================= */
 
         setTimeout(
@@ -2491,7 +2507,7 @@
 
 
         /* =========================
-           REFRESH LIVE STATUS
+           LIVE REFRESH
         ========================= */
 
         setInterval(
@@ -2501,7 +2517,7 @@
 
 
         /* =========================
-           REFRESH GLOBAL EVENTS
+           GLOBAL EVENTS REFRESH
         ========================= */
 
         setInterval(
