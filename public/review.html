@@ -2169,20 +2169,16 @@
             ).toUpperCase();
 
 
-        if (
-            currentStatus === "ACCEPTED"
-            ||
-            currentStatus === "REJECTED"
-        ) {
+if (
+    currentStatus === "APPROVED"
+    ||
+    currentStatus === "REJECTED"
+) {
 
-            acceptButton.disabled =
-                true;
+    acceptButton.disabled = true;
+    rejectButton.disabled = true;
 
-
-            rejectButton.disabled =
-                true;
-
-        }
+}
 
     }
 
@@ -2300,16 +2296,107 @@
 
     }
 
+/* ==========================================
+   UPDATE SUBMISSION STATUS
+========================================== */
 
+async function updateSubmissionStatus(status) {
+
+    if (!submissionId) {
+        return;
+    }
+
+
+    acceptButton.disabled = true;
+    rejectButton.disabled = true;
+
+
+    result.textContent =
+        `> UPDATING PERSONNEL STATUS TO ${status}...`;
+
+    result.classList.add(
+        "visible"
+    );
+
+
+    const {
+        error
+    } =
+        await db
+            .from(
+                "personnel_submissions"
+            )
+            .update({
+
+                submission_status:
+                    status
+
+            })
+            .eq(
+                "id",
+                submissionId
+            );
+
+
+    if (error) {
+
+        console.error(
+            "STATUS UPDATE ERROR:",
+            error
+        );
+
+
+        result.textContent =
+            "> ERROR: STATUS UPDATE FAILED.";
+
+
+        acceptButton.disabled = false;
+        rejectButton.disabled = false;
+
+
+        return;
+
+    }
+
+
+    result.textContent =
+        `> PERSONNEL STATUS UPDATED: ${status.toUpperCase()}.`;
+
+
+
+    addDataItem(
+        statusGrid,
+        "SUBMISSION STATUS",
+        status
+    );
+
+}
     /* ==========================================
        EVENT LISTENERS
     ========================================== */
 
-    loginButton.addEventListener(
-        "click",
-        authenticateAdmin
-    );
+acceptButton.addEventListener(
+    "click",
+    function() {
 
+        updateSubmissionStatus(
+            "approved"
+        );
+
+    }
+);
+
+
+rejectButton.addEventListener(
+    "click",
+    function() {
+
+        updateSubmissionStatus(
+            "rejected"
+        );
+
+    }
+);
 
     logoutButton.addEventListener(
         "click",
