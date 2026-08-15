@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="logo.png">
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -18,9 +19,15 @@
             background: #000;
             color: #fff;
             min-height: 100vh;
-            font-family: "OCR A", "Courier New", monospace;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
             overflow-x: hidden;
         }
+
 
         /* =========================
            WELCOME SCREEN
@@ -32,10 +39,16 @@
             top: 50%;
             left: 50%;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             z-index: 100;
@@ -47,31 +60,45 @@
                 transform 1s ease;
         }
 
+
         .welcome-screen.hidden {
             opacity: 0;
-            transform: translate(-50%, -55%);
+
+            transform:
+                translate(
+                    -50%,
+                    -55%
+                );
 
             pointer-events: none;
         }
 
+
         .welcome-logo {
             width: 230px;
+
             max-width: 55vw;
 
             margin-bottom: 35px;
         }
 
+
         .welcome-text {
             font-size: 16px;
+
             letter-spacing: 2px;
         }
 
+
         .welcome-text::before {
-            content: "[ ";
+            content:
+                "[ ";
         }
 
+
         .welcome-text::after {
-            content: " ]";
+            content:
+                " ]";
         }
 
 
@@ -81,14 +108,18 @@
 
         .home {
             width: 100%;
+
             min-height: 100vh;
 
-            padding: 35px 50px;
+            padding:
+                35px 50px;
 
             opacity: 0;
 
-            transition: opacity 1s ease;
+            transition:
+                opacity 1s ease;
         }
+
 
         .home.visible {
             opacity: 1;
@@ -101,36 +132,56 @@
 
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
 
             padding-bottom: 14px;
+
             margin-bottom: 30px;
 
-            border-bottom: 1px solid rgba(255,255,255,0.35);
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
         }
+
 
         .header-title {
             font-size: 22px;
+
             letter-spacing: 4px;
         }
+
 
         .header-subtitle {
             margin-top: 7px;
 
-            font-size: 10px;
+            font-size: 11px;
+
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
         }
+
 
         .operator {
             text-align: right;
 
-            font-size: 10px;
+            font-size: 11px;
+
             letter-spacing: 1px;
 
             line-height: 1.8;
+
+            opacity: 0.85;
         }
 
 
@@ -140,50 +191,86 @@
 
         .status-bar {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
 
             gap: 15px;
 
             margin-bottom: 30px;
         }
 
+
         .status-box {
-            border: 1px solid rgba(255,255,255,0.25);
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
-            padding: 16px 18px;
+            padding:
+                16px 18px;
 
-            background: rgba(255,255,255,0.015);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
         }
 
+
         .status-label {
-            font-size: 9px;
+            font-size: 10px;
+
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
 
             margin-bottom: 8px;
         }
 
+
         .status-value {
-            font-size: 13px;
+            font-size: 14px;
+
             letter-spacing: 2px;
         }
 
+
         .online {
             display: inline-flex;
+
             align-items: center;
+
             gap: 8px;
         }
 
+
         .online-dot {
             width: 6px;
+
             height: 6px;
 
             background: #fff;
 
             border-radius: 50%;
 
-            box-shadow: 0 0 8px rgba(255,255,255,0.8);
+            box-shadow:
+                0 0 8px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                );
         }
 
 
@@ -193,32 +280,58 @@
 
         .main-grid {
             display: grid;
-            grid-template-columns: 1.4fr 1fr;
+
+            grid-template-columns:
+                1.4fr
+                1fr;
 
             gap: 20px;
 
             margin-bottom: 30px;
         }
 
-        .panel {
-            border: 1px solid rgba(255,255,255,0.25);
 
-            background: rgba(255,255,255,0.015);
+        .panel {
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
 
             padding: 24px;
         }
 
+
         .panel-title {
             font-size: 10px;
+
             letter-spacing: 3px;
 
-            opacity: 0.5;
+            opacity: 0.55;
 
             margin-bottom: 20px;
 
             padding-bottom: 10px;
 
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
         }
 
 
@@ -227,10 +340,13 @@
         ========================= */
 
         .directive {
-            font-size: 14px;
+            font-size: 15px;
+
             line-height: 1.9;
+
             letter-spacing: 1px;
         }
+
 
         .directive-main {
             margin-bottom: 20px;
@@ -238,22 +354,42 @@
             opacity: 0.9;
         }
 
+
         .directive-list {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+
+            grid-template-columns:
+                1fr
+                1fr;
 
             gap: 10px;
 
-            font-size: 12px;
+            font-size: 13px;
+
             letter-spacing: 2px;
         }
 
+
         .directive-item {
-            padding: 10px 12px;
+            padding:
+                10px 12px;
 
-            border-left: 2px solid rgba(255,255,255,0.5);
+            border-left:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.5
+                );
 
-            background: rgba(255,255,255,0.02);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
         }
 
 
@@ -262,23 +398,27 @@
         ========================= */
 
         .logs {
-            font-size: 11px;
+            font-size: 12px;
+
             line-height: 2;
 
             letter-spacing: 1px;
 
             min-height: 140px;
+
             max-height: 220px;
 
             overflow: hidden;
         }
 
+
         .log {
-            opacity: 0.75;
+            opacity: 0.78;
         }
 
+
         .log-time {
-            opacity: 0.35;
+            opacity: 0.42;
 
             margin-right: 10px;
         }
@@ -292,17 +432,31 @@
             margin-bottom: 30px;
         }
 
+
         .systems-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+
+            grid-template-columns:
+                repeat(
+                    5,
+                    1fr
+                );
 
             gap: 12px;
         }
 
+
         .system-button {
             min-height: 85px;
 
-            border: 1px solid rgba(255,255,255,0.25);
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             background: #000;
 
@@ -322,30 +476,48 @@
                 transform 0.2s ease;
         }
 
+
         .system-button:hover {
-            background: rgba(255,255,255,0.06);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
 
-            border-color: rgba(255,255,255,0.65);
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
 
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
+
 
         .system-button-title {
             display: block;
 
-            font-size: 11px;
+            font-size: 12px;
+
             letter-spacing: 2px;
 
             margin-bottom: 10px;
         }
 
+
         .system-button-status {
             display: block;
 
-            font-size: 8px;
+            font-size: 9px;
+
             letter-spacing: 1px;
 
-            opacity: 0.35;
+            opacity: 0.45;
         }
 
 
@@ -357,9 +529,12 @@
             cursor: default;
         }
 
+
         .classified-button:hover {
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
+
 
         .classified-options {
             display: flex;
@@ -371,26 +546,41 @@
             margin-top: 14px;
         }
 
+
         .classified-option {
             display: block;
 
-            padding: 9px 10px;
+            padding:
+                9px 10px;
 
             color: #fff;
 
             text-decoration: none;
 
-            border: 1px solid rgba(255,255,255,0.18);
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
 
-            background: rgba(255,255,255,0.02);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
 
             font-family: inherit;
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 1.3px;
 
-            opacity: 0.55;
+            opacity: 0.62;
 
             transition:
                 background 0.2s ease,
@@ -398,10 +588,23 @@
                 opacity 0.2s ease;
         }
 
-        .classified-option:hover {
-            background: rgba(255,255,255,0.06);
 
-            border-color: rgba(255,255,255,0.55);
+        .classified-option:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
 
             opacity: 1;
         }
@@ -414,17 +617,25 @@
         .footer {
             display: flex;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
             padding-top: 15px;
 
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.2
+                );
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.40;
         }
 
 
@@ -432,23 +643,44 @@
            RESPONSIVE
         ========================= */
 
+        @media (max-width: 1200px) {
+
+            .systems-grid {
+                grid-template-columns:
+                    repeat(
+                        3,
+                        1fr
+                    );
+            }
+
+        }
+
+
         @media (max-width: 900px) {
 
             .home {
                 padding: 25px;
             }
 
+
             .main-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
+
 
             .systems-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr
+                    1fr;
             }
 
+
             .status-bar {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
+
         }
 
 
@@ -458,37 +690,52 @@
                 padding: 18px;
             }
 
+
             .welcome-logo {
                 width: 180px;
             }
+
 
             .welcome-text {
                 font-size: 12px;
             }
 
+
             .header {
-                align-items: flex-start;
+                align-items:
+                    flex-start;
+
                 gap: 20px;
             }
+
 
             .header-title {
                 font-size: 16px;
             }
 
+
             .operator {
-                font-size: 8px;
+                font-size: 9px;
             }
+
 
             .directive-list {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
+
             .systems-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
@@ -497,13 +744,17 @@
          WELCOME SCREEN
     ========================= -->
 
-    <section class="welcome-screen" id="welcomeScreen">
+    <section
+        class="welcome-screen"
+        id="welcomeScreen"
+    >
 
         <img
             src="logo.png"
             alt="CIGA"
             class="welcome-logo"
         >
+
 
         <div class="welcome-text">
             WELCOME OPERATIVE
@@ -516,7 +767,11 @@
          HOME
     ========================= -->
 
-    <main class="home" id="home">
+    <main
+        class="home"
+        id="home"
+    >
+
 
         <header class="header">
 
@@ -526,15 +781,20 @@
                     CIGA SYSTEMS
                 </div>
 
+
                 <div class="header-subtitle">
                     INTERNAL OPERATIONS NETWORK
                 </div>
 
             </div>
 
+
             <div class="operator">
+
                 OPERATIVE: 001<br>
+
                 SESSION: ACTIVE
+
             </div>
 
         </header>
@@ -542,11 +802,13 @@
 
         <section class="status-bar">
 
+
             <div class="status-box">
 
                 <div class="status-label">
                     SYSTEM STATUS
                 </div>
+
 
                 <div class="status-value online">
 
@@ -565,6 +827,7 @@
                     NETWORK STATUS
                 </div>
 
+
                 <div class="status-value">
                     SECURE
                 </div>
@@ -578,6 +841,7 @@
                     CLEARANCE LEVEL
                 </div>
 
+
                 <div class="status-value">
                     OPERATIVE
                 </div>
@@ -589,11 +853,13 @@
 
         <section class="main-grid">
 
+
             <div class="panel">
 
                 <div class="panel-title">
                     // PRIMARY DIRECTIVE
                 </div>
+
 
                 <div class="directive">
 
@@ -606,19 +872,23 @@
 
                     </div>
 
+
                     <div class="directive-list">
 
                         <div class="directive-item">
                             CONTAIN
                         </div>
 
+
                         <div class="directive-item">
                             INTERCEPT
                         </div>
 
+
                         <div class="directive-item">
                             GUARD
                         </div>
+
 
                         <div class="directive-item">
                             APPREHEND
@@ -637,7 +907,11 @@
                     // SYSTEM LOG
                 </div>
 
-                <div class="logs" id="systemLogs"></div>
+
+                <div
+                    class="logs"
+                    id="systemLogs"
+                ></div>
 
             </div>
 
@@ -646,12 +920,16 @@
 
         <section class="panel systems-panel">
 
+
             <div class="panel-title">
                 // AVAILABLE SYSTEMS
             </div>
 
+
             <div class="systems-grid">
 
+
+                <!-- PERSONNEL -->
 
                 <button
                     class="system-button"
@@ -666,12 +944,15 @@
                         PERSONNEL FILES
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS AVAILABLE
                     </span>
 
                 </button>
 
+
+                <!-- DISCORD -->
 
                 <button
                     class="system-button"
@@ -686,12 +967,15 @@
                         COMMUNICATIONS
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS AVAILABLE
                     </span>
 
                 </button>
 
+
+                <!-- ARCHIVES -->
 
                 <button
                     class="system-button"
@@ -706,8 +990,32 @@
                         ARCHIVES
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <!-- CIGA TRANSMISSIONS -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('CIGA TRANSMISSION DATABASE ACCESSED');
+                        cigaSetNextPage('CIGA TRANSMISSIONS');
+                        window.location.href='communications-log.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        CIGA TRANSMISSIONS
+                    </span>
+
+
+                    <span class="system-button-status">
+                        DATABASE ACCESS
                     </span>
 
                 </button>
@@ -721,12 +1029,14 @@
                         CLASSIFIED
                     </span>
 
+
                     <span class="system-button-status">
                         ACCESS RESTRICTED
                     </span>
 
 
                     <div class="classified-options">
+
 
                         <a
                             href="admin.html"
@@ -767,6 +1077,7 @@
                 CIGA SYSTEMS // INTERNAL USE ONLY
             </span>
 
+
             <span>
                 ALL ACCESS IS LOGGED
             </span>
@@ -778,6 +1089,7 @@
 
     <script>
 
+
         /* =========================
            ELEMENTS
         ========================= */
@@ -787,10 +1099,12 @@
                 "welcomeScreen"
             );
 
+
         const home =
             document.getElementById(
                 "home"
             );
+
 
         const systemLogs =
             document.getElementById(
@@ -805,8 +1119,10 @@
         const CIGA_LOG_KEY =
             "ciga_session_log";
 
+
         const CIGA_SESSION_KEY =
             "ciga_session_started";
+
 
         const CIGA_NEXT_PAGE_KEY =
             "ciga_next_page";
@@ -818,7 +1134,9 @@
 
         function cigaGetLocalTime() {
 
-            const now = new Date();
+            const now =
+                new Date();
+
 
             return now.toLocaleTimeString(
                 [],
@@ -829,6 +1147,7 @@
                     hour12: false
                 }
             );
+
         }
 
 
@@ -845,9 +1164,13 @@
                         CIGA_LOG_KEY
                     );
 
+
                 if (!stored) {
+
                     return [];
+
                 }
+
 
                 return JSON.parse(
                     stored
@@ -858,6 +1181,7 @@
                 return [];
 
             }
+
         }
 
 
@@ -865,12 +1189,17 @@
            SAVE LOGS
         ========================= */
 
-        function cigaSaveLogs(logs) {
+        function cigaSaveLogs(
+            logs
+        ) {
 
             sessionStorage.setItem(
                 CIGA_LOG_KEY,
-                JSON.stringify(logs)
+                JSON.stringify(
+                    logs
+                )
             );
+
         }
 
 
@@ -878,19 +1207,29 @@
            ADD LOG
         ========================= */
 
-        function cigaAddLog(message) {
+        function cigaAddLog(
+            message
+        ) {
 
             const logs =
                 cigaGetLogs();
 
+
             logs.push({
-                time: cigaGetLocalTime(),
-                message: message
+
+                time:
+                    cigaGetLocalTime(),
+
+                message:
+                    message
+
             });
+
 
             cigaSaveLogs(
                 logs
             );
+
         }
 
 
@@ -898,12 +1237,15 @@
            SET NEXT PAGE
         ========================= */
 
-        function cigaSetNextPage(page) {
+        function cigaSetNextPage(
+            page
+        ) {
 
             sessionStorage.setItem(
                 CIGA_NEXT_PAGE_KEY,
                 page
             );
+
         }
 
 
@@ -913,10 +1255,13 @@
 
         function cigaRenderLogs() {
 
-            systemLogs.innerHTML = "";
+            systemLogs.innerHTML =
+                "";
+
 
             const logs =
                 cigaGetLogs();
+
 
             logs.forEach(
                 log => {
@@ -925,6 +1270,7 @@
                         document.createElement(
                             "div"
                         );
+
 
                     logElement.className =
                         "log";
@@ -935,8 +1281,10 @@
                             "span"
                         );
 
+
                     time.className =
                         "log-time";
+
 
                     time.textContent =
                         log.time;
@@ -960,6 +1308,7 @@
 
                 }
             );
+
         }
 
 
@@ -985,17 +1334,21 @@
                 "SITE OPEN"
             );
 
+
             cigaAddLog(
                 "SYSTEM CONNECTION ESTABLISHED"
             );
+
 
             cigaAddLog(
                 "OPERATIVE SESSION INITIALIZED"
             );
 
+
             cigaAddLog(
                 "DATABASE INTERFACE READY"
             );
+
 
             cigaAddLog(
                 "CONNECTION SECURE"
@@ -1023,13 +1376,16 @@
                 `${previousPage} CLOSED`
             );
 
+
             cigaAddLog(
                 "RETURNED TO MAIN SYSTEM"
             );
 
+
             sessionStorage.removeItem(
                 CIGA_NEXT_PAGE_KEY
             );
+
         }
 
 
@@ -1037,30 +1393,38 @@
            WELCOME SCREEN
         ========================= */
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            welcomeScreen.classList.add(
-                "hidden"
-            );
+                welcomeScreen.classList.add(
+                    "hidden"
+                );
 
-        }, 1800);
+            },
+            1800
+        );
 
 
         /* =========================
            SHOW HOME
         ========================= */
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            home.classList.add(
-                "visible"
-            );
+                home.classList.add(
+                    "visible"
+                );
 
-            cigaRenderLogs();
 
-        }, 2400);
+                cigaRenderLogs();
+
+            },
+            2400
+        );
 
     </script>
 
 </body>
+
 </html>
