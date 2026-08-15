@@ -47,6 +47,7 @@
 
         .page {
             width: 100%;
+
             min-height: 100vh;
 
             padding:
@@ -114,7 +115,7 @@
 
 
         /* =========================
-           STATUS
+           SYSTEM STATUS
         ========================= */
 
         .system-status {
@@ -145,6 +146,285 @@
             line-height: 1.8;
 
             letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login {
+            display: none;
+
+            max-width: 620px;
+        }
+
+
+        .login.visible {
+            display: block;
+        }
+
+
+        .login-panel {
+            padding: 30px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+        }
+
+
+        .login-title {
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.65;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 25px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+        }
+
+
+        .login-field {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            margin-bottom: 18px;
+        }
+
+
+        .login-field label {
+            margin-bottom: 8px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.50;
+        }
+
+
+        .login-field input {
+            width: 100%;
+
+            height: 45px;
+
+            padding:
+                12px 14px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .login-field input:focus {
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        .login-button,
+        .logout-button {
+            width: 100%;
+
+            padding:
+                13px 18px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.40
+                );
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+        }
+
+
+        .login-button {
+            margin-top: 8px;
+        }
+
+
+        .login-button:hover,
+        .logout-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+        }
+
+
+        .login-button:disabled,
+        .logout-button:disabled {
+            opacity: 0.4;
+
+            cursor: not-allowed;
+        }
+
+
+        .login-result {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        .login-result.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           ADMIN BAR
+        ========================= */
+
+        .admin-bar {
+            display: none;
+
+            margin-bottom: 24px;
+
+            gap: 15px;
+
+            align-items: center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                12px 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .admin-bar.visible {
+            display: flex;
+        }
+
+
+        .admin-session {
+            opacity: 0.55;
+
+            line-height: 1.8;
+        }
+
+
+        .logout-button {
+            width: auto;
+
+            padding:
+                9px 13px;
+
+            font-size: 9px;
         }
 
 
@@ -180,7 +460,7 @@
 
 
         /* =========================
-           REVIEW PANEL
+           REVIEW
         ========================= */
 
         .review {
@@ -242,7 +522,7 @@
 
 
         /* =========================
-           SUBJECT HEADER
+           SUBJECT
         ========================= */
 
         .subject-header {
@@ -388,7 +668,7 @@
 
 
         /* =========================
-           DESCRIPTION / NOTES
+           TEXT
         ========================= */
 
         .text-block {
@@ -516,6 +796,13 @@
         }
 
 
+        .action-button:disabled {
+            opacity: 0.35;
+
+            cursor: not-allowed;
+        }
+
+
         .accept {
             border-color:
                 rgba(
@@ -596,6 +883,20 @@
             }
 
 
+            .admin-bar {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .admin-bar .logout-button {
+                width: 100%;
+            }
+
+
             .subject-header {
                 flex-direction:
                     column;
@@ -605,6 +906,7 @@
             .subject-image,
             .subject-placeholder {
                 width: 140px;
+
                 height: 140px;
             }
 
@@ -650,6 +952,7 @@
                 CIGA SYSTEMS
             </div>
 
+
             <div class="subtitle">
                 PERSONNEL REVIEW // INTERNAL
             </div>
@@ -672,9 +975,108 @@
         class="system-status"
         id="systemStatus"
     >
-        &gt; AUTHENTICATING REVIEW SESSION...
+        &gt; INITIALIZING REVIEW SYSTEM...
     </div>
 
+
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
+    <section
+        class="login"
+        id="login"
+    >
+
+        <div class="login-panel">
+
+            <div class="login-title">
+                // ADMINISTRATIVE AUTHENTICATION
+            </div>
+
+
+            <div class="login-field">
+
+                <label for="email">
+                    ADMIN EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="login-field">
+
+                <label for="password">
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="login-button"
+                id="loginButton"
+                type="button"
+            >
+                AUTHENTICATE ADMINISTRATOR
+            </button>
+
+
+            <div
+                class="login-result"
+                id="loginResult"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ADMIN SESSION
+    ========================= -->
+
+    <div
+        class="admin-bar"
+        id="adminBar"
+    >
+
+        <div
+            class="admin-session"
+            id="adminSession"
+        >
+            ADMIN SESSION: ACTIVE
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutButton"
+            type="button"
+        >
+            TERMINATE ADMIN SESSION
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         ACCESS DENIED
+    ========================= -->
 
     <div
         class="denied"
@@ -695,15 +1097,15 @@
     </div>
 
 
+    <!-- =========================
+         REVIEW
+    ========================= -->
+
     <main
         class="review"
         id="review"
     >
 
-
-        <!-- =========================
-             SUBJECT
-        ========================= -->
 
         <section class="panel">
 
@@ -713,7 +1115,6 @@
 
 
             <div class="subject-header">
-
 
                 <div id="imageContainer"></div>
 
@@ -742,10 +1143,6 @@
         </section>
 
 
-        <!-- =========================
-             IDENTITY
-        ========================= -->
-
         <section class="panel">
 
             <div class="panel-title">
@@ -760,10 +1157,6 @@
 
         </section>
 
-
-        <!-- =========================
-             DESCRIPTION
-        ========================= -->
 
         <section class="panel">
 
@@ -780,10 +1173,6 @@
         </section>
 
 
-        <!-- =========================
-             NOTES
-        ========================= -->
-
         <section class="panel">
 
             <div class="panel-title">
@@ -799,10 +1188,6 @@
         </section>
 
 
-        <!-- =========================
-             CONNECTIONS
-        ========================= -->
-
         <section class="panel">
 
             <div class="panel-title">
@@ -817,10 +1202,6 @@
 
         </section>
 
-
-        <!-- =========================
-             STATUS
-        ========================= -->
 
         <section class="panel">
 
@@ -890,10 +1271,35 @@
     } = supabase;
 
 
+    /*
+        Persistent Supabase session.
+
+        This allows multiple tabs from the same
+        browser to share the same authenticated
+        admin session.
+
+        The session can be explicitly terminated
+        with the logout button.
+    */
+
     const db =
         createClient(
             SUPABASE_URL,
-            SUPABASE_KEY
+            SUPABASE_KEY,
+            {
+                auth: {
+
+                    persistSession:
+                        true,
+
+                    autoRefreshToken:
+                        true,
+
+                    detectSessionInUrl:
+                        false
+
+                }
+            }
         );
 
 
@@ -904,6 +1310,54 @@
     const systemStatus =
         document.getElementById(
             "systemStatus"
+        );
+
+
+    const login =
+        document.getElementById(
+            "login"
+        );
+
+
+    const email =
+        document.getElementById(
+            "email"
+        );
+
+
+    const password =
+        document.getElementById(
+            "password"
+        );
+
+
+    const loginButton =
+        document.getElementById(
+            "loginButton"
+        );
+
+
+    const loginResult =
+        document.getElementById(
+            "loginResult"
+        );
+
+
+    const adminBar =
+        document.getElementById(
+            "adminBar"
+        );
+
+
+    const adminSession =
+        document.getElementById(
+            "adminSession"
+        );
+
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
         );
 
 
@@ -1002,18 +1456,63 @@
 
 
     /* ==========================================
-       AUTHENTICATION
+       SHOW LOGIN
+    ========================================== */
+
+    function showLogin() {
+
+        login.classList.add(
+            "visible"
+        );
+
+        adminBar.classList.remove(
+            "visible"
+        );
+
+        denied.classList.remove(
+            "visible"
+        );
+
+        review.classList.remove(
+            "visible"
+        );
+
+        systemStatus.textContent =
+            "> ADMINISTRATIVE AUTHENTICATION REQUIRED.";
+
+    }
+
+
+    /* ==========================================
+       LOGIN ERROR
+    ========================================== */
+
+    function showLoginError(
+        message
+    ) {
+
+        loginResult.textContent =
+            `> ${message}`;
+
+
+        loginResult.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       CHECK ADMIN
     ========================================== */
 
     async function verifyAdmin() {
 
-        systemStatus.textContent =
-            "> VERIFYING ADMINISTRATIVE CLEARANCE...";
-
-
         const {
-            data: sessionData,
-            error: sessionError
+            data:
+            sessionData,
+            error:
+            sessionError
         } =
             await db.auth.getSession();
 
@@ -1023,10 +1522,6 @@
             ||
             !sessionData.session
         ) {
-
-            denyAccess(
-                "NO ACTIVE ADMIN SESSION"
-            );
 
             return false;
 
@@ -1038,11 +1533,15 @@
 
 
         const {
-            data: adminData,
-            error: adminError
+            data:
+            adminData,
+            error:
+            adminError
         } =
             await db
-                .from("admins")
+                .from(
+                    "admins"
+                )
                 .select(
                     "user_id, role"
                 )
@@ -1063,17 +1562,10 @@
             !adminData
         ) {
 
-            denyAccess(
-                "ADMIN CLEARANCE NOT FOUND"
-            );
-
             return false;
 
         }
 
-
-        systemStatus.textContent =
-            "> ADMINISTRATIVE CLEARANCE VERIFIED.";
 
         return true;
 
@@ -1081,23 +1573,230 @@
 
 
     /* ==========================================
-       DENY ACCESS
+       AUTHENTICATE ADMIN
     ========================================== */
 
-    function denyAccess(
-        reason
-    ) {
+    async function authenticateAdmin() {
 
-        systemStatus.textContent =
-            `> ${reason}.`;
+        const enteredEmail =
+            email.value.trim();
 
-        denied.classList.add(
+
+        const enteredPassword =
+            password.value;
+
+
+        if (
+            !enteredEmail
+            ||
+            !enteredPassword
+        ) {
+
+            showLoginError(
+                "EMAIL AND PASSWORD REQUIRED."
+            );
+
+            return;
+
+        }
+
+
+        loginButton.disabled =
+            true;
+
+
+        loginButton.textContent =
+            "AUTHENTICATING...";
+
+
+        loginResult.classList.remove(
             "visible"
         );
+
+
+        try {
+
+            const {
+                data:
+                authData,
+                error:
+                authError
+            } =
+                await db.auth.signInWithPassword({
+
+                    email:
+                        enteredEmail,
+
+                    password:
+                        enteredPassword
+
+                });
+
+
+            if (
+                authError
+                ||
+                !authData.session
+            ) {
+
+                console.error(
+                    "AUTH ERROR:",
+                    authError
+                );
+
+
+                showLoginError(
+                    "AUTHENTICATION FAILED."
+                );
+
+
+                return;
+
+            }
+
+
+            const isAdmin =
+                await verifyAdmin();
+
+
+            if (!isAdmin) {
+
+                await db.auth.signOut({
+                    scope: "local"
+                });
+
+
+                showLoginError(
+                    "ADMIN CLEARANCE NOT FOUND."
+                );
+
+
+                return;
+
+            }
+
+
+            login.classList.remove(
+                "visible"
+            );
+
+
+            adminBar.classList.add(
+                "visible"
+            );
+
+
+            adminSession.textContent =
+                `ADMIN SESSION: ACTIVE // ${enteredEmail}`;
+
+
+            systemStatus.textContent =
+                "> ADMINISTRATIVE CLEARANCE VERIFIED.";
+
+
+            await loadSubmission();
+
+
+        } catch (error) {
+
+            console.error(
+                "LOGIN ERROR:",
+                error
+            );
+
+
+            showLoginError(
+                "AUTHENTICATION SYSTEM ERROR."
+            );
+
+        } finally {
+
+            loginButton.disabled =
+                false;
+
+
+            loginButton.textContent =
+                "AUTHENTICATE ADMINISTRATOR";
+
+        }
+
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    async function logoutAdmin() {
+
+        logoutButton.disabled =
+            true;
+
+
+        logoutButton.textContent =
+            "TERMINATING...";
+
+
+        try {
+
+            await db.auth.signOut({
+                scope: "local"
+            });
+
+        } catch (error) {
+
+            console.error(
+                "LOGOUT ERROR:",
+                error
+            );
+
+        }
+
 
         review.classList.remove(
             "visible"
         );
+
+
+        adminBar.classList.remove(
+            "visible"
+        );
+
+
+        denied.classList.remove(
+            "visible"
+        );
+
+
+        loginResult.classList.remove(
+            "visible"
+        );
+
+
+        email.value =
+            "";
+
+
+        password.value =
+            "";
+
+
+        systemStatus.textContent =
+            "> ADMIN SESSION TERMINATED.";
+
+
+        setTimeout(
+            showLogin,
+            500
+        );
+
+
+        logoutButton.disabled =
+            false;
+
+
+        logoutButton.textContent =
+            "TERMINATE ADMIN SESSION";
 
     }
 
@@ -1124,7 +1823,11 @@
 
 
         if (!isAdmin) {
+
+            showLogin();
+
             return;
+
         }
 
 
@@ -1176,6 +1879,40 @@
 
         systemStatus.textContent =
             "> PERSONNEL RECORD LOADED // CLEARANCE VERIFIED.";
+
+    }
+
+
+    /* ==========================================
+       DENY ACCESS
+    ========================================== */
+
+    function denyAccess(
+        reason
+    ) {
+
+        login.classList.remove(
+            "visible"
+        );
+
+
+        adminBar.classList.remove(
+            "visible"
+        );
+
+
+        systemStatus.textContent =
+            `> ${reason}.`;
+
+
+        denied.classList.add(
+            "visible"
+        );
+
+
+        review.classList.remove(
+            "visible"
+        );
 
     }
 
@@ -1270,7 +2007,7 @@
 
 
         /* =========================
-           IDENTITY GRID
+           IDENTITY
         ========================= */
 
         identityGrid.innerHTML =
@@ -1398,7 +2135,8 @@
         addDataItem(
             statusGrid,
             "STATUS",
-            data.status || "PENDING"
+            data.status ||
+            "PENDING"
         );
 
 
@@ -1415,10 +2153,13 @@
 
         if (
             currentStatus === "ACCEPTED"
+            ||
+            currentStatus === "REJECTED"
         ) {
 
             acceptButton.disabled =
                 true;
+
 
             rejectButton.disabled =
                 true;
@@ -1543,10 +2284,185 @@
 
 
     /* ==========================================
-       START
+       EVENT LISTENERS
     ========================================== */
 
-    loadSubmission();
+    loginButton.addEventListener(
+        "click",
+        authenticateAdmin
+    );
+
+
+    logoutButton.addEventListener(
+        "click",
+        logoutAdmin
+    );
+
+
+    password.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                authenticateAdmin();
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       AUTH STATE CHANGES
+    ========================================== */
+
+    db.auth.onAuthStateChange(
+        async function(
+            event,
+            session
+        ) {
+
+            /*
+                SIGNED_OUT:
+                hide admin content.
+            */
+
+            if (
+                event === "SIGNED_OUT"
+                ||
+                !session
+            ) {
+
+                review.classList.remove(
+                    "visible"
+                );
+
+                adminBar.classList.remove(
+                    "visible"
+                );
+
+                showLogin();
+
+                return;
+
+            }
+
+
+            /*
+                SIGNED_IN / TOKEN_REFRESHED:
+                verify admin again.
+            */
+
+            if (
+                event === "SIGNED_IN"
+                ||
+                event === "TOKEN_REFRESHED"
+            ) {
+
+                const isAdmin =
+                    await verifyAdmin();
+
+
+                if (!isAdmin) {
+
+                    await db.auth.signOut({
+                        scope: "local"
+                    });
+
+                    showLogin();
+
+                    return;
+
+                }
+
+
+                login.classList.remove(
+                    "visible"
+                );
+
+
+                adminBar.classList.add(
+                    "visible"
+                );
+
+
+                systemStatus.textContent =
+                    "> ADMINISTRATIVE CLEARANCE VERIFIED.";
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    async function initialize() {
+
+        if (!submissionId) {
+
+            denyAccess(
+                "SUBMISSION ID NOT PROVIDED"
+            );
+
+            return;
+
+        }
+
+
+        const {
+            data
+        } =
+            await db.auth.getSession();
+
+
+        if (data.session) {
+
+            const isAdmin =
+                await verifyAdmin();
+
+
+            if (isAdmin) {
+
+                login.classList.remove(
+                    "visible"
+                );
+
+
+                adminBar.classList.add(
+                    "visible"
+                );
+
+
+                adminSession.textContent =
+                    "ADMIN SESSION: ACTIVE";
+
+
+                await loadSubmission();
+
+                return;
+
+            }
+
+
+            await db.auth.signOut({
+                scope: "local"
+            });
+
+        }
+
+
+        showLogin();
+
+    }
+
+
+    initialize();
 
 </script>
 
