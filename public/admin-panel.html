@@ -66,21 +66,21 @@
         .subtitle {
             margin-top: 8px;
 
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
         }
 
         .header-status {
             text-align: right;
 
-            font-size: 9px;
+            font-size: 10px;
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.55;
+            opacity: 0.65;
         }
 
 
@@ -100,12 +100,12 @@
             background:
                 rgba(255,255,255,0.02);
 
-            font-size: 11px;
+            font-size: 12px;
             line-height: 1.9;
 
             letter-spacing: 1px;
 
-            opacity: 0.65;
+            opacity: 0.75;
         }
 
 
@@ -124,16 +124,16 @@
                 1px solid
                 rgba(255,255,255,0.25);
 
-            font-size: 11px;
+            font-size: 12px;
             line-height: 2;
 
             letter-spacing: 1.5px;
 
-            opacity: 0.7;
+            opacity: 0.75;
         }
 
         .message-title {
-            font-size: 18px;
+            font-size: 19px;
             letter-spacing: 3px;
 
             margin-bottom: 15px;
@@ -182,16 +182,16 @@
         }
 
         .stat-label {
-            font-size: 8px;
+            font-size: 9px;
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.42;
 
             margin-bottom: 9px;
         }
 
         .stat-value {
-            font-size: 18px;
+            font-size: 19px;
             letter-spacing: 2px;
         }
 
@@ -211,13 +211,21 @@
 
             background:
                 rgba(255,255,255,0.015);
+
+            overflow: hidden;
         }
 
         .panel-title {
-            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            font-size: 11px;
             letter-spacing: 3px;
 
-            opacity: 0.5;
+            opacity: 0.60;
 
             padding-bottom: 11px;
             margin-bottom: 20px;
@@ -225,6 +233,39 @@
             border-bottom:
                 1px solid
                 rgba(255,255,255,0.15);
+
+            cursor: pointer;
+
+            user-select: none;
+        }
+
+        .panel-title::after {
+            content: "▼";
+
+            font-size: 9px;
+
+            opacity: 0.45;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+        .panel.collapsed > .panel-title {
+            margin-bottom: 0;
+            border-bottom-color: transparent;
+        }
+
+        .panel.collapsed > .panel-title::after {
+            transform: rotate(-90deg);
+        }
+
+        .panel.collapsed > :not(.panel-title) {
+            display: none;
+        }
+
+        /* Nested panels created inside review content */
+        .panel .panel.collapsed > .panel-title {
+            display: flex;
         }
 
 
@@ -265,17 +306,17 @@
         }
 
         .submission-id {
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.45;
 
             margin-bottom: 8px;
         }
 
         .submission-name {
-            font-size: 15px;
+            font-size: 16px;
 
             letter-spacing: 2px;
 
@@ -283,13 +324,13 @@
         }
 
         .submission-meta {
-            font-size: 9px;
+            font-size: 10px;
 
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.55;
+            opacity: 0.62;
         }
 
         .submission-status {
@@ -298,11 +339,11 @@
             align-items:
                 center;
 
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 2px;
 
-            opacity: 0.5;
+            opacity: 0.58;
         }
 
         .submission-status::before {
@@ -343,7 +384,7 @@
 
             font-family: inherit;
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 1.5px;
 
@@ -423,12 +464,12 @@
                 1px solid
                 rgba(255,255,255,0.30);
 
-            font-size: 9px;
+            font-size: 10px;
             line-height: 1.6;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.45;
         }
 
         .review-subject {
@@ -440,17 +481,17 @@
         }
 
         .review-subject-label {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.42;
 
             margin-bottom: 10px;
         }
 
         .review-subject-name {
-            font-size: 28px;
+            font-size: 29px;
 
             letter-spacing: 4px;
 
@@ -458,13 +499,13 @@
         }
 
         .review-subject-description {
-            font-size: 11px;
+            font-size: 12px;
 
             line-height: 1.9;
 
             letter-spacing: 0.8px;
 
-            opacity: 0.7;
+            opacity: 0.75;
         }
 
 
@@ -481,19 +522,19 @@
 
             gap: 13px 20px;
 
-            font-size: 10px;
+            font-size: 11px;
 
             line-height: 1.7;
         }
 
         .review-label {
-            opacity: 0.35;
+            opacity: 0.40;
 
             letter-spacing: 1.5px;
         }
 
         .review-value {
-            opacity: 0.85;
+            opacity: 0.90;
 
             letter-spacing: 0.8px;
 
@@ -528,24 +569,24 @@
         }
 
         .social-name {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.42;
 
             margin-bottom: 6px;
         }
 
         .social-url {
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 0.5px;
 
             word-break:
                 break-all;
 
-            opacity: 0.75;
+            opacity: 0.80;
         }
 
 
@@ -576,7 +617,7 @@
         }
 
         .reject {
-            opacity: 0.65;
+            opacity: 0.7;
         }
 
 
@@ -604,23 +645,23 @@
         }
 
         .confirmation-title {
-            font-size: 11px;
+            font-size: 12px;
 
             letter-spacing: 3px;
 
             margin-bottom: 12px;
 
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .confirmation-text {
-            font-size: 10px;
+            font-size: 11px;
 
             line-height: 1.9;
 
             letter-spacing: 1px;
 
-            opacity: 0.6;
+            opacity: 0.68;
 
             margin-bottom: 17px;
         }
@@ -637,7 +678,7 @@
         }
 
         .confirmation-no {
-            opacity: 0.55;
+            opacity: 0.6;
         }
 
 
@@ -656,13 +697,13 @@
                 1px solid
                 rgba(255,255,255,0.20);
 
-            font-size: 9px;
+            font-size: 10px;
 
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.7;
+            opacity: 0.76;
         }
 
         .result.visible {
@@ -677,11 +718,11 @@
         .empty {
             padding: 20px;
 
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.48;
         }
 
 
@@ -712,11 +753,11 @@
         }
 
         .archive-label {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.48;
         }
 
         .archive-input,
@@ -736,7 +777,7 @@
 
             font-family: inherit;
 
-            font-size: 10px;
+            font-size: 11px;
 
             letter-spacing: 0.8px;
         }
@@ -776,7 +817,7 @@
         }
 
         .archive-number {
-            opacity: 0.5;
+            opacity: 0.55;
 
             cursor: not-allowed;
         }
@@ -795,11 +836,11 @@
         }
 
         .subject-preview-title {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.42;
 
             margin-bottom: 14px;
         }
@@ -813,19 +854,19 @@
 
             gap: 10px 18px;
 
-            font-size: 9px;
+            font-size: 10px;
 
             line-height: 1.7;
         }
 
         .subject-preview-label {
-            opacity: 0.35;
+            opacity: 0.40;
 
             letter-spacing: 1.5px;
         }
 
         .subject-preview-value {
-            opacity: 0.8;
+            opacity: 0.88;
 
             word-break: break-word;
         }
@@ -848,11 +889,11 @@
         }
 
         .archive-option-label {
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 1px;
 
-            opacity: 0.6;
+            opacity: 0.68;
 
             cursor: pointer;
         }
@@ -913,17 +954,17 @@
         }
 
         .archive-item-number {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.40;
 
             margin-bottom: 7px;
         }
 
         .archive-item-title {
-            font-size: 14px;
+            font-size: 15px;
 
             letter-spacing: 2px;
 
@@ -931,13 +972,13 @@
         }
 
         .archive-item-meta {
-            font-size: 8px;
+            font-size: 9px;
 
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.55;
+            opacity: 0.62;
         }
 
         .archive-item-status {
@@ -946,11 +987,11 @@
             align-items:
                 center;
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.55;
+            opacity: 0.60;
         }
 
         .archive-item-status::before {
@@ -994,11 +1035,11 @@
         }
 
         .communication-label {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.4;
+            opacity: 0.48;
         }
 
         .communication-input,
@@ -1018,7 +1059,7 @@
 
             font-family: inherit;
 
-            font-size: 10px;
+            font-size: 11px;
 
             letter-spacing: 0.8px;
         }
@@ -1054,7 +1095,7 @@
         }
 
         .communication-number {
-            opacity: 0.5;
+            opacity: 0.55;
 
             cursor: not-allowed;
         }
@@ -1077,11 +1118,11 @@
         }
 
         .communication-option-label {
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 1px;
 
-            opacity: 0.6;
+            opacity: 0.68;
 
             cursor: pointer;
         }
@@ -1139,17 +1180,17 @@
         }
 
         .communication-item-id {
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.35;
+            opacity: 0.40;
 
             margin-bottom: 7px;
         }
 
         .communication-item-subject {
-            font-size: 14px;
+            font-size: 15px;
 
             letter-spacing: 2px;
 
@@ -1157,23 +1198,23 @@
         }
 
         .communication-item-meta {
-            font-size: 8px;
+            font-size: 9px;
 
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.55;
+            opacity: 0.62;
         }
 
         .communication-item-status {
             margin-top: 12px;
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.50;
         }
 
 
@@ -1195,11 +1236,11 @@
                 1px solid
                 rgba(255,255,255,0.2);
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.3;
+            opacity: 0.38;
         }
 
 
@@ -1318,7 +1359,6 @@
 
 
 <body>
-
 
 <div class="page">
 
@@ -1488,8 +1528,6 @@
             </div>
 
 
-            <!-- CONFIRMATION -->
-
             <div
                 class="confirmation"
                 id="confirmation"
@@ -1530,15 +1568,11 @@
             </div>
 
 
-            <!-- RESULT -->
-
             <div
                 class="result"
                 id="reviewResult"
             ></div>
 
-
-            <!-- ACTION BUTTONS -->
 
             <div class="review-actions">
 
@@ -1563,9 +1597,7 @@
         </section>
 
 
-        <!-- =========================
-             ARCHIVE CREATION
-        ========================= -->
+        <!-- ARCHIVE CREATION -->
 
         <section class="panel">
 
@@ -1576,11 +1608,7 @@
 
             <form id="archiveForm">
 
-
                 <div class="archive-grid">
-
-
-                    <!-- ARCHIVE NUMBER -->
 
                     <div class="archive-field">
 
@@ -1597,8 +1625,6 @@
 
                     </div>
 
-
-                    <!-- SUBJECT -->
 
                     <div class="archive-field">
 
@@ -1624,8 +1650,6 @@
                     </div>
 
 
-                    <!-- TITLE -->
-
                     <div
                         class="archive-field archive-full"
                     >
@@ -1648,8 +1672,6 @@
                     </div>
 
 
-                    <!-- INCIDENT DATE -->
-
                     <div class="archive-field">
 
                         <label
@@ -1668,8 +1690,6 @@
 
                     </div>
 
-
-                    <!-- VISIBLE -->
 
                     <div class="archive-field">
 
@@ -1697,8 +1717,6 @@
                     </div>
 
 
-                    <!-- SUMMARY -->
-
                     <div
                         class="archive-field archive-full"
                     >
@@ -1719,8 +1737,6 @@
                     </div>
 
 
-                    <!-- FULL REPORT -->
-
                     <div
                         class="archive-field archive-full"
                     >
@@ -1740,11 +1756,8 @@
 
                     </div>
 
-
                 </div>
 
-
-                <!-- SUBJECT PREVIEW -->
 
                 <div
                     class="subject-preview"
@@ -1883,15 +1896,12 @@
 
                 </div>
 
-
             </form>
 
         </section>
 
 
-        <!-- =========================
-             ARCHIVE LIST
-        ========================= -->
+        <!-- ARCHIVE LIST -->
 
         <section class="panel">
 
@@ -1911,9 +1921,7 @@
         </section>
 
 
-        <!-- =========================
-             COMMUNICATION CREATION
-        ========================= -->
+        <!-- COMMUNICATION CREATION -->
 
         <section class="panel">
 
@@ -1924,11 +1932,7 @@
 
             <form id="communicationForm">
 
-
                 <div class="communication-grid">
-
-
-                    <!-- MESSAGE ID -->
 
                     <div class="communication-field">
 
@@ -1945,8 +1949,6 @@
 
                     </div>
 
-
-                    <!-- CLASSIFICATION -->
 
                     <div class="communication-field">
 
@@ -1970,7 +1972,10 @@
                                 INTERNAL
                             </option>
 
-                            <option value="RESTRICTED" selected>
+                            <option
+                                value="RESTRICTED"
+                                selected
+                            >
                                 RESTRICTED
                             </option>
 
@@ -1982,8 +1987,6 @@
 
                     </div>
 
-
-                    <!-- SENDER -->
 
                     <div class="communication-field">
 
@@ -2005,8 +2008,6 @@
                     </div>
 
 
-                    <!-- RECIPIENT -->
-
                     <div class="communication-field">
 
                         <label
@@ -2026,8 +2027,6 @@
 
                     </div>
 
-
-                    <!-- SUBJECT -->
 
                     <div
                         class="communication-field communication-full"
@@ -2051,8 +2050,6 @@
                     </div>
 
 
-                    <!-- STATUS -->
-
                     <div class="communication-field">
 
                         <label
@@ -2071,7 +2068,10 @@
                                 DRAFT
                             </option>
 
-                            <option value="DELIVERED" selected>
+                            <option
+                                value="DELIVERED"
+                                selected
+                            >
                                 DELIVERED
                             </option>
 
@@ -2087,8 +2087,6 @@
 
                     </div>
 
-
-                    <!-- PUBLIC -->
 
                     <div class="communication-field">
 
@@ -2116,8 +2114,6 @@
                     </div>
 
 
-                    <!-- CONTENT -->
-
                     <div
                         class="communication-field communication-full"
                     >
@@ -2137,7 +2133,6 @@
                         ></textarea>
 
                     </div>
-
 
                 </div>
 
@@ -2167,15 +2162,12 @@
 
                 </div>
 
-
             </form>
 
         </section>
 
 
-        <!-- =========================
-             COMMUNICATION LIST
-        ========================= -->
+        <!-- COMMUNICATION LIST -->
 
         <section class="panel">
 
@@ -2394,6 +2386,7 @@
             "refreshArchiveData"
         );
 
+
     const previewStatus =
         document.getElementById(
             "previewStatus"
@@ -2546,6 +2539,82 @@
             );
 
     }
+
+
+    /* ==========================================
+       COLLAPSIBLE PANELS
+    ========================================== */
+
+    function setupCollapsiblePanels() {
+
+        document
+            .querySelectorAll(
+                ".panel-title"
+            )
+            .forEach(
+                title => {
+
+                    if (
+                        title.dataset.collapseReady === "true"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    title.dataset.collapseReady =
+                        "true";
+
+
+                    title.addEventListener(
+                        "click",
+                        function() {
+
+                            const panel =
+                                title.closest(
+                                    ".panel"
+                                );
+
+
+                            if (!panel) {
+                                return;
+                            }
+
+
+                            panel.classList.toggle(
+                                "collapsed"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    const panelObserver =
+        new MutationObserver(
+            function() {
+
+                setupCollapsiblePanels();
+
+            }
+        );
+
+
+    panelObserver.observe(
+        document.body,
+        {
+            childList: true,
+            subtree: true
+        }
+    );
+
+
+    setupCollapsiblePanels();
 
 
     /* ==========================================
@@ -2931,7 +3000,6 @@
 
             <div class="review-top">
 
-
                 <div>
 
                     ${photo}
@@ -2979,18 +3047,15 @@
 
                 <div class="review-data">
 
-
                     <div class="review-label">
                         ALIAS
                     </div>
 
                     <div class="review-value">
-
                         ${escapeHTML(
                             data.alias ||
                             "UNAVAILABLE"
                         )}
-
                     </div>
 
 
@@ -2999,12 +3064,10 @@
                     </div>
 
                     <div class="review-value">
-
                         ${escapeHTML(
                             data.primary_activity ||
                             "UNAVAILABLE"
                         )}
-
                     </div>
 
 
@@ -3013,12 +3076,10 @@
                     </div>
 
                     <div class="review-value">
-
                         ${escapeHTML(
                             data.location ||
                             "UNAVAILABLE"
                         )}
-
                     </div>
 
 
@@ -3027,12 +3088,10 @@
                     </div>
 
                     <div class="review-value">
-
                         ${escapeHTML(
                             data.affiliation ||
                             "UNAVAILABLE"
                         )}
-
                     </div>
 
 
@@ -3041,14 +3100,11 @@
                     </div>
 
                     <div class="review-value">
-
                         ${escapeHTML(
                             data.origin ||
                             "UNAVAILABLE"
                         )}
-
                     </div>
-
 
                 </div>
 
@@ -3063,7 +3119,6 @@
 
 
                 <div class="social-grid">
-
 
                     <div class="social">
 
@@ -3136,7 +3191,6 @@
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -3185,6 +3239,9 @@
             behavior: "smooth",
             block: "start"
         });
+
+
+        setupCollapsiblePanels();
 
     }
 
@@ -4085,7 +4142,9 @@
 
                 showArchiveResult(
                     "> ARCHIVE CREATION FAILED.<br>" +
-                    `> ${escapeHTML(error.message)}`
+                    `> ${escapeHTML(
+                        error.message
+                    )}`
                 );
 
 
@@ -4240,6 +4299,7 @@
                 <div class="empty">
 
                     &gt; ARCHIVE DATABASE ERROR.<br>
+
                     &gt; ${escapeHTML(
                         error.message
                     )}
@@ -4712,6 +4772,7 @@
                 <div class="empty">
 
                     &gt; COMMUNICATION DATABASE ERROR.<br>
+
                     &gt; ${escapeHTML(
                         error.message
                     )}
