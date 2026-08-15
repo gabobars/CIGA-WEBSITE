@@ -20,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
 
         * {
@@ -313,12 +314,13 @@
 
         input::placeholder,
         textarea::placeholder {
-            color: rgba(
-                255,
-                255,
-                255,
-                0.35
-            );
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
         }
 
 
@@ -1169,7 +1171,7 @@
 
 
     /* ==========================================
-       DISCORD RELAY
+       SEND DISCORD RELAY
     ========================================== */
 
     async function cigaSendSubmissionRelay(
@@ -1216,7 +1218,6 @@
 
             return true;
 
-
         } catch (error) {
 
             console.error(
@@ -1233,7 +1234,7 @@
 
 
     /* ==========================================
-       SUBMIT
+       FORM SUBMIT
     ========================================== */
 
     form.addEventListener(
@@ -1341,7 +1342,7 @@
 
 
                 /* =========================
-                   NODE / OPERATIVE
+                   CIGA IDENTITY
                 ========================= */
 
                 const identity =
@@ -1363,7 +1364,6 @@
 
 
                 if (imageFile) {
-
 
                     /* =========================
                        VALIDATE IMAGE
@@ -1415,11 +1415,7 @@
 
 
                     const uniqueName =
-                        `${
-                            crypto.randomUUID()
-                        }.${
-                            fileExtension
-                        }`;
+                        `${crypto.randomUUID()}.${fileExtension}`;
 
 
                     const storagePath =
@@ -1473,7 +1469,7 @@
 
 
                     /* =========================
-                       PUBLIC URL
+                       PUBLIC IMAGE URL
                     ========================= */
 
                     const {
@@ -1499,80 +1495,71 @@
 
                 /* =========================
                    CREATE SUBMISSION
+                   VIA SUPABASE RPC
                 ========================= */
 
                 submitButton.textContent =
                     "SUBMITTING RECORD...";
 
 
-                const submission = {
-
-                    name:
-                        name,
-
-                    alias:
-                        alias,
-
-                    description:
-                        description,
-
-                    primary_activity:
-                        primaryActivity,
-
-                    location:
-                        location,
-
-                    affiliation:
-                        affiliation,
-
-                    origin:
-                        origin,
-
-                    twitch:
-                        twitch,
-
-                    youtube:
-                        youtube,
-
-                    tiktok:
-                        tiktok,
-
-                    discord:
-                        discord,
-
-                    photo:
-                        photoUrl,
-
-                    notes:
-                        notes,
-
-                    submission_status:
-                        "PENDING"
-
-                };
-
-
-                /* =========================
-                   INSERT
-                ========================= */
-
                 const {
+                    data:
+                    submissionId,
+
                     error:
                     submissionError
                 } =
-                    await db
+                    await db.rpc(
+                        "ciga_submit_personnel",
+                        {
 
-                        .from(
-                            "personnel_submissions"
-                        )
+                            p_name:
+                                name,
 
-                        .insert(
-                            [submission]
-                        );
+                            p_alias:
+                                alias,
+
+                            p_description:
+                                description,
+
+                            p_primary_activity:
+                                primaryActivity,
+
+                            p_location:
+                                location,
+
+                            p_affiliation:
+                                affiliation,
+
+                            p_origin:
+                                origin,
+
+                            p_twitch:
+                                twitch,
+
+                            p_youtube:
+                                youtube,
+
+                            p_tiktok:
+                                tiktok,
+
+                            p_discord:
+                                discord,
+
+                            p_photo:
+                                photoUrl,
+
+                            p_notes:
+                                notes
+
+                        }
+                    );
 
 
                 if (
                     submissionError
+                    ||
+                    !submissionId
                 ) {
 
                     console.error(
@@ -1589,32 +1576,32 @@
 
 
                 /* =========================
-                   SEND DISCORD RELAY
+                   DISCORD RELAY
                 ========================= */
 
                 submitButton.textContent =
                     "TRANSMITTING...";
 
 
-const relaySuccessful =
-    await cigaSendSubmissionRelay({
+                const relaySuccessful =
+                    await cigaSendSubmissionRelay({
 
-        node:
-            identity.node,
+                        node:
+                            identity.node,
 
-        operative:
-            identity.operative,
+                        operative:
+                            identity.operative,
 
-        submission_id:
-            "PENDING",
+                        submission_id:
+                            submissionId,
 
-        name:
-            name,
+                        name:
+                            name,
 
-        photo:
-            photoUrl
+                        photo:
+                            photoUrl
 
-    });
+                    });
 
 
                 /* =========================
@@ -1624,6 +1611,11 @@ const relaySuccessful =
                 result.innerHTML = `
 
                     &gt; SUBMISSION RECEIVED.
+
+                    <br>
+
+                    &gt; RECORD ID:
+                    ${submissionId}
 
                     <br>
 
