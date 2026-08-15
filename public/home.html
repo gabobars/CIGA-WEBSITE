@@ -1083,8 +1083,16 @@
 
 
             <div class="operator">
+
                 OPERATIVE: 001<br>
+
+                NODE:
+                <span id="operatorNode">
+                    UNKNOWN
+                </span><br>
+
                 SESSION: ACTIVE
+
             </div>
 
         </header>
@@ -1576,6 +1584,27 @@
             );
 
 
+        const operatorNode =
+            document.getElementById(
+                "operatorNode"
+            );
+
+
+        /* =========================
+           USE BOOT NODE
+        ========================= */
+
+        const cigaNode =
+            localStorage.getItem(
+                "ciga_node_id"
+            );
+
+
+        operatorNode.textContent =
+            cigaNode ||
+            "UNASSIGNED";
+
+
         /* =========================
            STORAGE KEYS
         ========================= */
@@ -1730,10 +1759,6 @@
                 )
             );
 
-
-            /*
-                Render immediately.
-            */
 
             cigaRenderLogs();
 
@@ -1910,10 +1935,6 @@
                 [];
 
 
-            /* =========================
-               LOCAL
-            ========================= */
-
             localLogs.forEach(
                 (
                     log,
@@ -1948,10 +1969,6 @@
                 }
             );
 
-
-            /* =========================
-               GLOBAL
-            ========================= */
 
             cigaGlobalEvents.forEach(
                 event => {
@@ -1989,10 +2006,6 @@
             );
 
 
-            /* =========================
-               SORT
-            ========================= */
-
             combinedLogs.sort(
                 (
                     first,
@@ -2028,10 +2041,6 @@
                 "";
 
 
-            /* =========================
-               EMPTY
-            ========================= */
-
             if (
                 visibleLogs.length === 0
             ) {
@@ -2059,10 +2068,6 @@
 
             }
 
-
-            /* =========================
-               RENDER
-            ========================= */
 
             visibleLogs.forEach(
                 log => {
@@ -2161,10 +2166,6 @@
                 .maybeSingle();
 
 
-            /* =========================
-               ERROR
-            ========================= */
-
             if (error) {
 
                 console.error(
@@ -2209,10 +2210,6 @@
             }
 
 
-            /* =========================
-               NO DATA
-            ========================= */
-
             if (!data) {
 
                 liveStatusDot.classList.add(
@@ -2250,10 +2247,6 @@
 
             }
 
-
-            /* =========================
-               ACTIVE
-            ========================= */
 
             if (
                 data.is_live === true
@@ -2338,10 +2331,6 @@
 
             }
 
-
-            /* =========================
-               OFFLINE
-            ========================= */
 
             liveStatusDot.classList.add(
                 "offline"
