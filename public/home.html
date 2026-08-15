@@ -268,6 +268,9 @@
             letter-spacing: 1px;
 
             min-height: 140px;
+            max-height: 220px;
+
+            overflow: hidden;
         }
 
         .log {
@@ -634,8 +637,7 @@
                     // SYSTEM LOG
                 </div>
 
-                <div class="logs" id="systemLogs">
-                </div>
+                <div class="logs" id="systemLogs"></div>
 
             </div>
 
@@ -653,7 +655,11 @@
 
                 <button
                     class="system-button"
-                    onclick="window.location.href='personnel.html'"
+                    onclick="
+                        cigaAddLog('PERSONNEL FILES ACCESSED');
+                        cigaSetNextPage('PERSONNEL FILES');
+                        window.location.href='personnel.html';
+                    "
                 >
 
                     <span class="system-button-title">
@@ -669,7 +675,11 @@
 
                 <button
                     class="system-button"
-                    onclick="window.location.href='communications.html'"
+                    onclick="
+                        cigaAddLog('COMMUNICATIONS SYSTEM ACCESSED');
+                        cigaSetNextPage('COMMUNICATIONS');
+                        window.location.href='communications.html';
+                    "
                 >
 
                     <span class="system-button-title">
@@ -685,7 +695,11 @@
 
                 <button
                     class="system-button"
-                    onclick="window.location.href='archives.html'"
+                    onclick="
+                        cigaAddLog('ARCHIVE SYSTEM ACCESSED');
+                        cigaSetNextPage('ARCHIVES');
+                        window.location.href='archives.html';
+                    "
                 >
 
                     <span class="system-button-title">
@@ -717,6 +731,10 @@
                         <a
                             href="admin.html"
                             class="classified-option"
+                            onclick="
+                                cigaAddLog('ADMINISTRATIVE ACCESS ACCESSED');
+                                cigaSetNextPage('ADMINISTRATIVE ACCESS');
+                            "
                         >
                             ADMINISTRATIVE ACCESS
                         </a>
@@ -725,6 +743,10 @@
                         <a
                             href="submission.html"
                             class="classified-option"
+                            onclick="
+                                cigaAddLog('PERSONNEL SUBMISSION INTERFACE ACCESSED');
+                                cigaSetNextPage('PERSONNEL SUBMISSION');
+                            "
                         >
                             PERSONNEL SUBMISSION
                         </a>
@@ -756,17 +778,19 @@
 
     <script>
 
+        /* =========================
+           ELEMENTS
+        ========================= */
+
         const welcomeScreen =
             document.getElementById(
                 "welcomeScreen"
             );
 
-
         const home =
             document.getElementById(
                 "home"
             );
-
 
         const systemLogs =
             document.getElementById(
@@ -774,12 +798,25 @@
             );
 
 
-        /*
-            Get the local time from the visitor's device.
-            Nothing is sent anywhere.
-        */
+        /* =========================
+           STORAGE KEYS
+        ========================= */
 
-        function getLocalTime() {
+        const CIGA_LOG_KEY =
+            "ciga_session_log";
+
+        const CIGA_SESSION_KEY =
+            "ciga_session_started";
+
+        const CIGA_NEXT_PAGE_KEY =
+            "ciga_next_page";
+
+
+        /* =========================
+           LOCAL TIME
+        ========================= */
+
+        function cigaGetLocalTime() {
 
             const now = new Date();
 
@@ -792,59 +829,213 @@
                     hour12: false
                 }
             );
+        }
+
+
+        /* =========================
+           GET LOGS
+        ========================= */
+
+        function cigaGetLogs() {
+
+            try {
+
+                const stored =
+                    sessionStorage.getItem(
+                        CIGA_LOG_KEY
+                    );
+
+                if (!stored) {
+                    return [];
+                }
+
+                return JSON.parse(
+                    stored
+                );
+
+            } catch (error) {
+
+                return [];
+
+            }
+        }
+
+
+        /* =========================
+           SAVE LOGS
+        ========================= */
+
+        function cigaSaveLogs(logs) {
+
+            sessionStorage.setItem(
+                CIGA_LOG_KEY,
+                JSON.stringify(logs)
+            );
+        }
+
+
+        /* =========================
+           ADD LOG
+        ========================= */
+
+        function cigaAddLog(message) {
+
+            const logs =
+                cigaGetLogs();
+
+            logs.push({
+                time: cigaGetLocalTime(),
+                message: message
+            });
+
+            cigaSaveLogs(
+                logs
+            );
+        }
+
+
+        /* =========================
+           SET NEXT PAGE
+        ========================= */
+
+        function cigaSetNextPage(page) {
+
+            sessionStorage.setItem(
+                CIGA_NEXT_PAGE_KEY,
+                page
+            );
+        }
+
+
+        /* =========================
+           RENDER LOGS
+        ========================= */
+
+        function cigaRenderLogs() {
+
+            systemLogs.innerHTML = "";
+
+            const logs =
+                cigaGetLogs();
+
+            logs.forEach(
+                log => {
+
+                    const logElement =
+                        document.createElement(
+                            "div"
+                        );
+
+                    logElement.className =
+                        "log";
+
+
+                    const time =
+                        document.createElement(
+                            "span"
+                        );
+
+                    time.className =
+                        "log-time";
+
+                    time.textContent =
+                        log.time;
+
+
+                    logElement.appendChild(
+                        time
+                    );
+
+
+                    logElement.appendChild(
+                        document.createTextNode(
+                            log.message
+                        )
+                    );
+
+
+                    systemLogs.appendChild(
+                        logElement
+                    );
+
+                }
+            );
+        }
+
+
+        /* =========================
+           INITIAL SESSION
+        ========================= */
+
+        const sessionStarted =
+            sessionStorage.getItem(
+                CIGA_SESSION_KEY
+            );
+
+
+        if (!sessionStarted) {
+
+            sessionStorage.setItem(
+                CIGA_SESSION_KEY,
+                "true"
+            );
+
+
+            cigaAddLog(
+                "SITE OPEN"
+            );
+
+            cigaAddLog(
+                "SYSTEM CONNECTION ESTABLISHED"
+            );
+
+            cigaAddLog(
+                "OPERATIVE SESSION INITIALIZED"
+            );
+
+            cigaAddLog(
+                "DATABASE INTERFACE READY"
+            );
+
+            cigaAddLog(
+                "CONNECTION SECURE"
+            );
 
         }
 
 
-        /*
-            Add a new line to the SYSTEM LOG.
-        */
+        /* =========================
+           RETURN TO HOME
+        ========================= */
 
-        function addLog(message) {
-
-            const log =
-                document.createElement(
-                    "div"
-                );
-
-            log.className = "log";
-
-
-            const time =
-                document.createElement(
-                    "span"
-                );
-
-            time.className =
-                "log-time";
-
-            time.textContent =
-                getLocalTime();
-
-
-            log.appendChild(
-                time
+        const previousPage =
+            sessionStorage.getItem(
+                CIGA_NEXT_PAGE_KEY
             );
 
 
-            log.appendChild(
-                document.createTextNode(
-                    message
-                )
+        if (
+            sessionStarted &&
+            previousPage
+        ) {
+
+            cigaAddLog(
+                `${previousPage} CLOSED`
             );
 
-
-            systemLogs.appendChild(
-                log
+            cigaAddLog(
+                "RETURNED TO MAIN SYSTEM"
             );
 
+            sessionStorage.removeItem(
+                CIGA_NEXT_PAGE_KEY
+            );
         }
 
 
-        /*
-            Welcome screen stays visible
-            for 1.8 seconds.
-        */
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
         setTimeout(() => {
 
@@ -855,10 +1046,9 @@
         }, 1800);
 
 
-        /*
-            Home fades in slightly after
-            the welcome screen disappears.
-        */
+        /* =========================
+           SHOW HOME
+        ========================= */
 
         setTimeout(() => {
 
@@ -866,45 +1056,11 @@
                 "visible"
             );
 
-
-            /*
-                Local SYSTEM LOG sequence.
-            */
-
-            const logSequence = [
-
-                "SITE OPEN",
-
-                "SYSTEM CONNECTION ESTABLISHED",
-
-                "OPERATIVE SESSION INITIALIZED",
-
-                "DATABASE INTERFACE READY",
-
-                "CONNECTION SECURE"
-
-            ];
-
-
-            logSequence.forEach(
-                (message, index) => {
-
-                    setTimeout(() => {
-
-                        addLog(
-                            message
-                        );
-
-                    }, index * 450);
-
-                }
-            );
-
+            cigaRenderLogs();
 
         }, 2400);
 
     </script>
-
 
 </body>
 </html>
