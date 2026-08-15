@@ -711,6 +711,203 @@
 
 
         /* =========================
+           LATEST VIDEO ARCHIVE
+        ========================= */
+
+        .video-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .video-operation {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 25px;
+
+            align-items: center;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .video-operation:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.38
+                );
+        }
+
+
+        .video-main-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 9px;
+        }
+
+
+        .video-title {
+            font-size: 17px;
+
+            letter-spacing: 2px;
+
+            line-height: 1.6;
+
+            margin-bottom: 14px;
+
+            word-break:
+                break-word;
+        }
+
+
+        .video-info {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr;
+
+            gap:
+                6px 15px;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        .video-info-label {
+            opacity: 0.35;
+        }
+
+
+        .video-info-value {
+            opacity: 0.82;
+
+            word-break:
+                break-word;
+        }
+
+
+        .video-action {
+            display: inline-block;
+
+            padding:
+                12px 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.8px;
+
+            opacity: 0.45;
+
+            pointer-events: none;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .video-action.available {
+            opacity: 0.75;
+
+            pointer-events: auto;
+        }
+
+
+        .video-action.available:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+
+            opacity: 1;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .video-loading {
+            opacity: 0.42;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        /* =========================
            GLOBAL CIGA COMMUNICATION
         ========================= */
 
@@ -1261,6 +1458,12 @@
                     1fr;
             }
 
+
+            .video-operation {
+                grid-template-columns:
+                    1fr;
+            }
+
         }
 
 
@@ -1319,6 +1522,17 @@
 
             .live-main-status {
                 font-size: 16px;
+            }
+
+
+            .video-info {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .video-title {
+                font-size: 15px;
             }
 
 
@@ -1651,6 +1865,94 @@
 
 
         <!-- =========================
+             LATEST VIDEO ARCHIVE
+        ========================= -->
+
+        <section class="panel video-panel">
+
+            <div class="panel-title">
+                // LATEST VIDEO ARCHIVE
+            </div>
+
+
+            <div
+                class="video-operation"
+                id="latestVideoOperation"
+            >
+
+                <div>
+
+                    <div class="video-main-label">
+                        MOST RECENT PUBLIC TRANSMISSION
+                    </div>
+
+
+                    <div
+                        class="video-title"
+                        id="latestVideoTitle"
+                    >
+                        RETRIEVING LATEST TRANSMISSION...
+                    </div>
+
+
+                    <div class="video-info">
+
+                        <div class="video-info-label">
+                            SOURCE
+                        </div>
+
+
+                        <div class="video-info-value">
+                            GABOBARS // YOUTUBE
+                        </div>
+
+
+                        <div class="video-info-label">
+                            STATUS
+                        </div>
+
+
+                        <div
+                            class="video-info-value"
+                            id="latestVideoStatus"
+                        >
+                            RETRIEVING
+                        </div>
+
+
+                        <div class="video-info-label">
+                            PUBLISHED
+                        </div>
+
+
+                        <div
+                            class="video-info-value"
+                            id="latestVideoDate"
+                        >
+                            UNKNOWN
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    id="latestVideoAction"
+                    class="video-action"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ACCESS LATEST VIDEO
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
              GLOBAL CIGA COMMUNICATION
         ========================= -->
 
@@ -1931,6 +2233,14 @@
 
 
         /* =========================
+           CIGA API
+        ========================= */
+
+        const CIGA_WORKER_URL =
+            "https://cigadiscordwebhook.ciga-hq.workers.dev";
+
+
+        /* =========================
            ELEMENTS
         ========================= */
 
@@ -2003,6 +2313,34 @@
         const operatorId =
             document.getElementById(
                 "operatorId"
+            );
+
+
+        /* =========================
+           LATEST VIDEO ELEMENTS
+        ========================= */
+
+        const latestVideoTitle =
+            document.getElementById(
+                "latestVideoTitle"
+            );
+
+
+        const latestVideoStatus =
+            document.getElementById(
+                "latestVideoStatus"
+            );
+
+
+        const latestVideoDate =
+            document.getElementById(
+                "latestVideoDate"
+            );
+
+
+        const latestVideoAction =
+            document.getElementById(
+                "latestVideoAction"
             );
 
 
@@ -2853,6 +3191,166 @@
 
 
         /* =========================
+           LOAD LATEST VIDEO
+        ========================= */
+
+        async function cigaLoadLatestVideo() {
+
+            latestVideoStatus.textContent =
+                "RETRIEVING";
+
+
+            latestVideoTitle.textContent =
+                "RETRIEVING LATEST TRANSMISSION...";
+
+
+            latestVideoDate.textContent =
+                "UNKNOWN";
+
+
+            latestVideoAction.href =
+                "#";
+
+
+            latestVideoAction.classList.remove(
+                "available"
+            );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${CIGA_WORKER_URL}/latest-video`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data.success ||
+                    !data.url
+                ) {
+
+                    throw new Error(
+                        data.error ||
+                        "LATEST_VIDEO_UNAVAILABLE"
+                    );
+
+                }
+
+
+                latestVideoTitle.textContent =
+                    data.title ||
+                    "UNTITLED TRANSMISSION";
+
+
+                latestVideoStatus.textContent =
+                    "AVAILABLE";
+
+
+                latestVideoAction.href =
+                    data.url;
+
+
+                latestVideoAction.classList.add(
+                    "available"
+                );
+
+
+                if (
+                    data.publishedAt
+                ) {
+
+                    const publishedDate =
+                        new Date(
+                            data.publishedAt
+                        );
+
+
+                    if (
+                        !Number.isNaN(
+                            publishedDate.getTime()
+                        )
+                    ) {
+
+                        latestVideoDate.textContent =
+                            publishedDate.toLocaleString(
+                                [],
+                                {
+                                    day:
+                                        "2-digit",
+
+                                    month:
+                                        "2-digit",
+
+                                    year:
+                                        "numeric",
+
+                                    hour:
+                                        "2-digit",
+
+                                    minute:
+                                        "2-digit"
+
+                                }
+                            );
+
+                    } else {
+
+                        latestVideoDate.textContent =
+                            "UNKNOWN";
+
+                    }
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "LATEST VIDEO LOAD ERROR:",
+                    error
+                );
+
+
+                latestVideoTitle.textContent =
+                    "TRANSMISSION UNAVAILABLE";
+
+
+                latestVideoStatus.textContent =
+                    "UNAVAILABLE";
+
+
+                latestVideoDate.textContent =
+                    "UNKNOWN";
+
+
+                latestVideoAction.href =
+                    "#";
+
+
+                latestVideoAction.classList.remove(
+                    "available"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
            LOAD CHAT MESSAGES
         ========================= */
 
@@ -3153,12 +3651,29 @@
 
 
         /* =========================
+           INITIAL VIDEO LOAD
+        ========================= */
+
+        cigaLoadLatestVideo();
+
+
+        /* =========================
            CHAT REFRESH
         ========================= */
 
         setInterval(
             cigaLoadMessages,
             3000
+        );
+
+
+        /* =========================
+           VIDEO REFRESH
+        ========================= */
+
+        setInterval(
+            cigaLoadLatestVideo,
+            300000
         );
 
 
