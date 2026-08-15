@@ -6,6 +6,7 @@
 
     <title>CIGA SYSTEMS</title>
     <link rel="icon" type="image/png" href="logo.png">
+
     <style>
         * {
             box-sizing: border-box;
@@ -98,12 +99,46 @@
                 0 0 15px rgba(255,255,255,0.4);
         }
 
+        .access-button:disabled {
+            cursor: default;
+        }
+
         .access-button::before {
             content: "[ ";
         }
 
         .access-button::after {
             content: " ]";
+        }
+
+        /* =========================
+           ACCESS RESPONSE
+        ========================= */
+
+        .access-response {
+            position: absolute;
+
+            margin-top: 155px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: max-content;
+            max-width: 85vw;
+
+            font-size: 13px;
+            letter-spacing: 1.5px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: opacity 0.3s ease;
+        }
+
+        .access-response.show {
+            opacity: 0.75;
         }
 
         /* =========================
@@ -136,9 +171,26 @@
         .boot-logo {
             width: 120px;
 
-            margin: 0 auto 45px auto;
+            margin: 0 auto 35px auto;
 
             display: block;
+        }
+
+        /* =========================
+           NODE INFO
+        ========================= */
+
+        .node-info {
+            margin-bottom: 35px;
+
+            font-size: 9px;
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.35;
+
+            text-align: right;
         }
 
         /* =========================
@@ -154,11 +206,21 @@
             line-height: 1.5;
             letter-spacing: 1.5px;
 
-            transition: opacity 0.3s ease;
+            transition:
+                opacity 0.3s ease;
         }
 
         .line.show {
             opacity: 1;
+        }
+
+        .line-status {
+            opacity: 0.4;
+
+            margin-left: 12px;
+
+            font-size: 12px;
+            letter-spacing: 1px;
         }
 
         .success {
@@ -218,6 +280,11 @@
                 font-size: 13px;
             }
 
+            .access-response {
+                font-size: 10px;
+                margin-top: 130px;
+            }
+
             .boot {
                 width: 85vw;
                 top: 10%;
@@ -228,9 +295,18 @@
                 letter-spacing: 1px;
             }
 
+            .line-status {
+                font-size: 8px;
+                margin-left: 8px;
+            }
+
             .boot-logo {
                 width: 90px;
-                margin-bottom: 35px;
+                margin-bottom: 25px;
+            }
+
+            .node-info {
+                font-size: 7px;
             }
 
             .cursor {
@@ -245,7 +321,9 @@
 
     <main class="screen">
 
-        <!-- INITIAL SCREEN -->
+        <!-- =========================
+             INITIAL SCREEN
+        ========================= -->
 
         <div class="welcome" id="welcome">
 
@@ -263,10 +341,19 @@
                 REQUEST ACCESS
             </button>
 
+            <div
+                class="access-response"
+                id="accessResponse"
+            >
+                &gt; ACCESS REQUEST RECEIVED.
+            </div>
+
         </div>
 
 
-        <!-- BOOT SEQUENCE -->
+        <!-- =========================
+             BOOT SEQUENCE
+        ========================= -->
 
         <div class="boot" id="boot">
 
@@ -276,12 +363,26 @@
                 class="boot-logo"
             >
 
+            <!-- NODE INFORMATION -->
+
+            <div class="node-info">
+
+                NODE: <span id="nodeId">CIGA-0000</span><br>
+
+                SESSION: ACTIVE
+
+            </div>
+
+
+            <!-- TERMINAL -->
+
             <div class="line" id="line1">
                 &gt; INITIALIZING CIGA SYSTEM...
             </div>
 
             <div class="line" id="line2">
                 &gt; VERIFYING CLEARANCE...
+                <span class="line-status">[ OK ]</span>
             </div>
 
             <div class="line" id="line3">
@@ -294,10 +395,12 @@
 
             <div class="line" id="line5">
                 &gt; ESTABLISHING SECURE CONNECTION...
+                <span class="line-status">[ SUCCESS ]</span>
             </div>
 
             <div class="line" id="line6">
                 &gt; AUTHENTICATING OPERATOR...
+                <span class="line-status">[ OK ]</span>
             </div>
 
             <div class="line" id="line7">
@@ -305,7 +408,8 @@
             </div>
 
             <div class="line success" id="line8">
-                &gt; ACCESS GRANTED.<span class="cursor"></span>
+                &gt; ACCESS GRANTED.
+                <span id="activeCursor"></span>
             </div>
 
         </div>
@@ -315,11 +419,43 @@
 
     <script>
 
-        const accessButton = document.getElementById("accessButton");
-        const welcome = document.getElementById("welcome");
-        const boot = document.getElementById("boot");
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const accessButton =
+            document.getElementById(
+                "accessButton"
+            );
+
+        const accessResponse =
+            document.getElementById(
+                "accessResponse"
+            );
+
+        const welcome =
+            document.getElementById(
+                "welcome"
+            );
+
+        const boot =
+            document.getElementById(
+                "boot"
+            );
+
+        const nodeId =
+            document.getElementById(
+                "nodeId"
+            );
+
+        const activeCursor =
+            document.getElementById(
+                "activeCursor"
+            );
+
 
         const lines = [
+
             document.getElementById("line1"),
             document.getElementById("line2"),
             document.getElementById("line3"),
@@ -328,61 +464,239 @@
             document.getElementById("line6"),
             document.getElementById("line7"),
             document.getElementById("line8")
+
         ];
 
 
-        accessButton.addEventListener("click", async function () {
+        /* =========================
+           GENERATE NODE
+        ========================= */
 
-            /* Prevent multiple clicks */
-            accessButton.disabled = true;
+        function generateNode() {
 
-            /* Hide initial screen */
-            welcome.classList.add("hidden");
+            const characters =
+                "0123456789ABCDEF";
 
-            /* Show boot sequence */
-            boot.classList.add("active");
+            let value = "";
 
-            /* Lines appear one at a time */
+            for (let i = 0; i < 4; i++) {
 
-            await wait(500);
-            show(lines[0]);
+                value +=
+                    characters.charAt(
+                        Math.floor(
+                            Math.random() *
+                            characters.length
+                        )
+                    );
+            }
 
-            await wait(800);
-            show(lines[1]);
-
-            await wait(700);
-            show(lines[2]);
-
-            await wait(800);
-            show(lines[3]);
-
-            await wait(1000);
-            show(lines[4]);
-
-            await wait(900);
-            show(lines[5]);
-
-            await wait(800);
-            show(lines[6]);
-    await wait(900);
-    show(lines[7]);
-
-    await wait(1800);
-
-window.location.href = "home.html"; 
-
-        });
-
-
-        function show(element) {
-            element.classList.add("show");
+            return "CIGA-" + value;
         }
 
 
+        /* =========================
+           GET / CREATE NODE
+        ========================= */
+
+        let savedNode =
+            localStorage.getItem(
+                "ciga_node_id"
+            );
+
+
+        if (!savedNode) {
+
+            savedNode =
+                generateNode();
+
+            localStorage.setItem(
+                "ciga_node_id",
+                savedNode
+            );
+
+        }
+
+
+        nodeId.textContent =
+            savedNode;
+
+
+        /* =========================
+           CLICK ACCESS
+        ========================= */
+
+        accessButton.addEventListener(
+            "click",
+            async function () {
+
+                /* Prevent multiple clicks */
+
+                accessButton.disabled =
+                    true;
+
+
+                /* Show access response */
+
+                accessResponse.classList.add(
+                    "show"
+                );
+
+
+                /*
+                    Small delay so the system
+                    appears to receive the request.
+                */
+
+                await wait(650);
+
+
+                /* Hide initial screen */
+
+                welcome.classList.add(
+                    "hidden"
+                );
+
+
+                /* Show boot sequence */
+
+                boot.classList.add(
+                    "active"
+                );
+
+
+                /*
+                    Lines appear one at a time.
+                */
+
+                await wait(450);
+
+                showLine(0);
+
+                await wait(700);
+
+                showLine(1);
+
+                await wait(600);
+
+                showLine(2);
+
+                await wait(800);
+
+                showLine(3);
+
+                await wait(950);
+
+                showLine(4);
+
+                await wait(750);
+
+                showLine(5);
+
+                await wait(650);
+
+                showLine(6);
+
+                await wait(800);
+
+                showLine(7);
+
+
+                /*
+                    Keep the final screen
+                    visible briefly.
+                */
+
+                await wait(1700);
+
+
+                /*
+                    Enter the main system.
+                */
+
+                window.location.href =
+                    "home.html";
+
+            }
+        );
+
+
+        /* =========================
+           SHOW LINE
+        ========================= */
+
+        function showLine(index) {
+
+            /*
+                Move cursor to the
+                currently processing line.
+            */
+
+            lines.forEach(
+                line => {
+
+                    const oldCursor =
+                        line.querySelector(
+                            ".cursor"
+                        );
+
+                    if (oldCursor) {
+
+                        oldCursor.remove();
+
+                    }
+
+                }
+            );
+
+
+            lines[index].classList.add(
+                "show"
+            );
+
+
+            /*
+                Cursor appears at the
+                end of the newest line.
+            */
+
+            const cursor =
+                document.createElement(
+                    "span"
+                );
+
+            cursor.className =
+                "cursor";
+
+
+            /*
+                Status text belongs before
+                cursor when present.
+            */
+
+            lines[index].appendChild(
+                cursor
+            );
+
+        }
+
+
+        /* =========================
+           WAIT
+        ========================= */
+
         function wait(milliseconds) {
-            return new Promise(resolve => {
-                setTimeout(resolve, milliseconds);
-            });
+
+            return new Promise(
+                resolve => {
+
+                    setTimeout(
+                        resolve,
+                        milliseconds
+                    );
+
+                }
+            );
+
         }
 
     </script>
