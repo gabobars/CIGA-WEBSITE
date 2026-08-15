@@ -534,6 +534,10 @@
                     255,
                     0.75
                 );
+
+            transition:
+                opacity 0.25s ease,
+                box-shadow 0.25s ease;
         }
 
 
@@ -1219,14 +1223,14 @@
 
 
                         <div class="live-info-label">
-                            STREAM
+                            OPERATION
                         </div>
 
                         <div
                             class="live-info-value"
                             id="liveStreamStatus"
                         >
-                            NO ACTIVE TRANSMISSION
+                            STANDBY
                         </div>
 
                     </div>
@@ -1420,7 +1424,6 @@
 
     <script>
 
-
         /* =========================
            SUPABASE
         ========================= */
@@ -1492,43 +1495,10 @@
 
 
         /* =========================
-           HTML ESCAPE
+           LIVE STATE
         ========================= */
 
-        function cigaEscapeHTML(
-            value
-        ) {
-
-            return String(
-                value ?? ""
-            )
-
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
-
-        }
+        let cigaPreviousLiveState = null;
 
 
         /* =========================
@@ -1631,7 +1601,7 @@
 
 
                 liveStreamStatus.textContent =
-                    "NO ACTIVE TRANSMISSION";
+                    "STANDBY";
 
 
                 liveAction.classList.remove(
@@ -1657,6 +1627,48 @@
                 data.is_live === true
             ) {
 
+                /* =========================
+                   LIVE EVENT LOG
+                ========================= */
+
+                if (
+                    cigaPreviousLiveState !== true
+                ) {
+
+                    cigaAddLog(
+                        "LIVE OPERATION DETECTED"
+                    );
+
+
+                    cigaAddLog(
+                        `${(
+                            data.platform ||
+                            "TWITCH"
+                        ).toUpperCase()} TRANSMISSION AUTHENTICATED`
+                    );
+
+
+                    cigaAddLog(
+                        `${(
+                            data.subject ||
+                            "UNKNOWN"
+                        ).toUpperCase()} // ACTIVE`
+                    );
+
+
+                    cigaRenderLogs();
+
+                }
+
+
+                cigaPreviousLiveState =
+                    true;
+
+
+                /* =========================
+                   DISPLAY LIVE
+                ========================= */
+
                 liveStatusDot.classList.remove(
                     "offline"
                 );
@@ -1667,25 +1679,21 @@
 
 
                 liveSubject.textContent =
-                    cigaEscapeHTML(
-                        (
-                            data.subject ||
-                            "UNKNOWN"
-                        ).toUpperCase()
-                    );
+                    (
+                        data.subject ||
+                        "UNKNOWN"
+                    ).toUpperCase();
 
 
                 livePlatform.textContent =
-                    cigaEscapeHTML(
-                        (
-                            data.platform ||
-                            "TWITCH"
-                        ).toUpperCase()
-                    );
+                    (
+                        data.platform ||
+                        "TWITCH"
+                    ).toUpperCase();
 
 
                 liveStreamStatus.textContent =
-                    "ACTIVE TRANSMISSION";
+                    "LIVE TRANSMISSION";
 
 
                 liveOperation.classList.add(
@@ -1693,13 +1701,9 @@
                 );
 
 
-                /*
-                    If a stream URL exists in Supabase,
-                    use it.
-
-                    Otherwise generate a Twitch link
-                    using the subject.
-                */
+                /* =========================
+                   STREAM LINK
+                ========================= */
 
                 let streamUrl =
                     data.stream_url;
@@ -1749,7 +1753,39 @@
 
 
             /* =========================
-               OFFLINE
+               OFFLINE EVENT LOG
+            ========================= */
+
+            if (
+                cigaPreviousLiveState === true
+            ) {
+
+                cigaAddLog(
+                    "LIVE OPERATION TERMINATED"
+                );
+
+
+                cigaAddLog(
+                    "TWITCH TRANSMISSION CLOSED"
+                );
+
+
+                cigaAddLog(
+                    "RETURNED TO STANDBY"
+                );
+
+
+                cigaRenderLogs();
+
+            }
+
+
+            cigaPreviousLiveState =
+                false;
+
+
+            /* =========================
+               DISPLAY OFFLINE
             ========================= */
 
             liveStatusDot.classList.add(
@@ -1767,14 +1803,12 @@
 
             livePlatform.textContent =
                 data.platform
-                    ? cigaEscapeHTML(
-                        data.platform.toUpperCase()
-                    )
+                    ? data.platform.toUpperCase()
                     : "TWITCH";
 
 
             liveStreamStatus.textContent =
-                "NO ACTIVE TRANSMISSION";
+                "STANDBY";
 
 
             liveOperation.classList.remove(
@@ -2123,10 +2157,9 @@
                 cigaRenderLogs();
 
 
-                /*
-                    Load live status when the
-                    Home becomes visible.
-                */
+                /* =========================
+                   INITIAL LIVE STATUS
+                ========================= */
 
                 cigaLoadLiveStatus();
 
@@ -2138,14 +2171,6 @@
         /* =========================
            LIVE STATUS REFRESH
         ========================= */
-
-        /*
-            Check every 10 seconds.
-
-            No Twitch polling is happening here.
-            The page is only reading one small
-            Supabase row.
-        */
 
         setInterval(
             cigaLoadLiveStatus,
