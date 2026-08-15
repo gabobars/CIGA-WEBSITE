@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>CIGA SYSTEMS</title>
-    <link rel="icon" type="image/png" href="logo.png">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+
         body {
             width: 100%;
             height: 100vh;
+
             overflow: hidden;
 
             background: #000;
             color: #fff;
 
-            font-family: "OCR A", "Courier New", monospace;
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
         }
+
+
+        /* =========================
+           SCREEN
+        ========================= */
 
         .screen {
             width: 100%;
@@ -32,6 +58,7 @@
             position: relative;
 
             display: flex;
+
             justify-content: center;
             align-items: center;
         }
@@ -47,10 +74,13 @@
             top: 16%;
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             transition:
@@ -58,8 +88,10 @@
                 opacity 0.8s ease;
         }
 
+
         .logo {
             width: 240px;
+
             max-width: 60vw;
 
             display: block;
@@ -80,11 +112,15 @@
             background: transparent;
             border: none;
 
-            color: white;
+            color: #fff;
 
-            font-family: "OCR A", "Courier New", monospace;
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
 
             font-size: 16px;
+
             letter-spacing: 2px;
 
             cursor: pointer;
@@ -92,6 +128,7 @@
             display: block;
 
             position: relative;
+
             z-index: 10;
 
             transition:
@@ -99,22 +136,28 @@
                 opacity 0.3s ease;
         }
 
+
         .access-button:hover {
             text-shadow:
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.4);
         }
 
+
         .access-button:disabled {
             cursor: default;
         }
 
+
         .access-button::before {
-            content: "[ ";
+            content:
+                "[ ";
         }
 
+
         .access-button::after {
-            content: " ]";
+            content:
+                " ]";
         }
 
 
@@ -126,14 +169,17 @@
             margin-top: 16px;
 
             font-size: 12px;
+
             letter-spacing: 1.5px;
 
             opacity: 0;
+
             height: 18px;
 
             transition:
                 opacity 0.3s ease;
         }
+
 
         .access-response.show {
             opacity: 0.7;
@@ -150,11 +196,14 @@
             top: 13%;
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
-            width: min(760px, 85vw);
+            width:
+                min(760px, 85vw);
 
             opacity: 0;
+
             visibility: hidden;
 
             transition:
@@ -162,15 +211,19 @@
                 visibility 0.8s ease;
         }
 
+
         .boot.active {
             opacity: 1;
+
             visibility: visible;
         }
+
 
         .boot-logo {
             width: 120px;
 
-            margin: 0 auto 35px auto;
+            margin:
+                0 auto 35px auto;
 
             display: block;
         }
@@ -184,6 +237,7 @@
             margin-bottom: 35px;
 
             font-size: 9px;
+
             line-height: 1.8;
 
             letter-spacing: 1.5px;
@@ -204,16 +258,20 @@
             margin-bottom: 13px;
 
             font-size: 16px;
+
             line-height: 1.5;
+
             letter-spacing: 1.5px;
 
             transition:
                 opacity 0.3s ease;
         }
 
+
         .line.show {
             opacity: 1;
         }
+
 
         .line-status {
             opacity: 0.4;
@@ -221,8 +279,10 @@
             margin-left: 12px;
 
             font-size: 12px;
+
             letter-spacing: 1px;
         }
+
 
         .success {
             margin-top: 25px;
@@ -245,16 +305,20 @@
 
             vertical-align: middle;
 
-            animation: blink 0.8s infinite;
+            animation:
+                blink 0.8s infinite;
         }
+
 
         @keyframes blink {
 
-            0%, 45% {
+            0%,
+            45% {
                 opacity: 1;
             }
 
-            46%, 100% {
+            46%,
+            100% {
                 opacity: 0;
             }
 
@@ -267,6 +331,7 @@
 
         .welcome.hidden {
             top: 7%;
+
             opacity: 0;
 
             pointer-events: none;
@@ -283,28 +348,37 @@
                 width: 180px;
             }
 
+
             .access-button {
                 font-size: 13px;
             }
+
 
             .access-response {
                 font-size: 9px;
             }
 
+
             .boot {
                 width: 85vw;
+
                 top: 10%;
             }
 
+
             .line {
                 font-size: 11px;
+
                 letter-spacing: 1px;
             }
 
+
             .line-status {
                 font-size: 8px;
+
                 margin-left: 8px;
             }
+
 
             .boot-logo {
                 width: 90px;
@@ -312,9 +386,11 @@
                 margin-bottom: 25px;
             }
 
+
             .node-info {
                 font-size: 7px;
             }
+
 
             .cursor {
                 width: 6px;
@@ -324,6 +400,7 @@
         }
 
     </style>
+
 </head>
 
 
@@ -390,6 +467,13 @@
                 NODE:
                 <span id="nodeId">
                     CIGA-0000
+                </span>
+
+                <br>
+
+                OPERATIVE:
+                <span id="operativeId">
+                    000
                 </span>
 
                 <br>
@@ -494,6 +578,30 @@
     <script>
 
         /* =========================
+           SUPABASE
+        ========================= */
+
+        const SUPABASE_URL =
+            "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+        const SUPABASE_KEY =
+            "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+        const {
+            createClient
+        } = supabase;
+
+
+        const db =
+            createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================
            ELEMENTS
         ========================= */
 
@@ -527,16 +635,45 @@
             );
 
 
+        const operativeId =
+            document.getElementById(
+                "operativeId"
+            );
+
+
         const lines = [
 
-            document.getElementById("line1"),
-            document.getElementById("line2"),
-            document.getElementById("line3"),
-            document.getElementById("line4"),
-            document.getElementById("line5"),
-            document.getElementById("line6"),
-            document.getElementById("line7"),
-            document.getElementById("line8")
+            document.getElementById(
+                "line1"
+            ),
+
+            document.getElementById(
+                "line2"
+            ),
+
+            document.getElementById(
+                "line3"
+            ),
+
+            document.getElementById(
+                "line4"
+            ),
+
+            document.getElementById(
+                "line5"
+            ),
+
+            document.getElementById(
+                "line6"
+            ),
+
+            document.getElementById(
+                "line7"
+            ),
+
+            document.getElementById(
+                "line8"
+            )
 
         ];
 
@@ -550,7 +687,9 @@
             const characters =
                 "0123456789ABCDEF";
 
+
             let value = "";
+
 
             for (
                 let i = 0;
@@ -568,7 +707,9 @@
 
             }
 
+
             return "CIGA-" + value;
+
         }
 
 
@@ -587,6 +728,7 @@
             savedNode =
                 generateNode();
 
+
             localStorage.setItem(
                 "ciga_node_id",
                 savedNode
@@ -597,6 +739,108 @@
 
         nodeId.textContent =
             savedNode;
+
+
+        /* =========================
+           ASSIGN OPERATIVE
+        ========================= */
+
+        async function assignOperative() {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await db.rpc(
+                        "ciga_assign_node",
+                        {
+                            requested_node_id:
+                                savedNode,
+
+                            preferred_operative:
+                                null
+                        }
+                    );
+
+
+                if (error) {
+
+                    console.error(
+                        "CIGA OPERATIVE ASSIGNMENT ERROR:",
+                        error
+                    );
+
+
+                    operativeId.textContent =
+                        "UNKNOWN";
+
+
+                    return;
+
+                }
+
+
+                const operativeNumber =
+                    Number(
+                        data
+                    );
+
+
+                if (
+                    !Number.isInteger(
+                        operativeNumber
+                    )
+                ) {
+
+                    operativeId.textContent =
+                        "UNKNOWN";
+
+                    return;
+
+                }
+
+
+                const formattedOperative =
+                    String(
+                        operativeNumber
+                    ).padStart(
+                        3,
+                        "0"
+                    );
+
+
+                operativeId.textContent =
+                    formattedOperative;
+
+
+                localStorage.setItem(
+                    "ciga_operative_id",
+                    formattedOperative
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "CIGA OPERATIVE ASSIGNMENT ERROR:",
+                    error
+                );
+
+
+                operativeId.textContent =
+                    "UNKNOWN";
+
+            }
+
+        }
+
+
+        /* =========================
+           START OPERATIVE ASSIGNMENT
+        ========================= */
+
+        assignOperative();
 
 
         /* =========================
@@ -631,7 +875,9 @@
                     to be visible.
                 */
 
-                await wait(700);
+                await wait(
+                    700
+                );
 
 
                 /*
@@ -657,29 +903,76 @@
                     one at a time.
                 */
 
-                await wait(450);
-                showLine(0);
+                await wait(
+                    450
+                );
 
-                await wait(700);
-                showLine(1);
+                showLine(
+                    0
+                );
 
-                await wait(600);
-                showLine(2);
 
-                await wait(800);
-                showLine(3);
+                await wait(
+                    700
+                );
 
-                await wait(950);
-                showLine(4);
+                showLine(
+                    1
+                );
 
-                await wait(750);
-                showLine(5);
 
-                await wait(650);
-                showLine(6);
+                await wait(
+                    600
+                );
 
-                await wait(800);
-                showLine(7);
+                showLine(
+                    2
+                );
+
+
+                await wait(
+                    800
+                );
+
+                showLine(
+                    3
+                );
+
+
+                await wait(
+                    950
+                );
+
+                showLine(
+                    4
+                );
+
+
+                await wait(
+                    750
+                );
+
+                showLine(
+                    5
+                );
+
+
+                await wait(
+                    650
+                );
+
+                showLine(
+                    6
+                );
+
+
+                await wait(
+                    800
+                );
+
+                showLine(
+                    7
+                );
 
 
                 /*
@@ -687,7 +980,9 @@
                     visible briefly.
                 */
 
-                await wait(1700);
+                await wait(
+                    1700
+                );
 
 
                 /*
@@ -705,7 +1000,9 @@
            SHOW LINE
         ========================= */
 
-        function showLine(index) {
+        function showLine(
+            index
+        ) {
 
             /*
                 Remove cursors from
@@ -719,6 +1016,7 @@
                         line.querySelector(
                             ".cursor"
                         );
+
 
                     if (oldCursor) {
 
@@ -749,6 +1047,7 @@
                     "span"
                 );
 
+
             cursor.className =
                 "cursor";
 
@@ -764,7 +1063,9 @@
            WAIT
         ========================= */
 
-        function wait(milliseconds) {
+        function wait(
+            milliseconds
+        ) {
 
             return new Promise(
                 resolve => {
@@ -782,4 +1083,5 @@
     </script>
 
 </body>
+
 </html>
