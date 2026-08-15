@@ -87,6 +87,21 @@
             font-size: 24px;
 
             letter-spacing: 4px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .title:hover {
+            text-decoration: none;
+
+            text-shadow:
+                0 0 6px rgba(255,255,255,0.8),
+                0 0 15px rgba(255,255,255,0.35);
         }
 
 
@@ -948,9 +963,12 @@
 
         <div>
 
-            <div class="title">
+            <a
+                href="home.html"
+                class="title"
+            >
                 CIGA SYSTEMS
-            </div>
+            </a>
 
 
             <div class="subtitle">
@@ -2325,11 +2343,6 @@
             session
         ) {
 
-            /*
-                SIGNED_OUT:
-                hide admin content.
-            */
-
             if (
                 event === "SIGNED_OUT"
                 ||
@@ -2350,11 +2363,6 @@
 
             }
 
-
-            /*
-                SIGNED_IN / TOKEN_REFRESHED:
-                verify admin again.
-            */
 
             if (
                 event === "SIGNED_IN"
