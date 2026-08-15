@@ -619,7 +619,8 @@
         .live-info-value {
             opacity: 0.82;
 
-            word-break: break-word;
+            word-break:
+                break-word;
         }
 
 
@@ -750,7 +751,7 @@
         .communication-messages {
             height: 250px;
 
-            padding: 15px;
+            padding: 18px;
 
             border:
                 1px solid
@@ -782,18 +783,18 @@
                 )
                 transparent;
 
-            font-size: 10px;
+            font-size: 11px;
 
-            line-height: 1.8;
+            line-height: 1.7;
 
             letter-spacing: 0.7px;
         }
 
 
         .communication-message {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
 
-            opacity: 0.85;
+            opacity: 1;
         }
 
 
@@ -803,13 +804,15 @@
 
 
         .communication-message-header {
-            margin-bottom: 3px;
+            margin-bottom: 5px;
 
-            font-size: 8px;
+            font-size: 9px;
+
+            line-height: 1.5;
 
             letter-spacing: 1.2px;
 
-            opacity: 0.45;
+            opacity: 0.75;
         }
 
 
@@ -825,7 +828,11 @@
 
             word-break: break-word;
 
-            opacity: 0.9;
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            opacity: 1;
         }
 
 
@@ -1564,7 +1571,6 @@
 
                     <div class="live-info">
 
-
                         <div class="live-info-label">
                             OPERATIVE
                         </div>
@@ -1824,7 +1830,6 @@
 
 
                     <div class="classified-options">
-
 
                         <a
                             href="admin.html"
@@ -2308,25 +2313,20 @@
                 data,
                 error
             } = await db
-
                 .from(
                     "ciga_events"
                 )
-
                 .select(
                     "id, event_type, message, source, created_at"
                 )
-
                 .eq(
                     "visible",
                     true
                 )
-
                 .gte(
                     "created_at",
                     cutoff
                 )
-
                 .order(
                     "created_at",
                     {
@@ -2609,20 +2609,16 @@
                 data,
                 error
             } = await db
-
                 .from(
                     "live_status"
                 )
-
                 .select(
                     "id, is_live, subject, platform, stream_title, stream_url, updated_at"
                 )
-
                 .eq(
                     "id",
                     1
                 )
-
                 .maybeSingle();
 
 
@@ -2832,7 +2828,7 @@
 
 
         /* =========================
-           GLOBAL COMMUNICATION
+           LOAD CHAT MESSAGES
         ========================= */
 
         async function cigaLoadMessages() {
@@ -2856,6 +2852,7 @@
                 communicationStatus.textContent =
                     "COMMUNICATION CHANNEL ERROR.";
 
+
                 return;
 
             }
@@ -2873,7 +2870,7 @@
 
 
         /* =========================
-           RENDER MESSAGES
+           RENDER CHAT MESSAGES
         ========================= */
 
         function cigaRenderMessages(
@@ -2985,7 +2982,7 @@
 
 
         /* =========================
-           SEND MESSAGE
+           SEND CHAT MESSAGE
         ========================= */
 
         async function cigaSendMessage() {
