@@ -33,12 +33,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
             display: flex;
             flex-direction: column;
             align-items: center;
+
             z-index: 100;
+
             opacity: 1;
-            transition: opacity 1s ease, transform 1s ease;
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
         }
 
         .welcome-screen.hidden {
@@ -74,7 +80,9 @@
             width: 100%;
             min-height: 100vh;
             padding: 35px 50px;
+
             opacity: 0;
+
             transition: opacity 1s ease;
         }
 
@@ -90,8 +98,10 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+
             padding-bottom: 14px;
             margin-bottom: 30px;
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.35);
         }
 
@@ -153,9 +163,12 @@
         .online-dot {
             width: 6px;
             height: 6px;
+
             background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.8);
         }
 
         /* =========================
@@ -165,23 +178,30 @@
         .main-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
+
             gap: 20px;
             margin-bottom: 30px;
         }
 
         .panel {
             border: 1px solid rgba(255, 255, 255, 0.25);
+
             background: rgba(255, 255, 255, 0.015);
+
             padding: 24px;
         }
 
         .panel-title {
             font-size: 10px;
             letter-spacing: 3px;
+
             opacity: 0.55;
+
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.15);
         }
 
         /* =========================
@@ -202,15 +222,21 @@
         .directive-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
+
             gap: 10px;
+
             font-size: 13px;
             letter-spacing: 2px;
         }
 
         .directive-item {
             padding: 10px 12px;
-            border-left: 2px solid rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.02);
+
+            border-left:
+                2px solid rgba(255, 255, 255, 0.5);
+
+            background:
+                rgba(255, 255, 255, 0.02);
         }
 
         /* =========================
@@ -218,43 +244,49 @@
         ========================= */
 
         .logs {
+            min-height: 180px;
+            max-height: 180px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            overflow: hidden;
+
             font-size: 12px;
-            line-height: 2;
+            line-height: 1.9;
             letter-spacing: 1px;
-            min-height: 140px;
-            max-height: 220px;
-            overflow-y: auto;
-            overflow-x: hidden;
-
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .logs::-webkit-scrollbar {
-            display: none;
         }
 
         .log {
-            opacity: 0.78;
+            height: 24px;
+
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            opacity: 0.78;
         }
 
         .log-time {
             opacity: 0.42;
-            margin-right: 10px;
+            margin-right: 9px;
         }
 
         .log-source {
             opacity: 0.35;
             margin-right: 8px;
+
             font-size: 9px;
             letter-spacing: 1.5px;
         }
 
         .log-global {
             opacity: 0.92;
+        }
+
+        .log-empty {
+            opacity: 0.4;
         }
 
         /* =========================
@@ -268,42 +300,61 @@
         .live-operation {
             display: grid;
             grid-template-columns: 1fr auto;
+
             gap: 25px;
             align-items: center;
+
             padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            background: rgba(255, 255, 255, 0.02);
-            transition: background 0.25s ease, border-color 0.25s ease;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            background:
+                rgba(255, 255, 255, 0.02);
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
         }
 
         .live-operation.active {
-            background: rgba(255, 255, 255, 0.035);
-            border-color: rgba(255, 255, 255, 0.38);
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border-color:
+                rgba(255, 255, 255, 0.38);
         }
 
         .live-main-label {
             font-size: 9px;
             letter-spacing: 2px;
+
             opacity: 0.45;
+
             margin-bottom: 9px;
         }
 
         .live-main-status {
             display: flex;
             align-items: center;
+
             gap: 10px;
+
             font-size: 18px;
             letter-spacing: 3px;
+
             margin-bottom: 15px;
         }
 
         .live-status-dot {
             width: 7px;
             height: 7px;
+
             background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 9px rgba(255, 255, 255, 0.75);
-            transition: opacity 0.25s ease, box-shadow 0.25s ease;
+
+            box-shadow:
+                0 0 9px rgba(255, 255, 255, 0.75);
         }
 
         .live-status-dot.offline {
@@ -313,8 +364,11 @@
 
         .live-info {
             display: grid;
+
             grid-template-columns: auto 1fr;
+
             gap: 6px 15px;
+
             font-size: 10px;
             line-height: 1.8;
             letter-spacing: 1px;
@@ -331,15 +385,23 @@
 
         .live-action {
             display: inline-block;
+
             padding: 12px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
             color: #fff;
+
             text-decoration: none;
             font-family: inherit;
+
             font-size: 9px;
             letter-spacing: 1.8px;
+
             opacity: 0.42;
             pointer-events: none;
+
             transition:
                 background 0.2s ease,
                 border-color 0.2s ease,
@@ -353,10 +415,16 @@
         }
 
         .live-action.available:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.65);
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border-color:
+                rgba(255, 255, 255, 0.65);
+
             opacity: 1;
-            transform: translateY(-2px);
+
+            transform:
+                translateY(-2px);
         }
 
         /* =========================
@@ -375,13 +443,19 @@
 
         .system-button {
             min-height: 85px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
             background: #000;
             color: #fff;
+
             font-family: inherit;
             text-align: left;
+
             padding: 16px;
             cursor: pointer;
+
             transition:
                 background 0.2s ease,
                 border-color 0.2s ease,
@@ -389,22 +463,31 @@
         }
 
         .system-button:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.65);
-            transform: translateY(-2px);
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border-color:
+                rgba(255, 255, 255, 0.65);
+
+            transform:
+                translateY(-2px);
         }
 
         .system-button-title {
             display: block;
+
             font-size: 12px;
             letter-spacing: 2px;
+
             margin-bottom: 10px;
         }
 
         .system-button-status {
             display: block;
+
             font-size: 9px;
             letter-spacing: 1px;
+
             opacity: 0.45;
         }
 
@@ -417,27 +500,40 @@
         }
 
         .classified-button:hover {
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
 
         .classified-options {
             display: flex;
             flex-direction: column;
+
             gap: 8px;
+
             margin-top: 14px;
         }
 
         .classified-option {
             display: block;
+
             padding: 9px 10px;
+
             color: #fff;
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            background: rgba(255, 255, 255, 0.02);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            background:
+                rgba(255, 255, 255, 0.02);
+
             font-family: inherit;
+
             font-size: 9px;
             letter-spacing: 1.3px;
+
             opacity: 0.62;
+
             transition:
                 background 0.2s ease,
                 border-color 0.2s ease,
@@ -445,8 +541,12 @@
         }
 
         .classified-option:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.55);
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border-color:
+                rgba(255, 255, 255, 0.55);
+
             opacity: 1;
         }
 
@@ -457,10 +557,15 @@
         .footer {
             display: flex;
             justify-content: space-between;
+
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.2);
+
             font-size: 9px;
             letter-spacing: 2px;
+
             opacity: 0.40;
         }
 
@@ -470,7 +575,8 @@
 
         @media (max-width: 1200px) {
             .systems-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns:
+                    repeat(3, 1fr);
             }
         }
 
@@ -537,6 +643,11 @@
             .live-main-status {
                 font-size: 16px;
             }
+
+            .logs {
+                min-height: 168px;
+                max-height: 168px;
+            }
         }
     </style>
 </head>
@@ -547,7 +658,10 @@
          WELCOME SCREEN
     ========================= -->
 
-    <section class="welcome-screen" id="welcomeScreen">
+    <section
+        class="welcome-screen"
+        id="welcomeScreen"
+    >
         <img
             src="logo.png"
             alt="CIGA"
@@ -559,14 +673,20 @@
         </div>
     </section>
 
+
     <!-- =========================
          HOME
     ========================= -->
 
-    <main class="home" id="home">
+    <main
+        class="home"
+        id="home"
+    >
 
         <header class="header">
+
             <div>
+
                 <div class="header-title">
                     CIGA SYSTEMS
                 </div>
@@ -574,17 +694,25 @@
                 <div class="header-subtitle">
                     INTERNAL OPERATIONS NETWORK
                 </div>
+
             </div>
 
             <div class="operator">
                 OPERATIVE: 001<br>
                 SESSION: ACTIVE
             </div>
+
         </header>
+
+
+        <!-- =========================
+             STATUS
+        ========================= -->
 
         <section class="status-bar">
 
             <div class="status-box">
+
                 <div class="status-label">
                     SYSTEM STATUS
                 </div>
@@ -593,9 +721,12 @@
                     <span class="online-dot"></span>
                     ONLINE
                 </div>
+
             </div>
 
+
             <div class="status-box">
+
                 <div class="status-label">
                     NETWORK STATUS
                 </div>
@@ -603,9 +734,12 @@
                 <div class="status-value">
                     SECURE
                 </div>
+
             </div>
 
+
             <div class="status-box">
+
                 <div class="status-label">
                     CLEARANCE LEVEL
                 </div>
@@ -613,18 +747,26 @@
                 <div class="status-value">
                     OPERATIVE
                 </div>
+
             </div>
 
         </section>
 
+
+        <!-- =========================
+             PRIMARY / LOG
+        ========================= -->
+
         <section class="main-grid">
 
             <div class="panel">
+
                 <div class="panel-title">
                     // PRIMARY DIRECTIVE
                 </div>
 
                 <div class="directive">
+
                     <div class="directive-main">
                         CIGA SYSTEMS operates through four
                         primary directives.
@@ -633,6 +775,7 @@
                     </div>
 
                     <div class="directive-list">
+
                         <div class="directive-item">
                             CONTAIN
                         </div>
@@ -648,11 +791,16 @@
                         <div class="directive-item">
                             APPREHEND
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
 
+
             <div class="panel">
+
                 <div class="panel-title">
                     // SYSTEM LOG
                 </div>
@@ -661,9 +809,11 @@
                     class="logs"
                     id="systemLogs"
                 ></div>
+
             </div>
 
         </section>
+
 
         <!-- =========================
              LIVE OPERATION
@@ -681,11 +831,13 @@
             >
 
                 <div>
+
                     <div class="live-main-label">
                         CURRENT OPERATION STATUS
                     </div>
 
                     <div class="live-main-status">
+
                         <span
                             class="live-status-dot offline"
                             id="liveStatusDot"
@@ -694,6 +846,7 @@
                         <span id="liveStatusText">
                             OFFLINE
                         </span>
+
                     </div>
 
                     <div class="live-info">
@@ -732,7 +885,9 @@
                         </div>
 
                     </div>
+
                 </div>
+
 
                 <a
                     href="#"
@@ -745,7 +900,9 @@
                 </a>
 
             </div>
+
         </section>
+
 
         <!-- =========================
              AVAILABLE SYSTEMS
@@ -778,6 +935,7 @@
                     </span>
                 </button>
 
+
                 <!-- COMMUNICATIONS -->
 
                 <button
@@ -796,6 +954,7 @@
                         ACCESS AVAILABLE
                     </span>
                 </button>
+
 
                 <!-- ARCHIVES -->
 
@@ -816,6 +975,7 @@
                     </span>
                 </button>
 
+
                 <!-- CIGA TRANSMISSIONS -->
 
                 <button
@@ -834,6 +994,7 @@
                         DATABASE ACCESS
                     </span>
                 </button>
+
 
                 <!-- CLASSIFIED -->
 
@@ -872,12 +1033,20 @@
                         </a>
 
                     </div>
+
                 </div>
 
             </div>
+
         </section>
 
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
         <footer class="footer">
+
             <span>
                 CIGA SYSTEMS // INTERNAL USE ONLY
             </span>
@@ -885,11 +1054,14 @@
             <span>
                 ALL ACCESS IS LOGGED
             </span>
+
         </footer>
 
     </main>
 
+
     <script>
+
         /* =========================
            SUPABASE
         ========================= */
@@ -909,43 +1081,58 @@
 
 
         /* =========================
-           LIVE OPERATION ELEMENTS
-        ========================= */
-
-        const liveOperation =
-            document.getElementById("liveOperation");
-
-        const liveStatusDot =
-            document.getElementById("liveStatusDot");
-
-        const liveStatusText =
-            document.getElementById("liveStatusText");
-
-        const liveSubject =
-            document.getElementById("liveSubject");
-
-        const livePlatform =
-            document.getElementById("livePlatform");
-
-        const liveStreamStatus =
-            document.getElementById("liveStreamStatus");
-
-        const liveAction =
-            document.getElementById("liveAction");
-
-
-        /* =========================
-           GENERAL ELEMENTS
+           ELEMENTS
         ========================= */
 
         const welcomeScreen =
-            document.getElementById("welcomeScreen");
+            document.getElementById(
+                "welcomeScreen"
+            );
 
         const home =
-            document.getElementById("home");
+            document.getElementById(
+                "home"
+            );
 
         const systemLogs =
-            document.getElementById("systemLogs");
+            document.getElementById(
+                "systemLogs"
+            );
+
+        const liveOperation =
+            document.getElementById(
+                "liveOperation"
+            );
+
+        const liveStatusDot =
+            document.getElementById(
+                "liveStatusDot"
+            );
+
+        const liveStatusText =
+            document.getElementById(
+                "liveStatusText"
+            );
+
+        const liveSubject =
+            document.getElementById(
+                "liveSubject"
+            );
+
+        const livePlatform =
+            document.getElementById(
+                "livePlatform"
+            );
+
+        const liveStreamStatus =
+            document.getElementById(
+                "liveStreamStatus"
+            );
+
+        const liveAction =
+            document.getElementById(
+                "liveAction"
+            );
 
 
         /* =========================
@@ -967,6 +1154,7 @@
         ========================= */
 
         function cigaGetLocalTime() {
+
             return new Date().toLocaleTimeString(
                 [],
                 {
@@ -976,6 +1164,7 @@
                     hour12: false
                 }
             );
+
         }
 
 
@@ -984,7 +1173,9 @@
         ========================= */
 
         function cigaGetLogs() {
+
             try {
+
                 const stored =
                     sessionStorage.getItem(
                         CIGA_LOG_KEY
@@ -995,15 +1186,20 @@
                 }
 
                 const logs =
-                    JSON.parse(stored);
+                    JSON.parse(
+                        stored
+                    );
 
                 return Array.isArray(logs)
                     ? logs
                     : [];
 
             } catch (error) {
+
                 return [];
+
             }
+
         }
 
 
@@ -1012,10 +1208,14 @@
         ========================= */
 
         function cigaSaveLogs(logs) {
+
             sessionStorage.setItem(
                 CIGA_LOG_KEY,
-                JSON.stringify(logs)
+                JSON.stringify(
+                    logs
+                )
             );
+
         }
 
 
@@ -1024,7 +1224,9 @@
         ========================= */
 
         function cigaAddLog(message) {
-            const logs = cigaGetLogs();
+
+            const logs =
+                cigaGetLogs();
 
             logs.push({
                 time: cigaGetLocalTime(),
@@ -1038,6 +1240,7 @@
             );
 
             cigaRenderLogs();
+
         }
 
 
@@ -1046,10 +1249,12 @@
         ========================= */
 
         function cigaSetNextPage(page) {
+
             sessionStorage.setItem(
                 CIGA_NEXT_PAGE_KEY,
                 page
             );
+
         }
 
 
@@ -1058,10 +1263,11 @@
         ========================= */
 
         async function cigaLoadGlobalEvents() {
+
             const cutoff =
                 new Date(
                     Date.now() -
-                    24 * 60 * 60 * 1000
+                    (24 * 60 * 60 * 1000)
                 ).toISOString();
 
             const {
@@ -1088,15 +1294,18 @@
                 );
 
             if (error) {
+
                 console.error(
                     "CIGA EVENTS DATABASE ERROR:",
                     error
                 );
 
                 return [];
+
             }
 
             return data || [];
+
         }
 
 
@@ -1105,11 +1314,15 @@
         ========================= */
 
         function cigaFormatEventTime(value) {
+
             if (!value) {
                 return "--:--:--";
             }
 
-            const date = new Date(value);
+            const date =
+                new Date(
+                    value
+                );
 
             if (
                 Number.isNaN(
@@ -1128,6 +1341,7 @@
                     hour12: false
                 }
             );
+
         }
 
 
@@ -1136,6 +1350,7 @@
         ========================= */
 
         async function cigaRenderLogs() {
+
             const localLogs =
                 cigaGetLogs();
 
@@ -1146,49 +1361,75 @@
 
 
             /* =========================
-               LOCAL LOGS
+               LOCAL
             ========================= */
 
-            localLogs.forEach(log => {
-                combinedLogs.push({
-                    timestamp:
-                        log.timestamp || 0,
+            localLogs.forEach(
+                (log, index) => {
 
-                    time:
-                        log.time || "--:--:--",
+                    combinedLogs.push({
 
-                    source:
-                        "LOCAL",
+                        timestamp:
+                            log.timestamp ||
+                            (Date.now() - (
+                                localLogs.length -
+                                index
+                            )),
 
-                    message:
-                        log.message || ""
-                });
-            });
+                        time:
+                            log.time ||
+                            "--:--:--",
+
+                        source:
+                            "LOCAL",
+
+                        message:
+                            log.message ||
+                            ""
+
+                    });
+
+                }
+            );
 
 
             /* =========================
-               GLOBAL EVENTS
+               GLOBAL
             ========================= */
 
-            globalEvents.forEach(event => {
-                combinedLogs.push({
-                    timestamp:
+            globalEvents.forEach(
+                event => {
+
+                    const eventTime =
                         new Date(
                             event.created_at
-                        ).getTime(),
+                        ).getTime();
 
-                    time:
-                        cigaFormatEventTime(
-                            event.created_at
-                        ),
+                    combinedLogs.push({
 
-                    source:
-                        "CIGA",
+                        timestamp:
+                            Number.isNaN(
+                                eventTime
+                            )
+                                ? 0
+                                : eventTime,
 
-                    message:
-                        event.message || ""
-                });
-            });
+                        time:
+                            cigaFormatEventTime(
+                                event.created_at
+                            ),
+
+                        source:
+                            "CIGA",
+
+                        message:
+                            event.message ||
+                            ""
+
+                    });
+
+                }
+            );
 
 
             /* =========================
@@ -1197,30 +1438,39 @@
 
             combinedLogs.sort(
                 (a, b) =>
-                    a.timestamp - b.timestamp
+                    a.timestamp -
+                    b.timestamp
             );
 
 
             /* =========================
-               SHOW LAST 12
+               LAST 8
             ========================= */
 
             const visibleLogs =
-                combinedLogs.slice(-12);
+                combinedLogs.slice(-8);
 
 
-            systemLogs.innerHTML = "";
+            systemLogs.innerHTML =
+                "";
 
+
+            /* =========================
+               EMPTY
+            ========================= */
 
             if (
                 visibleLogs.length === 0
             ) {
+
                 const empty =
                     document.createElement(
                         "div"
                     );
 
-                empty.className = "log";
+                empty.className =
+                    "log log-empty";
+
                 empty.textContent =
                     "SYSTEM LOG EMPTY.";
 
@@ -1229,6 +1479,7 @@
                 );
 
                 return;
+
             }
 
 
@@ -1236,68 +1487,66 @@
                RENDER
             ========================= */
 
-            visibleLogs.forEach(log => {
-                const logElement =
-                    document.createElement(
-                        "div"
+            visibleLogs.forEach(
+                log => {
+
+                    const logElement =
+                        document.createElement(
+                            "div"
+                        );
+
+                    logElement.className =
+                        log.source === "CIGA"
+                            ? "log log-global"
+                            : "log";
+
+
+                    const time =
+                        document.createElement(
+                            "span"
+                        );
+
+                    time.className =
+                        "log-time";
+
+                    time.textContent =
+                        log.time;
+
+
+                    const source =
+                        document.createElement(
+                            "span"
+                        );
+
+                    source.className =
+                        "log-source";
+
+                    source.textContent =
+                        log.source;
+
+
+                    logElement.appendChild(
+                        time
                     );
 
-                logElement.className =
-                    log.source === "CIGA"
-                        ? "log log-global"
-                        : "log";
-
-
-                const time =
-                    document.createElement(
-                        "span"
+                    logElement.appendChild(
+                        source
                     );
 
-                time.className =
-                    "log-time";
-
-                time.textContent =
-                    log.time;
-
-
-                const source =
-                    document.createElement(
-                        "span"
+                    logElement.appendChild(
+                        document.createTextNode(
+                            log.message
+                        )
                     );
 
-                source.className =
-                    "log-source";
 
-                source.textContent =
-                    log.source;
+                    systemLogs.appendChild(
+                        logElement
+                    );
 
+                }
+            );
 
-                logElement.appendChild(
-                    time
-                );
-
-                logElement.appendChild(
-                    source
-                );
-
-                logElement.appendChild(
-                    document.createTextNode(
-                        log.message
-                    )
-                );
-
-                systemLogs.appendChild(
-                    logElement
-                );
-            });
-
-
-            /* =========================
-               AUTO SCROLL
-            ========================= */
-
-            systemLogs.scrollTop =
-                systemLogs.scrollHeight;
         }
 
 
@@ -1306,6 +1555,7 @@
         ========================= */
 
         async function cigaLoadLiveStatus() {
+
             const {
                 data,
                 error
@@ -1326,6 +1576,7 @@
             ========================= */
 
             if (error) {
+
                 console.error(
                     "LIVE STATUS DATABASE ERROR:",
                     error
@@ -1356,6 +1607,7 @@
                 );
 
                 return;
+
             }
 
 
@@ -1364,6 +1616,7 @@
             ========================= */
 
             if (!data) {
+
                 liveStatusDot.classList.add(
                     "offline"
                 );
@@ -1389,14 +1642,18 @@
                 );
 
                 return;
+
             }
 
 
             /* =========================
-               LIVE
+               ACTIVE
             ========================= */
 
-            if (data.is_live === true) {
+            if (
+                data.is_live === true
+            ) {
+
                 liveStatusDot.classList.remove(
                     "offline"
                 );
@@ -1435,14 +1692,17 @@
                         "TWITCH" &&
                     data.subject
                 ) {
+
                     streamUrl =
                         `https://twitch.tv/${encodeURIComponent(
                             data.subject
                         )}`;
+
                 }
 
 
                 if (streamUrl) {
+
                     liveAction.href =
                         streamUrl;
 
@@ -1451,15 +1711,18 @@
                     );
 
                 } else {
+
                     liveAction.href =
                         "#";
 
                     liveAction.classList.remove(
                         "available"
                     );
+
                 }
 
                 return;
+
             }
 
 
@@ -1495,6 +1758,7 @@
             liveAction.classList.remove(
                 "available"
             );
+
         }
 
 
@@ -1509,6 +1773,7 @@
 
 
         if (!sessionStarted) {
+
             sessionStorage.setItem(
                 CIGA_SESSION_KEY,
                 "true"
@@ -1533,6 +1798,7 @@
             cigaAddLog(
                 "CONNECTION SECURE"
             );
+
         }
 
 
@@ -1550,6 +1816,7 @@
             sessionStarted &&
             previousPage
         ) {
+
             cigaAddLog(
                 `${previousPage} CLOSED`
             );
@@ -1561,6 +1828,7 @@
             sessionStorage.removeItem(
                 CIGA_NEXT_PAGE_KEY
             );
+
         }
 
 
@@ -1568,25 +1836,36 @@
            WELCOME SCREEN
         ========================= */
 
-        setTimeout(() => {
-            welcomeScreen.classList.add(
-                "hidden"
-            );
-        }, 1800);
+        setTimeout(
+            () => {
+
+                welcomeScreen.classList.add(
+                    "hidden"
+                );
+
+            },
+            1800
+        );
 
 
         /* =========================
            SHOW HOME
         ========================= */
 
-        setTimeout(async () => {
-            home.classList.add(
-                "visible"
-            );
+        setTimeout(
+            async () => {
 
-            await cigaRenderLogs();
-            await cigaLoadLiveStatus();
-        }, 2400);
+                home.classList.add(
+                    "visible"
+                );
+
+                await cigaRenderLogs();
+
+                await cigaLoadLiveStatus();
+
+            },
+            2400
+        );
 
 
         /* =========================
