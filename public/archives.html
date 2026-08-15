@@ -12,6 +12,9 @@
 
     <title>CIGA SYSTEMS // ARCHIVES</title>
     <link rel="icon" type="image/png" href="logo.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
 
         * {
@@ -194,7 +197,9 @@
                 "Courier New",
                 monospace;
 
-            cursor: default;
+            text-decoration: none;
+
+            cursor: pointer;
 
             transition:
                 background 0.2s ease,
@@ -232,6 +237,16 @@
             font-size: 13px;
 
             letter-spacing: 2px;
+
+            margin-bottom: 6px;
+        }
+
+        .archive-subject {
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.40;
         }
 
 
@@ -250,14 +265,33 @@
         }
 
 
-        .redacted-bar {
+        .status-dot {
             display: inline-block;
 
-            width: 85px;
+            width: 6px;
 
-            height: 9px;
+            height: 6px;
 
             background: #fff;
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================
+           LOADING / EMPTY
+        ========================= */
+
+        .archive-loading,
+        .archive-empty,
+        .archive-error {
+            padding: 20px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
         }
 
 
@@ -324,7 +358,9 @@
 
             .header {
                 gap: 20px;
-                align-items: flex-start;
+
+                align-items:
+                    flex-start;
             }
 
             .title {
@@ -340,11 +376,13 @@
             }
 
             .archive-file {
-                align-items: flex-start;
+                align-items:
+                    flex-start;
 
                 gap: 15px;
 
-                flex-direction: column;
+                flex-direction:
+                    column;
             }
 
             .archive-status {
@@ -353,10 +391,12 @@
             }
 
             .footer {
-                flex-direction: column;
+                flex-direction:
+                    column;
 
                 gap: 8px;
             }
+
         }
 
     </style>
@@ -390,8 +430,17 @@
 
         <div class="header-status">
 
-            DATABASE: ONLINE<br>
-            RECORDS: 10
+            DATABASE:
+            <span id="databaseStatus">
+                CONNECTING
+            </span>
+
+            <br>
+
+            RECORDS:
+            <span id="recordCount">
+                --
+            </span>
 
         </div>
 
@@ -408,17 +457,16 @@
             &gt; ACCESSING ARCHIVE DATABASE...
         </div>
 
-        <div>
+        <div id="terminalIndex">
             &gt; INDEXING HISTORICAL RECORDS...
         </div>
 
-        <div>
-            &gt; 10 RECORDS FOUND.
+        <div id="terminalCount">
+            &gt; WAITING FOR DATABASE RESPONSE...
         </div>
 
-        <div>
-            &gt; DISPLAYING AVAILABLE RECORDS...
-
+        <div id="terminalDisplay">
+            &gt; RETRIEVING AVAILABLE RECORDS...
         </div>
 
     </section>
@@ -435,285 +483,25 @@
         </div>
 
 
-        <div class="archive-list">
+        <div
+            class="archive-list"
+            id="archiveList"
+        >
 
+            <div class="archive-loading">
 
-            <!-- ARCHIVE 001 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_001
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
+                &gt; LOADING ARCHIVE DATABASE...
 
             </div>
-
-
-            <!-- ARCHIVE 002 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_002
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 003 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_003
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 004 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_004
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 005 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_005
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 006 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_006
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 007 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_007
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 008 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_008
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 009 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_009
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
-
-            <!-- ARCHIVE 010 -->
-
-            <div class="archive-file">
-
-                <div>
-
-                    <div class="archive-id">
-                        ARCHIVE_010
-                    </div>
-
-                    <div class="archive-name">
-                        [ REDACTED ]
-                    </div>
-
-                </div>
-
-                <div class="archive-status">
-
-                    <span class="redacted-bar"></span>
-
-                    REDACTED
-
-                </div>
-
-            </div>
-
 
         </div>
 
     </section>
 
 
-    <!-- BACK -->
+    <!-- =========================
+         BACK
+    ========================= -->
 
     <a
         href="home.html"
@@ -723,7 +511,9 @@
     </a>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer class="footer">
 
@@ -739,6 +529,364 @@
 
 
 </div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const {
+        createClient
+    } = supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const archiveList =
+        document.getElementById(
+            "archiveList"
+        );
+
+
+    const databaseStatus =
+        document.getElementById(
+            "databaseStatus"
+        );
+
+
+    const recordCount =
+        document.getElementById(
+            "recordCount"
+        );
+
+
+    const terminalIndex =
+        document.getElementById(
+            "terminalIndex"
+        );
+
+
+    const terminalCount =
+        document.getElementById(
+            "terminalCount"
+        );
+
+
+    const terminalDisplay =
+        document.getElementById(
+            "terminalDisplay"
+        );
+
+
+    /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(value) {
+
+        return String(
+            value ?? ""
+        )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       LOAD ARCHIVES
+    ========================================== */
+
+    async function loadArchives() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from("archives")
+
+                .select(`
+                    id,
+                    archive_number,
+                    title,
+                    personnel_id,
+                    incident_date,
+                    personnel (
+                        id,
+                        file_number,
+                        name,
+                        alias
+                    )
+                `)
+
+                .eq(
+                    "visible",
+                    true
+                )
+
+                .order(
+                    "id",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        /* =========================
+           DATABASE ERROR
+        ========================= */
+
+        if (error) {
+
+            console.error(
+                "ARCHIVE DATABASE ERROR:",
+                error
+            );
+
+
+            databaseStatus.textContent =
+                "ERROR";
+
+
+            recordCount.textContent =
+                "ERR";
+
+
+            terminalIndex.textContent =
+                "> ARCHIVE DATABASE ERROR.";
+
+
+            terminalCount.textContent =
+                "> RECORD INDEXING FAILED.";
+
+
+            terminalDisplay.textContent =
+                "> NO RECORDS COULD BE RETRIEVED.";
+
+
+            archiveList.innerHTML = `
+
+                <div class="archive-error">
+
+                    &gt; DATABASE ERROR.<br><br>
+
+                    &gt; ${escapeHTML(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =========================
+           DATABASE ONLINE
+        ========================= */
+
+        databaseStatus.textContent =
+            "ONLINE";
+
+
+        const archives =
+            data || [];
+
+
+        recordCount.textContent =
+            archives.length;
+
+
+        terminalIndex.textContent =
+            "> INDEXING HISTORICAL RECORDS...";
+
+
+        terminalCount.textContent =
+            `> ${archives.length} RECORD${
+                archives.length === 1
+                    ? ""
+                    : "S"
+            } FOUND.`;
+
+
+        terminalDisplay.textContent =
+            "> DISPLAYING AVAILABLE RECORDS...";
+
+
+        /* =========================
+           NO RECORDS
+        ========================= */
+
+        if (
+            archives.length === 0
+        ) {
+
+            archiveList.innerHTML = `
+
+                <div class="archive-empty">
+
+                    &gt; NO PUBLIC ARCHIVE RECORDS AVAILABLE.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =========================
+           CREATE FILE LIST
+        ========================= */
+
+        archiveList.innerHTML =
+            "";
+
+
+        archives.forEach(
+            archive => {
+
+                const person =
+                    Array.isArray(
+                        archive.personnel
+                    )
+                        ? archive.personnel[0]
+                        : archive.personnel;
+
+
+                const archiveFile =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                archiveFile.className =
+                    "archive-file";
+
+
+                archiveFile.href =
+                    `archive.html?id=${
+                        encodeURIComponent(
+                            archive.id
+                        )
+                    }`;
+
+
+                archiveFile.innerHTML = `
+
+                    <div>
+
+                        <div class="archive-id">
+
+                            ${escapeHTML(
+                                archive.archive_number
+                            )}
+
+                        </div>
+
+
+                        <div class="archive-name">
+
+                            [
+
+                            ${escapeHTML(
+                                archive.title ||
+                                "UNTITLED ARCHIVE"
+                            ).toUpperCase()}
+
+                            ]
+
+                        </div>
+
+
+                        <div class="archive-subject">
+
+                            SUBJECT:
+                            ${escapeHTML(
+                                person?.name ||
+                                "UNKNOWN"
+                            ).toUpperCase()}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="archive-status">
+
+                        <span class="status-dot"></span>
+
+                        ACCESS AVAILABLE
+
+                    </div>
+
+                `;
+
+
+                archiveList.appendChild(
+                    archiveFile
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadArchives();
+
+</script>
 
 </body>
 
