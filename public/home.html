@@ -1,67 +1,3271 @@
-/* =========================
-   WELCOME
-========================= */
+<!DOCTYPE html>
+<html lang="en">
 
-const welcomeAlreadyShown =
-    sessionStorage.getItem(
-        "ciga_welcome_shown"
-    );
+<head>
 
+    <meta charset="UTF-8">
 
-if (
-    welcomeAlreadyShown === "true"
-) {
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    /*
-        Welcome já foi mostrado
-        nesta sessão da tab.
+    <title>CIGA SYSTEMS // INTERNAL</title>
 
-        Entra diretamente no Home.
-    */
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
 
-    welcomeScreen.classList.add(
-        "hidden"
-    );
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-    home.classList.add(
-        "visible"
-    );
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
 
-    cigaRenderLogs();
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
 
 
-    cigaLoadLiveStatus();
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
-} else {
+        .welcome-screen {
+            position: fixed;
 
-    /*
-        Primeira entrada nesta sessão.
+            top: 50%;
+            left: 50%;
 
-        Mostra a animação normalmente.
-    */
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
 
-    sessionStorage.setItem(
-        "ciga_welcome_shown",
-        "true"
-    );
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            z-index: 100;
+
+            opacity: 1;
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+        }
 
 
-    setTimeout(
-        () => {
+        .welcome-screen.hidden {
+            opacity: 0;
+
+            transform:
+                translate(
+                    -50%,
+                    -55%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .welcome-logo {
+            width: 230px;
+
+            max-width: 55vw;
+
+            margin-bottom: 35px;
+        }
+
+
+        .welcome-text {
+            font-size: 16px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .welcome-text::before {
+            content:
+                "[ ";
+        }
+
+
+        .welcome-text::after {
+            content:
+                " ]";
+        }
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        .home {
+            width: 100%;
+
+            min-height: 100vh;
+
+            padding:
+                35px 50px;
+
+            opacity: 0;
+
+            transition:
+                opacity 1s ease;
+        }
+
+
+        .home.visible {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 14px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+        }
+
+
+        .header-title {
+            font-size: 22px;
+
+            letter-spacing: 4px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
+        }
+
+
+        .header-title:hover {
+            text-decoration: none;
+
+            text-shadow:
+                0 0 6px rgba(255,255,255,0.8),
+                0 0 15px rgba(255,255,255,0.35);
+        }
+
+
+        .header-subtitle {
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+        }
+
+
+        .operator {
+            text-align: right;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            line-height: 1.8;
+
+            opacity: 0.85;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-bar {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .status-box {
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            padding:
+                16px 18px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+        }
+
+
+        .status-label {
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+
+            margin-bottom: 8px;
+        }
+
+
+        .status-value {
+            font-size: 14px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .online {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .online-dot {
+            width: 6px;
+
+            height: 6px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 8px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                );
+        }
+
+
+        /* =========================
+           MAIN GRID
+        ========================= */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr
+                1fr;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .panel {
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            padding: 24px;
+        }
+
+
+        .panel-title {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.55;
+
+            margin-bottom: 20px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+        }
+
+
+        /* =========================
+           DIRECTIVE
+        ========================= */
+
+        .directive {
+            font-size: 15px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+        }
+
+
+        .directive-main {
+            margin-bottom: 20px;
+
+            opacity: 0.9;
+        }
+
+
+        .directive-list {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 10px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .directive-item {
+            padding:
+                10px 12px;
+
+            border-left:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.5
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+        }
+
+
+        /* =========================
+           SYSTEM LOG
+        ========================= */
+
+        .logs {
+            height: 180px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content:
+                flex-end;
+
+            overflow: hidden;
+
+            font-size: 11px;
+
+            line-height: 15px;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .log {
+            flex: 0 0 15px;
+
+            width: 100%;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            opacity: 0.78;
+        }
+
+
+        .log-time {
+            opacity: 0.42;
+
+            margin-right: 8px;
+        }
+
+
+        .log-source {
+            opacity: 0.35;
+
+            margin-right: 7px;
+
+            font-size: 8px;
+
+            letter-spacing: 1.2px;
+        }
+
+
+        .log-global {
+            opacity: 0.92;
+        }
+
+
+        .log-empty {
+            opacity: 0.4;
+        }
+
+
+        /* =========================
+           LIVE OPERATION
+        ========================= */
+
+        .live-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .live-operation {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 25px;
+
+            align-items: center;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .live-operation.active {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.38
+                );
+        }
+
+
+        .live-main-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 9px;
+        }
+
+
+        .live-main-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 18px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .live-status-dot {
+            width: 7px;
+
+            height: 7px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 9px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+        }
+
+
+        .live-status-dot.offline {
+            opacity: 0.28;
+
+            box-shadow: none;
+        }
+
+
+        .live-info {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr;
+
+            gap:
+                6px 15px;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        .live-info-label {
+            opacity: 0.35;
+        }
+
+
+        .live-info-value {
+            opacity: 0.82;
+
+            word-break:
+                break-word;
+        }
+
+
+        .live-action {
+            display: inline-block;
+
+            padding:
+                12px 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.8px;
+
+            opacity: 0.42;
+
+            pointer-events: none;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .live-action.available {
+            opacity: 0.75;
+
+            pointer-events: auto;
+        }
+
+
+        .live-action.available:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+
+            opacity: 1;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           GLOBAL CIGA COMMUNICATION
+        ========================= */
+
+        .communication-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .communication-identity {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            padding:
+                10px 12px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.45;
+        }
+
+
+        .communication-identity strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        .communication-messages {
+            height: 250px;
+
+            padding: 18px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.01
+                );
+
+            overflow-y: auto;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                )
+                transparent;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .communication-message {
+            margin-bottom: 16px;
+
+            opacity: 1;
+        }
+
+
+        .communication-message:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .communication-message-header {
+            margin-bottom: 5px;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.75;
+        }
+
+
+        .communication-message-header strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        .communication-message-body {
+            white-space: pre-wrap;
+
+            word-break: break-word;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            opacity: 1;
+        }
+
+
+        .communication-empty {
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.3;
+        }
+
+
+        .communication-input-area {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 10px;
+
+            margin-top: 12px;
+        }
+
+
+        .communication-input-area input {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 13px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .communication-input-area input:focus {
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+        }
+
+
+        .communication-input-area button {
+            height: 42px;
+
+            padding:
+                0 18px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.3
+                );
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .communication-input-area button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        .communication-input-area button:disabled {
+            opacity: 0.4;
+
+            cursor: not-allowed;
+        }
+
+
+        .communication-status {
+            margin-top: 8px;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
+           SYSTEMS
+        ========================= */
+
+        .systems-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .systems-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    5,
+                    1fr
+                );
+
+            gap: 12px;
+        }
+
+
+        .system-button {
+            min-height: 85px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            text-align: left;
+
+            padding: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .system-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .system-button-title {
+            display: block;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .system-button-status {
+            display: block;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.45;
+        }
+
+
+        /* =========================
+           CLASSIFIED
+        ========================= */
+
+        .classified-button {
+            cursor: default;
+        }
+
+
+        .classified-button:hover {
+            transform:
+                translateY(-2px);
+        }
+
+
+        .classified-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 14px;
+        }
+
+
+        .classified-option {
+            display: block;
+
+            padding:
+                9px 10px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.3px;
+
+            opacity: 0.62;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+
+        .classified-option:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.2
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1200px) {
+
+            .systems-grid {
+                grid-template-columns:
+                    repeat(
+                        3,
+                        1fr
+                    );
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .home {
+                padding: 25px;
+            }
+
+
+            .main-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .systems-grid {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .status-bar {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .live-operation {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .home {
+                padding: 18px;
+            }
+
+
+            .welcome-logo {
+                width: 180px;
+            }
+
+
+            .welcome-text {
+                font-size: 12px;
+            }
+
+
+            .header {
+                align-items:
+                    flex-start;
+
+                gap: 20px;
+            }
+
+
+            .header-title {
+                font-size: 16px;
+            }
+
+
+            .operator {
+                font-size: 9px;
+            }
+
+
+            .directive-list {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .systems-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .live-info {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .live-main-status {
+                font-size: 16px;
+            }
+
+
+            .logs {
+                height: 168px;
+
+                line-height: 14px;
+            }
+
+
+            .log {
+                flex-basis: 14px;
+
+                height: 14px;
+            }
+
+
+            .communication-input-area {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         WELCOME SCREEN
+    ========================= -->
+
+    <section
+        class="welcome-screen"
+        id="welcomeScreen"
+    >
+
+        <img
+            src="logo.png"
+            alt="CIGA"
+            class="welcome-logo"
+        >
+
+
+        <div class="welcome-text">
+            WELCOME OPERATIVE
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <main
+        class="home"
+        id="home"
+    >
+
+
+        <header class="header">
+
+            <div>
+
+                <a
+                    href="home.html"
+                    class="header-title"
+                >
+                    CIGA SYSTEMS
+                </a>
+
+
+                <div class="header-subtitle">
+                    INTERNAL OPERATIONS NETWORK
+                </div>
+
+            </div>
+
+
+            <div class="operator">
+
+                OPERATIVE:
+                <span id="operatorId">
+                    UNKNOWN
+                </span>
+
+                <br>
+
+                NODE:
+                <span id="operatorNode">
+                    UNKNOWN
+                </span>
+
+                <br>
+
+                SESSION: ACTIVE
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             STATUS
+        ========================= -->
+
+        <section class="status-bar">
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    SYSTEM STATUS
+                </div>
+
+
+                <div class="status-value online">
+
+                    <span class="online-dot"></span>
+
+                    ONLINE
+
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    NETWORK STATUS
+                </div>
+
+
+                <div class="status-value">
+                    SECURE
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    CLEARANCE LEVEL
+                </div>
+
+
+                <div class="status-value">
+                    OPERATIVE
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRIMARY / SYSTEM LOG
+        ========================= -->
+
+        <section class="main-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // PRIMARY DIRECTIVE
+                </div>
+
+
+                <div class="directive">
+
+                    <div class="directive-main">
+
+                        CIGA SYSTEMS operates through four
+                        primary directives.
+                        All operations are conducted under
+                        controlled authorization.
+
+                    </div>
+
+
+                    <div class="directive-list">
+
+                        <div class="directive-item">
+                            CONTAIN
+                        </div>
+
+
+                        <div class="directive-item">
+                            INTERCEPT
+                        </div>
+
+
+                        <div class="directive-item">
+                            GUARD
+                        </div>
+
+
+                        <div class="directive-item">
+                            APPREHEND
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // SYSTEM LOG
+                </div>
+
+
+                <div
+                    class="logs"
+                    id="systemLogs"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             LIVE OPERATION
+        ========================= -->
+
+        <section class="panel live-panel">
+
+            <div class="panel-title">
+                // LIVE OPERATION
+            </div>
+
+
+            <div
+                class="live-operation"
+                id="liveOperation"
+            >
+
+                <div>
+
+                    <div class="live-main-label">
+                        CURRENT OPERATION STATUS
+                    </div>
+
+
+                    <div class="live-main-status">
+
+                        <span
+                            class="live-status-dot offline"
+                            id="liveStatusDot"
+                        ></span>
+
+
+                        <span id="liveStatusText">
+                            OFFLINE
+                        </span>
+
+                    </div>
+
+
+                    <div class="live-info">
+
+                        <div class="live-info-label">
+                            OPERATIVE
+                        </div>
+
+
+                        <div
+                            class="live-info-value"
+                            id="liveSubject"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="live-info-label">
+                            PLATFORM
+                        </div>
+
+
+                        <div
+                            class="live-info-value"
+                            id="livePlatform"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="live-info-label">
+                            OPERATION
+                        </div>
+
+
+                        <div
+                            class="live-info-value"
+                            id="liveStreamStatus"
+                        >
+                            STANDBY
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    id="liveAction"
+                    class="live-action"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ACCESS TRANSMISSION
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GLOBAL CIGA COMMUNICATION
+        ========================= -->
+
+        <section class="panel communication-panel">
+
+            <div class="panel-title">
+                // GLOBAL CIGA COMMUNICATION
+            </div>
+
+
+            <div class="communication-identity">
+
+                <span>
+
+                    NODE:
+                    <strong id="chatNode">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    OPERATIVE:
+                    <strong id="chatOperative">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="communication-messages"
+                id="communicationMessages"
+            >
+
+                <div class="communication-empty">
+                    &gt; WAITING FOR GLOBAL TRANSMISSIONS...
+                </div>
+
+            </div>
+
+
+            <div class="communication-input-area">
+
+                <input
+                    type="text"
+                    id="communicationInput"
+                    maxlength="500"
+                    placeholder="ENTER TRANSMISSION..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    type="button"
+                    id="communicationSend"
+                >
+                    TRANSMIT
+                </button>
+
+            </div>
+
+
+            <div
+                class="communication-status"
+                id="communicationStatus"
+            >
+                CIGA COMMUNICATION CHANNEL READY.
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AVAILABLE SYSTEMS
+        ========================= -->
+
+        <section class="panel systems-panel">
+
+            <div class="panel-title">
+                // AVAILABLE SYSTEMS
+            </div>
+
+
+            <div class="systems-grid">
+
+
+                <!-- PERSONNEL -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('PERSONNEL FILES ACCESSED');
+                        cigaSetNextPage('PERSONNEL FILES');
+                        window.location.href='personnel.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        PERSONNEL FILES
+                    </span>
+
+
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <!-- COMMUNICATIONS -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('COMMUNICATIONS SYSTEM ACCESSED');
+                        cigaSetNextPage('COMMUNICATIONS');
+                        window.location.href='communications.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        COMMUNICATIONS
+                    </span>
+
+
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <!-- ARCHIVES -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('ARCHIVE SYSTEM ACCESSED');
+                        cigaSetNextPage('ARCHIVES');
+                        window.location.href='archives.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        ARCHIVES
+                    </span>
+
+
+                    <span class="system-button-status">
+                        ACCESS AVAILABLE
+                    </span>
+
+                </button>
+
+
+                <!-- CIGA TRANSMISSIONS -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('CIGA TRANSMISSION DATABASE ACCESSED');
+                        cigaSetNextPage('CIGA TRANSMISSIONS');
+                        window.location.href='communications-log.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        CIGA TRANSMISSIONS
+                    </span>
+
+
+                    <span class="system-button-status">
+                        DATABASE ACCESS
+                    </span>
+
+                </button>
+
+
+                <!-- CLASSIFIED -->
+
+                <div
+                    class="system-button classified-button"
+                >
+
+                    <span class="system-button-title">
+                        CLASSIFIED
+                    </span>
+
+
+                    <span class="system-button-status">
+                        ACCESS RESTRICTED
+                    </span>
+
+
+                    <div class="classified-options">
+
+                        <a
+                            href="admin.html"
+                            class="classified-option"
+                            onclick="
+                                cigaAddLog('ADMINISTRATIVE ACCESS ACCESSED');
+                                cigaSetNextPage('ADMINISTRATIVE ACCESS');
+                            "
+                        >
+                            ADMINISTRATIVE ACCESS
+                        </a>
+
+
+                        <a
+                            href="submission.html"
+                            class="classified-option"
+                            onclick="
+                                cigaAddLog('PERSONNEL SUBMISSION INTERFACE ACCESSED');
+                                cigaSetNextPage('PERSONNEL SUBMISSION');
+                            "
+                        >
+                            PERSONNEL SUBMISSION
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="footer">
+
+            <span>
+                CIGA SYSTEMS // INTERNAL USE ONLY
+            </span>
+
+
+            <span>
+                ALL ACCESS IS LOGGED
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           SUPABASE
+        ========================= */
+
+        const SUPABASE_URL =
+            "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+        const SUPABASE_KEY =
+            "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+        const {
+            createClient
+        } = supabase;
+
+
+        const db =
+            createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const welcomeScreen =
+            document.getElementById(
+                "welcomeScreen"
+            );
+
+
+        const home =
+            document.getElementById(
+                "home"
+            );
+
+
+        const systemLogs =
+            document.getElementById(
+                "systemLogs"
+            );
+
+
+        const liveOperation =
+            document.getElementById(
+                "liveOperation"
+            );
+
+
+        const liveStatusDot =
+            document.getElementById(
+                "liveStatusDot"
+            );
+
+
+        const liveStatusText =
+            document.getElementById(
+                "liveStatusText"
+            );
+
+
+        const liveSubject =
+            document.getElementById(
+                "liveSubject"
+            );
+
+
+        const livePlatform =
+            document.getElementById(
+                "livePlatform"
+            );
+
+
+        const liveStreamStatus =
+            document.getElementById(
+                "liveStreamStatus"
+            );
+
+
+        const liveAction =
+            document.getElementById(
+                "liveAction"
+            );
+
+
+        const operatorNode =
+            document.getElementById(
+                "operatorNode"
+            );
+
+
+        const operatorId =
+            document.getElementById(
+                "operatorId"
+            );
+
+
+        /* =========================
+           CHAT ELEMENTS
+        ========================= */
+
+        const chatNode =
+            document.getElementById(
+                "chatNode"
+            );
+
+
+        const chatOperative =
+            document.getElementById(
+                "chatOperative"
+            );
+
+
+        const communicationMessages =
+            document.getElementById(
+                "communicationMessages"
+            );
+
+
+        const communicationInput =
+            document.getElementById(
+                "communicationInput"
+            );
+
+
+        const communicationSend =
+            document.getElementById(
+                "communicationSend"
+            );
+
+
+        const communicationStatus =
+            document.getElementById(
+                "communicationStatus"
+            );
+
+
+        /* =========================
+           CIGA IDENTITY
+        ========================= */
+
+        const cigaNode =
+            localStorage.getItem(
+                "ciga_node_id"
+            );
+
+
+        const cigaOperative =
+            localStorage.getItem(
+                "ciga_operative_id"
+            );
+
+
+        const formattedOperative =
+            cigaOperative
+                ? String(
+                    cigaOperative
+                ).padStart(
+                    3,
+                    "0"
+                )
+                : "UNKNOWN";
+
+
+        operatorNode.textContent =
+            cigaNode ||
+            "UNASSIGNED";
+
+
+        operatorId.textContent =
+            formattedOperative;
+
+
+        chatNode.textContent =
+            cigaNode ||
+            "UNASSIGNED";
+
+
+        chatOperative.textContent =
+            formattedOperative;
+
+
+        /* =========================
+           STORAGE KEYS
+        ========================= */
+
+        const CIGA_LOG_KEY =
+            "ciga_session_log";
+
+
+        const CIGA_SESSION_KEY =
+            "ciga_session_started";
+
+
+        const CIGA_NEXT_PAGE_KEY =
+            "ciga_next_page";
+
+
+        const CIGA_WELCOME_KEY =
+            "ciga_welcome_shown";
+
+
+        /* =========================
+           GLOBAL CACHE
+        ========================= */
+
+        let cigaGlobalEvents =
+            [];
+
+
+        /* =========================
+           LOCAL TIME
+        ========================= */
+
+        function cigaGetLocalTime() {
+
+            return new Date().toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false
+                }
+            );
+
+        }
+
+
+        /* =========================
+           GET LOCAL LOGS
+        ========================= */
+
+        function cigaGetLogs() {
+
+            try {
+
+                const stored =
+                    localStorage.getItem(
+                        CIGA_LOG_KEY
+                    );
+
+
+                if (!stored) {
+
+                    return [];
+
+                }
+
+
+                const logs =
+                    JSON.parse(
+                        stored
+                    );
+
+
+                return Array.isArray(
+                    logs
+                )
+                    ? logs
+                    : [];
+
+            } catch (error) {
+
+                console.error(
+                    "LOCAL LOG READ ERROR:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+
+        /* =========================
+           SAVE LOCAL LOGS
+        ========================= */
+
+        function cigaSaveLogs(
+            logs
+        ) {
+
+            try {
+
+                localStorage.setItem(
+                    CIGA_LOG_KEY,
+                    JSON.stringify(
+                        logs
+                    )
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "LOCAL LOG SAVE ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           ADD LOCAL LOG
+        ========================= */
+
+        function cigaAddLog(
+            message
+        ) {
+
+            const logs =
+                cigaGetLogs();
+
+
+            logs.push({
+
+                time:
+                    cigaGetLocalTime(),
+
+                message:
+                    message,
+
+                source:
+                    "LOCAL",
+
+                timestamp:
+                    Date.now()
+
+            });
+
+
+            cigaSaveLogs(
+                logs.slice(
+                    -50
+                )
+            );
+
+
+            cigaRenderLogs();
+
+        }
+
+
+        /* =========================
+           SET NEXT PAGE
+        ========================= */
+
+        function cigaSetNextPage(
+            page
+        ) {
+
+            sessionStorage.setItem(
+                CIGA_NEXT_PAGE_KEY,
+                page
+            );
+
+        }
+
+
+        /* =========================
+           FORMAT GLOBAL TIME
+        ========================= */
+
+        function cigaFormatEventTime(
+            value
+        ) {
+
+            if (!value) {
+
+                return "--:--:--";
+
+            }
+
+
+            const date =
+                new Date(
+                    value
+                );
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "--:--:--";
+
+            }
+
+
+            return date.toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false
+                }
+            );
+
+        }
+
+
+        /* =========================
+           LOAD GLOBAL EVENTS
+        ========================= */
+
+        async function cigaLoadGlobalEvents() {
+
+            const cutoff =
+                new Date(
+                    Date.now() -
+                    (
+                        24 *
+                        60 *
+                        60 *
+                        1000
+                    )
+                ).toISOString();
+
+
+            const {
+                data,
+                error
+            } = await db
+                .from(
+                    "ciga_events"
+                )
+                .select(
+                    "id, event_type, message, source, created_at"
+                )
+                .eq(
+                    "visible",
+                    true
+                )
+                .gte(
+                    "created_at",
+                    cutoff
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA EVENTS DATABASE ERROR:",
+                    error
+                );
+
+
+                return null;
+
+            }
+
+
+            return data || [];
+
+        }
+
+
+        /* =========================
+           REFRESH GLOBAL EVENTS
+        ========================= */
+
+        async function cigaRefreshGlobalEvents() {
+
+            const events =
+                await cigaLoadGlobalEvents();
+
+
+            if (
+                events === null
+            ) {
+
+                return;
+
+            }
+
+
+            cigaGlobalEvents =
+                events;
+
+
+            cigaRenderLogs();
+
+        }
+
+
+        /* =========================
+           BUILD COMBINED LOGS
+        ========================= */
+
+        function cigaBuildCombinedLogs() {
+
+            const localLogs =
+                cigaGetLogs();
+
+
+            const combinedLogs =
+                [];
+
+
+            localLogs.forEach(
+                (
+                    log,
+                    index
+                ) => {
+
+                    combinedLogs.push({
+
+                        timestamp:
+                            log.timestamp ||
+                            (
+                                Date.now() -
+                                (
+                                    localLogs.length -
+                                    index
+                                )
+                            ),
+
+                        time:
+                            log.time ||
+                            "--:--:--",
+
+                        source:
+                            "LOCAL",
+
+                        message:
+                            log.message ||
+                            ""
+
+                    });
+
+                }
+            );
+
+
+            cigaGlobalEvents.forEach(
+                event => {
+
+                    const timestamp =
+                        new Date(
+                            event.created_at
+                        ).getTime();
+
+
+                    combinedLogs.push({
+
+                        timestamp:
+                            Number.isNaN(
+                                timestamp
+                            )
+                                ? 0
+                                : timestamp,
+
+                        time:
+                            cigaFormatEventTime(
+                                event.created_at
+                            ),
+
+                        source:
+                            "CIGA",
+
+                        message:
+                            event.message ||
+                            ""
+
+                    });
+
+                }
+            );
+
+
+            combinedLogs.sort(
+                (
+                    first,
+                    second
+                ) =>
+                    first.timestamp -
+                    second.timestamp
+            );
+
+
+            return combinedLogs;
+
+        }
+
+
+        /* =========================
+           RENDER LOGS
+        ========================= */
+
+        function cigaRenderLogs() {
+
+            const combinedLogs =
+                cigaBuildCombinedLogs();
+
+
+            const visibleLogs =
+                combinedLogs.slice(
+                    -12
+                );
+
+
+            systemLogs.innerHTML =
+                "";
+
+
+            if (
+                visibleLogs.length === 0
+            ) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "log log-empty";
+
+
+                empty.textContent =
+                    "SYSTEM LOG EMPTY.";
+
+
+                systemLogs.appendChild(
+                    empty
+                );
+
+
+                return;
+
+            }
+
+
+            visibleLogs.forEach(
+                log => {
+
+                    const logElement =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    logElement.className =
+                        log.source === "CIGA"
+                            ? "log log-global"
+                            : "log";
+
+
+                    const time =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    time.className =
+                        "log-time";
+
+
+                    time.textContent =
+                        log.time;
+
+
+                    const source =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    source.className =
+                        "log-source";
+
+
+                    source.textContent =
+                        log.source;
+
+
+                    logElement.appendChild(
+                        time
+                    );
+
+
+                    logElement.appendChild(
+                        source
+                    );
+
+
+                    logElement.appendChild(
+                        document.createTextNode(
+                            log.message
+                        )
+                    );
+
+
+                    systemLogs.appendChild(
+                        logElement
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           LOAD LIVE STATUS
+        ========================= */
+
+        async function cigaLoadLiveStatus() {
+
+            const {
+                data,
+                error
+            } = await db
+                .from(
+                    "live_status"
+                )
+                .select(
+                    "id, is_live, subject, platform, stream_title, stream_url, updated_at"
+                )
+                .eq(
+                    "id",
+                    1
+                )
+                .maybeSingle();
+
+
+            if (error) {
+
+                console.error(
+                    "LIVE STATUS DATABASE ERROR:",
+                    error
+                );
+
+
+                liveStatusDot.classList.add(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "STATUS UNAVAILABLE";
+
+
+                liveSubject.textContent =
+                    "DATABASE ERROR";
+
+
+                livePlatform.textContent =
+                    "UNAVAILABLE";
+
+
+                liveStreamStatus.textContent =
+                    "LIVE STATUS COULD NOT BE RETRIEVED";
+
+
+                liveAction.classList.remove(
+                    "available"
+                );
+
+
+                liveOperation.classList.remove(
+                    "active"
+                );
+
+
+                return;
+
+            }
+
+
+            if (!data) {
+
+                liveStatusDot.classList.add(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "OFFLINE";
+
+
+                liveSubject.textContent =
+                    "UNAVAILABLE";
+
+
+                livePlatform.textContent =
+                    "UNAVAILABLE";
+
+
+                liveStreamStatus.textContent =
+                    "STANDBY";
+
+
+                liveAction.classList.remove(
+                    "available"
+                );
+
+
+                liveOperation.classList.remove(
+                    "active"
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                data.is_live === true
+            ) {
+
+                liveStatusDot.classList.remove(
+                    "offline"
+                );
+
+
+                liveStatusText.textContent =
+                    "ACTIVE";
+
+
+                liveSubject.textContent =
+                    (
+                        data.subject ||
+                        "UNKNOWN"
+                    ).toUpperCase();
+
+
+                livePlatform.textContent =
+                    (
+                        data.platform ||
+                        "TWITCH"
+                    ).toUpperCase();
+
+
+                liveStreamStatus.textContent =
+                    "LIVE TRANSMISSION";
+
+
+                liveOperation.classList.add(
+                    "active"
+                );
+
+
+                let streamUrl =
+                    data.stream_url;
+
+
+                if (
+                    !streamUrl &&
+                    data.platform &&
+                    data.platform.toUpperCase() ===
+                        "TWITCH" &&
+                    data.subject
+                ) {
+
+                    streamUrl =
+                        `https://twitch.tv/${encodeURIComponent(
+                            data.subject
+                        )}`;
+
+                }
+
+
+                if (streamUrl) {
+
+                    liveAction.href =
+                        streamUrl;
+
+
+                    liveAction.classList.add(
+                        "available"
+                    );
+
+                } else {
+
+                    liveAction.href =
+                        "#";
+
+
+                    liveAction.classList.remove(
+                        "available"
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            liveStatusDot.classList.add(
+                "offline"
+            );
+
+
+            liveStatusText.textContent =
+                "OFFLINE";
+
+
+            liveSubject.textContent =
+                "UNAVAILABLE";
+
+
+            livePlatform.textContent =
+                data.platform
+                    ? data.platform.toUpperCase()
+                    : "TWITCH";
+
+
+            liveStreamStatus.textContent =
+                "STANDBY";
+
+
+            liveOperation.classList.remove(
+                "active"
+            );
+
+
+            liveAction.href =
+                "#";
+
+
+            liveAction.classList.remove(
+                "available"
+            );
+
+        }
+
+
+        /* =========================
+           LOAD CHAT MESSAGES
+        ========================= */
+
+        async function cigaLoadMessages() {
+
+            const {
+                data,
+                error
+            } = await db.rpc(
+                "ciga_get_messages"
+            );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA MESSAGE LOAD ERROR:",
+                    error
+                );
+
+
+                communicationStatus.textContent =
+                    "COMMUNICATION CHANNEL ERROR.";
+
+
+                return;
+
+            }
+
+
+            communicationStatus.textContent =
+                "CIGA COMMUNICATION CHANNEL READY.";
+
+
+            cigaRenderMessages(
+                data || []
+            );
+
+        }
+
+
+        /* =========================
+           RENDER CHAT MESSAGES
+        ========================= */
+
+        function cigaRenderMessages(
+            messages
+        ) {
+
+            communicationMessages.innerHTML =
+                "";
+
+
+            if (
+                messages.length === 0
+            ) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "communication-empty";
+
+
+                empty.textContent =
+                    "> WAITING FOR GLOBAL TRANSMISSIONS...";
+
+
+                communicationMessages.appendChild(
+                    empty
+                );
+
+
+                return;
+
+            }
+
+
+            messages.forEach(
+                message => {
+
+                    const wrapper =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    wrapper.className =
+                        "communication-message";
+
+
+                    const header =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    header.className =
+                        "communication-message-header";
+
+
+                    header.textContent =
+                        `[OPERATIVE ${String(
+                            message.operative_number
+                        ).padStart(
+                            3,
+                            "0"
+                        )} // ${
+                            message.node_id
+                        }]`;
+
+
+                    const body =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    body.className =
+                        "communication-message-body";
+
+
+                    body.textContent =
+                        message.message;
+
+
+                    wrapper.appendChild(
+                        header
+                    );
+
+
+                    wrapper.appendChild(
+                        body
+                    );
+
+
+                    communicationMessages.appendChild(
+                        wrapper
+                    );
+
+                }
+            );
+
+
+            communicationMessages.scrollTop =
+                communicationMessages.scrollHeight;
+
+        }
+
+
+        /* =========================
+           SEND CHAT MESSAGE
+        ========================= */
+
+        async function cigaSendMessage() {
+
+            const message =
+                communicationInput.value.trim();
+
+
+            if (!message) {
+
+                return;
+
+            }
+
+
+            if (!cigaNode) {
+
+                communicationStatus.textContent =
+                    "NODE NOT REGISTERED.";
+
+                return;
+
+            }
+
+
+            if (!cigaOperative) {
+
+                communicationStatus.textContent =
+                    "OPERATIVE NOT REGISTERED.";
+
+                return;
+
+            }
+
+
+            communicationSend.disabled =
+                true;
+
+
+            communicationInput.disabled =
+                true;
+
+
+            communicationStatus.textContent =
+                "TRANSMITTING...";
+
+
+            const {
+                error
+            } = await db.rpc(
+                "ciga_send_message",
+                {
+                    requested_node_id:
+                        cigaNode,
+
+                    requested_operative:
+                        Number(
+                            cigaOperative
+                        ),
+
+                    requested_message:
+                        message
+                }
+            );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA MESSAGE SEND ERROR:",
+                    error
+                );
+
+
+                communicationStatus.textContent =
+                    "TRANSMISSION FAILED.";
+
+            } else {
+
+                communicationInput.value =
+                    "";
+
+
+                communicationStatus.textContent =
+                    "TRANSMISSION ACCEPTED.";
+
+
+                await cigaLoadMessages();
+
+            }
+
+
+            communicationSend.disabled =
+                false;
+
+
+            communicationInput.disabled =
+                false;
+
+
+            communicationInput.focus();
+
+        }
+
+
+        /* =========================
+           SEND BUTTON
+        ========================= */
+
+        communicationSend.addEventListener(
+            "click",
+            cigaSendMessage
+        );
+
+
+        /* =========================
+           ENTER TO SEND
+        ========================= */
+
+        communicationInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    cigaSendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           INITIAL CHAT LOAD
+        ========================= */
+
+        cigaLoadMessages();
+
+
+        /* =========================
+           CHAT REFRESH
+        ========================= */
+
+        setInterval(
+            cigaLoadMessages,
+            3000
+        );
+
+
+        /* =========================
+           INITIAL SESSION
+        ========================= */
+
+        const sessionStarted =
+            sessionStorage.getItem(
+                CIGA_SESSION_KEY
+            );
+
+
+        if (
+            !sessionStarted
+        ) {
+
+            sessionStorage.setItem(
+                CIGA_SESSION_KEY,
+                "true"
+            );
+
+
+            cigaAddLog(
+                "SITE OPEN"
+            );
+
+
+            cigaAddLog(
+                "SYSTEM CONNECTION ESTABLISHED"
+            );
+
+
+            cigaAddLog(
+                "OPERATIVE SESSION INITIALIZED"
+            );
+
+
+            cigaAddLog(
+                "DATABASE INTERFACE READY"
+            );
+
+
+            cigaAddLog(
+                "CONNECTION SECURE"
+            );
+
+        }
+
+
+        /* =========================
+           RETURN TO HOME
+        ========================= */
+
+        const previousPage =
+            sessionStorage.getItem(
+                CIGA_NEXT_PAGE_KEY
+            );
+
+
+        if (
+            sessionStarted &&
+            previousPage
+        ) {
+
+            cigaAddLog(
+                `${previousPage} CLOSED`
+            );
+
+
+            cigaAddLog(
+                "RETURNED TO MAIN SYSTEM"
+            );
+
+
+            sessionStorage.removeItem(
+                CIGA_NEXT_PAGE_KEY
+            );
+
+        }
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        cigaRefreshGlobalEvents();
+
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        const welcomeAlreadyShown =
+            sessionStorage.getItem(
+                CIGA_WELCOME_KEY
+            );
+
+
+        if (
+            welcomeAlreadyShown === "true"
+        ) {
 
             welcomeScreen.classList.add(
                 "hidden"
             );
 
-        },
-        1800
-    );
-
-
-    setTimeout(
-        async () => {
 
             home.classList.add(
                 "visible"
@@ -71,30 +3275,69 @@ if (
             cigaRenderLogs();
 
 
-            await cigaLoadLiveStatus();
+            cigaLoadLiveStatus();
 
-        },
-        2400
-    );
+        } else {
 
-}
-
-
-/* =========================
-   LIVE REFRESH
-========================= */
-
-setInterval(
-    cigaLoadLiveStatus,
-    10000
-);
+            sessionStorage.setItem(
+                CIGA_WELCOME_KEY,
+                "true"
+            );
 
 
-/* =========================
-   GLOBAL EVENTS REFRESH
-========================= */
+            setTimeout(
+                () => {
 
-setInterval(
-    cigaRefreshGlobalEvents,
-    10000
-);
+                    welcomeScreen.classList.add(
+                        "hidden"
+                    );
+
+                },
+                1800
+            );
+
+
+            setTimeout(
+                async () => {
+
+                    home.classList.add(
+                        "visible"
+                    );
+
+
+                    cigaRenderLogs();
+
+
+                    await cigaLoadLiveStatus();
+
+                },
+                2400
+            );
+
+        }
+
+
+        /* =========================
+           LIVE REFRESH
+        ========================= */
+
+        setInterval(
+            cigaLoadLiveStatus,
+            10000
+        );
+
+
+        /* =========================
+           GLOBAL EVENTS REFRESH
+        ========================= */
+
+        setInterval(
+            cigaRefreshGlobalEvents,
+            10000
+        );
+
+    </script>
+
+</body>
+
+</html>
