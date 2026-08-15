@@ -540,10 +540,29 @@
     } = supabase;
 
 
+    /*
+        Use the default persistent Supabase
+        session so all tabs can share it.
+    */
+
     const db =
         createClient(
             SUPABASE_URL,
-            SUPABASE_KEY
+            SUPABASE_KEY,
+            {
+                auth: {
+
+                    persistSession:
+                        true,
+
+                    autoRefreshToken:
+                        true,
+
+                    detectSessionInUrl:
+                        false
+
+                }
+            }
         );
 
 
@@ -567,6 +586,124 @@
         document.getElementById(
             "message"
         );
+
+
+    /* ==========================================
+       CHECK ADMIN SESSION
+    ========================================== */
+
+    async function checkExistingAdminSession() {
+
+        try {
+
+            const {
+                data:
+                sessionData,
+                error:
+                sessionError
+            } =
+                await db.auth.getSession();
+
+
+            if (
+                sessionError
+                ||
+                !sessionData.session
+            ) {
+
+                return false;
+
+            }
+
+
+            const userId =
+                sessionData.session.user.id;
+
+
+            const {
+                data:
+                adminData,
+                error:
+                adminError
+            } =
+                await db
+                    .from(
+                        "admins"
+                    )
+                    .select(
+                        "user_id, role"
+                    )
+                    .eq(
+                        "user_id",
+                        userId
+                    )
+                    .eq(
+                        "role",
+                        "ADMIN"
+                    )
+                    .maybeSingle();
+
+
+            if (
+                adminError
+                ||
+                !adminData
+            ) {
+
+                /*
+                    Session exists, but the user
+                    is not an authorized admin.
+                */
+
+                return false;
+
+            }
+
+
+            return true;
+
+
+        } catch (error) {
+
+            console.error(
+                "ADMIN SESSION CHECK ERROR:",
+                error
+            );
+
+
+            return false;
+
+        }
+
+    }
+
+
+    /* ==========================================
+       REDIRECT AUTHENTICATED ADMIN
+    ========================================== */
+
+    async function initializeAdminPage() {
+
+        const isAdmin =
+            await checkExistingAdminSession();
+
+
+        if (isAdmin) {
+
+            /*
+                The administrator is already
+                authenticated.
+
+                Skip the login screen entirely.
+            */
+
+            window.location.replace(
+                "admin-panel.html"
+            );
+
+        }
+
+    }
 
 
     /* ==========================================
@@ -596,7 +733,7 @@
             const email =
                 document.getElementById(
                     "email"
-                ).value;
+                ).value.trim();
 
 
             const password =
@@ -605,37 +742,140 @@
                 ).value;
 
 
-            const {
-                data,
-                error
-            } =
-                await db.auth.signInWithPassword({
+            try {
 
-                    email:
-                        email,
+                const {
+                    data,
+                    error
+                } =
+                    await db.auth.signInWithPassword({
 
-                    password:
-                        password
+                        email:
+                            email,
 
-                });
+                        password:
+                            password
+
+                    });
 
 
-            if (error) {
+                if (
+                    error
+                    ||
+                    !data.session
+                ) {
+
+                    console.error(
+                        "AUTH ERROR:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        "> AUTHENTICATION FAILED.";
+
+
+                    message.classList.add(
+                        "visible"
+                    );
+
+
+                    return;
+
+                }
+
+
+                /*
+                    Verify that the authenticated
+                    user is actually an ADMIN.
+                */
+
+                const userId =
+                    data.session.user.id;
+
+
+                const {
+                    data:
+                    adminData,
+                    error:
+                    adminError
+                } =
+                    await db
+                        .from(
+                            "admins"
+                        )
+                        .select(
+                            "user_id, role"
+                        )
+                        .eq(
+                            "user_id",
+                            userId
+                        )
+                        .eq(
+                            "role",
+                            "ADMIN"
+                        )
+                        .maybeSingle();
+
+
+                if (
+                    adminError
+                    ||
+                    !adminData
+                ) {
+
+                    console.error(
+                        "ADMIN CLEARANCE ERROR:",
+                        adminError
+                    );
+
+
+                    await db.auth.signOut({
+                        scope:
+                            "local"
+                    });
+
+
+                    message.textContent =
+                        "> ADMIN CLEARANCE NOT FOUND.";
+
+
+                    message.classList.add(
+                        "visible"
+                    );
+
+
+                    return;
+
+                }
+
+
+                /*
+                    Authentication successful.
+                */
+
+                window.location.replace(
+                    "admin-panel.html"
+                );
+
+
+            } catch (error) {
 
                 console.error(
-                    "AUTH ERROR:",
+                    "ADMIN LOGIN ERROR:",
                     error
                 );
 
 
                 message.textContent =
-                    "> AUTHENTICATION FAILED.";
+                    "> AUTHENTICATION SYSTEM ERROR.";
 
 
                 message.classList.add(
                     "visible"
                 );
 
+            } finally {
 
                 loginButton.disabled =
                     false;
@@ -644,25 +884,17 @@
                 loginButton.textContent =
                     "AUTHENTICATE";
 
-
-                return;
-
             }
-
-
-            /*
-                Authentication succeeded.
-
-                The next page will verify
-                that this authenticated user
-                actually exists in the admins table.
-            */
-
-            window.location.href =
-                "admin-panel.html";
 
         }
     );
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    initializeAdminPage();
 
 </script>
 
