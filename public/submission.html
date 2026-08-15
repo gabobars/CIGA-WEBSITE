@@ -11,7 +11,13 @@
     >
 
     <title>CIGA SYSTEMS // PERSONNEL SUBMISSION</title>
-    <link rel="icon" type="image/png" href="logo.png">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -21,6 +27,7 @@
             margin: 0;
             padding: 0;
         }
+
 
         body {
             background: #000;
@@ -36,12 +43,16 @@
             overflow-x: hidden;
         }
 
+
         .page {
             width: 100%;
+
             min-height: 100vh;
 
-            padding: 45px 60px;
+            padding:
+                45px 60px;
         }
+
 
         /* =========================
            HEADER
@@ -49,41 +60,58 @@
 
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
 
             padding-bottom: 18px;
+
             margin-bottom: 32px;
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.30);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
         }
+
 
         .title {
             font-size: 24px;
+
             letter-spacing: 4px;
         }
+
 
         .subtitle {
             margin-top: 8px;
 
-            font-size: 10px;
+            font-size: 11px;
+
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
         }
+
 
         .status {
             text-align: right;
 
-            font-size: 9px;
+            font-size: 10px;
+
             line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.5;
+            opacity: 0.65;
         }
+
 
         /* =========================
            INTRO
@@ -92,22 +120,35 @@
         .intro {
             margin-bottom: 28px;
 
-            padding: 18px 22px;
+            padding:
+                18px 22px;
 
             border-left:
                 2px solid
-                rgba(255,255,255,0.45);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
 
             background:
-                rgba(255,255,255,0.02);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
 
-            font-size: 11px;
+            font-size: 12px;
+
             line-height: 1.9;
 
             letter-spacing: 0.8px;
 
-            opacity: 0.7;
+            opacity: 0.76;
         }
+
 
         /* =========================
            FORM
@@ -117,6 +158,7 @@
             max-width: 1000px;
         }
 
+
         .panel {
             padding: 26px;
 
@@ -124,26 +166,44 @@
 
             border:
                 1px solid
-                rgba(255,255,255,0.25);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             background:
-                rgba(255,255,255,0.015);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
         }
 
+
         .panel-title {
-            font-size: 10px;
+            font-size: 11px;
 
             letter-spacing: 3px;
 
-            opacity: 0.5;
+            opacity: 0.58;
 
             padding-bottom: 12px;
+
             margin-bottom: 22px;
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.15);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
         }
+
 
         .field-grid {
             display: grid;
@@ -155,36 +215,49 @@
             gap: 20px;
         }
 
+
         .field {
             display: flex;
-            flex-direction: column;
+
+            flex-direction:
+                column;
 
             margin-bottom: 18px;
         }
 
+
         .field.full {
-            grid-column: 1 / -1;
+            grid-column:
+                1 / -1;
         }
+
 
         label {
             margin-bottom: 8px;
 
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.55;
         }
+
 
         input,
         textarea {
             width: 100%;
 
-            padding: 13px 14px;
+            padding:
+                13px 14px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.22);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
 
             outline: none;
 
@@ -194,7 +267,7 @@
 
             font-family: inherit;
 
-            font-size: 11px;
+            font-size: 12px;
 
             letter-spacing: 0.8px;
 
@@ -203,38 +276,64 @@
                 background 0.2s ease;
         }
 
+
         input {
             height: 45px;
         }
+
 
         textarea {
             min-height: 120px;
 
             resize: vertical;
 
-            line-height: 1.7;
+            line-height: 1.8;
         }
+
 
         input:focus,
         textarea:focus {
             border-color:
-                rgba(255,255,255,0.65);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
 
             background:
-                rgba(255,255,255,0.025);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
         }
 
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(
+                255,
+                255,
+                255,
+                0.35
+            );
+        }
+
+
         .hint {
-            margin-top: 6px;
+            margin-top: 7px;
 
-            font-size: 8px;
+            font-size: 9px;
 
-            line-height: 1.6;
+            line-height: 1.7;
 
             letter-spacing: 0.7px;
 
-            opacity: 0.3;
+            opacity: 0.42;
         }
+
 
         /* =========================
            FILE INPUT
@@ -245,32 +344,53 @@
 
             border:
                 1px dashed
-                rgba(255,255,255,0.25);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             background:
-                rgba(255,255,255,0.015);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
         }
+
 
         input[type="file"] {
             border: none;
 
             padding: 0;
 
-            background: transparent;
+            background:
+                transparent;
 
             color: #fff;
 
             height: auto;
+
+            font-size: 11px;
         }
+
 
         input[type="file"]::file-selector-button {
             margin-right: 12px;
 
-            padding: 9px 12px;
+            padding:
+                9px 12px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.25);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
 
             background: #000;
 
@@ -278,12 +398,36 @@
 
             font-family: inherit;
 
-            font-size: 9px;
+            font-size: 10px;
 
             letter-spacing: 1px;
 
             cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
         }
+
+
+        input[type="file"]::file-selector-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
 
         /* =========================
            SUBMIT
@@ -293,19 +437,28 @@
             display: flex;
 
             align-items: center;
-            justify-content: space-between;
+
+            justify-content:
+                space-between;
 
             gap: 20px;
 
             margin-top: 25px;
         }
 
+
         .submit-button {
-            padding: 14px 22px;
+            padding:
+                14px 22px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.45);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
 
             background: #000;
 
@@ -313,7 +466,7 @@
 
             font-family: inherit;
 
-            font-size: 10px;
+            font-size: 11px;
 
             letter-spacing: 2px;
 
@@ -324,13 +477,25 @@
                 border-color 0.2s ease;
         }
 
+
         .submit-button:hover {
             background:
-                rgba(255,255,255,0.06);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
 
             border-color:
-                rgba(255,255,255,0.75);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
         }
+
 
         .submit-button:disabled {
             opacity: 0.4;
@@ -338,15 +503,17 @@
             cursor: not-allowed;
         }
 
-        .form-status {
-            font-size: 9px;
 
-            line-height: 1.7;
+        .form-status {
+            font-size: 10px;
+
+            line-height: 1.8;
 
             letter-spacing: 1px;
 
-            opacity: 0.5;
+            opacity: 0.60;
         }
+
 
         /* =========================
            RESULT
@@ -361,18 +528,27 @@
 
             border:
                 1px solid
-                rgba(255,255,255,0.25);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
-            font-size: 10px;
+            font-size: 11px;
 
             line-height: 1.9;
 
             letter-spacing: 1px;
+
+            opacity: 0.78;
         }
+
 
         .result.visible {
             display: block;
         }
+
 
         /* =========================
            FOOTER
@@ -390,14 +566,20 @@
 
             border-top:
                 1px solid
-                rgba(255,255,255,0.20);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
 
-            font-size: 8px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.32;
+            opacity: 0.40;
         }
+
 
         /* =========================
            MOBILE
@@ -406,8 +588,10 @@
         @media (max-width: 700px) {
 
             .page {
-                padding: 22px 18px;
+                padding:
+                    22px 18px;
             }
+
 
             .header {
                 gap: 20px;
@@ -416,18 +600,51 @@
                     flex-start;
             }
 
+
             .title {
-                font-size: 17px;
+                font-size: 18px;
             }
+
+
+            .subtitle {
+                font-size: 10px;
+            }
+
+
+            .status {
+                font-size: 9px;
+            }
+
+
+            .intro {
+                font-size: 11px;
+
+                line-height: 1.85;
+            }
+
 
             .field-grid {
                 grid-template-columns:
                     1fr;
             }
 
+
             .field.full {
-                grid-column: auto;
+                grid-column:
+                    auto;
             }
+
+
+            label {
+                font-size: 9px;
+            }
+
+
+            input,
+            textarea {
+                font-size: 11px;
+            }
+
 
             .submit-area {
                 flex-direction:
@@ -437,12 +654,19 @@
                     flex-start;
             }
 
+
+            .submit-button {
+                width: 100%;
+            }
+
+
             .footer {
                 flex-direction:
                     column;
 
                 gap: 8px;
             }
+
         }
 
     </style>
@@ -474,9 +698,13 @@
 
         </div>
 
+
         <div class="status">
+
             CHANNEL: SECURE<br>
+
             STATUS: ACCEPTING
+
         </div>
 
     </header>
@@ -739,6 +967,7 @@
                     SUBJECT IMAGE
                 </label>
 
+
                 <div class="file-input">
 
                     <input
@@ -778,6 +1007,7 @@
                     NOTES
                 </label>
 
+
                 <textarea
                     id="notes"
                     name="notes"
@@ -790,8 +1020,11 @@
             <div class="submit-area">
 
                 <div class="form-status">
+
                     &gt; REVIEW REQUIRED<br>
+
                     &gt; STATUS: PENDING
+
                 </div>
 
 
@@ -817,13 +1050,16 @@
     </form>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer class="footer">
 
         <span>
             CIGA SYSTEMS // EXTERNAL SUBMISSION CHANNEL
         </span>
+
 
         <span>
             ALL SUBMISSIONS ARE REVIEWED
@@ -843,6 +1079,7 @@
 
     const SUPABASE_URL =
         "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
 
     const SUPABASE_KEY =
         "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
@@ -888,10 +1125,13 @@
             event.preventDefault();
 
 
-            submitButton.disabled = true;
+            submitButton.disabled =
+                true;
+
 
             submitButton.textContent =
                 "PROCESSING...";
+
 
             result.classList.remove(
                 "visible"
@@ -901,7 +1141,9 @@
             try {
 
                 const formData =
-                    new FormData(form);
+                    new FormData(
+                        form
+                    );
 
 
                 /* =========================
@@ -909,42 +1151,75 @@
                 ========================= */
 
                 const name =
-                    formData.get("name");
+                    formData.get(
+                        "name"
+                    );
+
 
                 const alias =
-                    formData.get("alias");
+                    formData.get(
+                        "alias"
+                    );
+
 
                 const description =
-                    formData.get("description");
+                    formData.get(
+                        "description"
+                    );
+
 
                 const primaryActivity =
                     formData.get(
                         "primary_activity"
                     );
 
+
                 const location =
-                    formData.get("location");
+                    formData.get(
+                        "location"
+                    );
+
 
                 const affiliation =
-                    formData.get("affiliation");
+                    formData.get(
+                        "affiliation"
+                    );
+
 
                 const origin =
-                    formData.get("origin");
+                    formData.get(
+                        "origin"
+                    );
+
 
                 const twitch =
-                    formData.get("twitch");
+                    formData.get(
+                        "twitch"
+                    );
+
 
                 const youtube =
-                    formData.get("youtube");
+                    formData.get(
+                        "youtube"
+                    );
+
 
                 const tiktok =
-                    formData.get("tiktok");
+                    formData.get(
+                        "tiktok"
+                    );
+
 
                 const discord =
-                    formData.get("discord");
+                    formData.get(
+                        "discord"
+                    );
+
 
                 const notes =
-                    formData.get("notes");
+                    formData.get(
+                        "notes"
+                    );
 
 
                 /* =========================
@@ -957,7 +1232,8 @@
                     ).files[0];
 
 
-                let photoUrl = null;
+                let photoUrl =
+                    null;
 
 
                 if (imageFile) {
@@ -968,9 +1244,11 @@
                     ========================= */
 
                     const allowedTypes = [
+
                         "image/png",
                         "image/jpeg",
                         "image/webp"
+
                     ];
 
 
@@ -1011,7 +1289,11 @@
 
 
                     const uniqueName =
-                        `${crypto.randomUUID()}.${fileExtension}`;
+                        `${
+                            crypto.randomUUID()
+                        }.${
+                            fileExtension
+                        }`;
 
 
                     const storagePath =
@@ -1029,20 +1311,24 @@
                     const {
                         error:
                         uploadError
-                    } = await db.storage
+                    } =
+                        await db.storage
 
-                        .from("personnel")
+                            .from(
+                                "personnel"
+                            )
 
-                        .upload(
-                            storagePath,
-                            imageFile,
-                            {
-                                contentType:
-                                    imageFile.type,
+                            .upload(
+                                storagePath,
+                                imageFile,
+                                {
+                                    contentType:
+                                        imageFile.type,
 
-                                upsert: false
-                            }
-                        );
+                                    upsert:
+                                        false
+                                }
+                            );
 
 
                     if (uploadError) {
@@ -1051,6 +1337,7 @@
                             "IMAGE UPLOAD ERROR:",
                             uploadError
                         );
+
 
                         throw new Error(
                             "IMAGE_UPLOAD_FAILED"
@@ -1066,13 +1353,16 @@
                     const {
                         data:
                         publicData
-                    } = db.storage
+                    } =
+                        db.storage
 
-                        .from("personnel")
+                            .from(
+                                "personnel"
+                            )
 
-                        .getPublicUrl(
-                            storagePath
-                        );
+                            .getPublicUrl(
+                                storagePath
+                            );
 
 
                     photoUrl =
@@ -1139,18 +1429,21 @@
                 const {
                     error:
                     submissionError
-                } = await db
+                } =
+                    await db
 
-                    .from(
-                        "personnel_submissions"
-                    )
+                        .from(
+                            "personnel_submissions"
+                        )
 
-                    .insert(
-                        [submission]
-                    );
+                        .insert(
+                            [submission]
+                        );
 
 
-                if (submissionError) {
+                if (
+                    submissionError
+                ) {
 
                     console.error(
                         "SUBMISSION ERROR:",
@@ -1181,9 +1474,10 @@
                     <br>
 
                     &gt; IDENTIFICATION IMAGE:
-                    ${photoUrl
-                        ? "UPLOADED"
-                        : "NOT PROVIDED"
+                    ${
+                        photoUrl
+                            ? "UPLOADED"
+                            : "NOT PROVIDED"
                     }
 
                     <br>
@@ -1192,6 +1486,7 @@
                     THE SUBMISSION BEFORE ACTIVATION.
 
                 `;
+
 
                 result.classList.add(
                     "visible"
@@ -1219,8 +1514,13 @@
                 ) {
 
                     message = `
-                        &gt; INVALID IMAGE FORMAT.<br>
+
+                        &gt; INVALID IMAGE FORMAT.
+
+                        <br>
+
                         &gt; USE PNG, JPG OR WEBP.
+
                     `;
 
                 }
@@ -1232,8 +1532,13 @@
                 ) {
 
                     message = `
-                        &gt; IMAGE TOO LARGE.<br>
+
+                        &gt; IMAGE TOO LARGE.
+
+                        <br>
+
                         &gt; MAXIMUM SIZE: 5 MB.
+
                     `;
 
                 }
@@ -1245,8 +1550,13 @@
                 ) {
 
                     message = `
-                        &gt; IMAGE UPLOAD FAILED.<br>
+
+                        &gt; IMAGE UPLOAD FAILED.
+
+                        <br>
+
                         &gt; RECORD WAS NOT SUBMITTED.
+
                     `;
 
                 }
@@ -1254,6 +1564,7 @@
 
                 result.innerHTML =
                     message;
+
 
                 result.classList.add(
                     "visible"
@@ -1264,6 +1575,7 @@
 
             submitButton.disabled =
                 false;
+
 
             submitButton.textContent =
                 "SUBMIT RECORD";
