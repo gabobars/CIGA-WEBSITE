@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // COMMUNICATION</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 45px 60px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.30);
+        }
+
+
+        .title {
+            font-size: 24px;
+
+            letter-spacing: 4px;
+        }
+
+
+        .subtitle {
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+        }
+
+
+        .header-status {
+            text-align: right;
+
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1px;
+
+            opacity: 0.65;
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            margin-bottom: 28px;
+
+            padding: 18px 21px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.76;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .message {
+            width: min(750px, 92vw);
+
+            margin:
+                80px auto;
+
+            padding: 25px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.75;
+        }
+
+
+        .message-title {
+            font-size: 20px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           COMMUNICATION
+        ========================= */
+
+        .communication {
+            display: none;
+        }
+
+
+        .communication.visible {
+            display: block;
+        }
+
+
+        /* =========================
+           TRANSMISSION HEADER
+        ========================= */
+
+        .transmission-header {
+            padding: 28px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+
+        .message-id {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.45;
+
+            margin-bottom: 12px;
+        }
+
+
+        .subject {
+            font-size: 29px;
+
+            letter-spacing: 4px;
+
+            line-height: 1.35;
+
+            margin-bottom: 22px;
+        }
+
+
+        .classification-row {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 15px 30px;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.65;
+        }
+
+
+        .classification-row strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+            padding: 25px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.015);
+        }
+
+
+        .panel-title {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.58;
+
+            padding-bottom: 11px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           METADATA
+        ========================= */
+
+        .metadata {
+            display: grid;
+
+            grid-template-columns:
+                150px
+                1fr;
+
+            gap: 13px 20px;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+
+        .metadata-label {
+            opacity: 0.42;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .metadata-value {
+            opacity: 0.90;
+
+            letter-spacing: 0.8px;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           TRANSMISSION STATUS
+        ========================= */
+
+        .transmission-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.62;
+        }
+
+
+        .status-dot {
+            width: 6px;
+
+            height: 6px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 7px
+                rgba(255,255,255,0.7);
+        }
+
+
+        /* =========================
+           MESSAGE BODY
+        ========================= */
+
+        .message-body {
+            min-height: 260px;
+
+            padding: 22px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.14);
+
+            background:
+                rgba(255,255,255,0.012);
+
+            font-size: 13px;
+
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            white-space: pre-wrap;
+
+            opacity: 0.88;
+        }
+
+
+        /* =========================
+           WARNING
+        ========================= */
+
+        .warning {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.62;
+        }
+
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 7px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+
+            transition:
+                opacity 0.2s ease;
+        }
+
+
+        .back:hover {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 20px;
+            }
+
+
+            .header {
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .title {
+                font-size: 18px;
+            }
+
+
+            .subtitle {
+                font-size: 10px;
+            }
+
+
+            .header-status {
+                font-size: 9px;
+            }
+
+
+            .terminal {
+                font-size: 11px;
+            }
+
+
+            .subject {
+                font-size: 20px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .classification-row {
+                flex-direction:
+                    column;
+
+                gap: 8px;
+            }
+
+
+            .metadata {
+                grid-template-columns:
+                    1fr;
+
+                gap: 4px;
+            }
+
+
+            .metadata-label {
+                margin-top: 8px;
+            }
+
+
+            .message-body {
+                font-size: 12px;
+
+                line-height: 1.9;
+            }
+
+
+            .warning {
+                font-size: 9px;
+            }
+
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div>
+
+            <div class="title">
+                CIGA SYSTEMS
+            </div>
+
+            <div class="subtitle">
+                COMMUNICATIONS DATABASE // TRANSMISSION
+            </div>
+
+        </div>
+
+
+        <div class="header-status">
+
+            DATABASE:
+            <span id="databaseStatus">
+                CONNECTING
+            </span>
+
+            <br>
+
+            RECORD:
+            <span id="recordStatus">
+                LOADING
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         TERMINAL
+    ========================= -->
+
+    <section class="terminal">
+
+        <div id="terminalLine1">
+            &gt; ACCESSING TRANSMISSION RECORD...
+        </div>
+
+        <div id="terminalLine2">
+            &gt; AUTHENTICATING COMMUNICATION...
+        </div>
+
+        <div id="terminalLine3">
+            &gt; VERIFYING TRANSMISSION STATUS...
+        </div>
+
+        <div id="terminalLine4">
+            &gt; WAITING FOR DATABASE RESPONSE...
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ERROR
+    ========================= -->
+
+    <section
+        class="message"
+        id="errorMessage"
+        style="display:none;"
+    >
+
+        <div class="message-title">
+            TRANSMISSION UNAVAILABLE
+        </div>
+
+        <div id="errorText">
+            &gt; COMMUNICATION RECORD COULD NOT BE RETRIEVED.
+        </div>
+
+        <br>
+
+        <a
+            href="communications-log.html"
+            class="back"
+        >
+            &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         COMMUNICATION
+    ========================= -->
+
+    <main
+        class="communication"
+        id="communication"
+    >
+
+
+        <!-- TRANSMISSION HEADER -->
+
+        <section class="transmission-header">
+
+            <div
+                class="message-id"
+                id="messageId"
+            >
+                COMM-000
+            </div>
+
+
+            <div
+                class="subject"
+                id="subject"
+            >
+                UNTITLED TRANSMISSION
+            </div>
+
+
+            <div class="classification-row">
+
+                <span>
+
+                    FROM:
+                    <strong id="sender">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    TO:
+                    <strong id="recipient">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    CLASSIFICATION:
+                    <strong id="classification">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    STATUS:
+                    <strong id="status">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- METADATA -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // TRANSMISSION DATA
+            </div>
+
+
+            <div class="metadata">
+
+
+                <div class="metadata-label">
+                    MESSAGE ID
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataMessageId"
+                >
+                    UNKNOWN
+                </div>
+
+
+                <div class="metadata-label">
+                    ORIGIN
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataSender"
+                >
+                    UNKNOWN
+                </div>
+
+
+                <div class="metadata-label">
+                    DESTINATION
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataRecipient"
+                >
+                    UNKNOWN
+                </div>
+
+
+                <div class="metadata-label">
+                    CLASSIFICATION
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataClassification"
+                >
+                    UNKNOWN
+                </div>
+
+
+                <div class="metadata-label">
+                    STATUS
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataStatus"
+                >
+                    UNKNOWN
+                </div>
+
+
+                <div class="metadata-label">
+                    TRANSMISSION TIME
+                </div>
+
+                <div
+                    class="metadata-value"
+                    id="metadataTime"
+                >
+                    UNKNOWN
+                </div>
+
+
+            </div>
+
+
+            <div class="transmission-status">
+
+                <span class="status-dot"></span>
+
+                <span id="transmissionStatusText">
+                    TRANSMISSION VERIFIED
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- MESSAGE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // MESSAGE CONTENT
+            </div>
+
+
+            <div
+                class="message-body"
+                id="messageBody"
+            >
+                NO MESSAGE CONTENT AVAILABLE.
+            </div>
+
+
+            <div class="warning">
+
+                CIGA SYSTEMS INTERNAL NOTICE:
+
+                <br>
+
+                THIS TRANSMISSION IS PART OF THE
+                CIGA INTERNAL COMMUNICATION ARCHIVE.
+
+                <br>
+
+                UNAUTHORIZED DISTRIBUTION OR
+                MODIFICATION OF ARCHIVED TRANSMISSIONS
+                IS PROHIBITED.
+
+            </div>
+
+        </section>
+
+
+        <!-- BACK -->
+
+        <a
+            href="communications-log.html"
+            class="back"
+        >
+            &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
+        </a>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // COMMUNICATIONS DATABASE
+        </span>
+
+        <span>
+            ALL ACCESS IS LOGGED
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       SUPABASE
+    ========================================== */
+
+    const SUPABASE_URL =
+        "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+    const SUPABASE_KEY =
+        "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+    const {
+        createClient
+    } = supabase;
+
+
+    const db =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const communication =
+        document.getElementById(
+            "communication"
+        );
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    const errorText =
+        document.getElementById(
+            "errorText"
+        );
+
+
+    const databaseStatus =
+        document.getElementById(
+            "databaseStatus"
+        );
+
+
+    const recordStatus =
+        document.getElementById(
+            "recordStatus"
+        );
+
+
+    const terminalLine4 =
+        document.getElementById(
+            "terminalLine4"
+        );
+
+
+    const messageId =
+        document.getElementById(
+            "messageId"
+        );
+
+
+    const subject =
+        document.getElementById(
+            "subject"
+        );
+
+
+    const sender =
+        document.getElementById(
+            "sender"
+        );
+
+
+    const recipient =
+        document.getElementById(
+            "recipient"
+        );
+
+
+    const classification =
+        document.getElementById(
+            "classification"
+        );
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    const metadataMessageId =
+        document.getElementById(
+            "metadataMessageId"
+        );
+
+
+    const metadataSender =
+        document.getElementById(
+            "metadataSender"
+        );
+
+
+    const metadataRecipient =
+        document.getElementById(
+            "metadataRecipient"
+        );
+
+
+    const metadataClassification =
+        document.getElementById(
+            "metadataClassification"
+        );
+
+
+    const metadataStatus =
+        document.getElementById(
+            "metadataStatus"
+        );
+
+
+    const metadataTime =
+        document.getElementById(
+            "metadataTime"
+        );
+
+
+    const messageBody =
+        document.getElementById(
+            "messageBody"
+        );
+
+
+    const transmissionStatusText =
+        document.getElementById(
+            "transmissionStatusText"
+        );
+
+
+    /* ==========================================
+       GET COMMUNICATION ID
+    ========================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const communicationId =
+        params.get(
+            "id"
+        );
+
+
+    /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       FORMAT DATE
+    ========================================== */
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "UNKNOWN";
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(
+                value
+            );
+
+        }
+
+
+        return date.toLocaleString(
+            [],
+            {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       SHOW ERROR
+    ========================================== */
+
+    function showError(
+        message
+    ) {
+
+        errorText.innerHTML =
+            `&gt; ${escapeHTML(
+                message
+            )}`;
+
+
+        errorMessage.style.display =
+            "block";
+
+
+        communication.classList.remove(
+            "visible"
+        );
+
+
+        databaseStatus.textContent =
+            "ERROR";
+
+
+        recordStatus.textContent =
+            "UNAVAILABLE";
+
+    }
+
+
+    /* ==========================================
+       LOAD COMMUNICATION
+    ========================================== */
+
+    async function loadCommunication() {
+
+        if (!communicationId) {
+
+            showError(
+                "NO COMMUNICATION IDENTIFIER PROVIDED."
+            );
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from(
+                    "communications"
+                )
+
+                .select(`
+                    id,
+                    message_id,
+                    sender,
+                    recipient,
+                    subject,
+                    content,
+                    classification,
+                    status,
+                    visible,
+                    created_at
+                `)
+
+                .eq(
+                    "id",
+                    communicationId
+                )
+
+                .eq(
+                    "visible",
+                    true
+                )
+
+                .maybeSingle();
+
+
+        if (error) {
+
+            console.error(
+                "COMMUNICATION LOAD ERROR:",
+                error
+            );
+
+
+            showError(
+                "DATABASE ERROR WHILE RETRIEVING TRANSMISSION."
+            );
+
+            return;
+
+        }
+
+
+        if (!data) {
+
+            showError(
+                "TRANSMISSION NOT FOUND OR ACCESS IS RESTRICTED."
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           DATABASE STATUS
+        ========================= */
+
+        databaseStatus.textContent =
+            "ONLINE";
+
+
+        recordStatus.textContent =
+            data.message_id ||
+            "UNKNOWN";
+
+
+        terminalLine4.textContent =
+            "> TRANSMISSION AUTHENTICATED. DISPLAYING RECORD...";
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        messageId.textContent =
+            data.message_id ||
+            "COMM-UNKNOWN";
+
+
+        subject.textContent =
+            (
+                data.subject ||
+                "UNTITLED TRANSMISSION"
+            ).toUpperCase();
+
+
+        sender.textContent =
+            data.sender ||
+            "UNKNOWN";
+
+
+        recipient.textContent =
+            data.recipient ||
+            "UNKNOWN";
+
+
+        classification.textContent =
+            data.classification ||
+            "UNSPECIFIED";
+
+
+        status.textContent =
+            data.status ||
+            "UNSPECIFIED";
+
+
+        /* =========================
+           METADATA
+        ========================= */
+
+        metadataMessageId.textContent =
+            data.message_id ||
+            "UNKNOWN";
+
+
+        metadataSender.textContent =
+            data.sender ||
+            "UNKNOWN";
+
+
+        metadataRecipient.textContent =
+            data.recipient ||
+            "UNKNOWN";
+
+
+        metadataClassification.textContent =
+            data.classification ||
+            "UNSPECIFIED";
+
+
+        metadataStatus.textContent =
+            data.status ||
+            "UNSPECIFIED";
+
+
+        metadataTime.textContent =
+            formatDate(
+                data.created_at
+            );
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        messageBody.textContent =
+            data.content ||
+            "NO MESSAGE CONTENT AVAILABLE.";
+
+
+        /* =========================
+           STATUS MESSAGE
+        ========================= */
+
+        transmissionStatusText.textContent =
+            `TRANSMISSION ${(
+                data.status ||
+                "VERIFIED"
+            ).toUpperCase()}`;
+
+
+        /* =========================
+           SHOW
+        ========================= */
+
+        communication.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadCommunication();
+
+</script>
+
+</body>
+
+</html>
