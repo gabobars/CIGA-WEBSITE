@@ -47,10 +47,6 @@
         }
 
 
-        /* =========================
-           PAGE
-        ========================= */
-
         .page {
 
             width: 100%;
@@ -600,6 +596,44 @@
 
 
         /* =========================
+           STANDALONE ARCHIVE
+        ========================= */
+
+        .standalone-notice {
+
+            padding: 16px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.65;
+
+        }
+
+
+        /* =========================
            TEXT CONTENT
         ========================= */
 
@@ -1000,9 +1034,29 @@
         </section>
 
 
+        <!-- STANDALONE NOTICE -->
+
+        <section
+            class="standalone-notice"
+            id="standaloneNotice"
+            style="display: none;"
+        >
+
+            &gt; THIS ARCHIVE IS NOT ASSOCIATED WITH A PERSONNEL FILE.
+
+            <br>
+
+            &gt; RECORD CLASSIFICATION: ANOMALOUS EVENT.
+
+        </section>
+
+
         <!-- PERSONNEL FILE -->
 
-        <section class="panel">
+        <section
+            class="panel"
+            id="personnelPanel"
+        >
 
             <div class="panel-title">
 
@@ -1077,7 +1131,10 @@
 
         <!-- PERSONNEL DATA -->
 
-        <section class="panel">
+        <section
+            class="panel"
+            id="personnelDataPanel"
+        >
 
             <div class="panel-title">
 
@@ -1285,9 +1342,32 @@
                 </div>
 
 
-                <div class="incident-value">
+                <div
+                    class="incident-value"
+                    id="incidentStatus"
+                >
 
                     ACTIVE RECORD
+
+                </div>
+
+
+                <div
+                    class="incident-label"
+                    id="associationLabel"
+                >
+
+                    ASSOCIATION
+
+                </div>
+
+
+                <div
+                    class="incident-value"
+                    id="associationValue"
+                >
+
+                    PERSONNEL RECORD
 
                 </div>
 
@@ -1453,6 +1533,24 @@
         );
 
 
+    const standaloneNotice =
+        document.getElementById(
+            "standaloneNotice"
+        );
+
+
+    const personnelPanel =
+        document.getElementById(
+            "personnelPanel"
+        );
+
+
+    const personnelDataPanel =
+        document.getElementById(
+            "personnelDataPanel"
+        );
+
+
     const personnelPhotoContainer =
         document.getElementById(
             "personnelPhotoContainer"
@@ -1537,6 +1635,24 @@
         );
 
 
+    const incidentStatus =
+        document.getElementById(
+            "incidentStatus"
+        );
+
+
+    const associationLabel =
+        document.getElementById(
+            "associationLabel"
+        );
+
+
+    const associationValue =
+        document.getElementById(
+            "associationValue"
+        );
+
+
     const incidentSummary =
         document.getElementById(
             "incidentSummary"
@@ -1546,6 +1662,12 @@
     const incidentContent =
         document.getElementById(
             "incidentContent"
+        );
+
+
+    const terminalLine2 =
+        document.getElementById(
+            "terminalLine2"
         );
 
 
@@ -1641,6 +1763,182 @@
 
         recordStatus.textContent =
             "UNAVAILABLE";
+
+    }
+
+
+    /* ==========================================
+       SHOW STANDALONE ARCHIVE
+    ========================================== */
+
+    function showStandaloneArchive() {
+
+        standaloneNotice.style.display =
+            "block";
+
+
+        personnelPanel.style.display =
+            "none";
+
+
+        personnelDataPanel.style.display =
+            "none";
+
+
+        terminalLine2.textContent =
+            "> NO ASSOCIATED PERSONNEL FILE // STANDALONE EVENT RECORD.";
+
+        associationLabel.textContent =
+            "ASSOCIATION";
+
+        associationValue.textContent =
+            "ANOMALOUS EVENT";
+
+    }
+
+
+    /* ==========================================
+       SHOW PERSONNEL ARCHIVE
+    ========================================== */
+
+    function showPersonnelArchive(
+        person
+    ) {
+
+        standaloneNotice.style.display =
+            "none";
+
+
+        personnelPanel.style.display =
+            "";
+
+
+        personnelDataPanel.style.display =
+            "";
+
+
+        terminalLine2.textContent =
+            "> RETRIEVING ASSOCIATED PERSONNEL FILE...";
+
+
+        associationLabel.textContent =
+            "ASSOCIATION";
+
+
+        associationValue.textContent =
+            "PERSONNEL RECORD";
+
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        if (
+            person.photo &&
+            person.photo.trim() !== ""
+        ) {
+
+            personnelPhotoContainer.innerHTML = `
+
+                <img
+                    src="${escapeHTML(
+                        person.photo
+                    )}"
+                    alt="SUBJECT IMAGE"
+                    class="personnel-photo"
+                >
+
+            `;
+
+        } else {
+
+            personnelPhotoContainer.innerHTML = `
+
+                <div
+                    class="personnel-photo-unavailable"
+                >
+
+                    IMAGE
+                    <br>
+                    UNAVAILABLE
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        personnelName.textContent =
+            (
+                person.name ||
+                "UNKNOWN"
+            ).toUpperCase();
+
+
+        personnelAlias.textContent =
+            `ALIAS: ${
+                person.alias ||
+                "UNAVAILABLE"
+            }`;
+
+
+        personnelDescription.textContent =
+            person.description ||
+            "NO PERSONNEL DESCRIPTION AVAILABLE.";
+
+
+        /* =========================
+           DATA
+        ========================= */
+
+        personnelFileNumber.textContent =
+            person.file_number ||
+            "UNKNOWN";
+
+
+        personnelStatus.textContent =
+            person.status ||
+            "UNKNOWN";
+
+
+        personnelClearance.textContent =
+            person.clearance ||
+            "UNKNOWN";
+
+
+        personnelThreat.textContent =
+            person.threat_level ||
+            "UNKNOWN";
+
+
+        personnelObservation.textContent =
+            person.observation ||
+            "UNKNOWN";
+
+
+        personnelActivity.textContent =
+            person.primary_activity ||
+            "UNKNOWN";
+
+
+        personnelLocation.textContent =
+            person.location ||
+            "UNKNOWN";
+
+
+        personnelAffiliation.textContent =
+            person.affiliation ||
+            "UNKNOWN";
+
+
+        personnelOrigin.textContent =
+            person.origin ||
+            "UNKNOWN";
 
     }
 
@@ -1753,17 +2051,6 @@
                 : data.personnel;
 
 
-        if (!person) {
-
-            showError(
-                "ASSOCIATED PERSONNEL FILE NOT FOUND."
-            );
-
-            return;
-
-        }
-
-
         /* =========================
            DATABASE STATUS
         ========================= */
@@ -1773,7 +2060,8 @@
 
 
         recordStatus.textContent =
-            data.archive_number;
+            data.archive_number ||
+            "UNKNOWN";
 
 
         terminalLine4.textContent =
@@ -1797,106 +2085,31 @@
 
 
         archiveSubject.textContent =
-            (
-                person.name ||
-                "UNKNOWN"
-            ).toUpperCase();
+            person
+                ? (
+                    person.name ||
+                    "UNKNOWN"
+                ).toUpperCase()
+                : "UNKNOWN ENTITY";
 
 
         /* =========================
-           PERSONNEL IMAGE
+           PERSONNEL / STANDALONE
         ========================= */
 
         if (
-            person.photo &&
-            person.photo.trim() !== ""
+            person
         ) {
 
-            personnelPhotoContainer.innerHTML = `
+            showPersonnelArchive(
+                person
+            );
 
-                <img
-                    src="${escapeHTML(
-                        person.photo
-                    )}"
-                    alt="SUBJECT IMAGE"
-                    class="personnel-photo"
-                >
+        } else {
 
-            `;
+            showStandaloneArchive();
 
         }
-
-
-        /* =========================
-           PERSONNEL MAIN
-        ========================= */
-
-        personnelName.textContent =
-            (
-                person.name ||
-                "UNKNOWN"
-            ).toUpperCase();
-
-
-        personnelAlias.textContent =
-            `ALIAS: ${
-                person.alias ||
-                "UNAVAILABLE"
-            }`;
-
-
-        personnelDescription.textContent =
-            person.description ||
-            "NO PERSONNEL DESCRIPTION AVAILABLE.";
-
-
-        /* =========================
-           PERSONNEL DATA
-        ========================= */
-
-        personnelFileNumber.textContent =
-            person.file_number ||
-            "UNKNOWN";
-
-
-        personnelStatus.textContent =
-            person.status ||
-            "UNKNOWN";
-
-
-        personnelClearance.textContent =
-            person.clearance ||
-            "UNKNOWN";
-
-
-        personnelThreat.textContent =
-            person.threat_level ||
-            "UNKNOWN";
-
-
-        personnelObservation.textContent =
-            person.observation ||
-            "UNKNOWN";
-
-
-        personnelActivity.textContent =
-            person.primary_activity ||
-            "UNKNOWN";
-
-
-        personnelLocation.textContent =
-            person.location ||
-            "UNKNOWN";
-
-
-        personnelAffiliation.textContent =
-            person.affiliation ||
-            "UNKNOWN";
-
-
-        personnelOrigin.textContent =
-            person.origin ||
-            "UNKNOWN";
 
 
         /* =========================
@@ -1906,6 +2119,12 @@
         incidentDate.textContent =
             data.incident_date ||
             "UNKNOWN";
+
+
+        incidentStatus.textContent =
+            data.visible
+                ? "ACTIVE PUBLIC RECORD"
+                : "INTERNAL RECORD";
 
 
         incidentSummary.textContent =
@@ -1921,6 +2140,11 @@
         /* =========================
            SHOW ARCHIVE
         ========================= */
+
+        errorPanel.classList.remove(
+            "visible"
+        );
+
 
         archive.classList.add(
             "visible"
