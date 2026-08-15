@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -18,6 +19,7 @@
     >
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
     <style>
 
@@ -690,6 +692,288 @@
 
 
         /* =========================
+           GLOBAL CIGA COMMUNICATION
+        ========================= */
+
+        .communication-panel {
+            margin-bottom: 30px;
+        }
+
+
+        .communication-identity {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            padding:
+                10px 12px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.45;
+        }
+
+
+        .communication-identity strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        .communication-messages {
+            height: 250px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.01
+                );
+
+            overflow-y: auto;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                )
+                transparent;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .communication-message {
+            margin-bottom: 12px;
+
+            opacity: 0.85;
+        }
+
+
+        .communication-message:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .communication-message-header {
+            margin-bottom: 3px;
+
+            font-size: 8px;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.45;
+        }
+
+
+        .communication-message-header strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        .communication-message-body {
+            white-space: pre-wrap;
+
+            word-break: break-word;
+
+            opacity: 0.9;
+        }
+
+
+        .communication-empty {
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.3;
+        }
+
+
+        .communication-input-area {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 10px;
+
+            margin-top: 12px;
+        }
+
+
+        .communication-input-area input {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 13px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .communication-input-area input:focus {
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+        }
+
+
+        .communication-input-area button {
+            height: 42px;
+
+            padding:
+                0 18px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.3
+                );
+
+            font-family: inherit;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .communication-input-area button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        .communication-input-area button:disabled {
+            opacity: 0.4;
+
+            cursor: not-allowed;
+        }
+
+
+        .communication-status {
+            margin-top: 8px;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
            SYSTEMS
         ========================= */
 
@@ -1022,7 +1306,14 @@
 
             .log {
                 flex-basis: 14px;
+
                 height: 14px;
+            }
+
+
+            .communication-input-area {
+                grid-template-columns:
+                    1fr;
             }
 
         }
@@ -1050,6 +1341,7 @@
             class="welcome-logo"
         >
 
+
         <div class="welcome-text">
             WELCOME OPERATIVE
         </div>
@@ -1075,6 +1367,7 @@
                     CIGA SYSTEMS
                 </div>
 
+
                 <div class="header-subtitle">
                     INTERNAL OPERATIONS NETWORK
                 </div>
@@ -1084,12 +1377,19 @@
 
             <div class="operator">
 
-                OPERATIVE: 001<br>
+                OPERATIVE:
+                <span id="operatorId">
+                    UNKNOWN
+                </span>
+
+                <br>
 
                 NODE:
                 <span id="operatorNode">
                     UNKNOWN
-                </span><br>
+                </span>
+
+                <br>
 
                 SESSION: ACTIVE
 
@@ -1111,6 +1411,7 @@
                     SYSTEM STATUS
                 </div>
 
+
                 <div class="status-value online">
 
                     <span class="online-dot"></span>
@@ -1128,6 +1429,7 @@
                     NETWORK STATUS
                 </div>
 
+
                 <div class="status-value">
                     SECURE
                 </div>
@@ -1140,6 +1442,7 @@
                 <div class="status-label">
                     CLEARANCE LEVEL
                 </div>
+
 
                 <div class="status-value">
                     OPERATIVE
@@ -1182,13 +1485,16 @@
                             CONTAIN
                         </div>
 
+
                         <div class="directive-item">
                             INTERCEPT
                         </div>
 
+
                         <div class="directive-item">
                             GUARD
                         </div>
+
 
                         <div class="directive-item">
                             APPREHEND
@@ -1312,6 +1618,84 @@
                     ACCESS TRANSMISSION
                 </a>
 
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GLOBAL CIGA COMMUNICATION
+        ========================= -->
+
+        <section class="panel communication-panel">
+
+            <div class="panel-title">
+                // GLOBAL CIGA COMMUNICATION
+            </div>
+
+
+            <div class="communication-identity">
+
+                <span>
+
+                    NODE:
+                    <strong id="chatNode">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    OPERATIVE:
+                    <strong id="chatOperative">
+                        UNKNOWN
+                    </strong>
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="communication-messages"
+                id="communicationMessages"
+            >
+
+                <div class="communication-empty">
+                    &gt; WAITING FOR GLOBAL TRANSMISSIONS...
+                </div>
+
+            </div>
+
+
+            <div class="communication-input-area">
+
+                <input
+                    type="text"
+                    id="communicationInput"
+                    maxlength="500"
+                    placeholder="ENTER TRANSMISSION..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    type="button"
+                    id="communicationSend"
+                >
+                    TRANSMIT
+                </button>
+
+            </div>
+
+
+            <div
+                class="communication-status"
+                id="communicationStatus"
+            >
+                CIGA COMMUNICATION CHANNEL READY.
             </div>
 
         </section>
@@ -1590,8 +1974,54 @@
             );
 
 
+        const operatorId =
+            document.getElementById(
+                "operatorId"
+            );
+
+
         /* =========================
-           USE BOOT NODE
+           CHAT ELEMENTS
+        ========================= */
+
+        const chatNode =
+            document.getElementById(
+                "chatNode"
+            );
+
+
+        const chatOperative =
+            document.getElementById(
+                "chatOperative"
+            );
+
+
+        const communicationMessages =
+            document.getElementById(
+                "communicationMessages"
+            );
+
+
+        const communicationInput =
+            document.getElementById(
+                "communicationInput"
+            );
+
+
+        const communicationSend =
+            document.getElementById(
+                "communicationSend"
+            );
+
+
+        const communicationStatus =
+            document.getElementById(
+                "communicationStatus"
+            );
+
+
+        /* =========================
+           CIGA IDENTITY
         ========================= */
 
         const cigaNode =
@@ -1600,9 +2030,39 @@
             );
 
 
+        const cigaOperative =
+            localStorage.getItem(
+                "ciga_operative_id"
+            );
+
+
+        const formattedOperative =
+            cigaOperative
+                ? String(
+                    cigaOperative
+                ).padStart(
+                    3,
+                    "0"
+                )
+                : "UNKNOWN";
+
+
         operatorNode.textContent =
             cigaNode ||
             "UNASSIGNED";
+
+
+        operatorId.textContent =
+            formattedOperative;
+
+
+        chatNode.textContent =
+            cigaNode ||
+            "UNASSIGNED";
+
+
+        chatOperative.textContent =
+            formattedOperative;
 
 
         /* =========================
@@ -2372,6 +2832,315 @@
 
 
         /* =========================
+           GLOBAL COMMUNICATION
+        ========================= */
+
+        async function cigaLoadMessages() {
+
+            const {
+                data,
+                error
+            } = await db.rpc(
+                "ciga_get_messages"
+            );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA MESSAGE LOAD ERROR:",
+                    error
+                );
+
+
+                communicationStatus.textContent =
+                    "COMMUNICATION CHANNEL ERROR.";
+
+                return;
+
+            }
+
+
+            communicationStatus.textContent =
+                "CIGA COMMUNICATION CHANNEL READY.";
+
+
+            cigaRenderMessages(
+                data || []
+            );
+
+        }
+
+
+        /* =========================
+           RENDER MESSAGES
+        ========================= */
+
+        function cigaRenderMessages(
+            messages
+        ) {
+
+            communicationMessages.innerHTML =
+                "";
+
+
+            if (
+                messages.length === 0
+            ) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "communication-empty";
+
+
+                empty.textContent =
+                    "> WAITING FOR GLOBAL TRANSMISSIONS...";
+
+
+                communicationMessages.appendChild(
+                    empty
+                );
+
+
+                return;
+
+            }
+
+
+            messages.forEach(
+                message => {
+
+                    const wrapper =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    wrapper.className =
+                        "communication-message";
+
+
+                    const header =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    header.className =
+                        "communication-message-header";
+
+
+                    header.textContent =
+                        `[OPERATIVE ${String(
+                            message.operative_number
+                        ).padStart(
+                            3,
+                            "0"
+                        )} // ${
+                            message.node_id
+                        }]`;
+
+
+                    const body =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    body.className =
+                        "communication-message-body";
+
+
+                    body.textContent =
+                        message.message;
+
+
+                    wrapper.appendChild(
+                        header
+                    );
+
+
+                    wrapper.appendChild(
+                        body
+                    );
+
+
+                    communicationMessages.appendChild(
+                        wrapper
+                    );
+
+                }
+            );
+
+
+            communicationMessages.scrollTop =
+                communicationMessages.scrollHeight;
+
+        }
+
+
+        /* =========================
+           SEND MESSAGE
+        ========================= */
+
+        async function cigaSendMessage() {
+
+            const message =
+                communicationInput.value.trim();
+
+
+            if (!message) {
+
+                return;
+
+            }
+
+
+            if (!cigaNode) {
+
+                communicationStatus.textContent =
+                    "NODE NOT REGISTERED.";
+
+                return;
+
+            }
+
+
+            if (!cigaOperative) {
+
+                communicationStatus.textContent =
+                    "OPERATIVE NOT REGISTERED.";
+
+                return;
+
+            }
+
+
+            communicationSend.disabled =
+                true;
+
+
+            communicationInput.disabled =
+                true;
+
+
+            communicationStatus.textContent =
+                "TRANSMITTING...";
+
+
+            const {
+                error
+            } = await db.rpc(
+                "ciga_send_message",
+                {
+                    requested_node_id:
+                        cigaNode,
+
+                    requested_operative:
+                        Number(
+                            cigaOperative
+                        ),
+
+                    requested_message:
+                        message
+                }
+            );
+
+
+            if (error) {
+
+                console.error(
+                    "CIGA MESSAGE SEND ERROR:",
+                    error
+                );
+
+
+                communicationStatus.textContent =
+                    "TRANSMISSION FAILED.";
+
+            } else {
+
+                communicationInput.value =
+                    "";
+
+
+                communicationStatus.textContent =
+                    "TRANSMISSION ACCEPTED.";
+
+
+                await cigaLoadMessages();
+
+            }
+
+
+            communicationSend.disabled =
+                false;
+
+
+            communicationInput.disabled =
+                false;
+
+
+            communicationInput.focus();
+
+        }
+
+
+        /* =========================
+           SEND BUTTON
+        ========================= */
+
+        communicationSend.addEventListener(
+            "click",
+            cigaSendMessage
+        );
+
+
+        /* =========================
+           ENTER TO SEND
+        ========================= */
+
+        communicationInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    cigaSendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           INITIAL CHAT LOAD
+        ========================= */
+
+        cigaLoadMessages();
+
+
+        /* =========================
+           CHAT REFRESH
+        ========================= */
+
+        setInterval(
+            cigaLoadMessages,
+            3000
+        );
+
+
+        /* =========================
            INITIAL SESSION
         ========================= */
 
@@ -2517,4 +3286,5 @@
     </script>
 
 </body>
+
 </html>
