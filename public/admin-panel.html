@@ -686,6 +686,288 @@
 
 
         /* =========================
+           ARCHIVE CREATOR
+        ========================= */
+
+        .archive-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+        .archive-full {
+            grid-column: 1 / -1;
+        }
+
+        .archive-field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .archive-label {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.4;
+        }
+
+        .archive-input,
+        .archive-select,
+        .archive-textarea {
+            width: 100%;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 0.8px;
+        }
+
+        .archive-input,
+        .archive-select {
+            height: 42px;
+
+            padding:
+                0 12px;
+        }
+
+        .archive-textarea {
+            min-height: 110px;
+
+            padding: 12px;
+
+            resize: vertical;
+
+            line-height: 1.7;
+        }
+
+        .archive-textarea.large {
+            min-height: 260px;
+        }
+
+        .archive-input:focus,
+        .archive-select:focus,
+        .archive-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+        .archive-select option {
+            background: #000;
+            color: #fff;
+        }
+
+        .archive-number {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+
+        .subject-preview {
+            margin-top: 20px;
+
+            padding: 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+        }
+
+        .subject-preview-title {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 14px;
+        }
+
+        .subject-preview-grid {
+            display: grid;
+
+            grid-template-columns:
+                150px
+                1fr;
+
+            gap: 10px 18px;
+
+            font-size: 9px;
+
+            line-height: 1.7;
+        }
+
+        .subject-preview-label {
+            opacity: 0.35;
+
+            letter-spacing: 1.5px;
+        }
+
+        .subject-preview-value {
+            opacity: 0.8;
+
+            word-break: break-word;
+        }
+
+        .archive-options {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 6px;
+        }
+
+        .archive-checkbox {
+            width: 14px;
+            height: 14px;
+
+            accent-color: #fff;
+        }
+
+        .archive-option-label {
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.6;
+
+            cursor: pointer;
+        }
+
+        .archive-actions {
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .archive-create-button {
+            border-color:
+                rgba(255,255,255,0.55);
+        }
+
+
+        /* =========================
+           ARCHIVE LIST
+        ========================= */
+
+        .archive-item {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 18px;
+
+            padding: 17px;
+
+            margin-bottom: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+        }
+
+        .archive-item:hover {
+            background:
+                rgba(255,255,255,0.045);
+
+            border-color:
+                rgba(255,255,255,0.4);
+        }
+
+        .archive-item-number {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.35;
+
+            margin-bottom: 7px;
+        }
+
+        .archive-item-title {
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 8px;
+        }
+
+        .archive-item-meta {
+            font-size: 8px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+        .archive-item-status {
+            display: flex;
+
+            align-items:
+                center;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+        }
+
+        .archive-item-status::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            margin-right: 8px;
+
+            border-radius: 50%;
+
+            background: #fff;
+        }
+
+
+        /* =========================
            FOOTER
         ========================= */
 
@@ -772,6 +1054,31 @@
                     column;
             }
 
+            .archive-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .archive-full {
+                grid-column:
+                    auto;
+            }
+
+            .subject-preview-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .archive-actions {
+                flex-direction:
+                    column;
+            }
+
+            .archive-item {
+                grid-template-columns:
+                    1fr;
+            }
+
             .footer {
                 flex-direction:
                     column;
@@ -783,6 +1090,7 @@
     </style>
 
 </head>
+
 
 <body>
 
@@ -826,6 +1134,10 @@
 
         <div id="terminalStatus">
             &gt; WAITING FOR AUTHORIZATION...
+        </div>
+
+        <div>
+            &gt; ARCHIVE SYSTEM: AVAILABLE
         </div>
 
     </section>
@@ -1022,6 +1334,358 @@
         </section>
 
 
+        <!-- =========================
+             ARCHIVE CREATION
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // CREATE ARCHIVE RECORD
+            </div>
+
+
+            <form id="archiveForm">
+
+
+                <div class="archive-grid">
+
+
+                    <!-- ARCHIVE NUMBER -->
+
+                    <div class="archive-field">
+
+                        <label class="archive-label">
+                            ARCHIVE NUMBER
+                        </label>
+
+                        <input
+                            type="text"
+                            id="archiveNumber"
+                            class="archive-input archive-number"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <!-- SUBJECT -->
+
+                    <div class="archive-field">
+
+                        <label
+                            class="archive-label"
+                            for="archiveSubject"
+                        >
+                            SUBJECT / PERSONNEL FILE
+                        </label>
+
+                        <select
+                            id="archiveSubject"
+                            class="archive-select"
+                            required
+                        >
+
+                            <option value="">
+                                SELECT PERSONNEL FILE
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TITLE -->
+
+                    <div
+                        class="archive-field archive-full"
+                    >
+
+                        <label
+                            class="archive-label"
+                            for="archiveTitle"
+                        >
+                            ARCHIVE TITLE
+                        </label>
+
+                        <input
+                            type="text"
+                            id="archiveTitle"
+                            class="archive-input"
+                            placeholder="RCPD INCIDENT"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- INCIDENT DATE -->
+
+                    <div class="archive-field">
+
+                        <label
+                            class="archive-label"
+                            for="archiveDate"
+                        >
+                            INCIDENT DATE
+                        </label>
+
+                        <input
+                            type="text"
+                            id="archiveDate"
+                            class="archive-input"
+                            placeholder="UNKNOWN / CLASSIFIED / 14/08/2026"
+                        >
+
+                    </div>
+
+
+                    <!-- VISIBLE -->
+
+                    <div class="archive-field">
+
+                        <label class="archive-label">
+                            PUBLIC VISIBILITY
+                        </label>
+
+                        <div class="archive-options">
+
+                            <input
+                                type="checkbox"
+                                id="archiveVisible"
+                                class="archive-checkbox"
+                            >
+
+                            <label
+                                for="archiveVisible"
+                                class="archive-option-label"
+                            >
+                                MAKE ARCHIVE PUBLIC
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUMMARY -->
+
+                    <div
+                        class="archive-field archive-full"
+                    >
+
+                        <label
+                            class="archive-label"
+                            for="archiveSummary"
+                        >
+                            INCIDENT SUMMARY
+                        </label>
+
+                        <textarea
+                            id="archiveSummary"
+                            class="archive-textarea"
+                            placeholder="Brief description of the incident..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- FULL REPORT -->
+
+                    <div
+                        class="archive-field archive-full"
+                    >
+
+                        <label
+                            class="archive-label"
+                            for="archiveContent"
+                        >
+                            FULL ARCHIVE REPORT
+                        </label>
+
+                        <textarea
+                            id="archiveContent"
+                            class="archive-textarea large"
+                            placeholder="Write the complete archive report here..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- SUBJECT PREVIEW -->
+
+                <div
+                    class="subject-preview"
+                    id="subjectPreview"
+                >
+
+                    <div class="subject-preview-title">
+                        // SELECTED PERSONNEL FILE
+                    </div>
+
+
+                    <div class="subject-preview-grid">
+
+                        <div class="subject-preview-label">
+                            STATUS
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewStatus"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            CLEARANCE
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewClearance"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            THREAT LEVEL
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewThreat"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            LOCATION
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewLocation"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            AFFILIATION
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewAffiliation"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            ORIGIN
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewOrigin"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            OBSERVATION
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewObservation"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+
+                        <div class="subject-preview-label">
+                            PRIMARY ACTIVITY
+                        </div>
+
+                        <div
+                            class="subject-preview-value"
+                            id="previewActivity"
+                        >
+                            UNAVAILABLE
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div
+                    class="result"
+                    id="archiveResult"
+                ></div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="archive-actions">
+
+                    <button
+                        type="button"
+                        id="refreshArchiveData"
+                    >
+                        REFRESH DATA
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="archive-create-button"
+                        id="createArchiveButton"
+                    >
+                        CREATE ARCHIVE
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             ARCHIVE LIST
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // ARCHIVE DATABASE
+            </div>
+
+
+            <div id="archiveList">
+
+                <div class="empty">
+                    &gt; LOADING ARCHIVES...
+                </div>
+
+            </div>
+
+        </section>
+
+
         <!-- LOGOUT -->
 
         <button
@@ -1157,9 +1821,117 @@
         );
 
 
+    /* ==========================================
+       ARCHIVE ELEMENTS
+    ========================================== */
+
+    const archiveForm =
+        document.getElementById(
+            "archiveForm"
+        );
+
+    const archiveNumber =
+        document.getElementById(
+            "archiveNumber"
+        );
+
+    const archiveSubject =
+        document.getElementById(
+            "archiveSubject"
+        );
+
+    const archiveTitle =
+        document.getElementById(
+            "archiveTitle"
+        );
+
+    const archiveDate =
+        document.getElementById(
+            "archiveDate"
+        );
+
+    const archiveSummary =
+        document.getElementById(
+            "archiveSummary"
+        );
+
+    const archiveContent =
+        document.getElementById(
+            "archiveContent"
+        );
+
+    const archiveVisible =
+        document.getElementById(
+            "archiveVisible"
+        );
+
+    const archiveResult =
+        document.getElementById(
+            "archiveResult"
+        );
+
+    const archiveList =
+        document.getElementById(
+            "archiveList"
+        );
+
+    const createArchiveButton =
+        document.getElementById(
+            "createArchiveButton"
+        );
+
+    const refreshArchiveData =
+        document.getElementById(
+            "refreshArchiveData"
+        );
+
+
+    const previewStatus =
+        document.getElementById(
+            "previewStatus"
+        );
+
+    const previewClearance =
+        document.getElementById(
+            "previewClearance"
+        );
+
+    const previewThreat =
+        document.getElementById(
+            "previewThreat"
+        );
+
+    const previewLocation =
+        document.getElementById(
+            "previewLocation"
+        );
+
+    const previewAffiliation =
+        document.getElementById(
+            "previewAffiliation"
+        );
+
+    const previewOrigin =
+        document.getElementById(
+            "previewOrigin"
+        );
+
+    const previewObservation =
+        document.getElementById(
+            "previewObservation"
+        );
+
+    const previewActivity =
+        document.getElementById(
+            "previewActivity"
+        );
+
+
     let currentSubmission = null;
 
     let pendingAction = null;
+
+    let personnelRecords = [];
 
 
     /* ==========================================
@@ -1283,7 +2055,14 @@
             "visible"
         );
 
-        loadSubmissions();
+
+        await loadSubmissions();
+
+        await loadPersonnel();
+
+        await prepareNextArchiveNumber();
+
+        await loadArchives();
 
     }
 
@@ -2177,6 +2956,8 @@
 
             await loadSubmissions();
 
+            await loadPersonnel();
+
 
         } catch (error) {
 
@@ -2313,6 +3094,693 @@
 
         reviewResult.classList.add(
             "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       LOAD PERSONNEL
+    ========================================== */
+
+    async function loadPersonnel() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from("personnel")
+
+                .select(
+                    "id, file_number, name, alias, status, clearance, observation, threat_level, description, primary_activity, location, affiliation, origin, photo, visible"
+                )
+
+                .order(
+                    "file_number",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "PERSONNEL LOAD ERROR:",
+                error
+            );
+
+
+            archiveSubject.innerHTML = `
+
+                <option value="">
+                    PERSONNEL DATABASE ERROR
+                </option>
+
+            `;
+
+            personnelRecords = [];
+
+            return;
+
+        }
+
+
+        personnelRecords =
+            data || [];
+
+
+        archiveSubject.innerHTML = `
+
+            <option value="">
+                SELECT PERSONNEL FILE
+            </option>
+
+        `;
+
+
+        personnelRecords.forEach(
+            person => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    person.id;
+
+
+                option.textContent =
+                    `${person.file_number || "UNKNOWN"} // ${person.name || "UNKNOWN"}`;
+
+
+                archiveSubject.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        resetSubjectPreview();
+
+    }
+
+
+    /* ==========================================
+       SUBJECT CHANGE
+    ========================================== */
+
+    archiveSubject.addEventListener(
+        "change",
+        function() {
+
+            const selectedId =
+                Number(
+                    archiveSubject.value
+                );
+
+
+            const person =
+                personnelRecords.find(
+                    record =>
+                        Number(
+                            record.id
+                        ) === selectedId
+                );
+
+
+            if (!person) {
+
+                resetSubjectPreview();
+
+                return;
+
+            }
+
+
+            previewStatus.textContent =
+                person.status ||
+                "UNAVAILABLE";
+
+            previewClearance.textContent =
+                person.clearance ||
+                "UNAVAILABLE";
+
+            previewThreat.textContent =
+                person.threat_level ||
+                "UNAVAILABLE";
+
+            previewLocation.textContent =
+                person.location ||
+                "UNAVAILABLE";
+
+            previewAffiliation.textContent =
+                person.affiliation ||
+                "UNAVAILABLE";
+
+            previewOrigin.textContent =
+                person.origin ||
+                "UNAVAILABLE";
+
+            previewObservation.textContent =
+                person.observation ||
+                "UNAVAILABLE";
+
+            previewActivity.textContent =
+                person.primary_activity ||
+                "UNAVAILABLE";
+
+        }
+    );
+
+
+    /* ==========================================
+       RESET SUBJECT PREVIEW
+    ========================================== */
+
+    function resetSubjectPreview() {
+
+        previewStatus.textContent =
+            "UNAVAILABLE";
+
+        previewClearance.textContent =
+            "UNAVAILABLE";
+
+        previewThreat.textContent =
+            "UNAVAILABLE";
+
+        previewLocation.textContent =
+            "UNAVAILABLE";
+
+        previewAffiliation.textContent =
+            "UNAVAILABLE";
+
+        previewOrigin.textContent =
+            "UNAVAILABLE";
+
+        previewObservation.textContent =
+            "UNAVAILABLE";
+
+        previewActivity.textContent =
+            "UNAVAILABLE";
+
+    }
+
+
+    /* ==========================================
+       PREPARE NEXT ARCHIVE NUMBER
+    ========================================== */
+
+    async function prepareNextArchiveNumber() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from("archives")
+
+                .select(
+                    "archive_number"
+                );
+
+
+        if (error) {
+
+            console.error(
+                "ARCHIVE NUMBER LOAD ERROR:",
+                error
+            );
+
+
+            archiveNumber.value =
+                "ARCHIVE-001";
+
+            return;
+
+        }
+
+
+        let highestNumber =
+            0;
+
+
+        (data || []).forEach(
+            archive => {
+
+                const match =
+                    String(
+                        archive.archive_number ||
+                        ""
+                    ).match(
+                        /(\d+)/
+                    );
+
+
+                if (match) {
+
+                    const number =
+                        parseInt(
+                            match[1],
+                            10
+                        );
+
+
+                    if (
+                        !Number.isNaN(number) &&
+                        number > highestNumber
+                    ) {
+
+                        highestNumber =
+                            number;
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        archiveNumber.value =
+            `ARCHIVE-${String(
+                highestNumber + 1
+            ).padStart(
+                3,
+                "0"
+            )}`;
+
+    }
+
+
+    /* ==========================================
+       CREATE ARCHIVE
+    ========================================== */
+
+    archiveForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const selectedId =
+                Number(
+                    archiveSubject.value
+                );
+
+
+            const selectedPersonnel =
+                personnelRecords.find(
+                    person =>
+                        Number(
+                            person.id
+                        ) === selectedId
+                );
+
+
+            if (!selectedPersonnel) {
+
+                showArchiveResult(
+                    "> ARCHIVE CREATION FAILED.<br>" +
+                    "> SELECT A PERSONNEL FILE."
+                );
+
+                return;
+
+            }
+
+
+            const archiveTitleValue =
+                archiveTitle.value.trim();
+
+
+            const summaryValue =
+                archiveSummary.value.trim();
+
+
+            const contentValue =
+                archiveContent.value.trim();
+
+
+            if (!archiveTitleValue) {
+
+                showArchiveResult(
+                    "> ARCHIVE CREATION FAILED.<br>" +
+                    "> ARCHIVE TITLE REQUIRED."
+                );
+
+                return;
+
+            }
+
+
+            createArchiveButton.disabled =
+                true;
+
+            createArchiveButton.textContent =
+                "CREATING ARCHIVE...";
+
+
+            const archiveRecord = {
+
+                archive_number:
+                    archiveNumber.value,
+
+                title:
+                    archiveTitleValue,
+
+                personnel_id:
+                    selectedPersonnel.id,
+
+                incident_date:
+                    archiveDate.value.trim() ||
+                    null,
+
+                summary:
+                    summaryValue ||
+                    null,
+
+                content:
+                    contentValue ||
+                    null,
+
+                visible:
+                    archiveVisible.checked
+
+            };
+
+
+            const {
+                data,
+                error
+            } =
+                await db
+
+                    .from("archives")
+
+                    .insert(
+                        [archiveRecord]
+                    )
+
+                    .select()
+                    .single();
+
+
+            if (error) {
+
+                console.error(
+                    "ARCHIVE CREATION ERROR:",
+                    error
+                );
+
+
+                showArchiveResult(
+                    "> ARCHIVE CREATION FAILED.<br>" +
+                    `> ${escapeHTML(error.message)}`
+                );
+
+
+                createArchiveButton.disabled =
+                    false;
+
+                createArchiveButton.textContent =
+                    "CREATE ARCHIVE";
+
+                return;
+
+            }
+
+
+            showArchiveResult(
+                `> ARCHIVE CREATED.<br>` +
+                `> ${escapeHTML(
+                    data.archive_number
+                )} // ${escapeHTML(
+                    data.title
+                )}<br>` +
+                `> SUBJECT: ${escapeHTML(
+                    selectedPersonnel.name
+                )}<br>` +
+                `> VISIBILITY: ${
+                    data.visible
+                        ? "PUBLIC"
+                        : "INTERNAL"
+                }`
+            );
+
+
+            archiveForm.reset();
+
+            resetSubjectPreview();
+
+
+            await prepareNextArchiveNumber();
+
+            await loadArchives();
+
+
+            createArchiveButton.disabled =
+                false;
+
+            createArchiveButton.textContent =
+                "CREATE ARCHIVE";
+
+        }
+    );
+
+
+    /* ==========================================
+       SHOW ARCHIVE RESULT
+    ========================================== */
+
+    function showArchiveResult(
+        message
+    ) {
+
+        archiveResult.innerHTML =
+            message;
+
+        archiveResult.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       REFRESH ARCHIVE DATA
+    ========================================== */
+
+    refreshArchiveData.addEventListener(
+        "click",
+        async function() {
+
+            refreshArchiveData.disabled =
+                true;
+
+            refreshArchiveData.textContent =
+                "REFRESHING...";
+
+
+            await loadPersonnel();
+
+            await prepareNextArchiveNumber();
+
+            await loadArchives();
+
+
+            refreshArchiveData.disabled =
+                false;
+
+            refreshArchiveData.textContent =
+                "REFRESH DATA";
+
+        }
+    );
+
+
+    /* ==========================================
+       LOAD ARCHIVES
+    ========================================== */
+
+    async function loadArchives() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+
+                .from("archives")
+
+                .select(`
+                    id,
+                    archive_number,
+                    title,
+                    personnel_id,
+                    incident_date,
+                    summary,
+                    visible,
+                    created_at,
+                    personnel (
+                        id,
+                        file_number,
+                        name,
+                        alias
+                    )
+                `)
+
+                .order(
+                    "id",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "ARCHIVE LOAD ERROR:",
+                error
+            );
+
+
+            archiveList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; ARCHIVE DATABASE ERROR.<br>
+                    &gt; ${escapeHTML(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            archiveList.innerHTML = `
+
+                <div class="empty">
+
+                    &gt; NO ARCHIVE RECORDS.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        archiveList.innerHTML =
+            "";
+
+
+        data.forEach(
+            archive => {
+
+                const person =
+                    archive.personnel;
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "archive-item";
+
+
+                item.innerHTML = `
+
+                    <div>
+
+                        <div class="archive-item-number">
+
+                            ${escapeHTML(
+                                archive.archive_number
+                            )}
+
+                        </div>
+
+
+                        <div class="archive-item-title">
+
+                            ${escapeHTML(
+                                archive.title
+                            )}
+
+                        </div>
+
+
+                        <div class="archive-item-meta">
+
+                            SUBJECT:
+                            ${escapeHTML(
+                                person?.name ||
+                                "UNKNOWN"
+                            )}
+
+                            <br>
+
+                            PERSONNEL FILE:
+                            ${escapeHTML(
+                                person?.file_number ||
+                                "UNKNOWN"
+                            )}
+
+                            <br>
+
+                            INCIDENT DATE:
+                            ${escapeHTML(
+                                archive.incident_date ||
+                                "UNKNOWN"
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="archive-item-status">
+
+                        ${
+                            archive.visible
+                                ? "PUBLIC"
+                                : "INTERNAL"
+                        }
+
+                    </div>
+
+                `;
+
+
+                archiveList.appendChild(
+                    item
+                );
+
+            }
         );
 
     }
