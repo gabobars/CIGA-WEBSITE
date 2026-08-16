@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // PUBLIC LICENSE</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #000;
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            padding:
+                35px 50px;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 14px;
+
+            margin-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+        }
+
+
+        .header-title {
+
+            font-size: 22px;
+
+            letter-spacing: 4px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            transition:
+                text-shadow 0.2s ease;
+
+        }
+
+
+        .header-title:hover {
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                ),
+
+                0 0 15px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+        }
+
+
+        .header-subtitle {
+
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+
+        }
+
+
+        .header-status {
+
+            text-align: right;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            line-height: 1.8;
+
+            opacity: 0.55;
+
+        }
+
+
+        /* =========================
+           NOTICE
+        ========================= */
+
+        .notice {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .notice-title {
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.55;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .notice-text {
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.82;
+
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .content-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            padding: 24px;
+
+        }
+
+
+        .panel.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .panel-title {
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.55;
+
+            margin-bottom: 20px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+        }
+
+
+        .panel p {
+
+            font-size: 12px;
+
+            line-height: 1.9;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.82;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .panel p:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =========================
+           RULES
+        ========================= */
+
+        .rules {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .rule {
+
+            border-left:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.018
+                );
+
+            padding:
+                13px 15px;
+
+        }
+
+
+        .rule-number {
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .rule-title {
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .rule-description {
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.70;
+
+        }
+
+
+        /* =========================
+           CREDIT BLOCK
+        ========================= */
+
+        .credit {
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            margin-top: 15px;
+
+        }
+
+
+        .credit-label {
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.42;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .credit-text {
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.80;
+
+        }
+
+
+        /* =========================
+           STATUS LINE
+        ========================= */
+
+        .status-line {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-top: 20px;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.55;
+
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+
+            height: 6px;
+
+            background: #fff;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 8px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+
+        }
+
+
+        .footer a {
+
+            color: #fff;
+
+            text-decoration: none;
+
+        }
+
+
+        .footer a:hover {
+
+            opacity: 1;
+
+            text-shadow:
+                0 0 7px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+
+                padding: 25px;
+
+            }
+
+
+            .content-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .panel.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .page {
+
+                padding: 18px;
+
+            }
+
+
+            .header {
+
+                align-items:
+                    flex-start;
+
+                gap: 20px;
+
+            }
+
+
+            .header-title {
+
+                font-size: 16px;
+
+            }
+
+
+            .header-status {
+
+                font-size: 8px;
+
+            }
+
+
+            .footer {
+
+                flex-direction:
+                    column;
+
+                gap: 10px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div>
+
+            <a
+                href="home.html"
+                class="header-title"
+            >
+                CIGA SYSTEMS
+            </a>
+
+            <div class="header-subtitle">
+                PUBLIC CREATIVE LICENSE
+            </div>
+
+        </div>
+
+
+        <div class="header-status">
+
+            DOCUMENT:
+            CIGA-PCL-001
+
+            <br>
+
+            STATUS:
+            ACTIVE
+
+            <br>
+
+            CLASS:
+            PUBLIC
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         NOTICE
+    ========================= -->
+
+    <section class="notice">
+
+        <div class="notice-title">
+            // PUBLIC USE DIRECTIVE
+        </div>
+
+
+        <div class="notice-text">
+
+            The CIGA SYSTEMS universe is a fictional
+            creative setting created and maintained by
+            GaboBars. This license permits members of
+            the public to create independent works
+            inspired by or derived from the CIGA SYSTEMS
+            universe, subject to the conditions defined
+            below.
+
+        </div>
+
+
+        <div class="status-line">
+
+            <span class="status-dot"></span>
+
+            CREATIVE ACCESS:
+            AUTHORIZED UNDER LICENSE
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CORE
+    ========================= -->
+
+    <div class="content-grid">
+
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 01 — PERMITTED USE
+            </div>
+
+
+            <p>
+
+                Anyone may create original stories,
+                games, artwork, videos, animations,
+                music, documents, roleplay material,
+                websites and other creative works based
+                upon the CIGA SYSTEMS universe.
+
+            </p>
+
+
+            <p>
+
+                Derivative works may expand upon existing
+                CIGA lore or introduce new characters,
+                locations, organizations, events and
+                interpretations, provided that the
+                requirements of this license are respected.
+
+            </p>
+
+
+            <p>
+
+                Creative works do not require individual
+                permission from CIGA SYSTEMS before
+                publication when they comply with this
+                license.
+
+            </p>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 02 — ATTRIBUTION
+            </div>
+
+
+            <p>
+
+                All derivative works must provide clear
+                credit to the original creator of the
+                material being used.
+
+            </p>
+
+
+            <div class="credit">
+
+                <div class="credit-label">
+                    PRIMARY UNIVERSE
+                </div>
+
+                <div class="credit-text">
+
+                    CIGA SYSTEMS and the original CIGA
+                    SYSTEMS universe were created by
+                    GaboBars.
+
+                </div>
+
+            </div>
+
+
+            <div class="credit">
+
+                <div class="credit-label">
+                    DERIVATIVE MATERIAL
+                </div>
+
+                <div class="credit-text">
+
+                    If a work incorporates material
+                    created by another CIGA contributor,
+                    that contributor must also receive
+                    appropriate credit.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RULES
+        ========================= -->
+
+        <section class="panel full">
+
+            <div class="panel-title">
+                // 03 — CREATIVE CONDITIONS
+            </div>
+
+
+            <div class="rules">
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 01
+                    </div>
+
+                    <div class="rule-title">
+                        CREDIT THE SOURCE
+                    </div>
+
+                    <div class="rule-description">
+
+                        You must credit CIGA SYSTEMS and
+                        GaboBars when your work is based upon
+                        the CIGA universe. If your work also
+                        uses another creator's CIGA-related
+                        material, credit that creator as well.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 02
+                    </div>
+
+                    <div class="rule-title">
+                        PRESERVE CREATIVE FREEDOM
+                    </div>
+
+                    <div class="rule-description">
+
+                        Contributors may create their own
+                        interpretations, stories, characters,
+                        events and settings. No contributor
+                        should represent another creator's
+                        original work as their own.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 03
+                    </div>
+
+                    <div class="rule-title">
+                        SHARE DERIVATIVE WORKS
+                    </div>
+
+                    <div class="rule-description">
+
+                        Derivative works based upon CIGA
+                        material must remain available for
+                        further creative use under the same
+                        general principles of this license.
+                        Other creators must be permitted to
+                        build upon the derivative work,
+                        subject to this license.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 04
+                    </div>
+
+                    <div class="rule-title">
+                        CONTENT LIMITATIONS
+                    </div>
+
+                    <div class="rule-description">
+
+                        CIGA-related works may contain mature
+                        themes, horror, violence, crime and
+                        other dark fictional material.
+
+                        However, works must not promote or
+                        depict prohibited extreme material
+                        such as sexual content involving
+                        minors, sexual exploitation of
+                        minors, or comparable illegal
+                        exploitative material.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 05
+                    </div>
+
+                    <div class="rule-title">
+                        CIGA IDENTIFIER
+                    </div>
+
+                    <div class="rule-description">
+
+                        The official CIGA SYSTEMS logo must
+                        not be altered, redesigned,
+                        distorted, recolored or otherwise
+                        modified when used as an official
+                        identifier of the CIGA universe.
+
+                        Independent artwork may depict,
+                        reference or interpret CIGA concepts
+                        without modifying the official logo.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 06
+                    </div>
+
+                    <div class="rule-title">
+                        NON-COMMERCIAL PROJECTS
+                    </div>
+
+                    <div class="rule-description">
+
+                        Complete derivative projects such as
+                        games, standalone websites, films,
+                        animations or similar substantial
+                        works based upon CIGA SYSTEMS may not
+                        be sold or commercially distributed
+                        as paid products.
+
+                        This restriction does not prevent
+                        creators from independently offering
+                        commissioned creative services. For
+                        example, an artist may charge a client
+                        for creating commissioned CIGA-related
+                        artwork.
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule">
+
+                    <div class="rule-number">
+                        DIRECTIVE 07
+                    </div>
+
+                    <div class="rule-title">
+                        NO FALSE OWNERSHIP
+                    </div>
+
+                    <div class="rule-description">
+
+                        Contributors may not claim that they
+                        created the original CIGA SYSTEMS
+                        universe or that they are the original
+                        owner of CIGA SYSTEMS.
+
+                        Derivative works must remain
+                        identifiable as independent works
+                        created by their respective authors.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ORIGIN
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 04 — ORIGINALITY & CONTRIBUTION
+            </div>
+
+
+            <p>
+
+                CIGA SYSTEMS is intended to function as a
+                collaborative fictional universe.
+
+            </p>
+
+
+            <p>
+
+                Creators are encouraged to expand the
+                universe rather than simply reproduce
+                existing material.
+
+            </p>
+
+
+            <p>
+
+                Original contributions remain attributable
+                to their respective creators while the
+                underlying CIGA universe remains attributed
+                to its original creator.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LICENSE STATUS
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 05 — LICENSE STATUS
+            </div>
+
+
+            <p>
+
+                This license applies to creative works
+                released under the CIGA SYSTEMS universe
+                unless a separate written authorization
+                states otherwise.
+
+            </p>
+
+
+            <p>
+
+                Permission granted by this license is
+                conditional upon compliance with its terms.
+
+                Material violations may result in the
+                relevant work no longer being authorized
+                as a CIGA derivative work.
+
+            </p>
+
+
+            <p>
+
+                CIGA SYSTEMS reserves the right to update
+                this license for future releases.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LEGAL NOTICE
+        ========================= -->
+
+        <section class="panel full">
+
+            <div class="panel-title">
+                // 06 — OWNERSHIP NOTICE
+            </div>
+
+
+            <p>
+
+                CIGA SYSTEMS, its original fictional
+                universe, original lore, official
+                documentation and official branding are
+                original creative works attributed to
+                GaboBars, except where otherwise stated.
+
+            </p>
+
+
+            <p>
+
+                This license grants permission to create
+                derivative works. It does not transfer
+                ownership of the original CIGA SYSTEMS
+                universe, original materials or official
+                branding to another person.
+
+            </p>
+
+
+            <p>
+
+                Individual contributors retain authorship
+                of their own original contributions, while
+                granting the permissions required by this
+                license for those contributions to remain
+                part of the collaborative CIGA creative
+                ecosystem.
+
+            </p>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <span>
+
+            CIGA SYSTEMS // PUBLIC CREATIVE LICENSE
+
+        </span>
+
+
+        <span>
+
+            <a href="home.html">
+                RETURN TO SYSTEM
+            </a>
+
+        </span>
+
+    </footer>
+
+
+</main>
+
+
+</body>
+
+</html>
