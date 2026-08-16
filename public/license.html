@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CIGA SYSTEMS // PUBLIC LICENSE</title>
+    <title>CIGA SYSTEMS // PUBLIC CREATIVE LICENSE</title>
 
     <link
         rel="icon"
@@ -27,8 +27,14 @@
         }
 
 
+        /* =========================
+           BASE
+        ========================= */
+
         body {
+
             background: #000;
+
             color: #fff;
 
             min-height: 100vh;
@@ -39,21 +45,22 @@
                 monospace;
 
             overflow-x: hidden;
+
         }
 
-
-        /* =========================
-           PAGE
-        ========================= */
 
         .page {
 
             width: 100%;
 
+            max-width: 1450px;
+
+            margin: 0 auto;
+
             min-height: 100vh;
 
             padding:
-                35px 50px;
+                40px 55px 50px;
 
         }
 
@@ -72,6 +79,8 @@
             align-items:
                 flex-end;
 
+            gap: 30px;
+
             padding-bottom: 18px;
 
             margin-bottom: 35px;
@@ -89,6 +98,8 @@
 
 
         .header-title {
+
+            display: inline-block;
 
             font-size: 23px;
 
@@ -128,11 +139,11 @@
 
         .header-subtitle {
 
-            margin-top: 8px;
+            margin-top: 9px;
 
             font-size: 12px;
 
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
 
             opacity: 0.60;
 
@@ -149,7 +160,31 @@
 
             line-height: 1.9;
 
-            opacity: 0.60;
+            opacity: 0.58;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =========================
+           GENERAL TEXT
+        ========================= */
+
+        .readable {
+
+            font-size: 14px;
+
+            line-height: 2;
+
+            letter-spacing: 0.45px;
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.90
+            );
 
         }
 
@@ -159,6 +194,11 @@
         ========================= */
 
         .notice {
+
+            max-width: 1200px;
+
+            margin:
+                0 auto 30px;
 
             border:
                 1px solid
@@ -177,9 +217,7 @@
                     0.035
                 );
 
-            padding: 24px;
-
-            margin-bottom: 28px;
+            padding: 26px 28px;
 
         }
 
@@ -192,7 +230,7 @@
 
             opacity: 0.60;
 
-            margin-bottom: 14px;
+            margin-bottom: 15px;
 
         }
 
@@ -203,11 +241,15 @@
 
             line-height: 2;
 
-            letter-spacing: 0.65px;
+            letter-spacing: 0.5px;
 
-            opacity: 0.90;
-
-            max-width: 1200px;
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
 
         }
 
@@ -218,13 +260,13 @@
 
             align-items: center;
 
-            gap: 9px;
+            gap: 10px;
 
-            margin-top: 22px;
+            margin-top: 20px;
 
             font-size: 10px;
 
-            letter-spacing: 1.5px;
+            letter-spacing: 1.7px;
 
             opacity: 0.60;
 
@@ -236,6 +278,8 @@
             width: 7px;
 
             height: 7px;
+
+            flex-shrink: 0;
 
             background: #fff;
 
@@ -267,7 +311,10 @@
 
             gap: 22px;
 
-            margin-bottom: 28px;
+            max-width: 1400px;
+
+            margin:
+                0 auto 28px;
 
         }
 
@@ -295,7 +342,7 @@
                     0.018
                 );
 
-            padding: 27px;
+            padding: 28px;
 
         }
 
@@ -314,7 +361,7 @@
 
             letter-spacing: 3px;
 
-            opacity: 0.60;
+            opacity: 0.58;
 
             margin-bottom: 22px;
 
@@ -326,7 +373,7 @@
                     255,
                     255,
                     255,
-                    0.18
+                    0.16
                 );
 
         }
@@ -338,11 +385,17 @@
 
             line-height: 2;
 
-            letter-spacing: 0.65px;
+            letter-spacing: 0.45px;
 
-            opacity: 0.88;
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.88
+                );
 
-            margin-bottom: 17px;
+            margin-bottom: 18px;
 
         }
 
@@ -364,7 +417,7 @@
 
             flex-direction: column;
 
-            gap: 15px;
+            gap: 14px;
 
         }
 
@@ -377,7 +430,7 @@
                     255,
                     255,
                     255,
-                    0.50
+                    0.55
                 );
 
             background:
@@ -389,18 +442,18 @@
                 );
 
             padding:
-                17px 19px;
+                18px 20px;
 
         }
 
 
         .rule-number {
 
-            font-size: 10px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
-            opacity: 0.45;
+            opacity: 0.43;
 
             margin-bottom: 7px;
 
@@ -411,22 +464,28 @@
 
             font-size: 13px;
 
-            letter-spacing: 1.5px;
+            letter-spacing: 1.7px;
 
-            margin-bottom: 9px;
+            margin-bottom: 10px;
 
         }
 
 
         .rule-description {
 
-            font-size: 12px;
+            font-size: 12.5px;
 
             line-height: 1.95;
 
-            letter-spacing: 0.65px;
+            letter-spacing: 0.45px;
 
-            opacity: 0.78;
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.78
+                );
 
         }
 
@@ -437,7 +496,7 @@
 
         .credit {
 
-            padding: 17px;
+            padding: 18px;
 
             border:
                 1px solid
@@ -456,14 +515,14 @@
                     0.018
                 );
 
-            margin-top: 17px;
+            margin-top: 16px;
 
         }
 
 
         .credit-label {
 
-            font-size: 10px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
@@ -480,9 +539,147 @@
 
             line-height: 1.9;
 
-            letter-spacing: 0.65px;
+            letter-spacing: 0.5px;
 
-            opacity: 0.84;
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.82
+                );
+
+        }
+
+
+        /* =========================
+           HIGHLIGHT
+        ========================= */
+
+        .highlight {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.32
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+
+            padding: 21px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .highlight-title {
+
+            font-size: 10px;
+
+            letter-spacing: 2.5px;
+
+            opacity: 0.58;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .highlight-text {
+
+            font-size: 13px;
+
+            line-height: 1.95;
+
+            letter-spacing: 0.5px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
+
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+
+            margin-top: 18px;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+        }
+
+
+        .contact-label {
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .contact-email {
+
+            color: #fff;
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            text-decoration: none;
+
+        }
+
+
+        .contact-email:hover {
+
+            text-shadow:
+                0 0 8px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
 
         }
 
@@ -498,9 +695,11 @@
             justify-content:
                 space-between;
 
+            align-items: center;
+
             gap: 20px;
 
-            padding-top: 17px;
+            padding-top: 18px;
 
             border-top:
                 1px solid
@@ -511,7 +710,7 @@
                     0.20
                 );
 
-            font-size: 10px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
@@ -549,11 +748,12 @@
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
 
             .page {
 
-                padding: 25px;
+                padding:
+                    30px 25px 40px;
 
             }
 
@@ -576,11 +776,12 @@
         }
 
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             .page {
 
-                padding: 18px;
+                padding:
+                    22px 17px 35px;
 
             }
 
@@ -590,6 +791,9 @@
                 align-items:
                     flex-start;
 
+                flex-direction:
+                    column;
+
                 gap: 20px;
 
             }
@@ -597,45 +801,62 @@
 
             .header-title {
 
-                font-size: 17px;
+                font-size: 18px;
 
             }
 
 
             .header-status {
 
+                text-align: left;
+
                 font-size: 9px;
 
-            }
-
-
-            .notice-text {
-
-                font-size: 13px;
+                white-space: normal;
 
             }
 
 
+            .notice {
+
+                padding: 21px;
+
+            }
+
+
+            .panel {
+
+                padding: 21px;
+
+            }
+
+
+            .notice-text,
             .panel p {
 
                 font-size: 13px;
+
+                line-height: 1.9;
 
             }
 
 
             .rule-description {
 
-                font-size: 11px;
+                font-size: 12px;
 
             }
 
 
             .footer {
 
+                align-items:
+                    flex-start;
+
                 flex-direction:
                     column;
 
-                gap: 10px;
+                gap: 12px;
 
             }
 
@@ -701,26 +922,23 @@
     <section class="notice">
 
         <div class="notice-title">
-            // PUBLIC USE DIRECTIVE
+            // PUBLIC CREATIVE ACCESS
         </div>
 
 
         <div class="notice-text">
 
-            The CIGA SYSTEMS universe is a fictional
-            creative setting created and maintained by
-            GaboBars. This license permits members of
-            the public to create independent works
-            inspired by or derived from the CIGA SYSTEMS
-            universe, subject to the conditions defined
-            below.
+            CIGA is a fictional creative universe created
+            by <strong>gabobars</strong>.
 
-            <br><br>
+            This license allows people to create their own
+            stories, games, artwork, videos, animations,
+            music, documents and other creative works based
+            on CIGA.
 
-            The purpose of this license is to allow CIGA
-            SYSTEMS to function as a collaborative
-            fictional universe while preserving proper
-            attribution between creators.
+            You do not need to ask for individual permission
+            before creating a work when you follow the
+            conditions of this license.
 
         </div>
 
@@ -737,66 +955,122 @@
     </section>
 
 
-    <!-- =========================
-         CORE
-    ========================= -->
-
     <div class="content-grid">
 
 
-        <section class="panel">
+        <!-- =========================
+             WHAT THIS MEANS
+        ========================= -->
+
+        <section class="panel full">
 
             <div class="panel-title">
-                // 01 — PERMITTED USE
+                // 01 — WHAT THIS LICENSE MEANS
             </div>
 
 
             <p>
 
-                Anyone may create original stories,
-                games, artwork, videos, animations,
-                music, documents, roleplay material,
-                websites and other creative works based
-                upon the CIGA SYSTEMS universe.
+                The purpose of this license is to allow CIGA
+                to grow as a shared creative universe.
+
+                People may create their own interpretations
+                and additions to CIGA without needing to
+                receive individual approval from gabobars.
 
             </p>
 
 
             <p>
 
-                Derivative works may expand upon existing
-                CIGA lore or introduce new characters,
-                locations, organizations, events and
-                interpretations, provided that the
-                requirements of this license are respected.
+                You can create something completely new
+                within the CIGA universe, or build upon
+                existing CIGA material created by gabobars
+                or by another CIGA contributor.
+
+            </p>
+
+
+            <div class="highlight">
+
+                <div class="highlight-title">
+                    SIMPLE VERSION
+                </div>
+
+                <div class="highlight-text">
+
+                    You can create things about CIGA.
+                    You can build upon things other people
+                    have created for CIGA.
+                    You must give the appropriate credits,
+                    follow this license, and keep derivative
+                    CIGA works available for further CIGA
+                    creation.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PERMITTED USE
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 02 — PERMITTED CREATIVE USE
+            </div>
+
+
+            <p>
+
+                Anyone may create original stories, games,
+                artwork, videos, animations, music, roleplay
+                material, websites, documents, characters,
+                locations and other creative works based on
+                the CIGA universe.
 
             </p>
 
 
             <p>
 
-                Creative works do not require individual
-                permission from CIGA SYSTEMS before
-                publication when they comply with this
-                license.
+                Creators may introduce new characters,
+                organizations, locations, events and stories
+                as part of their own interpretation of CIGA.
+
+            </p>
+
+
+            <p>
+
+                Derivative works may also build upon another
+                creator's CIGA-related work, provided that
+                the original creator is properly credited.
 
             </p>
 
         </section>
 
 
+        <!-- =========================
+             ATTRIBUTION
+        ========================= -->
+
         <section class="panel">
 
             <div class="panel-title">
-                // 02 — ATTRIBUTION
+                // 03 — ATTRIBUTION & CREDIT
             </div>
 
 
             <p>
 
-                All derivative works must provide clear
-                credit to the original creator of the
-                material being used.
+                Credit must be given to the creator of the
+                material that your work uses.
 
             </p>
 
@@ -804,14 +1078,13 @@
             <div class="credit">
 
                 <div class="credit-label">
-                    PRIMARY UNIVERSE
+                    ORIGINAL CIGA UNIVERSE
                 </div>
 
                 <div class="credit-text">
 
-                    CIGA SYSTEMS and the original CIGA
-                    SYSTEMS universe were created by
-                    GaboBars.
+                    CIGA and the original CIGA universe were
+                    created by <strong>gabobars</strong>.
 
                 </div>
 
@@ -821,13 +1094,14 @@
             <div class="credit">
 
                 <div class="credit-label">
-                    DERIVATIVE MATERIAL
+                    OTHER CIGA CONTRIBUTORS
                 </div>
 
                 <div class="credit-text">
 
-                    If a work incorporates material
-                    created by another CIGA contributor,
+                    If your work uses characters, artwork,
+                    stories, concepts or other original
+                    material created by another contributor,
                     that contributor must also receive
                     appropriate credit.
 
@@ -835,303 +1109,88 @@
 
             </div>
 
+
+            <p style="margin-top: 18px;">
+
+                A suitable credit may state that your work
+                was inspired by or based upon the relevant
+                CIGA material and identify its original
+                creator.
+
+            </p>
+
         </section>
 
 
         <!-- =========================
-             RULES
+             DERIVATIVE CHAIN
         ========================= -->
 
         <section class="panel full">
 
             <div class="panel-title">
-                // 03 — CREATIVE CONDITIONS
-            </div>
-
-
-            <div class="rules">
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 01
-                    </div>
-
-                    <div class="rule-title">
-                        CREDIT THE SOURCE
-                    </div>
-
-                    <div class="rule-description">
-
-                        You must credit CIGA SYSTEMS and
-                        GaboBars when your work is based upon
-                        the CIGA universe.
-
-                        If your work also uses original
-                        CIGA-related material created by
-                        another contributor, that contributor
-                        must receive appropriate credit as well.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 02
-                    </div>
-
-                    <div class="rule-title">
-                        DERIVATIVE WORKS MUST REMAIN WITHIN CIGA
-                    </div>
-
-                    <div class="rule-description">
-
-                        A creator may use, adapt or build upon
-                        another creator's CIGA-related work
-                        when the resulting work is itself
-                        created as part of, or in connection
-                        with, the CIGA SYSTEMS universe.
-
-                        For example, a person may create a
-                        game based upon another person's CIGA
-                        game, provided that the new project
-                        remains a CIGA-related work.
-
-                        This permission does not authorize
-                        the extraction and reuse of a CIGA
-                        contributor's original characters,
-                        stories, artwork or other creations
-                        in an unrelated project outside the
-                        CIGA creative universe.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 03
-                    </div>
-
-                    <div class="rule-title">
-                        SHARE DERIVATIVE WORKS
-                    </div>
-
-                    <div class="rule-description">
-
-                        If you create an original work based
-                        upon CIGA SYSTEMS or upon another
-                        CIGA-related work, other creators must
-                        be permitted to use that work as a
-                        foundation for further CIGA-related
-                        creative works, subject to the terms
-                        of this license.
-
-                        This permission applies specifically
-                        to further creation within the CIGA
-                        SYSTEMS universe and does not grant
-                        unrestricted permission to reuse the
-                        work outside that context.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 04
-                    </div>
-
-                    <div class="rule-title">
-                        CONTENT LIMITATIONS
-                    </div>
-
-                    <div class="rule-description">
-
-                        CIGA-related works may contain mature
-                        themes, horror, violence, crime and
-                        other dark fictional material.
-
-                        However, works must not contain or
-                        promote prohibited extreme material,
-                        including sexual content involving
-                        minors, sexual exploitation of minors,
-                        or comparable illegal exploitative
-                        material.
-
-                        Creators are responsible for ensuring
-                        that their own works comply with
-                        applicable law and platform rules.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 05
-                    </div>
-
-                    <div class="rule-title">
-                        CIGA IDENTIFIER
-                    </div>
-
-                    <div class="rule-description">
-
-                        The official CIGA SYSTEMS logo must
-                        not be altered, redesigned,
-                        distorted, recolored or otherwise
-                        modified when used as an official
-                        identifier of the CIGA universe.
-
-                        Independent artwork may depict,
-                        reference or interpret CIGA concepts
-                        without modifying the official logo.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 06
-                    </div>
-
-                    <div class="rule-title">
-                        NON-COMMERCIAL PROJECTS
-                    </div>
-
-                    <div class="rule-description">
-
-                        Complete derivative projects such as
-                        games, standalone websites, films,
-                        animations or similar substantial
-                        works based upon CIGA SYSTEMS may not
-                        be sold or commercially distributed
-                        as paid products.
-
-                        This restriction does not prevent
-                        creators from independently offering
-                        commissioned creative services.
-
-                        For example, an artist may charge a
-                        client for creating commissioned
-                        CIGA-related artwork. The payment is
-                        for the creator's service and does not
-                        transfer ownership of CIGA SYSTEMS.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 07
-                    </div>
-
-                    <div class="rule-title">
-                        NO FALSE OWNERSHIP
-                    </div>
-
-                    <div class="rule-description">
-
-                        Contributors may not claim that they
-                        created the original CIGA SYSTEMS
-                        universe or that they are the original
-                        owner of CIGA SYSTEMS.
-
-                        Contributors may claim authorship of
-                        their own original additions and
-                        creations.
-
-                        Derivative works must remain
-                        identifiable as independent works
-                        created by their respective authors.
-
-                    </div>
-
-                </div>
-
-
-                <div class="rule">
-
-                    <div class="rule-number">
-                        DIRECTIVE 08
-                    </div>
-
-                    <div class="rule-title">
-                        PRESERVE CREATOR CREDIT
-                    </div>
-
-                    <div class="rule-description">
-
-                        When using another creator's CIGA
-                        contribution, reasonable and visible
-                        attribution must be preserved.
-
-                        A creator may not remove, hide or
-                        intentionally misrepresent another
-                        contributor's authorship in order to
-                        present that contribution as their own.
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ORIGIN
-        ========================= -->
-
-        <section class="panel">
-
-            <div class="panel-title">
-                // 04 — ORIGINALITY & CONTRIBUTION
+                // 04 — DERIVATIVE CREATION
             </div>
 
 
             <p>
 
-                CIGA SYSTEMS is intended to function as a
-                collaborative fictional universe.
+                CIGA allows creative works to build upon
+                other CIGA works.
+
+                This means that if one creator makes a game
+                about CIGA, another creator may create a new
+                CIGA-related game, story, artwork or other
+                work based upon that game.
 
             </p>
 
 
             <p>
 
-                Creators are encouraged to expand the
-                universe rather than simply reproduce
-                existing material.
+                The new creator must still respect the
+                original creator's contribution and provide
+                appropriate credit.
 
             </p>
 
 
-            <p>
+            <div class="highlight">
 
-                Original contributions remain attributable
-                to their respective creators while the
-                underlying CIGA universe remains attributed
-                to its original creator.
+                <div class="highlight-title">
+                    EXAMPLE
+                </div>
+
+                <div class="highlight-text">
+
+                    Creator A makes a CIGA game.
+
+                    <br><br>
+
+                    Creator B creates another game based upon
+                    Creator A's CIGA game.
+
+                    <br><br>
+
+                    This is permitted because the new work
+                    remains part of the CIGA creative
+                    ecosystem and the relevant creators are
+                    credited.
+
+                </div>
+
+            </div>
+
+
+            <p style="margin-top: 18px;">
+
+                This permission does not mean that a creator's
+                original work becomes a completely unrestricted
+                asset for use outside CIGA.
+
+                The permission described here exists for
+                further creation connected to the CIGA
+                universe.
 
             </p>
 
@@ -1139,103 +1198,227 @@
 
 
         <!-- =========================
-             LICENSE STATUS
-        ========================= -->
-
-        <section class="panel">
-
-            <div class="panel-title">
-                // 05 — LICENSE STATUS
-            </div>
-
-
-            <p>
-
-                This license applies to creative works
-                released under the CIGA SYSTEMS universe
-                unless a separate written authorization
-                states otherwise.
-
-            </p>
-
-
-            <p>
-
-                Permission granted by this license is
-                conditional upon compliance with its terms.
-
-                Material violations may result in the
-                relevant work no longer being authorized
-                as a CIGA derivative work.
-
-            </p>
-
-
-            <p>
-
-                CIGA SYSTEMS reserves the right to update
-                this license for future releases.
-
-                Updates do not automatically transfer
-                ownership of previously created original
-                contributions.
-
-            </p>
-
-        </section>
-
-
-        <!-- =========================
-             LEGAL NOTICE
+             SHARING REQUIREMENT
         ========================= -->
 
         <section class="panel full">
 
             <div class="panel-title">
-                // 06 — OWNERSHIP NOTICE
+                // 05 — CONTINUED CREATIVE ACCESS
             </div>
 
 
             <p>
 
-                CIGA SYSTEMS, its original fictional
-                universe, original lore, official
-                documentation and official branding are
-                original creative works attributed to
-                GaboBars, except where otherwise stated.
+                Anyone who creates a derivative CIGA work
+                must allow other people to use that work
+                for the creation of further CIGA-related
+                content under the same general principles
+                of this license.
+
+            </p>
+
+
+            <div class="highlight">
+
+                <div class="highlight-title">
+                    CORE REQUIREMENT
+                </div>
+
+                <div class="highlight-text">
+
+                    Other people must be able to use your
+                    CIGA-related work too, as long as their
+                    use is for creating content about or
+                    within the CIGA universe and they follow
+                    this license.
+
+                </div>
+
+            </div>
+
+
+            <p style="margin-top: 18px;">
+
+                This does not give people permission to take
+                your work and use it for unrelated projects,
+                claim it as their own, or ignore the
+                attribution requirements.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 06 — CONTENT
+            </div>
+
+
+            <p>
+
+                CIGA is a fictional universe and may contain
+                horror, violence, crime, dark themes, mature
+                subjects and other disturbing fictional
+                material.
 
             </p>
 
 
             <p>
 
-                This license grants permission to create
-                derivative works. It does not transfer
-                ownership of the original CIGA SYSTEMS
-                universe, original materials or official
-                branding to another person.
+                However, CIGA-related works must not contain
+                or promote sexual exploitation of minors,
+                sexual content involving minors, or other
+                comparable illegal exploitative material.
 
             </p>
 
 
             <p>
 
-                Individual contributors retain authorship
-                of their own original contributions, while
-                granting the permissions required by this
-                license for those contributions to remain
-                part of the collaborative CIGA creative
-                ecosystem.
+                Creators remain responsible for complying
+                with applicable laws and the rules of the
+                platforms where their work is published.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LOGO
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 07 — OFFICIAL CIGA IDENTIFIER
+            </div>
+
+
+            <p>
+
+                The official CIGA logo is a protected
+                identifier of the CIGA project.
 
             </p>
 
 
             <p>
 
-                Nothing in this document should be
-                interpreted as transferring ownership of
-                intellectual property that a creator did
-                not originally own or have permission to
+                The official logo must not be altered,
+                redesigned, distorted, recolored or modified
+                when presented as the official CIGA logo.
+
+            </p>
+
+
+            <p>
+
+                Creators may still reference CIGA concepts
+                and create their own artwork inspired by the
+                universe.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             COMMERCIAL USE
+        ========================= -->
+
+        <section class="panel full">
+
+            <div class="panel-title">
+                // 08 — COMMERCIAL USE
+            </div>
+
+
+            <p>
+
+                Complete derivative projects based on CIGA,
+                such as standalone games, films, animations,
+                websites or similar substantial projects,
+                may not be sold as paid products under this
+                license.
+
+            </p>
+
+
+            <p>
+
+                This does not prevent creators from being
+                paid for their own creative services.
+
+            </p>
+
+
+            <div class="highlight">
+
+                <div class="highlight-title">
+                    COMMISSIONS ARE ALLOWED
+                </div>
+
+                <div class="highlight-text">
+
+                    For example, a client may pay an artist
+                    to create a CIGA-related illustration.
+
+                    The artist is being paid for their
+                    creative service, rather than selling
+                    the CIGA universe itself as a standalone
+                    commercial product.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             OWNERSHIP
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 09 — OWNERSHIP & AUTHORSHIP
+            </div>
+
+
+            <p>
+
+                This license does not transfer ownership of
+                the original CIGA universe to contributors.
+
+            </p>
+
+
+            <p>
+
+                The original CIGA universe, original lore,
+                official documentation and official branding
+                remain attributed to <strong>gabobars</strong>,
+                except where another creator is specifically
+                credited for their own original contribution.
+
+            </p>
+
+
+            <p>
+
+                Contributors retain authorship of the
+                original material they personally create,
+                subject to the permissions granted by this
                 license.
 
             </p>
@@ -1244,127 +1427,215 @@
 
 
         <!-- =========================
-             PRACTICAL EXAMPLES
+             NO FALSE OWNERSHIP
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 10 — NO FALSE OWNERSHIP
+            </div>
+
+
+            <p>
+
+                Contributors may not claim that they created
+                the original CIGA universe or represent
+                themselves as the original creator of CIGA.
+
+            </p>
+
+
+            <p>
+
+                Derivative works should remain identifiable
+                as works created by their respective authors.
+
+            </p>
+
+
+            <p>
+
+                A creator may state that they are an author
+                or contributor to a CIGA-related work without
+                claiming ownership of the original CIGA
+                universe.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LICENSE COMPLIANCE
         ========================= -->
 
         <section class="panel full">
 
             <div class="panel-title">
-                // 07 — PRACTICAL INTERPRETATION
+                // 11 — LICENSE COMPLIANCE
             </div>
 
 
-            <div class="rule">
+            <p>
 
-                <div class="rule-number">
-                    EXAMPLE 01
-                </div>
+                Permission to create and distribute
+                CIGA-related derivative works is conditional
+                upon compliance with this license.
 
-                <div class="rule-title">
-                    CIGA GAME → CIGA GAME
-                </div>
+            </p>
 
-                <div class="rule-description">
 
-                    Creator A makes a game based upon CIGA
-                    SYSTEMS.
+            <p>
 
-                    Creator B may create another CIGA game
-                    based upon Creator A's game, provided
-                    that Creator B gives appropriate credit
-                    to Creator A and continues to use the
-                    material within the CIGA creative
-                    universe.
+                If a work seriously violates the conditions
+                of this license, the work may no longer be
+                considered an authorized CIGA derivative work.
 
-                </div>
+            </p>
 
+
+            <p>
+
+                Where appropriate, gabobars may request that
+                a creator correct attribution, remove
+                unauthorized use of official identifiers, or
+                stop presenting a violating work as an
+                authorized CIGA derivative.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LICENSE UPDATES
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // 12 — LICENSE UPDATES
             </div>
 
 
-            <br>
+            <p>
+
+                This license may be updated for future
+                versions of the CIGA project.
+
+            </p>
 
 
-            <div class="rule">
+            <p>
 
-                <div class="rule-number">
-                    EXAMPLE 02
-                </div>
+                The version published on this website is the
+                version currently designated as active by
+                CIGA SYSTEMS.
 
-                <div class="rule-title">
-                    CIGA CHARACTER → CIGA STORY
-                </div>
+            </p>
 
-                <div class="rule-description">
+        </section>
 
-                    Creator A creates an original character
-                    for a CIGA project.
 
-                    Creator B may use that character in a
-                    new CIGA story or project, provided that
-                    Creator A receives appropriate credit.
+        <!-- =========================
+             CONTACT
+        ========================= -->
 
-                </div>
+        <section class="panel">
 
+            <div class="panel-title">
+                // 13 — OFFICIAL CONTACT
             </div>
 
 
-            <br>
+            <p>
+
+                Questions regarding CIGA, derivative works,
+                attribution, collaboration or this license
+                may be directed to the official CIGA contact
+                address.
+
+            </p>
 
 
-            <div class="rule">
+            <div class="contact">
 
-                <div class="rule-number">
-                    EXAMPLE 03
+                <div class="contact-label">
+                    CIGA SYSTEMS // CONTACT
                 </div>
 
-                <div class="rule-title">
-                    CIGA CHARACTER → UNRELATED PROJECT
-                </div>
-
-                <div class="rule-description">
-
-                    Creator A creates an original character
-                    for CIGA.
-
-                    Creator B may not simply take that
-                    character and use it as a character in
-                    an unrelated project with no connection
-                    to CIGA while relying on this license
-                    as permission.
-
-                    The license grants permission for
-                    further CIGA-related creation, not
-                    unrestricted use of every contribution
-                    everywhere.
-
-                </div>
+                <a
+                    class="contact-email"
+                    href="mailto:cigasystems.contact@gmail.com"
+                >
+                    cigasystems.contact@gmail.com
+                </a>
 
             </div>
 
+        </section>
 
-            <br>
+
+        <!-- =========================
+             FINAL NOTICE
+        ========================= -->
+
+        <section class="panel full">
+
+            <div class="panel-title">
+                // 14 — FINAL CREATIVE NOTICE
+            </div>
 
 
-            <div class="rule">
+            <p>
 
-                <div class="rule-number">
-                    EXAMPLE 04
+                CIGA is intended to be a universe that can
+                grow beyond its original creator.
+
+            </p>
+
+
+            <p>
+
+                Create your own stories.
+                Create your own characters.
+                Create your own games.
+                Expand the universe.
+
+            </p>
+
+
+            <p>
+
+                Give credit to the people whose work you use,
+                respect the conditions of this license, and
+                allow future CIGA creators to build upon the
+                creative work that came before them.
+
+            </p>
+
+
+            <div class="highlight">
+
+                <div class="highlight-title">
+                    CIGA SYSTEMS
                 </div>
 
-                <div class="rule-title">
-                    COMMISSIONED ARTWORK
-                </div>
+                <div class="highlight-text">
 
-                <div class="rule-description">
+                    ORIGINAL UNIVERSE:
+                    <strong>gabobars</strong>
 
-                    A creator may commission another artist
-                    to produce artwork depicting CIGA
-                    characters, locations or events.
+                    <br>
 
-                    The artist may charge for their creative
-                    service. The existence of payment does
-                    not by itself transfer ownership of the
-                    CIGA universe.
+                    LICENSE:
+                    CIGA-PCL-001
+
+                    <br>
+
+                    STATUS:
+                    ACTIVE / PUBLIC
 
                 </div>
 
@@ -1383,9 +1654,7 @@
     <footer class="footer">
 
         <span>
-
             CIGA SYSTEMS // PUBLIC CREATIVE LICENSE
-
         </span>
 
 
