@@ -1397,7 +1397,9 @@
 
             gap: 15px;
 
-            padding-top: 15px;
+            padding-top: 18px;
+
+            margin-top: 5px;
 
             border-top:
                 1px solid
@@ -1410,9 +1412,58 @@
 
             font-size: 9px;
 
-            letter-spacing: 2px;
+            letter-spacing: 1.6px;
 
-            opacity: 0.40;
+            opacity: 0.45;
+
+            line-height: 1.8;
+        }
+
+
+        .footer-left {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 3px;
+        }
+
+
+        .footer-copyright {
+            font-size: 10px;
+
+            letter-spacing: 1.7px;
+
+            opacity: 0.85;
+        }
+
+
+        .footer-note {
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+        }
+
+
+        .footer-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .footer-status {
+            font-size: 8px;
+
+            letter-spacing: 1.4px;
+
+            opacity: 0.65;
         }
 
 
@@ -1420,6 +1471,12 @@
             color: #fff;
 
             text-decoration: none;
+
+            font-size: 9px;
+
+            letter-spacing: 1.6px;
+
+            opacity: 0.75;
 
             transition:
                 opacity 0.2s ease,
@@ -1501,6 +1558,12 @@
             .video-operation {
                 grid-template-columns:
                     1fr;
+            }
+
+
+            .footer {
+                align-items:
+                    flex-start;
             }
 
         }
@@ -1601,6 +1664,13 @@
 
                 align-items:
                     flex-start;
+
+                gap: 12px;
+            }
+
+
+            .footer-right {
+                gap: 12px;
             }
 
         }
@@ -2240,22 +2310,39 @@
 
         <footer class="footer">
 
-            <span>
-                CIGA SYSTEMS // INTERNAL USE ONLY
-            </span>
+            <div class="footer-left">
+
+                <span class="footer-copyright">
+                    © 2026 CIGA SYSTEMS. ALL RIGHTS RESERVED.
+                </span>
+
+                <span class="footer-note">
+                    CIGA SYSTEMS IS A FICTIONAL CREATIVE PROJECT.
+                </span>
+
+            </div>
 
 
-            <span>
-                ALL ACCESS IS LOGGED
-            </span>
+            <div class="footer-right">
+
+                <span class="footer-status">
+                    CIGA SYSTEMS // INTERNAL USE ONLY
+                </span>
 
 
-            <a
-                href="license.html"
-                class="footer-license"
-            >
-                PUBLIC CREATIVE LICENSE
-            </a>
+                <span class="footer-status">
+                    ALL ACCESS IS LOGGED
+                </span>
+
+
+                <a
+                    href="license.html"
+                    class="footer-license"
+                >
+                    PUBLIC CREATIVE LICENSE
+                </a>
+
+            </div>
 
         </footer>
 
