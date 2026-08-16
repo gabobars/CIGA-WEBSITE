@@ -3335,6 +3335,7 @@
 
         /* =========================
            LOAD LATEST VIDEO
+           DIAGNOSTIC VERSION
         ========================= */
 
         async function cigaLoadLatestVideo() {
@@ -3364,8 +3365,28 @@
 
                 const response =
                     await fetch(
-                        `${CIGA_WORKER_URL}/latest-video`
+                        `${CIGA_WORKER_URL}/latest-video`,
+                        {
+                            method: "GET",
+                            cache: "no-store"
+                        }
                     );
+
+
+                console.log(
+                    "LATEST VIDEO HTTP STATUS:",
+                    response.status
+                );
+
+
+                const rawText =
+                    await response.text();
+
+
+                console.log(
+                    "LATEST VIDEO RAW RESPONSE:",
+                    rawText
+                );
 
 
                 if (!response.ok) {
@@ -3377,8 +3398,29 @@
                 }
 
 
-                const data =
-                    await response.json();
+                let data;
+
+
+                try {
+
+                    data =
+                        JSON.parse(
+                            rawText
+                        );
+
+                } catch (jsonError) {
+
+                    throw new Error(
+                        "INVALID JSON RESPONSE"
+                    );
+
+                }
+
+
+                console.log(
+                    "LATEST VIDEO DATA:",
+                    data
+                );
 
 
                 if (
@@ -3446,14 +3488,8 @@
 
                                     minute:
                                         "2-digit"
-
                                 }
                             );
-
-                    } else {
-
-                        latestVideoDate.textContent =
-                            "UNKNOWN";
 
                     }
 
