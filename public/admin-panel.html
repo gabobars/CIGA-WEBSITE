@@ -20,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
 
         * {
@@ -84,6 +85,8 @@
 
 
         .title:hover {
+            text-decoration: none;
+
             text-shadow:
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.35);
@@ -302,6 +305,11 @@
 
         .panel.collapsed > :not(.panel-title) {
             display: none;
+        }
+
+
+        .panel .panel.collapsed > .panel-title {
+            display: flex;
         }
 
 
@@ -977,29 +985,6 @@
         }
 
 
-        .personnel-editor-input:focus,
-        .personnel-editor-select:focus,
-        .personnel-editor-textarea:focus,
-        .history-entry-text:focus,
-        .archive-input:focus,
-        .archive-select:focus,
-        .archive-textarea:focus,
-        .communication-input:focus,
-        .communication-select:focus,
-        .communication-textarea:focus {
-            border-color:
-                rgba(255,255,255,0.65);
-        }
-
-
-        .personnel-editor-select option,
-        .archive-select option,
-        .communication-select option {
-            background: #000;
-            color: #fff;
-        }
-
-
         .personnel-editor-readonly {
             opacity: 0.55;
 
@@ -1078,6 +1063,12 @@
         }
 
 
+        .history-entry-text:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
         .history-remove {
             align-self: end;
 
@@ -1128,42 +1119,6 @@
         .history-add {
             border-color:
                 rgba(255,255,255,0.45);
-        }
-
-
-        /* =========================
-           LORE LINK HELP
-        ========================= */
-
-        .lore-link-help {
-            margin-top: 10px;
-
-            padding:
-                10px 13px;
-
-            border-left:
-                2px solid
-                rgba(255,255,255,0.30);
-
-            background:
-                rgba(255,255,255,0.018);
-
-            font-size: 9px;
-
-            line-height: 1.8;
-
-            letter-spacing: 0.7px;
-
-            opacity: 0.46;
-        }
-
-
-        .lore-link-help strong {
-            color: #fff;
-
-            opacity: 0.9;
-
-            font-weight: normal;
         }
 
 
@@ -1318,10 +1273,37 @@
         }
 
 
+        .archive-input:focus,
+        .archive-select:focus,
+        .archive-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
+        .archive-select option {
+            background: #000;
+            color: #fff;
+        }
+
+
         .archive-number {
             opacity: 0.55;
 
             cursor: not-allowed;
+        }
+
+
+        .archive-subject-optional-note {
+            margin-top: 4px;
+
+            font-size: 8px;
+
+            line-height: 1.7;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.38;
         }
 
 
@@ -1375,7 +1357,8 @@
         .subject-preview-value {
             opacity: 0.88;
 
-            word-break: break-word;
+            word-break:
+                break-word;
         }
 
 
@@ -1606,6 +1589,20 @@
             resize: vertical;
 
             line-height: 1.8;
+        }
+
+
+        .communication-input:focus,
+        .communication-select:focus,
+        .communication-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
+        .communication-select option {
+            background: #000;
+            color: #fff;
         }
 
 
@@ -1996,13 +1993,16 @@
             &gt; VERIFYING ADMINISTRATOR SESSION...
         </div>
 
+
         <div id="terminalStatus">
             &gt; WAITING FOR AUTHORIZATION...
         </div>
 
+
         <div>
             &gt; ARCHIVE SYSTEM: AVAILABLE
         </div>
+
 
         <div>
             &gt; COMMUNICATIONS SYSTEM: AVAILABLE
@@ -2022,9 +2022,11 @@
             ACCESS DENIED
         </div>
 
+
         <div>
             &gt; ADMINISTRATOR CLEARANCE REQUIRED.
         </div>
+
 
         <div>
             &gt; THIS ATTEMPT HAS BEEN LOGGED.
@@ -2089,7 +2091,9 @@
         </section>
 
 
-        <!-- SUBMISSIONS -->
+        <!-- =========================
+             PENDING SUBMISSIONS
+        ========================= -->
 
         <section
             class="panel"
@@ -2112,7 +2116,9 @@
         </section>
 
 
-        <!-- REVIEW -->
+        <!-- =========================
+             SUBMISSION REVIEW
+        ========================= -->
 
         <section
             class="panel review-panel"
@@ -2198,7 +2204,9 @@
         </section>
 
 
-        <!-- PERSONNEL FILE EDITOR -->
+        <!-- =========================
+             PERSONNEL FILE EDITOR
+        ========================= -->
 
         <section class="panel">
 
@@ -2577,7 +2585,9 @@
                 >
 
                     <label class="personnel-editor-label">
+
                         LORE / INCIDENT HISTORY
+
                     </label>
 
 
@@ -2600,27 +2610,15 @@
                     </div>
 
 
-                    <div class="lore-link-help">
-
-                        &gt; LORE LINK FORMAT:
-                        <strong>[[VISIBLE TEXT|https://example.com]]</strong>
-
-                        <br>
-
-                        &gt; EXAMPLE:
-                        <strong>[[ANOMALOUS|https://www.youtube.com/watch?v=llCqlvrQQUI]]</strong>
-
-                        <br>
-
-                        &gt; LINKS ARE CONVERTED WHEN THE RECORD IS DISPLAYED.
-
-                    </div>
-
-
                     <div class="history-note">
 
                         &gt; EACH ENTRY IS STORED AS A
                         SEPARATE HISTORY RECORD.
+
+                        <br>
+
+                        &gt; ADD AS MANY INCIDENTS OR
+                        HISTORICAL EVENTS AS REQUIRED.
 
                     </div>
 
@@ -2734,7 +2732,9 @@
         </section>
 
 
-        <!-- CREATE ARCHIVE -->
+        <!-- =========================
+             CREATE ARCHIVE
+        ========================= -->
 
         <section class="panel">
 
@@ -2778,14 +2778,22 @@
                         <select
                             id="archiveSubject"
                             class="archive-select"
-                            required
                         >
 
                             <option value="">
-                                SELECT PERSONNEL FILE
+                                NO PERSONNEL FILE // STANDALONE ARCHIVE
                             </option>
 
                         </select>
+
+
+                        <div class="archive-subject-optional-note">
+
+                            &gt; OPTIONAL FIELD.
+                            LEAVE UNSELECTED FOR A STANDALONE
+                            EVENT / ANOMALOUS RECORD.
+
+                        </div>
 
                     </div>
 
@@ -2879,14 +2887,6 @@
                             placeholder="Brief description of the incident..."
                         ></textarea>
 
-
-                        <div class="lore-link-help">
-
-                            &gt; LINK FORMAT:
-                            <strong>[[VISIBLE TEXT|https://example.com]]</strong>
-
-                        </div>
-
                     </div>
 
 
@@ -2907,14 +2907,6 @@
                             class="archive-textarea large"
                             placeholder="Write the complete archive report here..."
                         ></textarea>
-
-
-                        <div class="lore-link-help">
-
-                            &gt; LINK FORMAT:
-                            <strong>[[VISIBLE TEXT|https://example.com]]</strong>
-
-                        </div>
 
                     </div>
 
@@ -2937,6 +2929,7 @@
                             STATUS
                         </div>
 
+
                         <div
                             class="subject-preview-value"
                             id="previewStatus"
@@ -2948,6 +2941,7 @@
                         <div class="subject-preview-label">
                             CLEARANCE
                         </div>
+
 
                         <div
                             class="subject-preview-value"
@@ -2961,6 +2955,7 @@
                             THREAT LEVEL
                         </div>
 
+
                         <div
                             class="subject-preview-value"
                             id="previewThreat"
@@ -2972,6 +2967,7 @@
                         <div class="subject-preview-label">
                             LOCATION
                         </div>
+
 
                         <div
                             class="subject-preview-value"
@@ -2985,6 +2981,7 @@
                             AFFILIATION
                         </div>
 
+
                         <div
                             class="subject-preview-value"
                             id="previewAffiliation"
@@ -2996,6 +2993,7 @@
                         <div class="subject-preview-label">
                             ORIGIN
                         </div>
+
 
                         <div
                             class="subject-preview-value"
@@ -3009,6 +3007,7 @@
                             OBSERVATION
                         </div>
 
+
                         <div
                             class="subject-preview-value"
                             id="previewObservation"
@@ -3020,6 +3019,7 @@
                         <div class="subject-preview-label">
                             PRIMARY ACTIVITY
                         </div>
+
 
                         <div
                             class="subject-preview-value"
@@ -3064,7 +3064,9 @@
         </section>
 
 
-        <!-- ARCHIVE DATABASE -->
+        <!-- =========================
+             ARCHIVE DATABASE
+        ========================= -->
 
         <section class="panel">
 
@@ -3084,7 +3086,9 @@
         </section>
 
 
-        <!-- CREATE COMMUNICATION -->
+        <!-- =========================
+             CREATE COMMUNICATION
+        ========================= -->
 
         <section class="panel">
 
@@ -3305,20 +3309,6 @@
                             required
                         ></textarea>
 
-
-                        <div class="lore-link-help">
-
-                            &gt; LINK FORMAT:
-                            <strong>[[VISIBLE TEXT|https://example.com]]</strong>
-
-                            <br>
-
-                            &gt; EXAMPLE:
-                            <strong>SUBJECT CLASSIFICATION:
-                                [[ANOMALOUS|https://example.com]]</strong>
-
-                        </div>
-
                     </div>
 
                 </div>
@@ -3355,7 +3345,9 @@
         </section>
 
 
-        <!-- COMMUNICATION DATABASE -->
+        <!-- =========================
+             COMMUNICATION DATABASE
+        ========================= -->
 
         <section class="panel">
 
@@ -3452,49 +3444,93 @@
     ========================================== */
 
     const dashboard =
-        document.getElementById("dashboard");
+        document.getElementById(
+            "dashboard"
+        );
+
 
     const deniedMessage =
-        document.getElementById("deniedMessage");
+        document.getElementById(
+            "deniedMessage"
+        );
+
 
     const terminalStatus =
-        document.getElementById("terminalStatus");
+        document.getElementById(
+            "terminalStatus"
+        );
+
 
     const pendingCount =
-        document.getElementById("pendingCount");
+        document.getElementById(
+            "pendingCount"
+        );
+
 
     const submissionList =
-        document.getElementById("submissionList");
+        document.getElementById(
+            "submissionList"
+        );
+
 
     const reviewPanel =
-        document.getElementById("reviewPanel");
+        document.getElementById(
+            "reviewPanel"
+        );
+
 
     const reviewContent =
-        document.getElementById("reviewContent");
+        document.getElementById(
+            "reviewContent"
+        );
+
 
     const reviewResult =
-        document.getElementById("reviewResult");
+        document.getElementById(
+            "reviewResult"
+        );
+
 
     const approveButton =
-        document.getElementById("approveButton");
+        document.getElementById(
+            "approveButton"
+        );
+
 
     const rejectButton =
-        document.getElementById("rejectButton");
+        document.getElementById(
+            "rejectButton"
+        );
+
 
     const confirmation =
-        document.getElementById("confirmation");
+        document.getElementById(
+            "confirmation"
+        );
+
 
     const confirmationTitle =
-        document.getElementById("confirmationTitle");
+        document.getElementById(
+            "confirmationTitle"
+        );
+
 
     const confirmationText =
-        document.getElementById("confirmationText");
+        document.getElementById(
+            "confirmationText"
+        );
+
 
     const confirmationYes =
-        document.getElementById("confirmationYes");
+        document.getElementById(
+            "confirmationYes"
+        );
+
 
     const confirmationNo =
-        document.getElementById("confirmationNo");
+        document.getElementById(
+            "confirmationNo"
+        );
 
 
     /* ==========================================
@@ -3502,70 +3538,135 @@
     ========================================== */
 
     const editPersonnel =
-        document.getElementById("editPersonnel");
+        document.getElementById(
+            "editPersonnel"
+        );
+
 
     const editFileNumber =
-        document.getElementById("editFileNumber");
+        document.getElementById(
+            "editFileNumber"
+        );
+
 
     const editName =
-        document.getElementById("editName");
+        document.getElementById(
+            "editName"
+        );
+
 
     const editAlias =
-        document.getElementById("editAlias");
+        document.getElementById(
+            "editAlias"
+        );
+
 
     const editPrimaryActivity =
-        document.getElementById("editPrimaryActivity");
+        document.getElementById(
+            "editPrimaryActivity"
+        );
+
 
     const editLocation =
-        document.getElementById("editLocation");
+        document.getElementById(
+            "editLocation"
+        );
+
 
     const editAffiliation =
-        document.getElementById("editAffiliation");
+        document.getElementById(
+            "editAffiliation"
+        );
+
 
     const editOrigin =
-        document.getElementById("editOrigin");
+        document.getElementById(
+            "editOrigin"
+        );
+
 
     const editStatus =
-        document.getElementById("editStatus");
+        document.getElementById(
+            "editStatus"
+        );
+
 
     const editClearance =
-        document.getElementById("editClearance");
+        document.getElementById(
+            "editClearance"
+        );
+
 
     const editObservation =
-        document.getElementById("editObservation");
+        document.getElementById(
+            "editObservation"
+        );
+
 
     const editThreatLevel =
-        document.getElementById("editThreatLevel");
+        document.getElementById(
+            "editThreatLevel"
+        );
+
 
     const editDescription =
-        document.getElementById("editDescription");
+        document.getElementById(
+            "editDescription"
+        );
+
 
     const historyList =
-        document.getElementById("historyList");
+        document.getElementById(
+            "historyList"
+        );
+
 
     const addHistoryButton =
-        document.getElementById("addHistoryButton");
+        document.getElementById(
+            "addHistoryButton"
+        );
+
 
     const editTwitch =
-        document.getElementById("editTwitch");
+        document.getElementById(
+            "editTwitch"
+        );
+
 
     const editYoutube =
-        document.getElementById("editYoutube");
+        document.getElementById(
+            "editYoutube"
+        );
+
 
     const editTiktok =
-        document.getElementById("editTiktok");
+        document.getElementById(
+            "editTiktok"
+        );
+
 
     const editDiscord =
-        document.getElementById("editDiscord");
+        document.getElementById(
+            "editDiscord"
+        );
+
 
     const savePersonnelButton =
-        document.getElementById("savePersonnelButton");
+        document.getElementById(
+            "savePersonnelButton"
+        );
+
 
     const refreshPersonnelEditor =
-        document.getElementById("refreshPersonnelEditor");
+        document.getElementById(
+            "refreshPersonnelEditor"
+        );
+
 
     const personnelEditorResult =
-        document.getElementById("personnelEditorResult");
+        document.getElementById(
+            "personnelEditorResult"
+        );
 
 
     /* ==========================================
@@ -3573,64 +3674,123 @@
     ========================================== */
 
     const archiveForm =
-        document.getElementById("archiveForm");
+        document.getElementById(
+            "archiveForm"
+        );
+
 
     const archiveNumber =
-        document.getElementById("archiveNumber");
+        document.getElementById(
+            "archiveNumber"
+        );
+
 
     const archiveSubject =
-        document.getElementById("archiveSubject");
+        document.getElementById(
+            "archiveSubject"
+        );
+
 
     const archiveTitle =
-        document.getElementById("archiveTitle");
+        document.getElementById(
+            "archiveTitle"
+        );
+
 
     const archiveDate =
-        document.getElementById("archiveDate");
+        document.getElementById(
+            "archiveDate"
+        );
+
 
     const archiveSummary =
-        document.getElementById("archiveSummary");
+        document.getElementById(
+            "archiveSummary"
+        );
+
 
     const archiveContent =
-        document.getElementById("archiveContent");
+        document.getElementById(
+            "archiveContent"
+        );
+
 
     const archiveVisible =
-        document.getElementById("archiveVisible");
+        document.getElementById(
+            "archiveVisible"
+        );
+
 
     const archiveResult =
-        document.getElementById("archiveResult");
+        document.getElementById(
+            "archiveResult"
+        );
+
 
     const archiveList =
-        document.getElementById("archiveList");
+        document.getElementById(
+            "archiveList"
+        );
+
 
     const createArchiveButton =
-        document.getElementById("createArchiveButton");
+        document.getElementById(
+            "createArchiveButton"
+        );
+
 
     const refreshArchiveData =
-        document.getElementById("refreshArchiveData");
+        document.getElementById(
+            "refreshArchiveData"
+        );
+
 
     const previewStatus =
-        document.getElementById("previewStatus");
+        document.getElementById(
+            "previewStatus"
+        );
+
 
     const previewClearance =
-        document.getElementById("previewClearance");
+        document.getElementById(
+            "previewClearance"
+        );
+
 
     const previewThreat =
-        document.getElementById("previewThreat");
+        document.getElementById(
+            "previewThreat"
+        );
+
 
     const previewLocation =
-        document.getElementById("previewLocation");
+        document.getElementById(
+            "previewLocation"
+        );
+
 
     const previewAffiliation =
-        document.getElementById("previewAffiliation");
+        document.getElementById(
+            "previewAffiliation"
+        );
+
 
     const previewOrigin =
-        document.getElementById("previewOrigin");
+        document.getElementById(
+            "previewOrigin"
+        );
+
 
     const previewObservation =
-        document.getElementById("previewObservation");
+        document.getElementById(
+            "previewObservation"
+        );
+
 
     const previewActivity =
-        document.getElementById("previewActivity");
+        document.getElementById(
+            "previewActivity"
+        );
 
 
     /* ==========================================
@@ -3638,43 +3798,81 @@
     ========================================== */
 
     const communicationForm =
-        document.getElementById("communicationForm");
+        document.getElementById(
+            "communicationForm"
+        );
+
 
     const communicationMessageId =
-        document.getElementById("communicationMessageId");
+        document.getElementById(
+            "communicationMessageId"
+        );
+
 
     const communicationSender =
-        document.getElementById("communicationSender");
+        document.getElementById(
+            "communicationSender"
+        );
+
 
     const communicationRecipient =
-        document.getElementById("communicationRecipient");
+        document.getElementById(
+            "communicationRecipient"
+        );
+
 
     const communicationSubject =
-        document.getElementById("communicationSubject");
+        document.getElementById(
+            "communicationSubject"
+        );
+
 
     const communicationClassification =
-        document.getElementById("communicationClassification");
+        document.getElementById(
+            "communicationClassification"
+        );
+
 
     const communicationStatus =
-        document.getElementById("communicationStatus");
+        document.getElementById(
+            "communicationStatus"
+        );
+
 
     const communicationContent =
-        document.getElementById("communicationContent");
+        document.getElementById(
+            "communicationContent"
+        );
+
 
     const communicationVisible =
-        document.getElementById("communicationVisible");
+        document.getElementById(
+            "communicationVisible"
+        );
+
 
     const communicationResult =
-        document.getElementById("communicationResult");
+        document.getElementById(
+            "communicationResult"
+        );
+
 
     const communicationList =
-        document.getElementById("communicationList");
+        document.getElementById(
+            "communicationList"
+        );
+
 
     const createCommunicationButton =
-        document.getElementById("createCommunicationButton");
+        document.getElementById(
+            "createCommunicationButton"
+        );
+
 
     const refreshCommunicationData =
-        document.getElementById("refreshCommunicationData");
+        document.getElementById(
+            "refreshCommunicationData"
+        );
 
 
     let currentSubmission = null;
@@ -3725,313 +3923,7 @@
 
 
     /* ==========================================
-       LORE MARKUP NORMALIZER
-    ========================================== */
-
-    function normalizeCigaLoreMarkup(
-        value
-    ) {
-
-        if (
-            value === null ||
-            value === undefined
-        ) {
-
-            return "";
-
-        }
-
-
-        let text =
-            String(
-                value
-            );
-
-
-        /*
-            Recover malformed HTML that may already
-            have been stored by an older version.
-        */
-
-        text =
-            text.replace(
-                /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,
-                (
-                    match,
-                    url,
-                    label
-                ) => {
-
-                    const cleanLabel =
-                        label
-                            .replace(
-                                /<[^>]*>/g,
-                                ""
-                            )
-                            .replace(
-                                /&nbsp;/gi,
-                                " "
-                            )
-                            .trim();
-
-
-                    const cleanUrl =
-                        String(
-                            url
-                        ).trim();
-
-
-                    if (
-                        !cleanLabel ||
-                        !/^https?:\/\//i.test(
-                            cleanUrl
-                        )
-                    ) {
-
-                        return match;
-
-                    }
-
-
-                    return `[[${cleanLabel}|${cleanUrl}]]`;
-
-                }
-            );
-
-
-        /*
-            Recover the specific broken format that
-            appeared in your old records:
-
-            href="..."
-            class="..."
-            target="_blank"
-            rel="..."
-            >
-            TEXT
-        */
-
-        text =
-            text.replace(
-                /href=["'](https?:\/\/[^"']+)["'][\s\S]*?class=["']ciga-lore-link["'][\s\S]*?target=["']_blank["'][\s\S]*?rel=["'][^"']*["'][\s\S]*?>\s*([\s\S]*?)\s*<\/a>/gi,
-                (
-                    match,
-                    url,
-                    label
-                ) => {
-
-                    const cleanLabel =
-                        label
-                            .replace(
-                                /<[^>]*>/g,
-                                ""
-                            )
-                            .trim();
-
-
-                    return `[[${cleanLabel}|${url}]]`;
-
-                }
-            );
-
-
-        /*
-            Also support the exact broken database
-            fragment where the closing </a> was lost.
-        */
-
-        text =
-            text.replace(
-                /href=["'](https?:\/\/[^"']+)["']\s*class=["']ciga-lore-link["']\s*target=["']_blank["']\s*rel=["']noopener noreferrer["']\s*>\s*([^.\r\n]+?)\s*\.\s*/gi,
-                (
-                    match,
-                    url,
-                    label
-                ) => {
-
-                    const cleanLabel =
-                        label.trim();
-
-
-                    if (
-                        !cleanLabel
-                    ) {
-
-                        return match;
-
-                    }
-
-
-                    return `[[${cleanLabel}|${url}]]. `;
-
-                }
-            );
-
-
-        /*
-            Remove accidental HTML wrappers around
-            plain text where possible.
-        */
-
-        text =
-            text.replace(
-                /<br\s*\/?>/gi,
-                "\n"
-            );
-
-
-        text =
-            text.replace(
-                /<\/?p\b[^>]*>/gi,
-                ""
-            );
-
-
-        return text;
-
-    }
-
-
-    /* ==========================================
-       HISTORY PARSER
-    ========================================== */
-
-    function parseHistoryValue(
-        value
-    ) {
-
-        if (
-            value === null ||
-            value === undefined ||
-            value === ""
-        ) {
-
-            return [];
-
-        }
-
-
-        if (
-            Array.isArray(
-                value
-            )
-        ) {
-
-            return value
-
-                .map(
-                    entry =>
-                        normalizeCigaLoreMarkup(
-                            entry
-                        ).trim()
-                )
-
-                .filter(
-                    entry =>
-                        entry !== ""
-                );
-
-        }
-
-
-        const text =
-            normalizeCigaLoreMarkup(
-                value
-            ).trim();
-
-
-        if (!text) {
-            return [];
-        }
-
-
-        if (
-            text.startsWith("[")
-            &&
-            text.endsWith("]")
-        ) {
-
-            try {
-
-                const parsed =
-                    JSON.parse(
-                        text
-                    );
-
-
-                if (
-                    Array.isArray(
-                        parsed
-                    )
-                ) {
-
-                    return parsed
-
-                        .map(
-                            entry =>
-                                normalizeCigaLoreMarkup(
-                                    entry
-                                ).trim()
-                        )
-
-                        .filter(
-                            entry =>
-                                entry !== ""
-                        );
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "HISTORY JSON PARSE ERROR:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        return [
-            text
-        ];
-
-    }
-
-
-    /* ==========================================
-       NORMALIZE NOTES
-    ========================================== */
-
-    function normalizeNotesForStorage(
-        value
-    ) {
-
-        const entries =
-            parseHistoryValue(
-                value
-            );
-
-
-        if (
-            entries.length === 0
-        ) {
-
-            return null;
-
-        }
-
-
-        return JSON.stringify(
-            entries
-        );
-
-    }
-
-
-    /* ==========================================
-       SCROLL RESTORE
+       RESTORE SCROLL
     ========================================== */
 
     function restoreScrollPosition(
@@ -4166,9 +4058,7 @@
         } =
             await db
 
-                .from(
-                    "admins"
-                )
+                .from("admins")
 
                 .select(
                     "user_id, role"
@@ -4268,8 +4158,7 @@
                 .order(
                     "id",
                     {
-                        ascending:
-                            false
+                        ascending: false
                     }
                 );
 
@@ -4283,9 +4172,13 @@
 
 
             submissionList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; SUBMISSION DATABASE ERROR.
+
                 </div>
+
             `;
 
 
@@ -4303,9 +4196,13 @@
         ) {
 
             submissionList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; NO PENDING SUBMISSIONS.
+
                 </div>
+
             `;
 
 
@@ -4339,10 +4236,7 @@
 
                             SUBMISSION_${String(
                                 submission.id
-                            ).padStart(
-                                3,
-                                "0"
-                            )}
+                            ).padStart(3, "0")}
 
                         </div>
 
@@ -4448,10 +4342,6 @@
         submissionId
     ) {
 
-        const preservedScroll =
-            window.scrollY;
-
-
         const {
             data,
             error
@@ -4514,9 +4404,7 @@
 
                 : `
 
-                    <div
-                        class="review-photo-unavailable"
-                    >
+                    <div class="review-photo-unavailable">
 
                         IMAGE<br>
                         UNAVAILABLE
@@ -4836,14 +4724,6 @@
 
                 </div>
 
-
-                <div class="classification-note">
-
-                    &gt; CLASSIFICATION IS ASSIGNED BY CIGA
-                    ADMINISTRATION DURING APPROVAL.
-
-                </div>
-
             </div>
 
 
@@ -4856,7 +4736,6 @@
 
                 <div class="social-grid">
 
-
                     <div class="social">
 
                         <div class="social-name">
@@ -4864,10 +4743,12 @@
                         </div>
 
                         <div class="social-url">
+
                             ${escapeHTML(
                                 data.twitch ||
                                 "UNAVAILABLE"
                             )}
+
                         </div>
 
                     </div>
@@ -4880,10 +4761,12 @@
                         </div>
 
                         <div class="social-url">
+
                             ${escapeHTML(
                                 data.youtube ||
                                 "UNAVAILABLE"
                             )}
+
                         </div>
 
                     </div>
@@ -4896,10 +4779,12 @@
                         </div>
 
                         <div class="social-url">
+
                             ${escapeHTML(
                                 data.tiktok ||
                                 "UNAVAILABLE"
                             )}
+
                         </div>
 
                     </div>
@@ -4912,10 +4797,12 @@
                         </div>
 
                         <div class="social-url">
+
                             ${escapeHTML(
                                 data.discord ||
                                 "UNAVAILABLE"
                             )}
+
                         </div>
 
                     </div>
@@ -4935,10 +4822,8 @@
                 <div class="review-value">
 
                     ${escapeHTML(
-                        normalizeCigaLoreMarkup(
-                            data.notes ||
-                            "NO ADDITIONAL INFORMATION PROVIDED."
-                        )
+                        data.notes ||
+                        "NO ADDITIONAL INFORMATION PROVIDED."
                     ).replace(
                         /\n/g,
                         "<br>"
@@ -4976,7 +4861,8 @@
 
 
         if (
-            data.status &&
+            data.status
+            &&
             Array.from(
                 reviewStatus.options
             ).some(
@@ -5040,26 +4926,10 @@
         );
 
 
-        requestAnimationFrame(
-            () => {
-
-                reviewPanel.scrollIntoView(
-                    {
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "start"
-                    }
-                );
-
-            }
-        );
-
-
-        restoreScrollPosition(
-            preservedScroll
-        );
+        reviewPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
 
         setupCollapsiblePanels();
@@ -5068,7 +4938,7 @@
 
 
     /* ==========================================
-       CONFIRMATION
+       SHOW CONFIRMATION
     ========================================== */
 
     function showConfirmation(
@@ -5116,15 +4986,16 @@
 
 
         confirmation.scrollIntoView({
-            behavior:
-                "smooth",
-
-            block:
-                "center"
+            behavior: "smooth",
+            block: "center"
         });
 
     }
 
+
+    /* ==========================================
+       CANCEL CONFIRMATION
+    ========================================== */
 
     confirmationNo.addEventListener(
         "click",
@@ -5141,6 +5012,10 @@
         }
     );
 
+
+    /* ==========================================
+       CONFIRM ACTION
+    ========================================== */
 
     confirmationYes.addEventListener(
         "click",
@@ -5189,6 +5064,10 @@
         }
     );
 
+
+    /* ==========================================
+       APPROVE BUTTON
+    ========================================== */
 
     approveButton.addEventListener(
         "click",
@@ -5269,14 +5148,11 @@
 
             const {
                 data: existingPersonnel,
-                error:
-                    personnelQueryError
+                error: personnelQueryError
             } =
                 await db
 
-                    .from(
-                        "personnel"
-                    )
+                    .from("personnel")
 
                     .select(
                         "file_number"
@@ -5307,7 +5183,8 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
+                        !Number.isNaN(number)
+                        &&
                         number >
                         highestNumber
                     ) {
@@ -5396,7 +5273,7 @@
 
             const {
                 error:
-                    insertPersonnelError
+                insertPersonnelError
             } =
                 await db
 
@@ -5420,7 +5297,7 @@
 
             const {
                 error:
-                    updateSubmissionError
+                updateSubmissionError
             } =
                 await db
 
@@ -5479,6 +5356,14 @@
             );
 
 
+            approveButton.disabled =
+                true;
+
+
+            rejectButton.disabled =
+                true;
+
+
             approveButton.textContent =
                 "RECORD APPROVED";
 
@@ -5494,17 +5379,10 @@
             await loadArchives();
 
 
-            approveButton.disabled =
-                true;
-
-
-            rejectButton.disabled =
-                true;
-
-
             restoreScrollPosition(
                 preservedScroll
             );
+
 
         } catch (error) {
 
@@ -5636,6 +5514,14 @@
         );
 
 
+        approveButton.disabled =
+            true;
+
+
+        rejectButton.disabled =
+            true;
+
+
         approveButton.textContent =
             "RECORD CLOSED";
 
@@ -5674,7 +5560,143 @@
 
 
     /* ==========================================
-       HISTORY ENTRY
+       HISTORY PARSER
+    ========================================== */
+
+    function parseHistoryValue(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return [];
+
+        }
+
+
+        if (
+            Array.isArray(
+                value
+            )
+        ) {
+
+            return value
+                .map(
+                    entry =>
+                        String(
+                            entry
+                        ).trim()
+                )
+                .filter(
+                    entry =>
+                        entry !== ""
+                );
+
+        }
+
+
+        const text =
+            String(
+                value
+            ).trim();
+
+
+        if (!text) {
+
+            return [];
+
+        }
+
+
+        if (
+            text.startsWith("[")
+            &&
+            text.endsWith("]")
+        ) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+                        .map(
+                            entry =>
+                                String(
+                                    entry
+                                ).trim()
+                        )
+                        .filter(
+                            entry =>
+                                entry !== ""
+                        );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "HISTORY JSON PARSE ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        return [
+            text
+        ];
+
+    }
+
+
+    /* ==========================================
+       NORMALIZE NOTES
+    ========================================== */
+
+    function normalizeNotesForStorage(
+        value
+    ) {
+
+        const entries =
+            parseHistoryValue(
+                value
+            );
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            return null;
+
+        }
+
+
+        return JSON.stringify(
+            entries
+        );
+
+    }
+
+
+    /* ==========================================
+       ADD HISTORY ENTRY
     ========================================== */
 
     function addHistoryEntry(
@@ -5716,9 +5738,7 @@
 
 
         textarea.value =
-            normalizeCigaLoreMarkup(
-                value
-            );
+            value;
 
 
         const removeButton =
@@ -5903,14 +5923,10 @@
                 ".history-entry-text"
             )
         )
-
             .map(
                 textarea =>
-                    normalizeCigaLoreMarkup(
-                        textarea.value
-                    ).trim()
+                    textarea.value.trim()
             )
-
             .filter(
                 entry =>
                     entry !== ""
@@ -5964,6 +5980,10 @@
     }
 
 
+    /* ==========================================
+       ADD HISTORY BUTTON
+    ========================================== */
+
     addHistoryButton.addEventListener(
         "click",
         function() {
@@ -5997,8 +6017,7 @@
                 .order(
                     "file_number",
                     {
-                        ascending:
-                            true
+                        ascending: true
                     }
                 );
 
@@ -6012,16 +6031,20 @@
 
 
             archiveSubject.innerHTML = `
+
                 <option value="">
                     PERSONNEL DATABASE ERROR
                 </option>
+
             `;
 
 
             editPersonnel.innerHTML = `
+
                 <option value="">
                     PERSONNEL DATABASE ERROR
                 </option>
+
             `;
 
 
@@ -6039,9 +6062,11 @@
 
 
         archiveSubject.innerHTML = `
+
             <option value="">
-                SELECT PERSONNEL FILE
+                NO PERSONNEL FILE // STANDALONE ARCHIVE
             </option>
+
         `;
 
 
@@ -6078,9 +6103,11 @@
 
 
         editPersonnel.innerHTML = `
+
             <option value="">
                 SELECT PERSONNEL FILE
             </option>
+
         `;
 
 
@@ -6110,7 +6137,8 @@
 
 
         if (
-            previousEditId &&
+            previousEditId
+            &&
             personnelRecords.some(
                 person =>
                     String(
@@ -6322,7 +6350,7 @@
 
 
     /* ==========================================
-       RESET EDITOR
+       RESET PERSONNEL EDITOR
     ========================================== */
 
     function resetPersonnelEditor() {
@@ -6330,51 +6358,67 @@
         editFileNumber.value =
             "";
 
+
         editName.value =
             "";
+
 
         editAlias.value =
             "";
 
+
         editPrimaryActivity.value =
             "";
+
 
         editLocation.value =
             "";
 
+
         editAffiliation.value =
             "";
+
 
         editOrigin.value =
             "";
 
+
         editStatus.value =
             "UNKNOWN";
+
 
         editClearance.value =
             "UNKNOWN";
 
+
         editObservation.value =
             "UNKNOWN";
+
 
         editThreatLevel.value =
             "UNKNOWN";
 
+
         editDescription.value =
             "";
+
 
         loadHistoryIntoEditor(
             []
         );
 
+
         editTwitch.value =
             "";
+
 
         editYoutube.value =
             "";
 
+
         editTiktok.value =
             "";
+
 
         editDiscord.value =
             "";
@@ -6402,7 +6446,7 @@
 
 
     /* ==========================================
-       SAVE PERSONNEL FILE
+       SAVE PERSONNEL
     ========================================== */
 
     async function savePersonnelFile() {
@@ -6413,7 +6457,9 @@
             );
 
 
-        if (!personnelId) {
+        if (
+            !personnelId
+        ) {
 
             showPersonnelEditorResult(
                 "> UPDATE FAILED.<br>" +
@@ -6424,10 +6470,6 @@
             return;
 
         }
-
-
-        const preservedScroll =
-            window.scrollY;
 
 
         savePersonnelButton.disabled =
@@ -6447,13 +6489,17 @@
         );
 
 
+        const preservedScroll =
+            window.scrollY;
+
+
         try {
 
             const {
                 data:
-                    currentPersonnel,
+                currentPersonnel,
                 error:
-                    personnelLoadError
+                personnelLoadError
             } =
                 await db
 
@@ -6562,7 +6608,7 @@
 
             const {
                 error:
-                    updateError
+                updateError
             } =
                 await db
 
@@ -6621,6 +6667,7 @@
                 preservedScroll
             );
 
+
         } catch (error) {
 
             console.error(
@@ -6659,6 +6706,10 @@
     }
 
 
+    /* ==========================================
+       EDITOR SELECT
+    ========================================== */
+
     editPersonnel.addEventListener(
         "change",
         function() {
@@ -6692,6 +6743,10 @@
     );
 
 
+    /* ==========================================
+       EDITOR REFRESH
+    ========================================== */
+
     refreshPersonnelEditor.addEventListener(
         "click",
         async function() {
@@ -6717,7 +6772,9 @@
             await loadArchives();
 
 
-            if (currentId) {
+            if (
+                currentId
+            ) {
 
                 editPersonnel.value =
                     currentId;
@@ -6747,6 +6804,10 @@
     );
 
 
+    /* ==========================================
+       SAVE EDITOR
+    ========================================== */
+
     savePersonnelButton.addEventListener(
         "click",
         savePersonnelFile
@@ -6754,7 +6815,7 @@
 
 
     /* ==========================================
-       ARCHIVE SUBJECT
+       SUBJECT CHANGE
     ========================================== */
 
     archiveSubject.addEventListener(
@@ -6829,28 +6890,39 @@
     );
 
 
+    /* ==========================================
+       RESET SUBJECT PREVIEW
+    ========================================== */
+
     function resetSubjectPreview() {
 
         previewStatus.textContent =
             "UNAVAILABLE";
 
+
         previewClearance.textContent =
             "UNAVAILABLE";
+
 
         previewThreat.textContent =
             "UNAVAILABLE";
 
+
         previewLocation.textContent =
             "UNAVAILABLE";
+
 
         previewAffiliation.textContent =
             "UNAVAILABLE";
 
+
         previewOrigin.textContent =
             "UNAVAILABLE";
 
+
         previewObservation.textContent =
             "UNAVAILABLE";
+
 
         previewActivity.textContent =
             "UNAVAILABLE";
@@ -6859,7 +6931,7 @@
 
 
     /* ==========================================
-       ARCHIVE NUMBER
+       PREPARE ARCHIVE NUMBER
     ========================================== */
 
     async function prepareNextArchiveNumber() {
@@ -6870,9 +6942,7 @@
         } =
             await db
 
-                .from(
-                    "archives"
-                )
+                .from("archives")
 
                 .select(
                     "archive_number"
@@ -6922,7 +6992,8 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
+                        !Number.isNaN(number)
+                        &&
                         number >
                         highestNumber
                     ) {
@@ -6960,6 +7031,13 @@
             event.preventDefault();
 
 
+            /*
+                Personnel file is OPTIONAL.
+
+                Empty selection means this is
+                a standalone archive/event.
+            */
+
             const selectedId =
                 Number(
                     archiveSubject.value
@@ -6967,20 +7045,25 @@
 
 
             const selectedPersonnel =
-                personnelRecords.find(
-                    person =>
-                        Number(
-                            person.id
-                        ) ===
-                        selectedId
-                );
+                selectedId
+                    ? personnelRecords.find(
+                        person =>
+                            Number(
+                                person.id
+                            ) ===
+                            selectedId
+                    )
+                    : null;
 
 
-            if (!selectedPersonnel) {
+            if (
+                selectedId &&
+                !selectedPersonnel
+            ) {
 
                 showArchiveResult(
                     "> ARCHIVE CREATION FAILED.<br>" +
-                    "> SELECT A PERSONNEL FILE."
+                    "> SELECTED PERSONNEL FILE COULD NOT BE FOUND."
                 );
 
 
@@ -6994,15 +7077,11 @@
 
 
             const summaryValue =
-                normalizeCigaLoreMarkup(
-                    archiveSummary.value
-                ).trim();
+                archiveSummary.value.trim();
 
 
             const contentValue =
-                normalizeCigaLoreMarkup(
-                    archiveContent.value
-                ).trim();
+                archiveContent.value.trim();
 
 
             if (!archiveTitleValue) {
@@ -7026,6 +7105,18 @@
                 "CREATING ARCHIVE...";
 
 
+            /*
+                IMPORTANT:
+
+                personnel_id is now nullable.
+
+                Selected personnel:
+                    personnel_id = ID
+
+                No personnel selected:
+                    personnel_id = null
+            */
+
             const archiveRecord = {
 
                 archive_number:
@@ -7035,7 +7126,9 @@
                     archiveTitleValue,
 
                 personnel_id:
-                    selectedPersonnel.id,
+                    selectedPersonnel
+                        ? selectedPersonnel.id
+                        : null,
 
                 incident_date:
                     archiveDate.value.trim() ||
@@ -7061,9 +7154,7 @@
             } =
                 await db
 
-                    .from(
-                        "archives"
-                    )
+                    .from("archives")
 
                     .insert(
                         [archiveRecord]
@@ -7102,6 +7193,12 @@
             }
 
 
+            const subjectName =
+                selectedPersonnel
+                    ? selectedPersonnel.name
+                    : "STANDALONE EVENT";
+
+
             showArchiveResult(
                 `> ARCHIVE CREATED.<br>` +
                 `> ${escapeHTML(
@@ -7110,8 +7207,13 @@
                     data.title
                 )}<br>` +
                 `> SUBJECT: ${escapeHTML(
-                    selectedPersonnel.name
+                    subjectName
                 )}<br>` +
+                `> ASSOCIATION: ${
+                    selectedPersonnel
+                        ? "PERSONNEL FILE"
+                        : "STANDALONE ARCHIVE"
+                }<br>` +
                 `> VISIBILITY: ${
                     data.visible
                         ? "PUBLIC"
@@ -7121,6 +7223,11 @@
 
 
             archiveForm.reset();
+
+
+            archiveSubject.value =
+                "";
+
 
             resetSubjectPreview();
 
@@ -7141,6 +7248,10 @@
     );
 
 
+    /* ==========================================
+       SHOW ARCHIVE RESULT
+    ========================================== */
+
     function showArchiveResult(
         message
     ) {
@@ -7155,6 +7266,10 @@
 
     }
 
+
+    /* ==========================================
+       REFRESH ARCHIVE DATA
+    ========================================== */
 
     refreshArchiveData.addEventListener(
         "click",
@@ -7222,8 +7337,7 @@
                 .order(
                     "id",
                     {
-                        ascending:
-                            false
+                        ascending: false
                     }
                 );
 
@@ -7237,12 +7351,17 @@
 
 
             archiveList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; ARCHIVE DATABASE ERROR.<br>
+
                     &gt; ${escapeHTML(
                         error.message
                     )}
+
                 </div>
+
             `;
 
 
@@ -7257,9 +7376,13 @@
         ) {
 
             archiveList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; NO ARCHIVE RECORDS.
+
                 </div>
+
             `;
 
 
@@ -7316,18 +7439,21 @@
                             SUBJECT:
                             ${escapeHTML(
                                 person?.name ||
-                                "UNKNOWN"
+                                "STANDALONE EVENT"
                             )}
 
                             <br>
 
-                            PERSONNEL FILE:
-                            ${escapeHTML(
-                                person?.file_number ||
-                                "UNKNOWN"
-                            )}
-
-                            <br>
+                            ${
+                                person
+                                    ? `PERSONNEL FILE:
+                                        ${escapeHTML(
+                                            person.file_number ||
+                                            "UNKNOWN"
+                                        )}<br>`
+                                    : `ASSOCIATION:
+                                        STANDALONE ARCHIVE<br>`
+                            }
 
                             INCIDENT DATE:
                             ${escapeHTML(
@@ -7364,7 +7490,7 @@
 
 
     /* ==========================================
-       COMMUNICATION ID
+       PREPARE COMMUNICATION ID
     ========================================== */
 
     async function prepareNextCommunicationId() {
@@ -7427,7 +7553,8 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
+                        !Number.isNaN(number)
+                        &&
                         number >
                         highestNumber
                     ) {
@@ -7473,30 +7600,18 @@
                 communicationRecipient.value.trim();
 
 
-            const subjectValue =
+            const subject =
                 communicationSubject.value.trim();
 
 
-            /*
-                IMPORTANT:
-                Store lore markup as plain text.
-
-                [[ANOMALOUS|https://...]]
-                stays exactly in that form in Supabase.
-
-                It is NOT converted into HTML here.
-            */
-
             const content =
-                normalizeCigaLoreMarkup(
-                    communicationContent.value
-                ).trim();
+                communicationContent.value.trim();
 
 
             if (
                 !sender ||
                 !recipient ||
-                !subjectValue ||
+                !subject ||
                 !content
             ) {
 
@@ -7531,7 +7646,7 @@
                     recipient,
 
                 subject:
-                    subjectValue,
+                    subject,
 
                 content:
                     content,
@@ -7637,6 +7752,10 @@
     );
 
 
+    /* ==========================================
+       SHOW COMMUNICATION RESULT
+    ========================================== */
+
     function showCommunicationResult(
         message
     ) {
@@ -7651,6 +7770,10 @@
 
     }
 
+
+    /* ==========================================
+       REFRESH COMMUNICATION DATA
+    ========================================== */
 
     refreshCommunicationData.addEventListener(
         "click",
@@ -7703,8 +7826,7 @@
                 .order(
                     "id",
                     {
-                        ascending:
-                            false
+                        ascending: false
                     }
                 );
 
@@ -7718,12 +7840,17 @@
 
 
             communicationList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; COMMUNICATION DATABASE ERROR.<br>
+
                     &gt; ${escapeHTML(
                         error.message
                     )}
+
                 </div>
+
             `;
 
 
@@ -7738,9 +7865,13 @@
         ) {
 
             communicationList.innerHTML = `
+
                 <div class="empty">
+
                     &gt; NO COMMUNICATION RECORDS.
+
                 </div>
+
             `;
 
 
