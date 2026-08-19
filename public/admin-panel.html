@@ -20,36 +20,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
-
-        :root {
-
-            --text-main:
-                rgba(255,255,255,0.96);
-
-            --text-soft:
-                rgba(255,255,255,0.74);
-
-            --text-muted:
-                rgba(255,255,255,0.52);
-
-            --text-faint:
-                rgba(255,255,255,0.38);
-
-            --border-soft:
-                rgba(255,255,255,0.18);
-
-            --border-normal:
-                rgba(255,255,255,0.26);
-
-            --panel-bg:
-                rgba(255,255,255,0.018);
-
-            --input-bg:
-                rgba(255,255,255,0.012);
-
-        }
-
 
         * {
             box-sizing: border-box;
@@ -62,6 +34,7 @@
 
             background: #000;
             color: #fff;
+
             min-height: 100vh;
 
             font-family:
@@ -70,8 +43,6 @@
                 monospace;
 
             overflow-x: hidden;
-
-            font-size: 13px;
 
         }
 
@@ -86,9 +57,9 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            HEADER
-        ========================================== */
+        ========================= */
 
         .header {
 
@@ -102,9 +73,11 @@
 
             gap: 30px;
 
-            padding-bottom: 18px;
+            padding-bottom:
+                18px;
 
-            margin-bottom: 32px;
+            margin-bottom:
+                32px;
 
             border-bottom:
                 1px solid
@@ -122,15 +95,20 @@
 
             display: inline-block;
 
-            font-size: 22px;
+            font-size:
+                22px;
 
-            letter-spacing: 4px;
+            letter-spacing:
+                4px;
 
-            color: #fff;
+            color:
+                #fff;
 
-            text-decoration: none;
+            text-decoration:
+                none;
 
-            cursor: pointer;
+            cursor:
+                pointer;
 
             transition:
                 text-shadow 0.2s ease;
@@ -142,51 +120,68 @@
 
             text-shadow:
                 0 0 6px
-                rgba(255,255,255,0.8),
-
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                ),
                 0 0 15px
-                rgba(255,255,255,0.35);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
 
         }
 
 
         .subtitle {
 
-            margin-top: 8px;
+            margin-top:
+                8px;
 
-            font-size: 12px;
+            font-size:
+                11px;
 
-            letter-spacing: 2px;
+            letter-spacing:
+                2px;
 
-            color:
-                var(--text-muted);
+            opacity:
+                0.55;
 
         }
 
 
         .header-status {
 
-            text-align: right;
+            text-align:
+                right;
 
-            font-size: 11px;
+            font-size:
+                10px;
 
-            line-height: 1.9;
+            line-height:
+                1.9;
 
-            letter-spacing: 1px;
+            letter-spacing:
+                1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.65;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            TERMINAL
-        ========================================== */
+        ========================= */
 
         .terminal {
 
-            margin-bottom: 28px;
+            margin-bottom:
+                28px;
 
             padding:
                 18px 21px;
@@ -208,30 +203,35 @@
                     0.025
                 );
 
-            font-size: 12px;
+            font-size:
+                12px;
 
-            line-height: 2;
+            line-height:
+                2;
 
-            letter-spacing: 1px;
+            letter-spacing:
+                1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.76;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            ACCESS DENIED
-        ========================================== */
+        ========================= */
 
         .message {
 
-            max-width: 720px;
+            max-width:
+                720px;
 
             margin:
                 100px auto;
 
-            padding: 28px;
+            padding:
+                28px;
 
             border:
                 1px solid
@@ -250,141 +250,198 @@
                     0.015
                 );
 
-            font-size: 12px;
+            font-size:
+                12px;
 
-            line-height: 2;
+            line-height:
+                2;
 
-            letter-spacing: 1.4px;
+            letter-spacing:
+                1.4px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.75;
 
         }
 
 
         .message-title {
 
-            font-size: 19px;
+            font-size:
+                19px;
 
-            letter-spacing: 3px;
+            letter-spacing:
+                3px;
 
-            margin-bottom: 15px;
+            margin-bottom:
+                15px;
 
-            color:
-                var(--text-main);
+            opacity:
+                1;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            DASHBOARD
-        ========================================== */
+        ========================= */
 
         .dashboard {
-            display: none;
+
+            display:
+                none;
+
         }
 
 
         .dashboard.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
-        /* ==========================================
+        /* =========================
            STATS
-        ========================================== */
+        ========================= */
 
         .stats {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(
+                    3,
+                    1fr
+                );
 
-            gap: 16px;
+            gap:
+                15px;
 
-            margin-bottom: 26px;
+            margin-bottom:
+                25px;
 
         }
 
 
         .stat {
 
-            padding: 20px;
-
-            min-height: 92px;
+            padding:
+                18px;
 
             border:
                 1px solid
-                var(--border-normal);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
 
             background:
-                var(--panel-bg);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
 
         }
 
 
         .stat-label {
 
-            font-size: 10px;
+            font-size:
+                9px;
 
-            letter-spacing: 2px;
+            letter-spacing:
+                2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
-            margin-bottom: 10px;
+            margin-bottom:
+                9px;
 
         }
 
 
         .stat-value {
 
-            font-size: 19px;
+            font-size:
+                19px;
 
-            letter-spacing: 2px;
-
-            color:
-                var(--text-main);
+            letter-spacing:
+                2px;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            PANELS
-        ========================================== */
+        ========================= */
 
         .panel {
 
-            padding: 27px;
+            padding:
+                25px;
 
-            margin-bottom: 22px;
+            margin-bottom:
+                20px;
 
             border:
                 1px solid
-                var(--border-normal);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             background:
-                var(--panel-bg);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
 
-            overflow: hidden;
+            overflow:
+                hidden;
 
         }
 
 
         .panel-title {
 
-            display: flex;
+            display:
+                flex;
 
-            align-items: center;
+            align-items:
+                center;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
-            gap: 18px;
+            gap:
+                15px;
 
-            padding-bottom: 13px;
+            font-size:
+                11px;
 
-            margin-bottom: 23px;
+            letter-spacing:
+                3px;
+
+            opacity:
+                0.60;
+
+            padding-bottom:
+                11px;
+
+            margin-bottom:
+                20px;
 
             border-bottom:
                 1px solid
@@ -392,24 +449,14 @@
                     255,
                     255,
                     255,
-                    0.17
+                    0.15
                 );
 
-            font-size: 12px;
+            cursor:
+                pointer;
 
-            letter-spacing: 3px;
-
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.72
-                );
-
-            cursor: pointer;
-
-            user-select: none;
+            user-select:
+                none;
 
         }
 
@@ -419,13 +466,15 @@
             content:
                 "▼";
 
-            font-size: 9px;
+            font-size:
+                9px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.45;
 
             transition:
-                transform 0.2s ease;
+                transform
+                0.2s ease;
 
         }
 
@@ -433,7 +482,8 @@
         .panel.collapsed >
         .panel-title {
 
-            margin-bottom: 0;
+            margin-bottom:
+                0;
 
             border-bottom-color:
                 transparent;
@@ -445,7 +495,9 @@
         .panel-title::after {
 
             transform:
-                rotate(-90deg);
+                rotate(
+                    -90deg
+                );
 
         }
 
@@ -453,21 +505,23 @@
         .panel.collapsed >
         :not(.panel-title) {
 
-            display: none;
+            display:
+                none;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            CIGA LINK HELP
-        ========================================== */
+        ========================= */
 
         .ciga-link-help {
 
-            margin-top: 13px;
+            margin-top:
+                12px;
 
             padding:
-                15px 16px;
+                14px 15px;
 
             border:
                 1px solid
@@ -475,7 +529,7 @@
                     255,
                     255,
                     255,
-                    0.27
+                    0.28
                 );
 
             border-left:
@@ -495,43 +549,54 @@
                     0.045
                 );
 
-            font-size: 10px;
+            font-size:
+                10px;
 
-            line-height: 1.9;
+            line-height:
+                1.8;
 
             letter-spacing:
                 0.8px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.82;
 
         }
 
 
         .ciga-link-help strong {
 
-            display: block;
+            display:
+                block;
 
-            margin-bottom: 5px;
+            margin-bottom:
+                6px;
 
-            font-size: 10px;
+            font-size:
+                10px;
 
-            letter-spacing: 1.7px;
+            letter-spacing:
+                1.6px;
 
-            color:
-                var(--text-main);
+            opacity:
+                1;
 
         }
 
 
         .ciga-link-help code {
 
-            display: inline-block;
+            display:
+                inline-block;
 
-            margin-top: 5px;
+            margin-top:
+                4px;
 
             padding:
                 3px 7px;
+
+            background:
+                #000;
 
             border:
                 1px solid
@@ -542,30 +607,21 @@
                     0.25
                 );
 
-            background:
-                #000;
-
             color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.90
-                );
+                #fff;
 
-            font-family: inherit;
+            font-family:
+                inherit;
 
-            font-size: 10px;
-
-            letter-spacing:
-                0.5px;
+            font-size:
+                10px;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            BUTTONS
-        ========================================== */
+        ========================= */
 
         button {
 
@@ -584,24 +640,20 @@
                     255,
                     255,
                     255,
-                    0.28
+                    0.25
                 );
 
             font-family:
                 inherit;
 
             font-size:
-                10px;
+                9px;
 
             letter-spacing:
                 1.5px;
 
             cursor:
                 pointer;
-
-            transition:
-                background 0.2s ease,
-                border-color 0.2s ease;
 
         }
 
@@ -613,7 +665,7 @@
                     255,
                     255,
                     255,
-                    0.065
+                    0.06
                 );
 
             border-color:
@@ -621,7 +673,7 @@
                     255,
                     255,
                     255,
-                    0.62
+                    0.60
                 );
 
         }
@@ -647,7 +699,7 @@
                 10px;
 
             margin-top:
-                16px;
+                15px;
 
         }
 
@@ -660,9 +712,9 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            SUBMISSIONS
-        ========================================== */
+        ========================= */
 
         .submission {
 
@@ -670,21 +722,25 @@
                 grid;
 
             grid-template-columns:
-                1fr
-                auto;
+                1fr auto;
 
             gap:
-                22px;
+                20px;
 
             padding:
-                19px;
+                18px;
 
             margin-bottom:
-                11px;
+                10px;
 
             border:
                 1px solid
-                var(--border-soft);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
 
             background:
                 rgba(
@@ -695,8 +751,10 @@
                 );
 
             transition:
-                background 0.2s ease,
-                border-color 0.2s ease;
+                background
+                0.2s ease,
+                border-color
+                0.2s ease;
 
         }
 
@@ -716,7 +774,7 @@
                     255,
                     255,
                     255,
-                    0.42
+                    0.40
                 );
 
         }
@@ -730,11 +788,11 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.45;
 
             margin-bottom:
-                9px;
+                8px;
 
         }
 
@@ -747,11 +805,8 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-main);
-
             margin-bottom:
-                11px;
+                10px;
 
         }
 
@@ -762,13 +817,13 @@
                 10px;
 
             line-height:
-                1.95;
+                1.8;
 
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.62;
 
         }
 
@@ -787,11 +842,8 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-soft);
-
-            white-space:
-                nowrap;
+            opacity:
+                0.58;
 
         }
 
@@ -808,7 +860,7 @@
                 6px;
 
             margin-right:
-                9px;
+                8px;
 
             background:
                 #fff;
@@ -819,17 +871,23 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            REVIEW
-        ========================================== */
+        ========================= */
 
         .review-panel {
-            display: none;
+
+            display:
+                none;
+
         }
 
 
         .review-panel.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
@@ -846,7 +904,7 @@
                 30px;
 
             margin-bottom:
-                26px;
+                25px;
 
         }
 
@@ -915,13 +973,13 @@
                 10px;
 
             line-height:
-                1.7;
+                1.6;
 
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.45;
 
         }
 
@@ -948,8 +1006,8 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
             margin-bottom:
                 10px;
@@ -968,9 +1026,6 @@
             margin-bottom:
                 15px;
 
-            color:
-                var(--text-main);
-
         }
 
 
@@ -980,13 +1035,13 @@
                 12px;
 
             line-height:
-                1.95;
+                1.9;
 
             letter-spacing:
                 0.8px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.75;
 
         }
 
@@ -1001,21 +1056,21 @@
                 1fr;
 
             gap:
-                14px 21px;
+                13px 20px;
 
             font-size:
                 11px;
 
             line-height:
-                1.8;
+                1.7;
 
         }
 
 
         .review-label {
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.40;
 
             letter-spacing:
                 1.5px;
@@ -1025,8 +1080,8 @@
 
         .review-value {
 
-            color:
-                var(--text-main);
+            opacity:
+                0.90;
 
             letter-spacing:
                 0.8px;
@@ -1034,12 +1089,15 @@
             word-break:
                 break-word;
 
+            white-space:
+                pre-wrap;
+
         }
 
 
-        /* ==========================================
-           ALL SELECTS - DARK
-        ========================================== */
+        /* =========================
+           DARK SELECTS
+        ========================= */
 
         select {
 
@@ -1049,100 +1107,22 @@
         }
 
 
+        .classification-select,
         .personnel-editor-select,
         .archive-select,
-        .communication-select,
-        .classification-select {
-
-            color:
-                #fff;
-
-            background:
-                #000;
-
-            color-scheme:
-                dark;
-
-        }
-
-
-        .personnel-editor-select option,
-        .archive-select option,
-        .communication-select option,
-        .classification-select option {
-
-            background:
-                #000;
-
-            color:
-                #fff;
-
-        }
-
-
-        /* ==========================================
-           CLASSIFICATION
-        ========================================== */
-
-        .classification-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr
-                1fr;
-
-            gap:
-                20px;
-
-        }
-
-
-        .classification-field {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                9px;
-
-        }
-
-
-        .classification-label {
-
-            font-size:
-                10px;
-
-            letter-spacing:
-                2px;
-
-            color:
-                var(--text-muted);
-
-        }
-
-
-        .classification-select {
+        .communication-select {
 
             width:
                 100%;
 
-            height:
-                44px;
-
-            padding:
-                0 12px;
-
             background:
                 #000;
 
             color:
                 #fff;
+
+            color-scheme:
+                dark;
 
             border:
                 1px solid
@@ -1150,7 +1130,7 @@
                     255,
                     255,
                     255,
-                    0.24
+                    0.22
                 );
 
             outline:
@@ -1165,15 +1145,87 @@
             letter-spacing:
                 0.8px;
 
+        }
+
+
+        .classification-select option,
+        .personnel-editor-select option,
+        .archive-select option,
+        .communication-select option {
+
+            background:
+                #000;
+
+            color:
+                #fff;
+
+        }
+
+
+        /* =========================
+           CLASSIFICATION
+        ========================= */
+
+        .classification-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                18px;
+
+        }
+
+
+        .classification-field {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+        }
+
+
+        .classification-label {
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+            opacity:
+                0.48;
+
+        }
+
+
+        .classification-select {
+
+            height:
+                42px;
+
+            padding:
+                0 12px;
+
             cursor:
                 pointer;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            SOCIALS
-        ========================================== */
+        ========================= */
 
         .social-grid {
 
@@ -1185,7 +1237,7 @@
                 1fr;
 
             gap:
-                11px;
+                10px;
 
         }
 
@@ -1193,7 +1245,7 @@
         .social {
 
             padding:
-                14px;
+                13px;
 
             border:
                 1px solid
@@ -1201,7 +1253,7 @@
                     255,
                     255,
                     255,
-                    0.17
+                    0.16
                 );
 
             background:
@@ -1209,7 +1261,7 @@
                     255,
                     255,
                     255,
-                    0.018
+                    0.02
                 );
 
         }
@@ -1223,11 +1275,11 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
             margin-bottom:
-                7px;
+                6px;
 
         }
 
@@ -1243,15 +1295,15 @@
             word-break:
                 break-all;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.80;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            CONFIRMATION
-        ========================================== */
+        ========================= */
 
         .confirmation {
 
@@ -1270,7 +1322,7 @@
                     255,
                     255,
                     255,
-                    0.34
+                    0.35
                 );
 
             background:
@@ -1285,7 +1337,10 @@
 
 
         .confirmation.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
@@ -1298,10 +1353,10 @@
                 3px;
 
             margin-bottom:
-                13px;
+                12px;
 
-            color:
-                var(--text-main);
+            opacity:
+                0.85;
 
         }
 
@@ -1312,16 +1367,16 @@
                 11px;
 
             line-height:
-                1.95;
+                1.9;
 
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.68;
 
             margin-bottom:
-                18px;
+                17px;
 
         }
 
@@ -1337,9 +1392,9 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            RESULT
-        ========================================== */
+        ========================= */
 
         .result {
 
@@ -1350,7 +1405,7 @@
                 18px;
 
             padding:
-                15px;
+                14px;
 
             border:
                 1px solid
@@ -1358,26 +1413,29 @@
                     255,
                     255,
                     255,
-                    0.22
+                    0.20
                 );
 
             font-size:
                 10px;
 
             line-height:
-                1.9;
+                1.8;
 
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.76;
 
         }
 
 
         .result.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
@@ -1389,21 +1447,18 @@
             font-size:
                 10px;
 
-            line-height:
-                1.8;
-
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.48;
 
         }
 
 
-        /* ==========================================
-           FORM FIELDS
-        ========================================== */
+        /* =========================
+           EDITOR GRIDS
+        ========================= */
 
         .personnel-editor-grid,
         .archive-grid,
@@ -1417,7 +1472,7 @@
                 1fr;
 
             gap:
-                20px;
+                18px;
 
         }
 
@@ -1443,7 +1498,7 @@
                 column;
 
             gap:
-                9px;
+                8px;
 
         }
 
@@ -1453,13 +1508,13 @@
         .communication-label {
 
             font-size:
-                10px;
+                9px;
 
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-muted);
+            opacity:
+                0.48;
 
         }
 
@@ -1478,7 +1533,7 @@
                 100%;
 
             background:
-                var(--input-bg);
+                #000;
 
             color:
                 #fff;
@@ -1489,7 +1544,7 @@
                     255,
                     255,
                     255,
-                    0.23
+                    0.22
                 );
 
             outline:
@@ -1504,10 +1559,6 @@
             letter-spacing:
                 0.8px;
 
-            transition:
-                border-color 0.2s ease,
-                background 0.2s ease;
-
         }
 
 
@@ -1519,10 +1570,10 @@
         .communication-select {
 
             height:
-                44px;
+                42px;
 
             padding:
-                0 13px;
+                0 12px;
 
         }
 
@@ -1530,16 +1581,16 @@
         .personnel-editor-textarea {
 
             min-height:
-                130px;
+                120px;
 
             padding:
-                13px;
+                12px;
 
             resize:
                 vertical;
 
             line-height:
-                1.9;
+                1.8;
 
         }
 
@@ -1547,16 +1598,16 @@
         .archive-textarea {
 
             min-height:
-                120px;
+                110px;
 
             padding:
-                13px;
+                12px;
 
             resize:
                 vertical;
 
             line-height:
-                1.9;
+                1.7;
 
         }
 
@@ -1564,7 +1615,7 @@
         .archive-textarea.large {
 
             min-height:
-                280px;
+                260px;
 
         }
 
@@ -1572,16 +1623,16 @@
         .communication-textarea {
 
             min-height:
-                250px;
+                230px;
 
             padding:
-                13px;
+                12px;
 
             resize:
                 vertical;
 
             line-height:
-                1.9;
+                1.8;
 
         }
 
@@ -1601,15 +1652,7 @@
                     255,
                     255,
                     255,
-                    0.66
-                );
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.025
+                    0.65
                 );
 
         }
@@ -1628,9 +1671,9 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            HISTORY
-        ========================================== */
+        ========================= */
 
         .history-list {
 
@@ -1638,7 +1681,7 @@
                 grid;
 
             gap:
-                13px;
+                12px;
 
         }
 
@@ -1649,14 +1692,13 @@
                 grid;
 
             grid-template-columns:
-                1fr
-                auto;
+                1fr auto;
 
             gap:
-                13px;
+                12px;
 
             padding:
-                15px;
+                14px;
 
             border:
                 1px solid
@@ -1672,7 +1714,7 @@
                     255,
                     255,
                     255,
-                    0.018
+                    0.02
                 );
 
         }
@@ -1689,8 +1731,8 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
         }
 
@@ -1701,10 +1743,10 @@
                 100%;
 
             min-height:
-                105px;
+                95px;
 
             padding:
-                13px;
+                12px;
 
             resize:
                 vertical;
@@ -1721,7 +1763,7 @@
                     255,
                     255,
                     255,
-                    0.23
+                    0.22
                 );
 
             outline:
@@ -1734,10 +1776,10 @@
                 11px;
 
             line-height:
-                1.9;
+                1.8;
 
             letter-spacing:
-                0.6px;
+                0.7px;
 
         }
 
@@ -1776,7 +1818,7 @@
         .history-actions {
 
             margin-top:
-                15px;
+                14px;
 
         }
 
@@ -1786,7 +1828,7 @@
         .communication-actions {
 
             margin-top:
-                23px;
+                22px;
 
             padding-top:
                 20px;
@@ -1803,32 +1845,19 @@
         }
 
 
-        .history-add {
-
-            border-color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.45
-                );
-
-        }
-
-
         .history-note {
 
             margin-top:
-                11px;
+                10px;
 
             font-size:
                 9px;
 
             line-height:
-                1.8;
+                1.7;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.40;
 
         }
 
@@ -1856,8 +1885,8 @@
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
         }
 
@@ -1886,7 +1915,7 @@
                 15px;
 
             padding:
-                15px;
+                14px;
 
             border:
                 1px solid
@@ -1894,29 +1923,35 @@
                     255,
                     255,
                     255,
-                    0.21
+                    0.20
                 );
 
             font-size:
                 10px;
 
             line-height:
-                1.9;
+                1.8;
 
-            color:
-                var(--text-soft);
+            letter-spacing:
+                1px;
+
+            opacity:
+                0.76;
 
         }
 
 
         .personnel-editor-result.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
-        /* ==========================================
-           CREATE / EDIT SWITCH
-        ========================================== */
+        /* =========================
+           CREATE / EDIT MODE
+        ========================= */
 
         .editor-mode {
 
@@ -1927,7 +1962,7 @@
                 8px;
 
             margin-bottom:
-                20px;
+                18px;
 
             padding:
                 8px;
@@ -1958,7 +1993,7 @@
                 1;
 
             min-height:
-                39px;
+                40px;
 
         }
 
@@ -1978,7 +2013,7 @@
                     255,
                     255,
                     255,
-                    0.68
+                    0.70
                 );
 
         }
@@ -2016,7 +2051,10 @@
 
 
         .editor-select-wrap.visible {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
@@ -2029,28 +2067,28 @@
                 9px;
 
             font-size:
-                10px;
+                9px;
 
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-muted);
+            opacity:
+                0.48;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            SUBJECT PREVIEW
-        ========================================== */
+        ========================= */
 
         .subject-preview {
 
             margin-top:
-                21px;
+                20px;
 
             padding:
-                19px;
+                18px;
 
             border:
                 1px solid
@@ -2058,7 +2096,7 @@
                     255,
                     255,
                     255,
-                    0.19
+                    0.18
                 );
 
             background:
@@ -2075,16 +2113,16 @@
         .subject-preview-title {
 
             font-size:
-                10px;
+                9px;
 
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.42;
 
             margin-bottom:
-                15px;
+                14px;
 
         }
 
@@ -2099,21 +2137,21 @@
                 1fr;
 
             gap:
-                11px 18px;
+                10px 18px;
 
             font-size:
                 10px;
 
             line-height:
-                1.8;
+                1.7;
 
         }
 
 
         .subject-preview-label {
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.40;
 
             letter-spacing:
                 1.5px;
@@ -2123,8 +2161,8 @@
 
         .subject-preview-value {
 
-            color:
-                var(--text-main);
+            opacity:
+                0.88;
 
             word-break:
                 break-word;
@@ -2154,10 +2192,10 @@
         .communication-checkbox {
 
             width:
-                15px;
+                14px;
 
             height:
-                15px;
+                14px;
 
             accent-color:
                 #fff;
@@ -2174,68 +2212,18 @@
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.68;
+
+            cursor:
+                pointer;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            DATABASE LISTS
-        ========================================== */
-
-        .archive-database-link,
-        .communication-database-link {
-
-            display:
-                block;
-
-            color:
-                inherit;
-
-            text-decoration:
-                none;
-
-        }
-
-
-        .archive-item,
-        .communication-item {
-
-            transition:
-                background 0.2s ease,
-                border-color 0.2s ease,
-                transform 0.2s ease;
-
-        }
-
-
-        .archive-database-link:hover
-        .archive-item,
-        .communication-database-link:hover
-        .communication-item {
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.05
-                );
-
-            border-color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.48
-                );
-
-            transform:
-                translateX(4px);
-
-        }
-
+        ========================= */
 
         .archive-item {
 
@@ -2243,17 +2231,16 @@
                 grid;
 
             grid-template-columns:
-                1fr
-                auto;
+                1fr auto;
 
             gap:
-                20px;
-
-            padding:
                 18px;
 
+            padding:
+                17px;
+
             margin-bottom:
-                11px;
+                10px;
 
             border:
                 1px solid
@@ -2275,8 +2262,43 @@
         }
 
 
-        .archive-item-number,
-        .communication-item-id {
+        .archive-database-link {
+
+            display:
+                block;
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .archive-database-link:hover
+        .archive-item {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.40
+                );
+
+        }
+
+
+        .archive-item-number {
 
             font-size:
                 9px;
@@ -2284,17 +2306,16 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.40;
 
             margin-bottom:
-                8px;
+                7px;
 
         }
 
 
-        .archive-item-title,
-        .communication-item-subject {
+        .archive-item-title {
 
             font-size:
                 15px;
@@ -2302,38 +2323,30 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-main);
-
             margin-bottom:
-                9px;
-
-            line-height:
-                1.55;
+                8px;
 
         }
 
 
-        .archive-item-meta,
-        .communication-item-meta {
+        .archive-item-meta {
 
             font-size:
-                10px;
+                9px;
 
             line-height:
-                1.9;
+                1.8;
 
             letter-spacing:
                 1px;
 
-            color:
-                var(--text-soft);
+            opacity:
+                0.62;
 
         }
 
 
-        .archive-item-status,
-        .communication-item-status {
+        .archive-item-status {
 
             display:
                 flex;
@@ -2347,17 +2360,13 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-soft);
-
-            white-space:
-                nowrap;
+            opacity:
+                0.60;
 
         }
 
 
-        .archive-item-status::before,
-        .communication-item-status::before {
+        .archive-item-status::before {
 
             content:
                 "";
@@ -2383,10 +2392,10 @@
         .communication-item {
 
             padding:
-                18px;
+                17px;
 
             margin-bottom:
-                11px;
+                10px;
 
             border:
                 1px solid
@@ -2408,9 +2417,110 @@
         }
 
 
-        /* ==========================================
+        .communication-database-link {
+
+            display:
+                block;
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .communication-database-link:hover
+        .communication-item {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.40
+                );
+
+        }
+
+
+        .communication-item-id {
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+            opacity:
+                0.40;
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .communication-item-subject {
+
+            font-size:
+                15px;
+
+            letter-spacing:
+                2px;
+
+            margin-bottom:
+                9px;
+
+        }
+
+
+        .communication-item-meta {
+
+            font-size:
+                9px;
+
+            line-height:
+                1.8;
+
+            letter-spacing:
+                1px;
+
+            opacity:
+                0.62;
+
+        }
+
+
+        .communication-item-status {
+
+            margin-top:
+                12px;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+            opacity:
+                0.50;
+
+        }
+
+
+        /* =========================
            FOOTER
-        ========================================== */
+        ========================= */
 
         .footer {
 
@@ -2420,14 +2530,11 @@
             justify-content:
                 space-between;
 
-            gap:
-                20px;
-
             margin-top:
-                34px;
+                30px;
 
             padding-top:
-                16px;
+                14px;
 
             border-top:
                 1px solid
@@ -2444,15 +2551,15 @@
             letter-spacing:
                 2px;
 
-            color:
-                var(--text-faint);
+            opacity:
+                0.38;
 
         }
 
 
-        /* ==========================================
+        /* =========================
            MOBILE
-        ========================================== */
+        ========================= */
 
         @media (
             max-width: 700px
@@ -2461,15 +2568,7 @@
             .page {
 
                 padding:
-                    22px 18px 35px;
-
-            }
-
-
-            body {
-
-                font-size:
-                    12px;
+                    22px 18px;
 
             }
 
@@ -2488,23 +2587,7 @@
             .title {
 
                 font-size:
-                    18px;
-
-            }
-
-
-            .subtitle {
-
-                font-size:
-                    10px;
-
-            }
-
-
-            .header-status {
-
-                font-size:
-                    9px;
+                    17px;
 
             }
 
@@ -2525,14 +2608,6 @@
             }
 
 
-            .submission-status {
-
-                justify-content:
-                    flex-start;
-
-            }
-
-
             .review-top {
 
                 grid-template-columns:
@@ -2545,9 +2620,6 @@
 
                 grid-template-columns:
                     1fr;
-
-                gap:
-                    5px;
 
             }
 
@@ -2570,28 +2642,6 @@
 
                 grid-column:
                     auto;
-
-            }
-
-
-            .subject-preview-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .review-actions,
-            .confirmation-actions,
-            .personnel-editor-actions,
-            .archive-actions,
-            .communication-actions,
-            .history-actions,
-            .editor-mode {
-
-                flex-direction:
-                    column;
 
             }
 
@@ -2620,10 +2670,15 @@
             }
 
 
-            .editor-mode button {
+            .editor-mode,
+            .history-actions,
+            .personnel-editor-actions,
+            .archive-actions,
+            .communication-actions,
+            .confirmation-actions {
 
-                width:
-                    100%;
+                flex-direction:
+                    column;
 
             }
 
@@ -2632,14 +2687,6 @@
 
                 grid-template-columns:
                     1fr;
-
-            }
-
-
-            .archive-item-status {
-
-                margin-top:
-                    2px;
 
             }
 
@@ -2666,7 +2713,9 @@
 <div class="page">
 
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header class="header">
 
@@ -2698,7 +2747,9 @@
     </header>
 
 
-    <!-- TERMINAL -->
+    <!-- =========================
+         TERMINAL
+    ========================= -->
 
     <section class="terminal">
 
@@ -2721,7 +2772,9 @@
     </section>
 
 
-    <!-- ACCESS DENIED -->
+    <!-- =========================
+         ACCESS DENIED
+    ========================= -->
 
     <section
         class="message"
@@ -2743,7 +2796,9 @@
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
 
     <main
         class="dashboard"
@@ -2799,7 +2854,9 @@
         </section>
 
 
-        <!-- PENDING SUBMISSIONS -->
+        <!-- =========================
+             PENDING SUBMISSIONS
+        ========================= -->
 
         <section class="panel">
 
@@ -2819,7 +2876,9 @@
         </section>
 
 
-        <!-- REVIEW -->
+        <!-- =========================
+             SUBMISSION REVIEW
+        ========================= -->
 
         <section
             class="panel review-panel"
@@ -2901,7 +2960,9 @@
         </section>
 
 
-        <!-- PERSONNEL FILE EDITOR -->
+        <!-- =========================
+             PERSONNEL FILE EDITOR
+        ========================= -->
 
         <section class="panel">
 
@@ -2910,10 +2971,16 @@
             </div>
 
 
-            <div class="personnel-editor-grid">
+            <div
+                class="personnel-editor-grid"
+            >
+
 
                 <div
-                    class="personnel-editor-field personnel-editor-full"
+                    class="
+                        personnel-editor-field
+                        personnel-editor-full
+                    "
                 >
 
                     <label
@@ -2944,10 +3011,14 @@
                         FILE NUMBER
                     </label>
 
+
                     <input
                         type="text"
                         id="editFileNumber"
-                        class="personnel-editor-input personnel-editor-readonly"
+                        class="
+                            personnel-editor-input
+                            personnel-editor-readonly
+                        "
                         readonly
                     >
 
@@ -2959,6 +3030,7 @@
                     <label class="personnel-editor-label">
                         DISPLAY NAME
                     </label>
+
 
                     <input
                         type="text"
@@ -2975,6 +3047,7 @@
                         ALIAS
                     </label>
 
+
                     <input
                         type="text"
                         id="editAlias"
@@ -2989,6 +3062,7 @@
                     <label class="personnel-editor-label">
                         PRIMARY ACTIVITY
                     </label>
+
 
                     <input
                         type="text"
@@ -3005,6 +3079,7 @@
                         LOCATION
                     </label>
 
+
                     <input
                         type="text"
                         id="editLocation"
@@ -3019,6 +3094,7 @@
                     <label class="personnel-editor-label">
                         AFFILIATION
                     </label>
+
 
                     <input
                         type="text"
@@ -3035,6 +3111,7 @@
                         ORIGIN
                     </label>
 
+
                     <input
                         type="text"
                         id="editOrigin"
@@ -3046,9 +3123,13 @@
 
                 <div class="personnel-editor-field">
 
-                    <label class="personnel-editor-label">
+                    <label
+                        class="personnel-editor-label"
+                        for="editStatus"
+                    >
                         STATUS
                     </label>
+
 
                     <select
                         id="editStatus"
@@ -3090,9 +3171,13 @@
 
                 <div class="personnel-editor-field">
 
-                    <label class="personnel-editor-label">
+                    <label
+                        class="personnel-editor-label"
+                        for="editClearance"
+                    >
                         CLEARANCE
                     </label>
+
 
                     <select
                         id="editClearance"
@@ -3126,9 +3211,13 @@
 
                 <div class="personnel-editor-field">
 
-                    <label class="personnel-editor-label">
+                    <label
+                        class="personnel-editor-label"
+                        for="editObservation"
+                    >
                         OBSERVATION
                     </label>
+
 
                     <select
                         id="editObservation"
@@ -3170,9 +3259,13 @@
 
                 <div class="personnel-editor-field">
 
-                    <label class="personnel-editor-label">
+                    <label
+                        class="personnel-editor-label"
+                        for="editThreatLevel"
+                    >
                         THREAT LEVEL
                     </label>
+
 
                     <select
                         id="editThreatLevel"
@@ -3209,7 +3302,10 @@
 
 
                 <div
-                    class="personnel-editor-field personnel-editor-full"
+                    class="
+                        personnel-editor-field
+                        personnel-editor-full
+                    "
                 >
 
                     <label class="personnel-editor-label">
@@ -3229,14 +3325,23 @@
                             // CIGA LINK FORMAT
                         </strong>
 
+
+                        Write:
+
+                        <br>
+
+
                         <code>
                             [[ANOMALOUS|https://youtube.com]]
                         </code>
 
+
                         <br>
 
-                        Only ANOMALOUS will appear
-                        as the clickable text.
+
+                        Only
+                        <strong>ANOMALOUS</strong>
+                        becomes the clickable text.
 
                     </div>
 
@@ -3244,7 +3349,10 @@
 
 
                 <div
-                    class="personnel-editor-field personnel-editor-full"
+                    class="
+                        personnel-editor-field
+                        personnel-editor-full
+                    "
                 >
 
                     <label class="personnel-editor-label">
@@ -3253,8 +3361,8 @@
 
 
                     <div
-                        id="historyList"
                         class="history-list"
+                        id="historyList"
                     ></div>
 
 
@@ -3263,7 +3371,6 @@
                         <button
                             type="button"
                             id="addHistoryButton"
-                            class="history-add"
                         >
                             + ADD HISTORY ENTRY
                         </button>
@@ -3277,8 +3384,14 @@
                             // CIGA LINKS IN HISTORY
                         </strong>
 
+
+                        Example:
+
+                        <br>
+
+
                         <code>
-                            [[LABEL|https://example.com]]
+                            [[INCIDENT REPORT|https://example.com]]
                         </code>
 
                     </div>
@@ -3291,6 +3404,7 @@
                     <label class="personnel-editor-label">
                         TWITCH
                     </label>
+
 
                     <input
                         type="url"
@@ -3307,6 +3421,7 @@
                         YOUTUBE
                     </label>
 
+
                     <input
                         type="url"
                         id="editYoutube"
@@ -3321,6 +3436,7 @@
                     <label class="personnel-editor-label">
                         TIKTOK
                     </label>
+
 
                     <input
                         type="url"
@@ -3337,6 +3453,7 @@
                         DISCORD
                     </label>
 
+
                     <input
                         type="text"
                         id="editDiscord"
@@ -3349,8 +3466,8 @@
 
 
             <div
-                id="personnelEditorResult"
                 class="personnel-editor-result"
+                id="personnelEditorResult"
             ></div>
 
 
@@ -3377,7 +3494,9 @@
         </section>
 
 
-        <!-- ARCHIVE CREATOR / EDITOR -->
+        <!-- =========================
+             ARCHIVE CREATOR / EDITOR
+        ========================= -->
 
         <section class="panel">
 
@@ -3408,8 +3527,8 @@
 
 
             <div
-                id="archiveEditSelectWrap"
                 class="editor-select-wrap"
+                id="archiveEditSelectWrap"
             >
 
                 <label
@@ -3445,10 +3564,14 @@
                             ARCHIVE NUMBER
                         </label>
 
+
                         <input
                             type="text"
                             id="archiveNumber"
-                            class="archive-input archive-number"
+                            class="
+                                archive-input
+                                archive-number
+                            "
                             readonly
                         >
 
@@ -3480,7 +3603,10 @@
 
 
                     <div
-                        class="archive-field archive-full"
+                        class="
+                            archive-field
+                            archive-full
+                        "
                     >
 
                         <label
@@ -3551,7 +3677,10 @@
 
 
                     <div
-                        class="archive-field archive-full"
+                        class="
+                            archive-field
+                            archive-full
+                        "
                     >
 
                         <label
@@ -3574,6 +3703,7 @@
                                 // CIGA LINK FORMAT
                             </strong>
 
+
                             <code>
                                 [[ANOMALOUS|https://youtube.com]]
                             </code>
@@ -3584,7 +3714,10 @@
 
 
                     <div
-                        class="archive-field archive-full"
+                        class="
+                            archive-field
+                            archive-full
+                        "
                     >
 
                         <label
@@ -3597,7 +3730,10 @@
 
                         <textarea
                             id="archiveContent"
-                            class="archive-textarea large"
+                            class="
+                                archive-textarea
+                                large
+                            "
                         ></textarea>
 
 
@@ -3606,6 +3742,7 @@
                             <strong>
                                 // CIGA LINK FORMAT
                             </strong>
+
 
                             <code>
                                 [[LABEL|https://example.com]]
@@ -3629,6 +3766,7 @@
 
 
                     <div class="subject-preview-grid">
+
 
                         <div class="subject-preview-label">
                             STATUS
@@ -3725,6 +3863,7 @@
                             UNAVAILABLE
                         </div>
 
+
                     </div>
 
                 </div>
@@ -3761,7 +3900,9 @@
         </section>
 
 
-        <!-- ARCHIVE DATABASE -->
+        <!-- =========================
+             ARCHIVE DATABASE
+        ========================= -->
 
         <section class="panel">
 
@@ -3781,12 +3922,14 @@
         </section>
 
 
-        <!-- TRANSMISSION CREATOR / EDITOR -->
+        <!-- =========================
+             COMMUNICATION CREATOR / EDITOR
+        ========================= -->
 
         <section class="panel">
 
             <div class="panel-title">
-                // TRANSMISSION CREATOR / EDITOR
+                // COMMUNICATION CREATOR / EDITOR
             </div>
 
 
@@ -3812,8 +3955,8 @@
 
 
             <div
-                id="communicationEditSelectWrap"
                 class="editor-select-wrap"
+                id="communicationEditSelectWrap"
             >
 
                 <label
@@ -3853,7 +3996,10 @@
                         <input
                             type="text"
                             id="communicationMessageId"
-                            class="communication-input communication-number"
+                            class="
+                                communication-input
+                                communication-number
+                            "
                             readonly
                         >
 
@@ -3862,7 +4008,10 @@
 
                     <div class="communication-field">
 
-                        <label class="communication-label">
+                        <label
+                            class="communication-label"
+                            for="communicationClassification"
+                        >
                             CLASSIFICATION
                         </label>
 
@@ -3898,7 +4047,10 @@
 
                     <div class="communication-field">
 
-                        <label class="communication-label">
+                        <label
+                            class="communication-label"
+                            for="communicationSender"
+                        >
                             SENDER
                         </label>
 
@@ -3907,6 +4059,7 @@
                             type="text"
                             id="communicationSender"
                             class="communication-input"
+                            placeholder="CIGA DIRECTOR"
                             required
                         >
 
@@ -3915,7 +4068,10 @@
 
                     <div class="communication-field">
 
-                        <label class="communication-label">
+                        <label
+                            class="communication-label"
+                            for="communicationRecipient"
+                        >
                             RECIPIENT
                         </label>
 
@@ -3924,6 +4080,7 @@
                             type="text"
                             id="communicationRecipient"
                             class="communication-input"
+                            placeholder="FIELD OPERATIVE"
                             required
                         >
 
@@ -3931,10 +4088,16 @@
 
 
                     <div
-                        class="communication-field communication-full"
+                        class="
+                            communication-field
+                            communication-full
+                        "
                     >
 
-                        <label class="communication-label">
+                        <label
+                            class="communication-label"
+                            for="communicationSubject"
+                        >
                             SUBJECT
                         </label>
 
@@ -3943,6 +4106,7 @@
                             type="text"
                             id="communicationSubject"
                             class="communication-input"
+                            placeholder="CONTAINMENT FAILURE"
                             required
                         >
 
@@ -3951,7 +4115,10 @@
 
                     <div class="communication-field">
 
-                        <label class="communication-label">
+                        <label
+                            class="communication-label"
+                            for="communicationStatus"
+                        >
                             STATUS
                         </label>
 
@@ -4014,7 +4181,10 @@
 
 
                     <div
-                        class="communication-field communication-full"
+                        class="
+                            communication-field
+                            communication-full
+                        "
                     >
 
                         <label
@@ -4028,6 +4198,7 @@
                         <textarea
                             id="communicationContent"
                             class="communication-textarea"
+                            placeholder="Write the complete internal communication here..."
                             required
                         ></textarea>
 
@@ -4038,14 +4209,22 @@
                                 // CIGA LINK FORMAT
                             </strong>
 
+
+                            Example:
+
+                            <br>
+
+
                             <code>
                                 [[ANOMALOUS|https://youtube.com]]
                             </code>
 
+
                             <br>
 
-                            The visible text becomes
-                            clickable in the transmission.
+
+                            The visible text becomes the
+                            clickable link in the transmission.
 
                         </div>
 
@@ -4085,7 +4264,9 @@
         </section>
 
 
-        <!-- COMMUNICATION DATABASE -->
+        <!-- =========================
+             COMMUNICATION DATABASE
+        ========================= -->
 
         <section class="panel">
 
@@ -4132,6 +4313,7 @@
         </span>
 
     </footer>
+
 
 </div>
 
@@ -4271,7 +4453,7 @@
 
 
     /* ==========================================
-       PERSONNEL ELEMENTS
+       PERSONNEL
     ========================================== */
 
     const editPersonnel =
@@ -4407,7 +4589,7 @@
 
 
     /* ==========================================
-       ARCHIVE ELEMENTS
+       ARCHIVES
     ========================================== */
 
     const archiveForm =
@@ -4506,10 +4688,6 @@
         );
 
 
-    /* ==========================================
-       PREVIEW
-    ========================================== */
-
     const previewStatus =
         document.getElementById(
             "previewStatus"
@@ -4559,7 +4737,7 @@
 
 
     /* ==========================================
-       COMMUNICATION ELEMENTS
+       COMMUNICATIONS
     ========================================== */
 
     const communicationForm =
@@ -4697,7 +4875,7 @@
 
 
     /* ==========================================
-       ESCAPE
+       HTML ESCAPE
     ========================================== */
 
     function escapeHTML(
@@ -4737,7 +4915,7 @@
 
 
     /* ==========================================
-       SCROLL
+       RESTORE SCROLL
     ========================================== */
 
     function restoreScrollPosition(
@@ -4754,6 +4932,7 @@
 
                         behavior:
                             "instant"
+
                     }
                 );
 
@@ -4832,11 +5011,47 @@
 
             subtree:
                 true
+
         }
     );
 
 
     setupCollapsiblePanels();
+
+
+    /* ==========================================
+       SELECT HELPER
+    ========================================== */
+
+    function setSelectOrFallback(
+        select,
+        value,
+        fallback
+    ) {
+
+        const desired =
+            String(
+                value ||
+                fallback
+            );
+
+
+        const exists =
+            Array.from(
+                select.options
+            ).some(
+                option =>
+                    option.value ===
+                    desired
+            );
+
+
+        select.value =
+            exists
+                ? desired
+                : fallback;
+
+    }
 
 
     /* ==========================================
@@ -4858,8 +5073,10 @@
             terminalStatus.textContent =
                 "> NO ACTIVE SESSION.";
 
+
             deniedMessage.style.display =
                 "block";
+
 
             return;
 
@@ -4949,7 +5166,7 @@
 
 
     /* ==========================================
-       SUBMISSIONS
+       LOAD SUBMISSIONS
     ========================================== */
 
     async function loadSubmissions() {
@@ -4964,7 +5181,9 @@
                     "personnel_submissions"
                 )
 
-                .select("*")
+                .select(
+                    "*"
+                )
 
                 .eq(
                     "submission_status",
@@ -4980,7 +5199,9 @@
                 );
 
 
-        if (error) {
+        if (
+            error
+        ) {
 
             console.error(
                 "SUBMISSION LOAD ERROR:",
@@ -5155,7 +5376,7 @@
 
 
     /* ==========================================
-       REVIEW
+       OPEN REVIEW
     ========================================== */
 
     async function openReview(
@@ -5172,7 +5393,9 @@
                     "personnel_submissions"
                 )
 
-                .select("*")
+                .select(
+                    "*"
+                )
 
                 .eq(
                     "id",
@@ -5226,7 +5449,8 @@
 
                     <div class="review-photo-unavailable">
 
-                        IMAGE<br>
+                        IMAGE
+                        <br>
                         UNAVAILABLE
 
                     </div>
@@ -5268,7 +5492,7 @@
                             data.description ||
                             "NO DESCRIPTION PROVIDED."
                         ).replace(
-                            /\n/g,
+                            /\r?\n/g,
                             "<br>"
                         )}
 
@@ -5576,13 +5800,13 @@
 
                 <div class="review-value">
 
-                    ${escapeHTML(
-                        data.notes ||
-                        "NO ADDITIONAL INFORMATION PROVIDED."
-                    ).replace(
-                        /\n/g,
-                        "<br>"
-                    )}
+                    ${
+                        data.notes
+                            ? renderCigaText(
+                                data.notes
+                            )
+                            : "NO ADDITIONAL INFORMATION PROVIDED."
+                    }
 
                 </div>
 
@@ -5591,7 +5815,7 @@
         `;
 
 
-        setSelectValue(
+        setSelectOrFallback(
             document.getElementById(
                 "reviewStatus"
             ),
@@ -5600,7 +5824,7 @@
         );
 
 
-        setSelectValue(
+        setSelectOrFallback(
             document.getElementById(
                 "reviewClearance"
             ),
@@ -5609,7 +5833,7 @@
         );
 
 
-        setSelectValue(
+        setSelectOrFallback(
             document.getElementById(
                 "reviewObservation"
             ),
@@ -5618,7 +5842,7 @@
         );
 
 
-        setSelectValue(
+        setSelectOrFallback(
             document.getElementById(
                 "reviewThreatLevel"
             ),
@@ -5708,46 +5932,116 @@
     }
 
 
-    function setSelectValue(
-        select,
-        value,
-        fallback
+    /* ==========================================
+       CIGA TEXT RENDERER
+    ========================================== */
+
+    function renderCigaText(
+        value
     ) {
 
-        const desired =
-            value
-                ? String(value)
-                : fallback;
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return "";
+
+        }
 
 
-        const exists =
-            Array.from(
-                select.options
-            ).some(
-                option =>
-                    option.value ===
-                    desired
+        const text =
+            String(
+                value
             );
 
 
-        select.value =
-            exists
-                ? desired
-                : fallback;
-
-    }
+        const tokenRegex =
+            /\[\[([^\]\n|]+)\|(https?:\/\/[^\]\s]+)\]\]/gi;
 
 
-    function showReviewResult(
-        message
-    ) {
-
-        reviewResult.innerHTML =
-            message;
+        let output =
+            "";
 
 
-        reviewResult.classList.add(
-            "visible"
+        let lastIndex =
+            0;
+
+
+        let match;
+
+
+        while (
+            (
+                match =
+                    tokenRegex.exec(
+                        text
+                    )
+            ) !== null
+        ) {
+
+            const fullMatch =
+                match[0];
+
+
+            const label =
+                match[1];
+
+
+            const url =
+                match[2];
+
+
+            const matchStart =
+                match.index;
+
+
+            output +=
+                escapeHTML(
+                    text.substring(
+                        lastIndex,
+                        matchStart
+                    )
+                );
+
+
+            output += `
+
+                <a
+                    href="${escapeHTML(
+                        url
+                    )}"
+                    class="ciga-lore-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ${escapeHTML(
+                        label
+                    )}
+                </a>
+
+            `;
+
+
+            lastIndex =
+                matchStart +
+                fullMatch.length;
+
+        }
+
+
+        output +=
+            escapeHTML(
+                text.substring(
+                    lastIndex
+                )
+            );
+
+
+        return output.replace(
+            /\r?\n/g,
+            "<br>"
         );
 
     }
@@ -5781,9 +6075,16 @@
 
             confirmationText.innerHTML =
                 "&gt; CONFIRM APPROVAL OF THIS PERSONNEL RECORD?<br>" +
-                "&gt; A NEW PERSONNEL FILE WILL BE CREATED.";
+                "&gt; THE SELECTED CIGA CLASSIFICATION WILL BE APPLIED.<br>" +
+                "&gt; A NEW FILE WILL BE CREATED IN THE PERSONNEL DATABASE.";
 
-        } else {
+        }
+
+
+        if (
+            action ===
+            "reject"
+        ) {
 
             confirmationTitle.textContent =
                 "// REJECTION CONFIRMATION";
@@ -5800,7 +6101,7 @@
 
     confirmationNo.addEventListener(
         "click",
-        () => {
+        function() {
 
             pendingAction =
                 null;
@@ -5816,7 +6117,7 @@
 
     confirmationYes.addEventListener(
         "click",
-        async () => {
+        async function() {
 
             if (
                 !currentSubmission ||
@@ -5848,7 +6149,13 @@
 
                 await approveCurrentSubmission();
 
-            } else {
+            }
+
+
+            if (
+                action ===
+                "reject"
+            ) {
 
                 await rejectCurrentSubmission();
 
@@ -5860,7 +6167,7 @@
 
     approveButton.addEventListener(
         "click",
-        () => {
+        function() {
 
             if (
                 !currentSubmission
@@ -5881,7 +6188,7 @@
 
     rejectButton.addEventListener(
         "click",
-        () => {
+        function() {
 
             if (
                 !currentSubmission
@@ -5920,44 +6227,51 @@
 
         try {
 
+            const reviewStatus =
+                document.getElementById(
+                    "reviewStatus"
+                );
+
+
+            const reviewClearance =
+                document.getElementById(
+                    "reviewClearance"
+                );
+
+
+            const reviewObservation =
+                document.getElementById(
+                    "reviewObservation"
+                );
+
+
+            const reviewThreatLevel =
+                document.getElementById(
+                    "reviewThreatLevel"
+                );
+
+
             const selectedStatus =
-                document
-                    .getElementById(
-                        "reviewStatus"
-                    )
-                    .value;
+                reviewStatus.value;
 
 
             const selectedClearance =
-                document
-                    .getElementById(
-                        "reviewClearance"
-                    )
-                    .value;
+                reviewClearance.value;
 
 
             const selectedObservation =
-                document
-                    .getElementById(
-                        "reviewObservation"
-                    )
-                    .value;
+                reviewObservation.value;
 
 
-            const selectedThreat =
-                document
-                    .getElementById(
-                        "reviewThreatLevel"
-                    )
-                    .value;
+            const selectedThreatLevel =
+                reviewThreatLevel.value;
 
 
             const {
                 data:
-                personnelRows,
-
+                existingPersonnel,
                 error:
-                personnelError
+                personnelQueryError
             } =
                 await db
 
@@ -5971,10 +6285,10 @@
 
 
             if (
-                personnelError
+                personnelQueryError
             ) {
 
-                throw personnelError;
+                throw personnelQueryError;
 
             }
 
@@ -5984,7 +6298,7 @@
 
 
             (
-                personnelRows ||
+                existingPersonnel ||
                 []
             ).forEach(
                 person => {
@@ -5997,7 +6311,9 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
+                        !Number.isNaN(
+                            number
+                        ) &&
                         number >
                         highestNumber
                     ) {
@@ -6041,7 +6357,7 @@
                     selectedObservation,
 
                 threat_level:
-                    selectedThreat,
+                    selectedThreatLevel,
 
                 description:
                     currentSubmission.description,
@@ -6086,7 +6402,7 @@
 
             const {
                 error:
-                insertError
+                insertPersonnelError
             } =
                 await db
 
@@ -6102,17 +6418,17 @@
 
 
             if (
-                insertError
+                insertPersonnelError
             ) {
 
-                throw insertError;
+                throw insertPersonnelError;
 
             }
 
 
             const {
                 error:
-                updateError
+                updateSubmissionError
             } =
                 await db
 
@@ -6134,10 +6450,10 @@
 
 
             if (
-                updateError
+                updateSubmissionError
             ) {
 
-                throw updateError;
+                throw updateSubmissionError;
 
             }
 
@@ -6163,8 +6479,10 @@
                 )}.<br>` +
 
                 `> THREAT LEVEL: ${escapeHTML(
-                    selectedThreat
-                )}.`
+                    selectedThreatLevel
+                )}.<br>` +
+
+                `> PERSONNEL DATABASE UPDATED.`
 
             );
 
@@ -6187,6 +6505,7 @@
             restoreScrollPosition(
                 preservedScroll
             );
+
 
         } catch (
             error
@@ -6212,7 +6531,7 @@
 
                 `> ${escapeHTML(
                     error.message ||
-                    "UNKNOWN ERROR"
+                    "UNKNOWN DATABASE ERROR."
                 )}`
 
             );
@@ -6232,6 +6551,18 @@
     ========================================== */
 
     async function rejectCurrentSubmission() {
+
+        const preservedScroll =
+            window.scrollY;
+
+
+        approveButton.disabled =
+            true;
+
+
+        rejectButton.disabled =
+            true;
+
 
         const {
             error
@@ -6259,14 +6590,27 @@
             error
         ) {
 
+            console.error(
+                "REJECTION ERROR:",
+                error
+            );
+
+
+            approveButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
+
+
             showReviewResult(
+                "> REJECTION FAILED."
+            );
 
-                "> REJECTION FAILED.<br>" +
 
-                `> ${escapeHTML(
-                    error.message
-                )}`
-
+            restoreScrollPosition(
+                preservedScroll
             );
 
 
@@ -6278,20 +6622,10 @@
         showReviewResult(
 
             "> RECORD REJECTED.<br>" +
-
             "> SUBMISSION ARCHIVED.<br>" +
-
             "> NO PERSONNEL FILE CREATED."
 
         );
-
-
-        approveButton.disabled =
-            true;
-
-
-        rejectButton.disabled =
-            true;
 
 
         approveButton.textContent =
@@ -6299,10 +6633,30 @@
 
 
         rejectButton.textContent =
-            "PERSONNEL REJECTED";
+            "RECORD REJECTED";
 
 
         await loadSubmissions();
+
+
+        restoreScrollPosition(
+            preservedScroll
+        );
+
+    }
+
+
+    function showReviewResult(
+        message
+    ) {
+
+        reviewResult.innerHTML =
+            message;
+
+
+        reviewResult.classList.add(
+            "visible"
+        );
 
     }
 
@@ -6335,10 +6689,13 @@
             return value
                 .map(
                     entry =>
-                        String(entry).trim()
+                        String(
+                            entry
+                        ).trim()
                 )
                 .filter(
-                    Boolean
+                    entry =>
+                        entry !== ""
                 );
 
         }
@@ -6372,15 +6729,27 @@
                     return parsed
                         .map(
                             entry =>
-                                String(entry).trim()
+                                String(
+                                    entry
+                                ).trim()
                         )
                         .filter(
-                            Boolean
+                            entry =>
+                                entry !== ""
                         );
 
                 }
 
-            } catch {}
+            } catch (
+                error
+            ) {
+
+                console.warn(
+                    "HISTORY JSON PARSE ERROR:",
+                    error
+                );
+
+            }
 
         }
 
@@ -6402,11 +6771,19 @@
             );
 
 
-        return entries.length
-            ? JSON.stringify(
-                entries
-            )
-            : null;
+        if (
+            entries.length ===
+            0
+        ) {
+
+            return null;
+
+        }
+
+
+        return JSON.stringify(
+            entries
+        );
 
     }
 
@@ -6425,51 +6802,79 @@
             "history-entry";
 
 
-        entry.innerHTML = `
-
-            <div
-                class="history-entry-number"
-            ></div>
-
-
-            <textarea
-                class="history-entry-text"
-                placeholder="Write incident, history or additional information..."
-            ></textarea>
+        const number =
+            document.createElement(
+                "div"
+            );
 
 
-            <button
-                type="button"
-                class="history-remove"
-            >
-                REMOVE ENTRY
-            </button>
-
-        `;
+        number.className =
+            "history-entry-number";
 
 
-        entry.querySelector(
-            ".history-entry-text"
-        ).value =
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.className =
+            "history-entry-text";
+
+
+        textarea.placeholder =
+            "Write incident, history or additional information...";
+
+
+        textarea.value =
             value;
 
 
-        entry
-            .querySelector(
-                ".history-remove"
-            )
-            .addEventListener(
-                "click",
-                () => {
-
-                    entry.remove();
-
-                    refreshHistoryNumbers();
-
-                    ensureHistoryEmptyState();
-
-                }
+        const removeButton =
+            document.createElement(
+                "button"
             );
+
+
+        removeButton.type =
+            "button";
+
+
+        removeButton.className =
+            "history-remove";
+
+
+        removeButton.textContent =
+            "REMOVE ENTRY";
+
+
+        removeButton.addEventListener(
+            "click",
+            function() {
+
+                entry.remove();
+
+                refreshHistoryEntryNumbers();
+
+                ensureHistoryEmptyState();
+
+            }
+        );
+
+
+        entry.appendChild(
+            number
+        );
+
+
+        entry.appendChild(
+            textarea
+        );
+
+
+        entry.appendChild(
+            removeButton
+        );
 
 
         historyList.appendChild(
@@ -6477,14 +6882,14 @@
         );
 
 
-        refreshHistoryNumbers();
+        refreshHistoryEntryNumbers();
 
         ensureHistoryEmptyState();
 
     }
 
 
-    function refreshHistoryNumbers() {
+    function refreshHistoryEntryNumbers() {
 
         historyList
             .querySelectorAll(
@@ -6502,7 +6907,9 @@
                         );
 
 
-                    if (number) {
+                    if (
+                        number
+                    ) {
 
                         number.textContent =
 
@@ -6538,34 +6945,41 @@
 
 
         if (
-            !entries.length
+            entries.length ===
+            0
         ) {
 
             if (
                 !existingEmpty
             ) {
 
-                const node =
+                const empty =
                     document.createElement(
                         "div"
                     );
 
 
-                node.className =
+                empty.className =
                     "history-empty";
 
 
-                node.textContent =
+                empty.textContent =
                     "> NO HISTORY ENTRIES.";
 
 
                 historyList.appendChild(
-                    node
+                    empty
                 );
 
             }
 
-        } else if (
+
+            return;
+
+        }
+
+
+        if (
             existingEmpty
         ) {
 
@@ -6591,7 +7005,8 @@
 
 
         if (
-            !entries.length
+            entries.length ===
+            0
         ) {
 
             ensureHistoryEmptyState();
@@ -6602,7 +7017,13 @@
 
 
         entries.forEach(
-            addHistoryEntry
+            entry => {
+
+                addHistoryEntry(
+                    entry
+                );
+
+            }
         );
 
     }
@@ -6615,12 +7036,15 @@
                 ".history-entry-text"
             )
         )
+
             .map(
                 textarea =>
                     textarea.value.trim()
             )
+
             .filter(
-                Boolean
+                entry =>
+                    entry !== ""
             );
 
     }
@@ -6628,7 +7052,7 @@
 
     addHistoryButton.addEventListener(
         "click",
-        () => {
+        function() {
 
             addHistoryEntry();
 
@@ -6637,88 +7061,8 @@
 
 
     /* ==========================================
-       PERSONNEL
+       PERSONNEL LOAD
     ========================================== */
-
-    function setSelectOrFallback(
-        select,
-        value,
-        fallback
-    ) {
-
-        const desired =
-            String(
-                value ||
-                fallback
-            );
-
-
-        const exists =
-            Array.from(
-                select.options
-            ).some(
-                option =>
-                    option.value ===
-                    desired
-            );
-
-
-        select.value =
-            exists
-                ? desired
-                : fallback;
-
-    }
-
-
-    function resetPersonnelEditor() {
-
-        [
-            editFileNumber,
-            editName,
-            editAlias,
-            editPrimaryActivity,
-            editLocation,
-            editAffiliation,
-            editOrigin,
-            editDescription,
-            editTwitch,
-            editYoutube,
-            editTiktok,
-            editDiscord
-        ]
-            .forEach(
-                input => {
-
-                    input.value =
-                        "";
-
-                }
-            );
-
-
-        editStatus.value =
-            "UNKNOWN";
-
-
-        editClearance.value =
-            "UNKNOWN";
-
-
-        editObservation.value =
-            "UNKNOWN";
-
-
-        editThreatLevel.value =
-            "UNKNOWN";
-
-
-        loadHistoryIntoEditor(
-            []
-        );
-
-    }
-
 
     async function loadPersonnel() {
 
@@ -6734,26 +7078,26 @@
 
                 .select(
                     `
-                        id,
-                        file_number,
-                        name,
-                        alias,
-                        status,
-                        clearance,
-                        observation,
-                        threat_level,
-                        description,
-                        notes,
-                        primary_activity,
-                        location,
-                        affiliation,
-                        origin,
-                        twitch,
-                        youtube,
-                        tiktok,
-                        discord,
-                        photo,
-                        visible
+                    id,
+                    file_number,
+                    name,
+                    alias,
+                    status,
+                    clearance,
+                    observation,
+                    threat_level,
+                    description,
+                    notes,
+                    primary_activity,
+                    location,
+                    affiliation,
+                    origin,
+                    twitch,
+                    youtube,
+                    tiktok,
+                    discord,
+                    photo,
+                    visible
                     `
                 )
 
@@ -6780,6 +7124,24 @@
                 [];
 
 
+            archiveSubject.innerHTML = `
+
+                <option value="">
+                    PERSONNEL DATABASE ERROR
+                </option>
+
+            `;
+
+
+            editPersonnel.innerHTML = `
+
+                <option value="">
+                    PERSONNEL DATABASE ERROR
+                </option>
+
+            `;
+
+
             return;
 
         }
@@ -6790,14 +7152,18 @@
             [];
 
 
-        /* ARCHIVE PERSONNEL SELECT */
+        /* =========================
+           ARCHIVE SUBJECT SELECT
+        ========================= */
+
+        const currentArchiveSubject =
+            archiveSubject.value;
+
 
         archiveSubject.innerHTML = `
 
             <option value="">
-
                 NO PERSONNEL FILE // STANDALONE EVENT
-
             </option>
 
         `;
@@ -6813,7 +7179,9 @@
 
 
                 option.value =
-                    person.id;
+                    String(
+                        person.id
+                    );
 
 
                 option.textContent =
@@ -6835,18 +7203,37 @@
         );
 
 
-        /* PERSONNEL EDITOR SELECT */
+        if (
+            currentArchiveSubject &&
+            personnelRecords.some(
+                person =>
+                    String(
+                        person.id
+                    ) ===
+                    String(
+                        currentArchiveSubject
+                    )
+            )
+        ) {
 
-        const previousEditId =
+            archiveSubject.value =
+                currentArchiveSubject;
+
+        }
+
+
+        /* =========================
+           PERSONNEL EDITOR SELECT
+        ========================= */
+
+        const currentPersonnelId =
             editPersonnel.value;
 
 
         editPersonnel.innerHTML = `
 
             <option value="">
-
                 SELECT PERSONNEL FILE
-
             </option>
 
         `;
@@ -6862,7 +7249,9 @@
 
 
                 option.value =
-                    person.id;
+                    String(
+                        person.id
+                    );
 
 
                 option.textContent =
@@ -6885,26 +7274,24 @@
 
 
         if (
-            previousEditId &&
+            currentPersonnelId &&
             personnelRecords.some(
                 person =>
                     String(
                         person.id
                     ) ===
                     String(
-                        previousEditId
+                        currentPersonnelId
                     )
             )
         ) {
 
             editPersonnel.value =
-                previousEditId;
+                currentPersonnelId;
 
 
             loadPersonnelIntoEditor(
-                Number(
-                    previousEditId
-                )
+                currentPersonnelId
             );
 
         }
@@ -6912,8 +7299,12 @@
     }
 
 
+    /* ==========================================
+       PERSONNEL EDITOR LOAD
+    ========================================== */
+
     function loadPersonnelIntoEditor(
-        id
+        personnelId
     ) {
 
         const person =
@@ -6923,12 +7314,14 @@
                         record.id
                     ) ===
                     Number(
-                        id
+                        personnelId
                     )
             );
 
 
-        if (!person) {
+        if (
+            !person
+        ) {
 
             resetPersonnelEditor();
 
@@ -7029,20 +7422,78 @@
             person.discord ||
             "";
 
+
+        personnelEditorResult.classList.remove(
+            "visible"
+        );
+
+    }
+
+
+    function resetPersonnelEditor() {
+
+        editFileNumber.value =
+            "";
+
+        editName.value =
+            "";
+
+        editAlias.value =
+            "";
+
+        editPrimaryActivity.value =
+            "";
+
+        editLocation.value =
+            "";
+
+        editAffiliation.value =
+            "";
+
+        editOrigin.value =
+            "";
+
+        editStatus.value =
+            "UNKNOWN";
+
+        editClearance.value =
+            "UNKNOWN";
+
+        editObservation.value =
+            "UNKNOWN";
+
+        editThreatLevel.value =
+            "UNKNOWN";
+
+        editDescription.value =
+            "";
+
+        editTwitch.value =
+            "";
+
+        editYoutube.value =
+            "";
+
+        editTiktok.value =
+            "";
+
+        editDiscord.value =
+            "";
+
+        loadHistoryIntoEditor(
+            []
+        );
+
     }
 
 
     editPersonnel.addEventListener(
         "change",
-        () => {
+        function() {
 
-            const id =
-                Number(
-                    editPersonnel.value
-                );
-
-
-            if (!id) {
+            if (
+                !editPersonnel.value
+            ) {
 
                 resetPersonnelEditor();
 
@@ -7052,22 +7503,28 @@
 
 
             loadPersonnelIntoEditor(
-                id
+                editPersonnel.value
             );
 
         }
     );
 
 
+    /* ==========================================
+       SAVE PERSONNEL
+    ========================================== */
+
     async function savePersonnelFile() {
 
-        const id =
+        const personnelId =
             Number(
                 editPersonnel.value
             );
 
 
-        if (!id) {
+        if (
+            !personnelId
+        ) {
 
             personnelEditorResult.innerHTML =
                 "> SELECT A PERSONNEL FILE.";
@@ -7087,13 +7544,17 @@
             true;
 
 
+        savePersonnelButton.textContent =
+            "SAVING...";
+
+
         try {
 
-            const history =
+            const historyEntries =
                 getHistoryEntries();
 
 
-            const update = {
+            const personnelUpdate = {
 
                 name:
                     editName.value.trim() ||
@@ -7101,22 +7562,6 @@
 
                 alias:
                     editAlias.value.trim() ||
-                    null,
-
-                primary_activity:
-                    editPrimaryActivity.value.trim() ||
-                    null,
-
-                location:
-                    editLocation.value.trim() ||
-                    null,
-
-                affiliation:
-                    editAffiliation.value.trim() ||
-                    null,
-
-                origin:
-                    editOrigin.value.trim() ||
                     null,
 
                 status:
@@ -7136,11 +7581,27 @@
                     null,
 
                 notes:
-                    history.length
+                    historyEntries.length
                         ? JSON.stringify(
-                            history
+                            historyEntries
                         )
                         : null,
+
+                primary_activity:
+                    editPrimaryActivity.value.trim() ||
+                    null,
+
+                location:
+                    editLocation.value.trim() ||
+                    null,
+
+                affiliation:
+                    editAffiliation.value.trim() ||
+                    null,
+
+                origin:
+                    editOrigin.value.trim() ||
+                    null,
 
                 twitch:
                     editTwitch.value.trim() ||
@@ -7171,12 +7632,12 @@
                     )
 
                     .update(
-                        update
+                        personnelUpdate
                     )
 
                     .eq(
                         "id",
-                        id
+                        personnelId
                     );
 
 
@@ -7192,7 +7653,9 @@
             personnelEditorResult.innerHTML =
 
                 "> PERSONNEL FILE UPDATED.<br>" +
-
+                `> HISTORY ENTRIES: ${
+                    historyEntries.length
+                }.<br>` +
                 "> DATABASE UPDATED SUCCESSFULLY.";
 
 
@@ -7217,10 +7680,11 @@
 
             personnelEditorResult.innerHTML =
 
-                "> PERSONNEL UPDATE FAILED.<br>" +
+                "> PERSONNEL FILE UPDATE FAILED.<br>" +
 
                 `> ${escapeHTML(
-                    error.message
+                    error.message ||
+                    "UNKNOWN DATABASE ERROR."
                 )}`;
 
 
@@ -7228,12 +7692,15 @@
                 "visible"
             );
 
-        } finally {
-
-            savePersonnelButton.disabled =
-                false;
-
         }
+
+
+        savePersonnelButton.disabled =
+            false;
+
+
+        savePersonnelButton.textContent =
+            "SAVE PERSONNEL FILE";
 
     }
 
@@ -7246,11 +7713,141 @@
 
     refreshPersonnelEditor.addEventListener(
         "click",
-        async () => {
+        async function() {
+
+            const currentId =
+                editPersonnel.value;
+
 
             await loadPersonnel();
 
             await loadArchives();
+
+
+            if (
+                currentId
+            ) {
+
+                editPersonnel.value =
+                    currentId;
+
+
+                loadPersonnelIntoEditor(
+                    currentId
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       RESET SUBJECT PREVIEW
+    ========================================== */
+
+    function resetSubjectPreview() {
+
+        previewStatus.textContent =
+            "UNAVAILABLE";
+
+        previewClearance.textContent =
+            "UNAVAILABLE";
+
+        previewThreat.textContent =
+            "UNAVAILABLE";
+
+        previewLocation.textContent =
+            "UNAVAILABLE";
+
+        previewAffiliation.textContent =
+            "UNAVAILABLE";
+
+        previewOrigin.textContent =
+            "UNAVAILABLE";
+
+        previewObservation.textContent =
+            "UNAVAILABLE";
+
+        previewActivity.textContent =
+            "UNAVAILABLE";
+
+    }
+
+
+    /* ==========================================
+       UPDATE SUBJECT PREVIEW
+    ========================================== */
+
+    function updateSubjectPreview(
+        selectedId
+    ) {
+
+        const person =
+            personnelRecords.find(
+                record =>
+                    Number(
+                        record.id
+                    ) ===
+                    Number(
+                        selectedId
+                    )
+            );
+
+
+        if (
+            !person
+        ) {
+
+            resetSubjectPreview();
+
+            return;
+
+        }
+
+
+        previewStatus.textContent =
+            person.status ||
+            "UNAVAILABLE";
+
+        previewClearance.textContent =
+            person.clearance ||
+            "UNAVAILABLE";
+
+        previewThreat.textContent =
+            person.threat_level ||
+            "UNAVAILABLE";
+
+        previewLocation.textContent =
+            person.location ||
+            "UNAVAILABLE";
+
+        previewAffiliation.textContent =
+            person.affiliation ||
+            "UNAVAILABLE";
+
+        previewOrigin.textContent =
+            person.origin ||
+            "UNAVAILABLE";
+
+        previewObservation.textContent =
+            person.observation ||
+            "UNAVAILABLE";
+
+        previewActivity.textContent =
+            person.primary_activity ||
+            "UNAVAILABLE";
+
+    }
+
+
+    archiveSubject.addEventListener(
+        "change",
+        function() {
+
+            updateSubjectPreview(
+                archiveSubject.value
+            );
 
         }
     );
@@ -7290,13 +7887,12 @@
 
 
         createArchiveButton.textContent =
-
             mode ===
                 "create"
 
-                ? "CREATE ARCHIVE"
+                    ? "CREATE ARCHIVE"
 
-                : "SAVE ARCHIVE CHANGES";
+                    : "SAVE ARCHIVE CHANGES";
 
 
         if (
@@ -7306,7 +7902,13 @@
 
             archiveForm.reset();
 
+
+            archiveSubject.value =
+                "";
+
+
             resetSubjectPreview();
+
 
             prepareNextArchiveNumber();
 
@@ -7317,7 +7919,7 @@
 
     archiveCreateMode.addEventListener(
         "click",
-        () => {
+        function() {
 
             setArchiveMode(
                 "create"
@@ -7329,7 +7931,7 @@
 
     archiveEditMode.addEventListener(
         "click",
-        async () => {
+        async function() {
 
             setArchiveMode(
                 "edit"
@@ -7343,7 +7945,9 @@
 
 
     /* ==========================================
-       ARCHIVE EDIT LIST
+       ARCHIVE EDITOR LOAD
+       IMPORTANT:
+       archives.id = UUID
     ========================================== */
 
     async function populateArchiveEditor() {
@@ -7360,19 +7964,19 @@
 
                 .select(
                     `
-                        id,
-                        archive_number,
-                        title,
-                        personnel_id,
-                        incident_date,
-                        summary,
-                        content,
-                        visible
+                    id,
+                    archive_number,
+                    title,
+                    personnel_id,
+                    incident_date,
+                    summary,
+                    content,
+                    visible
                     `
                 )
 
                 .order(
-                    "id",
+                    "created_at",
                     {
                         ascending:
                             false
@@ -7388,6 +7992,15 @@
                 "ARCHIVE EDIT LOAD ERROR:",
                 error
             );
+
+
+            editArchiveSelect.innerHTML = `
+
+                <option value="">
+                    ARCHIVE DATABASE ERROR
+                </option>
+
+            `;
 
 
             return;
@@ -7418,6 +8031,11 @@
                     );
 
 
+                /*
+                    UUID = string.
+                    NEVER Number().
+                */
+
                 option.value =
                     String(
                         archive.id
@@ -7446,7 +8064,9 @@
 
 
     /* ==========================================
-       ARCHIVE EDIT LOAD
+       SELECT ARCHIVE TO EDIT
+       IMPORTANT:
+       UUID stays STRING
     ========================================== */
 
     editArchiveSelect.addEventListener(
@@ -7454,12 +8074,12 @@
         function() {
 
             const selectedId =
-                Number(
-                    editArchiveSelect.value
-                );
+                editArchiveSelect.value;
 
 
-            if (!selectedId) {
+            if (
+                !selectedId
+            ) {
 
                 return;
 
@@ -7469,53 +8089,78 @@
             const archive =
                 archiveRecords.find(
                     record =>
-                        Number(
+                        String(
                             record.id
                         ) ===
-                        selectedId
+                        String(
+                            selectedId
+                        )
                 );
 
 
-            if (!archive) {
+            if (
+                !archive
+            ) {
 
                 console.error(
                     "SELECTED ARCHIVE NOT FOUND:",
                     selectedId
                 );
 
+
                 return;
 
             }
 
 
-            /* REAL ARCHIVE NUMBER */
+            /* =========================
+               REAL ARCHIVE NUMBER
+            ========================= */
 
             archiveNumber.value =
                 archive.archive_number ||
                 "";
 
 
-            /* REAL ARCHIVE DATA */
+            /* =========================
+               REAL TITLE
+            ========================= */
 
             archiveTitle.value =
                 archive.title ||
                 "";
 
 
+            /* =========================
+               REAL DATE
+            ========================= */
+
             archiveDate.value =
                 archive.incident_date ||
                 "";
 
+
+            /* =========================
+               REAL SUMMARY
+            ========================= */
 
             archiveSummary.value =
                 archive.summary ||
                 "";
 
 
+            /* =========================
+               REAL CONTENT
+            ========================= */
+
             archiveContent.value =
                 archive.content ||
                 "";
 
+
+            /* =========================
+               REAL VISIBILITY
+            ========================= */
 
             archiveVisible.checked =
                 Boolean(
@@ -7523,190 +8168,35 @@
                 );
 
 
-            /* REAL PERSONNEL ASSOCIATION */
+            /* =========================
+               REAL PERSONNEL
+            ========================= */
 
-            archiveSubject.value =
-                archive.personnel_id !== null &&
-                archive.personnel_id !== undefined
-                    ? String(
+            if (
+                archive.personnel_id === null ||
+                archive.personnel_id === undefined
+            ) {
+
+                archiveSubject.value =
+                    "";
+
+
+                resetSubjectPreview();
+
+
+            } else {
+
+                archiveSubject.value =
+                    String(
                         archive.personnel_id
-                    )
-                    : "";
+                    );
 
 
-            /* PREVIEW */
-
-            const person =
-                personnelRecords.find(
-                    record =>
-                        Number(
-                            record.id
-                        ) ===
-                        Number(
-                            archive.personnel_id
-                        )
+                updateSubjectPreview(
+                    archive.personnel_id
                 );
-
-
-            if (!person) {
-
-                resetSubjectPreview();
-
-                return;
 
             }
-
-
-            previewStatus.textContent =
-                person.status ||
-                "UNAVAILABLE";
-
-
-            previewClearance.textContent =
-                person.clearance ||
-                "UNAVAILABLE";
-
-
-            previewThreat.textContent =
-                person.threat_level ||
-                "UNAVAILABLE";
-
-
-            previewLocation.textContent =
-                person.location ||
-                "UNAVAILABLE";
-
-
-            previewAffiliation.textContent =
-                person.affiliation ||
-                "UNAVAILABLE";
-
-
-            previewOrigin.textContent =
-                person.origin ||
-                "UNAVAILABLE";
-
-
-            previewObservation.textContent =
-                person.observation ||
-                "UNAVAILABLE";
-
-
-            previewActivity.textContent =
-                person.primary_activity ||
-                "UNAVAILABLE";
-
-        }
-    );
-
-
-    /* ==========================================
-       SUBJECT PREVIEW
-    ========================================== */
-
-    function resetSubjectPreview() {
-
-        previewStatus.textContent =
-            "UNAVAILABLE";
-
-
-        previewClearance.textContent =
-            "UNAVAILABLE";
-
-
-        previewThreat.textContent =
-            "UNAVAILABLE";
-
-
-        previewLocation.textContent =
-            "UNAVAILABLE";
-
-
-        previewAffiliation.textContent =
-            "UNAVAILABLE";
-
-
-        previewOrigin.textContent =
-            "UNAVAILABLE";
-
-
-        previewObservation.textContent =
-            "UNAVAILABLE";
-
-
-        previewActivity.textContent =
-            "UNAVAILABLE";
-
-    }
-
-
-    archiveSubject.addEventListener(
-        "change",
-        () => {
-
-            const selectedId =
-                Number(
-                    archiveSubject.value
-                );
-
-
-            const person =
-                personnelRecords.find(
-                    record =>
-                        Number(
-                            record.id
-                        ) ===
-                        selectedId
-                );
-
-
-            if (!person) {
-
-                resetSubjectPreview();
-
-                return;
-
-            }
-
-
-            previewStatus.textContent =
-                person.status ||
-                "UNAVAILABLE";
-
-
-            previewClearance.textContent =
-                person.clearance ||
-                "UNAVAILABLE";
-
-
-            previewThreat.textContent =
-                person.threat_level ||
-                "UNAVAILABLE";
-
-
-            previewLocation.textContent =
-                person.location ||
-                "UNAVAILABLE";
-
-
-            previewAffiliation.textContent =
-                person.affiliation ||
-                "UNAVAILABLE";
-
-
-            previewOrigin.textContent =
-                person.origin ||
-                "UNAVAILABLE";
-
-
-            previewObservation.textContent =
-                person.observation ||
-                "UNAVAILABLE";
-
-
-            previewActivity.textContent =
-                person.primary_activity ||
-                "UNAVAILABLE";
 
         }
     );
@@ -7767,21 +8257,34 @@
                         archive.archive_number ||
                         ""
                     )
-                    .match(
-                        /(\d+)/
-                    );
-
-
-                if (match) {
-
-                    highestNumber =
-                        Math.max(
-                            highestNumber,
-                            parseInt(
-                                match[1],
-                                10
-                            )
+                        .match(
+                            /(\d+)/
                         );
+
+
+                if (
+                    match
+                ) {
+
+                    const number =
+                        parseInt(
+                            match[1],
+                            10
+                        );
+
+
+                    if (
+                        !Number.isNaN(
+                            number
+                        ) &&
+                        number >
+                        highestNumber
+                    ) {
+
+                        highestNumber =
+                            number;
+
+                    }
 
                 }
 
@@ -7804,21 +8307,23 @@
 
 
     /* ==========================================
-       ARCHIVE CREATE / EDIT SAVE
+       CREATE / EDIT ARCHIVE
     ========================================== */
 
     archiveForm.addEventListener(
         "submit",
-        async event => {
+        async function(event) {
 
             event.preventDefault();
 
 
-            const title =
+            const titleValue =
                 archiveTitle.value.trim();
 
 
-            if (!title) {
+            if (
+                !titleValue
+            ) {
 
                 showArchiveResult(
                     "> ARCHIVE TITLE REQUIRED."
@@ -7834,7 +8339,20 @@
                 true;
 
 
+            createArchiveButton.textContent =
+                archiveMode ===
+                    "create"
+
+                    ? "CREATING ARCHIVE..."
+
+                    : "SAVING ARCHIVE...";
+
+
             try {
+
+                const personnelId =
+                    archiveSubject.value;
+
 
                 const selectedPersonnel =
                     personnelRecords.find(
@@ -7843,15 +8361,15 @@
                                 person.id
                             ) ===
                             Number(
-                                archiveSubject.value
+                                personnelId
                             )
                     );
 
 
-                const record = {
+                const archiveData = {
 
                     title:
-                        title,
+                        titleValue,
 
                     personnel_id:
                         selectedPersonnel
@@ -7876,16 +8394,21 @@
                 };
 
 
+                /* =========================
+                   CREATE
+                ========================= */
+
                 if (
                     archiveMode ===
                     "create"
                 ) {
 
-                    record.archive_number =
+                    archiveData.archive_number =
                         archiveNumber.value;
 
 
                     const {
+                        data,
                         error
                     } =
                         await db
@@ -7896,9 +8419,12 @@
 
                             .insert(
                                 [
-                                    record
+                                    archiveData
                                 ]
-                            );
+                            )
+
+                            .select()
+                            .single();
 
 
                     if (
@@ -7911,28 +8437,57 @@
 
 
                     showArchiveResult(
-                        "> ARCHIVE CREATED."
+
+                        `> ARCHIVE CREATED.<br>` +
+
+                        `> ${
+                            escapeHTML(
+                                data.archive_number
+                            )
+                        } // ${
+                            escapeHTML(
+                                data.title
+                            )
+                        }`
+
                     );
 
 
                     archiveForm.reset();
 
+
+                    archiveSubject.value =
+                        "";
+
+
                     resetSubjectPreview();
 
+
                     await prepareNextArchiveNumber();
+
+                    await loadArchives();
 
                 }
 
 
+                /* =========================
+                   EDIT
+                ========================= */
+
                 else {
 
-                    const id =
-                        Number(
-                            editArchiveSelect.value
-                        );
+                    /*
+                        THIS MUST REMAIN A STRING.
+                        archives.id = UUID.
+                    */
+
+                    const archiveId =
+                        editArchiveSelect.value;
 
 
-                    if (!id) {
+                    if (
+                        !archiveId
+                    ) {
 
                         throw new Error(
                             "SELECT_AN_ARCHIVE_FIRST"
@@ -7951,12 +8506,12 @@
                             )
 
                             .update(
-                                record
+                                archiveData
                             )
 
                             .eq(
                                 "id",
-                                id
+                                archiveId
                             );
 
 
@@ -7972,20 +8527,31 @@
                     showArchiveResult(
 
                         "> ARCHIVE UPDATED.<br>" +
-
                         "> DATABASE UPDATED SUCCESSFULLY."
 
                     );
 
 
+                    /*
+                        Reload data from database.
+                    */
+
                     await populateArchiveEditor();
 
+                    await loadArchives();
+
+
+                    /*
+                        Restore selected UUID.
+                    */
 
                     editArchiveSelect.value =
-                        String(
-                            id
-                        );
+                        archiveId;
 
+
+                    /*
+                        Re-run loading.
+                    */
 
                     editArchiveSelect.dispatchEvent(
                         new Event(
@@ -7996,34 +8562,61 @@
                 }
 
 
-                await loadArchives();
-
             } catch (
                 error
             ) {
 
                 console.error(
-                    "ARCHIVE SAVE ERROR:",
+                    "ARCHIVE OPERATION ERROR:",
                     error
                 );
 
 
+                let message =
+                    "> ARCHIVE OPERATION FAILED.";
+
+
+                if (
+                    error.message ===
+                    "SELECT_AN_ARCHIVE_FIRST"
+                ) {
+
+                    message =
+                        "> SELECT AN ARCHIVE TO EDIT.";
+
+                } else if (
+                    error.message
+                ) {
+
+                    message +=
+
+                        `<br>> ${
+                            escapeHTML(
+                                error.message
+                            )
+                        }`;
+
+                }
+
+
                 showArchiveResult(
-
-                    "> ARCHIVE OPERATION FAILED.<br>" +
-
-                    `> ${escapeHTML(
-                        error.message
-                    )}`
-
+                    message
                 );
 
-            } finally {
-
-                createArchiveButton.disabled =
-                    false;
-
             }
+
+
+            createArchiveButton.disabled =
+                false;
+
+
+            createArchiveButton.textContent =
+                archiveMode ===
+                    "create"
+
+                    ? "CREATE ARCHIVE"
+
+                    : "SAVE ARCHIVE CHANGES";
 
         }
     );
@@ -8044,9 +8637,17 @@
     }
 
 
+    /* ==========================================
+       REFRESH ARCHIVE
+    ========================================== */
+
     refreshArchiveData.addEventListener(
         "click",
-        async () => {
+        async function() {
+
+            const currentArchiveId =
+                editArchiveSelect.value;
+
 
             await loadPersonnel();
 
@@ -8060,17 +8661,15 @@
                 "edit"
             ) {
 
-                const currentId =
-                    editArchiveSelect.value;
-
-
                 await populateArchiveEditor();
 
 
-                if (currentId) {
+                if (
+                    currentArchiveId
+                ) {
 
                     editArchiveSelect.value =
-                        currentId;
+                        currentArchiveId;
 
 
                     editArchiveSelect.dispatchEvent(
@@ -8105,26 +8704,26 @@
 
                 .select(
                     `
-                        id,
-                        archive_number,
-                        title,
-                        personnel_id,
-                        incident_date,
-                        summary,
-                        visible,
-                        created_at,
+                    id,
+                    archive_number,
+                    title,
+                    personnel_id,
+                    incident_date,
+                    summary,
+                    visible,
+                    created_at,
 
-                        personnel (
-                            id,
-                            file_number,
-                            name,
-                            alias
-                        )
+                    personnel (
+                        id,
+                        file_number,
+                        name,
+                        alias
+                    )
                     `
                 )
 
                 .order(
-                    "id",
+                    "created_at",
                     {
                         ascending:
                             false
@@ -8160,7 +8759,8 @@
 
         if (
             !data ||
-            data.length === 0
+            data.length ===
+            0
         ) {
 
             archiveList.innerHTML = `
@@ -8196,10 +8796,6 @@
                     );
 
 
-                link.className =
-                    "archive-database-link";
-
-
                 link.href =
 
                     `archive.html?id=${
@@ -8207,6 +8803,10 @@
                             archive.id
                         )
                     }`;
+
+
+                link.className =
+                    "archive-database-link";
 
 
                 link.innerHTML = `
@@ -8323,7 +8923,6 @@
 
 
         createCommunicationButton.textContent =
-
             mode ===
                 "create"
 
@@ -8357,7 +8956,7 @@
 
     communicationCreateMode.addEventListener(
         "click",
-        () => {
+        function() {
 
             setCommunicationMode(
                 "create"
@@ -8369,7 +8968,7 @@
 
     communicationEditMode.addEventListener(
         "click",
-        async () => {
+        async function() {
 
             setCommunicationMode(
                 "edit"
@@ -8381,6 +8980,10 @@
         }
     );
 
+
+    /* ==========================================
+       LOAD COMMUNICATION EDITOR
+    ========================================== */
 
     async function populateCommunicationEditor() {
 
@@ -8394,10 +8997,23 @@
                     "communications"
                 )
 
-                .select("*")
+                .select(
+                    `
+                    id,
+                    message_id,
+                    sender,
+                    recipient,
+                    subject,
+                    content,
+                    classification,
+                    status,
+                    visible,
+                    created_at
+                    `
+                )
 
                 .order(
-                    "id",
+                    "created_at",
                     {
                         ascending:
                             false
@@ -8444,7 +9060,9 @@
 
 
                 option.value =
-                    communication.id;
+                    String(
+                        communication.id
+                    );
 
 
                 option.textContent =
@@ -8469,66 +9087,45 @@
 
 
     /* ==========================================
-       COMMUNICATION EDIT
+       LOAD SELECTED COMMUNICATION
     ========================================== */
 
     editCommunicationSelect.addEventListener(
         "change",
-        async () => {
+        function() {
 
-            const id =
-                Number(
-                    editCommunicationSelect.value
-                );
+            const selectedId =
+                editCommunicationSelect.value;
 
 
-            if (!id) {
+            if (
+                !selectedId
+            ) {
 
                 return;
 
             }
 
 
-            const {
-                data,
-                error
-            } =
-                await db
-
-                    .from(
-                        "communications"
-                    )
-
-                    .select(
-                        `
-                            id,
-                            message_id,
-                            sender,
-                            recipient,
-                            subject,
-                            content,
-                            classification,
-                            status,
-                            visible
-                        `
-                    )
-
-                    .eq(
-                        "id",
-                        id
-                    )
-
-                    .maybeSingle();
+            const communication =
+                communicationRecords.find(
+                    record =>
+                        String(
+                            record.id
+                        ) ===
+                        String(
+                            selectedId
+                        )
+                );
 
 
             if (
-                error ||
-                !data
+                !communication
             ) {
 
                 console.error(
-                    "COMMUNICATION EDIT LOAD ERROR:",
-                    error
+                    "SELECTED COMMUNICATION NOT FOUND:",
+                    selectedId
                 );
 
 
@@ -8538,43 +9135,43 @@
 
 
             communicationMessageId.value =
-                data.message_id ||
+                communication.message_id ||
                 "";
 
 
             communicationSender.value =
-                data.sender ||
+                communication.sender ||
                 "";
 
 
             communicationRecipient.value =
-                data.recipient ||
+                communication.recipient ||
                 "";
 
 
             communicationSubject.value =
-                data.subject ||
+                communication.subject ||
                 "";
 
 
             communicationContent.value =
-                data.content ||
+                communication.content ||
                 "";
 
 
             communicationClassification.value =
-                data.classification ||
+                communication.classification ||
                 "RESTRICTED";
 
 
             communicationStatus.value =
-                data.status ||
+                communication.status ||
                 "DELIVERED";
 
 
             communicationVisible.checked =
                 Boolean(
-                    data.visible
+                    communication.visible
                 );
 
         }
@@ -8582,7 +9179,7 @@
 
 
     /* ==========================================
-       COMMUNICATION ID
+       NEXT COMMUNICATION ID
     ========================================== */
 
     async function prepareNextCommunicationId() {
@@ -8636,21 +9233,34 @@
                         communication.message_id ||
                         ""
                     )
-                    .match(
-                        /(\d+)/
-                    );
-
-
-                if (match) {
-
-                    highestNumber =
-                        Math.max(
-                            highestNumber,
-                            parseInt(
-                                match[1],
-                                10
-                            )
+                        .match(
+                            /(\d+)/
                         );
+
+
+                if (
+                    match
+                ) {
+
+                    const number =
+                        parseInt(
+                            match[1],
+                            10
+                        );
+
+
+                    if (
+                        !Number.isNaN(
+                            number
+                        ) &&
+                        number >
+                        highestNumber
+                    ) {
+
+                        highestNumber =
+                            number;
+
+                    }
 
                 }
 
@@ -8673,12 +9283,12 @@
 
 
     /* ==========================================
-       COMMUNICATION CREATE / EDIT
+       CREATE / EDIT COMMUNICATION
     ========================================== */
 
     communicationForm.addEventListener(
         "submit",
-        async event => {
+        async function(event) {
 
             event.preventDefault();
 
@@ -8722,9 +9332,18 @@
                 true;
 
 
+            createCommunicationButton.textContent =
+                communicationMode ===
+                    "create"
+
+                    ? "CREATING TRANSMISSION..."
+
+                    : "SAVING TRANSMISSION...";
+
+
             try {
 
-                const record = {
+                const communicationData = {
 
                     sender:
                         sender,
@@ -8750,16 +9369,21 @@
                 };
 
 
+                /* =========================
+                   CREATE
+                ========================= */
+
                 if (
                     communicationMode ===
                     "create"
                 ) {
 
-                    record.message_id =
+                    communicationData.message_id =
                         communicationMessageId.value;
 
 
                     const {
+                        data,
                         error
                     } =
                         await db
@@ -8770,9 +9394,12 @@
 
                             .insert(
                                 [
-                                    record
+                                    communicationData
                                 ]
-                            );
+                            )
+
+                            .select()
+                            .single();
 
 
                     if (
@@ -8785,7 +9412,18 @@
 
 
                     showCommunicationResult(
-                        "> TRANSMISSION CREATED."
+
+                        `> COMMUNICATION CREATED.<br>` +
+                        `> ${
+                            escapeHTML(
+                                data.message_id
+                            )
+                        } // ${
+                            escapeHTML(
+                                data.subject
+                            )
+                        }`
+
                     );
 
 
@@ -8802,18 +9440,24 @@
 
                     await prepareNextCommunicationId();
 
+                    await loadCommunications();
+
                 }
 
 
+                /* =========================
+                   EDIT
+                ========================= */
+
                 else {
 
-                    const id =
-                        Number(
-                            editCommunicationSelect.value
-                        );
+                    const communicationId =
+                        editCommunicationSelect.value;
 
 
-                    if (!id) {
+                    if (
+                        !communicationId
+                    ) {
 
                         throw new Error(
                             "SELECT_A_TRANSMISSION_FIRST"
@@ -8832,12 +9476,12 @@
                             )
 
                             .update(
-                                record
+                                communicationData
                             )
 
                             .eq(
                                 "id",
-                                id
+                                communicationId
                             );
 
 
@@ -8853,7 +9497,6 @@
                     showCommunicationResult(
 
                         "> TRANSMISSION UPDATED.<br>" +
-
                         "> DATABASE UPDATED SUCCESSFULLY."
 
                     );
@@ -8861,11 +9504,11 @@
 
                     await populateCommunicationEditor();
 
+                    await loadCommunications();
+
 
                     editCommunicationSelect.value =
-                        String(
-                            id
-                        );
+                        communicationId;
 
 
                     editCommunicationSelect.dispatchEvent(
@@ -8877,14 +9520,12 @@
                 }
 
 
-                await loadCommunications();
-
             } catch (
                 error
             ) {
 
                 console.error(
-                    "COMMUNICATION SAVE ERROR:",
+                    "COMMUNICATION OPERATION ERROR:",
                     error
                 );
 
@@ -8894,17 +9535,26 @@
                     "> TRANSMISSION OPERATION FAILED.<br>" +
 
                     `> ${escapeHTML(
-                        error.message
+                        error.message ||
+                        "UNKNOWN DATABASE ERROR."
                     )}`
 
                 );
 
-            } finally {
-
-                createCommunicationButton.disabled =
-                    false;
-
             }
+
+
+            createCommunicationButton.disabled =
+                false;
+
+
+            createCommunicationButton.textContent =
+                communicationMode ===
+                    "create"
+
+                    ? "CREATE TRANSMISSION"
+
+                    : "SAVE TRANSMISSION CHANGES";
 
         }
     );
@@ -8925,9 +9575,13 @@
     }
 
 
+    /* ==========================================
+       REFRESH COMMUNICATIONS
+    ========================================== */
+
     refreshCommunicationData.addEventListener(
         "click",
-        async () => {
+        async function() {
 
             const currentId =
                 editCommunicationSelect.value;
@@ -8946,7 +9600,9 @@
                 await populateCommunicationEditor();
 
 
-                if (currentId) {
+                if (
+                    currentId
+                ) {
 
                     editCommunicationSelect.value =
                         currentId;
@@ -8984,20 +9640,20 @@
 
                 .select(
                     `
-                        id,
-                        message_id,
-                        sender,
-                        recipient,
-                        subject,
-                        classification,
-                        status,
-                        visible,
-                        created_at
+                    id,
+                    message_id,
+                    sender,
+                    recipient,
+                    subject,
+                    classification,
+                    status,
+                    visible,
+                    created_at
                     `
                 )
 
                 .order(
-                    "id",
+                    "created_at",
                     {
                         ascending:
                             false
@@ -9033,7 +9689,8 @@
 
         if (
             !data ||
-            data.length === 0
+            data.length ===
+            0
         ) {
 
             communicationList.innerHTML = `
@@ -9085,8 +9742,7 @@
                         <div class="communication-item-id">
 
                             ${escapeHTML(
-                                communication.message_id ||
-                                "COMM-UNKNOWN"
+                                communication.message_id
                             )}
 
                         </div>
@@ -9095,8 +9751,7 @@
                         <div class="communication-item-subject">
 
                             ${escapeHTML(
-                                communication.subject ||
-                                "UNTITLED TRANSMISSION"
+                                communication.subject
                             )}
 
                         </div>
@@ -9106,16 +9761,14 @@
 
                             FROM:
                             ${escapeHTML(
-                                communication.sender ||
-                                "UNKNOWN"
+                                communication.sender
                             )}
 
                             <br>
 
                             TO:
                             ${escapeHTML(
-                                communication.recipient ||
-                                "UNKNOWN"
+                                communication.recipient
                             )}
 
                             <br>
@@ -9172,7 +9825,7 @@
         )
         .addEventListener(
             "click",
-            async () => {
+            async function() {
 
                 await db.auth.signOut();
 
