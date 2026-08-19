@@ -20,7 +20,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
     <style>
 
         * {
@@ -44,10 +43,6 @@
             overflow-x: hidden;
         }
 
-
-        /* =========================
-           PAGE
-        ========================= */
 
         .page {
             width: 100%;
@@ -181,7 +176,7 @@
 
             grid-template-columns:
                 250px
-                minmax(0, 1fr)
+                1fr
                 220px;
 
             gap: 35px;
@@ -285,8 +280,6 @@
 
             justify-content:
                 center;
-
-            min-width: 0;
         }
 
 
@@ -363,10 +356,10 @@
 
 
         /* =========================
-           FIXED CONTENT GRID
+           GRID
         ========================= */
 
-        .content-grid {
+        .grid {
             display: grid;
 
             grid-template-columns:
@@ -376,7 +369,7 @@
             gap: 22px;
 
             align-items:
-                start;
+                stretch;
         }
 
 
@@ -385,8 +378,6 @@
         ========================= */
 
         .panel {
-            min-width: 0;
-
             padding: 28px;
 
             border:
@@ -406,19 +397,11 @@
                     0.015
                 );
 
-            overflow:
-                hidden;
+            min-width: 0;
         }
 
 
         .panel-title {
-            display: flex;
-
-            align-items:
-                center;
-
-            min-height: 30px;
-
             font-size: 11px;
 
             letter-spacing: 3px;
@@ -441,7 +424,7 @@
 
 
         /* =========================
-           INFO GRID
+           INFO
         ========================= */
 
         .info {
@@ -449,7 +432,7 @@
 
             grid-template-columns:
                 180px
-                minmax(0, 1fr);
+                1fr;
 
             gap:
                 15px 22px;
@@ -478,7 +461,7 @@
 
 
         /* =========================
-           CONTROLLED SCROLL AREAS
+           CONTROLLED SCROLL
         ========================= */
 
         .scroll-area {
@@ -1023,26 +1006,13 @@
 
 
         /* =========================
-           NAVIGATION
+           BACK
         ========================= */
-
-        .navigation {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            gap: 20px;
-
-            margin-top: 28px;
-        }
-
 
         .back {
             display: inline-block;
+
+            margin-top: 28px;
 
             color: #fff;
 
@@ -1087,7 +1057,7 @@
             width: 100%;
 
             margin:
-                24px auto 0 auto;
+                30px auto 0 auto;
 
             padding-top: 15px;
 
@@ -1151,10 +1121,8 @@
 
             .subject-header {
                 grid-template-columns:
-                    220px
-                    minmax(0, 1fr);
-
-                gap: 25px;
+                    210px
+                    1fr;
             }
 
 
@@ -1190,7 +1158,7 @@
 
 
         /* =========================
-           SMALL DESKTOP / TABLET
+           MOBILE GRID
         ========================= */
 
         @media (max-width: 900px) {
@@ -1200,17 +1168,13 @@
             }
 
 
-            .content-grid {
+            .grid {
                 grid-template-columns:
                     1fr;
             }
 
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 650px) {
 
@@ -1333,15 +1297,6 @@
 
             .archive-item-status {
                 font-size: 9px;
-            }
-
-
-            .navigation {
-                align-items:
-                    flex-start;
-
-                flex-direction:
-                    column;
             }
 
 
@@ -2349,7 +2304,9 @@
                                 href="home.html"
                                 class="title"
                             >
+
                                 CIGA SYSTEMS
+
                             </a>
 
 
@@ -2386,39 +2343,31 @@
                     <section class="terminal">
 
                         <div>
-
                             &gt; OPENING ENTITY RECORD...
-
                         </div>
 
 
                         <div>
-
                             &gt; SUBJECT IDENTIFIED:
                             ${escapeHTML(
                                 name
                             )}
-
                         </div>
 
 
                         <div>
-
                             &gt; RECORD STATUS:
                             ${escapeHTML(
                                 status
                             )}
-
                         </div>
 
 
                         <div>
-
                             &gt; OBSERVATION PROTOCOL:
                             ${escapeHTML(
                                 observation
                             )}
-
                         </div>
 
                     </section>
@@ -2429,7 +2378,7 @@
                     <section class="subject-header">
 
 
-                        <!-- IDENTIFICATION IMAGE -->
+                        <!-- PHOTO -->
 
                         <div class="photo-area">
 
@@ -2442,6 +2391,7 @@
 
                             ${
                                 photo
+
                                     ? `
 
                                         <img
@@ -2455,6 +2405,7 @@
                                         >
 
                                     `
+
                                     : `
 
                                         <div
@@ -2489,7 +2440,7 @@
                         </div>
 
 
-                        <!-- DESIGNATION -->
+                        <!-- SUBJECT -->
 
                         <div class="subject-info">
 
@@ -2613,12 +2564,12 @@
                     </section>
 
 
-                    <!-- FIXED CONTENT LAYOUT -->
+                    <!-- CONTENT -->
 
-                    <section class="content-grid">
+                    <section class="grid">
 
 
-                        <!-- ROW 1 LEFT -->
+                        <!-- ENTITY INFORMATION -->
 
                         <section class="panel">
 
@@ -2727,7 +2678,7 @@
                         </section>
 
 
-                        <!-- ROW 1 RIGHT -->
+                        <!-- INCIDENT / HISTORY -->
 
                         <section class="panel">
 
@@ -2745,7 +2696,7 @@
                         </section>
 
 
-                        <!-- ROW 2 LEFT -->
+                        <!-- ASSOCIATED ARCHIVES -->
 
                         <section class="panel">
 
@@ -2761,7 +2712,7 @@
                         </section>
 
 
-                        <!-- ROW 2 RIGHT -->
+                        <!-- BEHAVIOURAL ASSESSMENT -->
 
                         <section class="panel">
 
@@ -2778,19 +2729,15 @@
                                     observation
                                 )}
 
-
                                 <br>
                                 <br>
-
 
                                 Subject continues normal
                                 activity despite ongoing
                                 observation.
 
-
                                 <br>
                                 <br>
-
 
                                 Further assessment remains
                                 recommended.
@@ -2817,7 +2764,7 @@
                         </section>
 
 
-                        <!-- ROW 3 LEFT -->
+                        <!-- KNOWN CONNECTIONS -->
 
                         <section class="panel">
 
@@ -2835,18 +2782,15 @@
                                     twitch
                                 )}
 
-
                                 ${renderConnection(
                                     "YOUTUBE",
                                     youtube
                                 )}
 
-
                                 ${renderConnection(
                                     "TIKTOK",
                                     tiktok
                                 )}
-
 
                                 ${renderConnection(
                                     "DISCORD",
@@ -2866,7 +2810,7 @@
                         </section>
 
 
-                        <!-- ROW 3 RIGHT -->
+                        <!-- CURRENT STATUS -->
 
                         <section class="panel">
 
@@ -2881,9 +2825,7 @@
 
 
                                 <div class="info-label">
-
                                     STATUS
-
                                 </div>
 
 
@@ -2897,9 +2839,7 @@
 
 
                                 <div class="info-label">
-
                                     ACTIVITY
-
                                 </div>
 
 
@@ -2911,9 +2851,7 @@
 
 
                                 <div class="info-label">
-
                                     MONITORING
-
                                 </div>
 
 
@@ -2925,9 +2863,7 @@
 
 
                                 <div class="info-label">
-
                                     THREAT LEVEL
-
                                 </div>
 
 
@@ -2951,11 +2887,14 @@
                         </section>
 
 
-                        <!-- ROW 4 FULL WIDTH -->
+                        <!-- INTERNAL NOTE -->
 
                         <section
                             class="panel"
-                            style="grid-column: 1 / -1;"
+                            style="
+                                grid-column:
+                                    1 / -1;
+                            "
                         >
 
                             <div class="panel-title">
@@ -2971,10 +2910,8 @@
                                 interest in CIGA systems and
                                 internal material.
 
-
                                 <br>
                                 <br>
-
 
                                 Nature of this relationship
                                 remains
@@ -2987,10 +2924,8 @@
 
                                 at current clearance level.
 
-
                                 <br>
                                 <br>
-
 
                                 Further observation is
                                 recommended.
@@ -3016,20 +2951,16 @@
                     </section>
 
 
-                    <!-- NAVIGATION -->
+                    <!-- BACK -->
 
-                    <div class="navigation">
+                    <a
+                        href="personnel.html"
+                        class="back"
+                    >
 
-                        <a
-                            href="personnel.html"
-                            class="back"
-                        >
+                        &lt;&lt; RETURN TO PERSONNEL DATABASE
 
-                            &lt;&lt; RETURN TO PERSONNEL DATABASE
-
-                        </a>
-
-                    </div>
+                    </a>
 
 
                     <!-- FOOTER -->
@@ -3038,7 +2969,8 @@
 
                         <span>
 
-                            CIGA SYSTEMS // FILE_${escapeHTML(
+                            CIGA SYSTEMS //
+                            FILE_${escapeHTML(
                                 fileNumber
                             )}
 
