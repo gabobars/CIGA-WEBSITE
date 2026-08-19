@@ -611,7 +611,7 @@
 
 
         /* =========================
-           REVIEW CLASSIFICATION
+           CLASSIFICATION
         ========================= */
 
         .classification-grid {
@@ -791,7 +791,7 @@
 
 
         /* =========================
-           CONFIRMATION BOX
+           CONFIRMATION
         ========================= */
 
         .confirmation {
@@ -985,29 +985,153 @@
         }
 
 
-        .personnel-editor-textarea.large {
-            min-height: 190px;
+        .personnel-editor-readonly {
+            opacity: 0.55;
+
+            cursor: not-allowed;
         }
 
 
-        .personnel-editor-input:focus,
-        .personnel-editor-select:focus,
-        .personnel-editor-textarea:focus {
+        /* =========================
+           HISTORY EDITOR
+        ========================= */
+
+        .history-list {
+            display: grid;
+
+            gap: 12px;
+        }
+
+
+        .history-entry {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 12px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.02);
+        }
+
+
+        .history-entry-number {
+            grid-column:
+                1 / -1;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.42;
+        }
+
+
+        .history-entry-text {
+            width: 100%;
+
+            min-height: 95px;
+
+            padding: 12px;
+
+            resize: vertical;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .history-entry-text:focus {
             border-color:
                 rgba(255,255,255,0.65);
         }
 
 
-        .personnel-editor-select option {
-            background: #000;
-            color: #fff;
+        .history-remove {
+            align-self: end;
+
+            padding:
+                10px 12px;
+
+            opacity: 0.65;
         }
 
 
-        .personnel-editor-readonly {
-            opacity: 0.55;
+        .history-remove:hover {
+            opacity: 1;
 
-            cursor: not-allowed;
+            border-color:
+                rgba(255,255,255,0.6);
+        }
+
+
+        .history-empty {
+            padding: 16px;
+
+            border:
+                1px dashed
+                rgba(255,255,255,0.18);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.42;
+        }
+
+
+        .history-actions {
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 10px;
+
+            margin-top: 14px;
+        }
+
+
+        .history-add {
+            border-color:
+                rgba(255,255,255,0.45);
+        }
+
+
+        .history-note {
+            margin-top: 10px;
+
+            font-size: 9px;
+
+            line-height: 1.7;
+
+            letter-spacing: 0.7px;
+
+            opacity: 0.40;
         }
 
 
@@ -1720,6 +1844,29 @@
             }
 
 
+            .history-entry {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .history-entry-number {
+                grid-column:
+                    auto;
+            }
+
+
+            .history-remove {
+                width: 100%;
+            }
+
+
+            .history-actions {
+                flex-direction:
+                    column;
+            }
+
+
             .personnel-editor-actions {
                 flex-direction:
                     column;
@@ -2036,7 +2183,6 @@
                 </button>
 
             </div>
-
 
         </section>
 
@@ -2415,22 +2561,51 @@
                 </div>
 
 
+                <!-- =========================
+                     HISTORY
+                ========================= -->
+
                 <div
                     class="personnel-editor-field personnel-editor-full"
                 >
 
-                    <label
-                        class="personnel-editor-label"
-                        for="editNotes"
-                    >
-                        LORE / INCIDENT INFORMATION
+                    <label class="personnel-editor-label">
+
+                        LORE / INCIDENT HISTORY
+
                     </label>
 
 
-                    <textarea
-                        id="editNotes"
-                        class="personnel-editor-textarea large"
-                    ></textarea>
+                    <div
+                        class="history-list"
+                        id="historyList"
+                    ></div>
+
+
+                    <div class="history-actions">
+
+                        <button
+                            type="button"
+                            class="history-add"
+                            id="addHistoryButton"
+                        >
+                            + ADD HISTORY ENTRY
+                        </button>
+
+                    </div>
+
+
+                    <div class="history-note">
+
+                        &gt; EACH ENTRY IS STORED AS A
+                        SEPARATE HISTORY RECORD.
+
+                        <br>
+
+                        &gt; ADD AS MANY INCIDENTS OR
+                        HISTORICAL EVENTS AS REQUIRED.
+
+                    </div>
 
                 </div>
 
@@ -3328,7 +3503,7 @@
 
 
     /* ==========================================
-       PERSONNEL EDITOR ELEMENTS
+       PERSONNEL EDITOR
     ========================================== */
 
     const editPersonnel =
@@ -3409,9 +3584,15 @@
         );
 
 
-    const editNotes =
+    const historyList =
         document.getElementById(
-            "editNotes"
+            "historyList"
+        );
+
+
+    const addHistoryButton =
+        document.getElementById(
+            "addHistoryButton"
         );
 
 
@@ -3711,7 +3892,7 @@
 
 
     /* ==========================================
-       RESTORE SCROLL POSITION
+       RESTORE SCROLL
     ========================================== */
 
     function restoreScrollPosition(
@@ -3969,6 +4150,7 @@
 
             `;
 
+
             return;
 
         }
@@ -3991,6 +4173,7 @@
                 </div>
 
             `;
+
 
             return;
 
@@ -4246,19 +4429,14 @@
             </div>
 
 
-            <!-- ENTITY INFORMATION -->
-
             <div class="panel">
 
                 <div class="panel-title">
-
                     // ENTITY INFORMATION
-
                 </div>
 
 
                 <div class="review-data">
-
 
                     <div class="review-label">
                         ALIAS
@@ -4324,14 +4502,10 @@
             </div>
 
 
-            <!-- CIGA CLASSIFICATION -->
-
             <div class="panel">
 
                 <div class="panel-title">
-
                     // CIGA CLASSIFICATION
-
                 </div>
 
 
@@ -4519,30 +4693,17 @@
 
                 </div>
 
-
-                <div class="classification-note">
-
-                    &gt; CLASSIFICATION VALUES ARE ASSIGNED
-                    BY CIGA ADMINISTRATION.
-
-                </div>
-
             </div>
 
-
-            <!-- KNOWN CONNECTIONS -->
 
             <div class="panel">
 
                 <div class="panel-title">
-
                     // KNOWN CONNECTIONS
-
                 </div>
 
 
                 <div class="social-grid">
-
 
                     <div class="social">
 
@@ -4620,14 +4781,10 @@
             </div>
 
 
-            <!-- LORE -->
-
             <div class="panel">
 
                 <div class="panel-title">
-
                     // LORE / INCIDENT INFORMATION
-
                 </div>
 
 
@@ -4942,20 +5099,6 @@
                 );
 
 
-            if (
-                !reviewStatus ||
-                !reviewClearance ||
-                !reviewObservation ||
-                !reviewThreatLevel
-            ) {
-
-                throw new Error(
-                    "CLASSIFICATION_FIELDS_MISSING"
-                );
-
-            }
-
-
             const selectedStatus =
                 reviewStatus.value;
 
@@ -5060,7 +5203,9 @@
                     currentSubmission.description,
 
                 notes:
-                    currentSubmission.notes,
+                    normalizeNotesForStorage(
+                        currentSubmission.notes
+                    ),
 
                 primary_activity:
                     currentSubmission.primary_activity,
@@ -5101,7 +5246,9 @@
             } =
                 await db
 
-                    .from("personnel")
+                    .from(
+                        "personnel"
+                    )
 
                     .insert(
                         [personnelRecord]
@@ -5222,25 +5369,9 @@
                 false;
 
 
-            let message =
-                "> APPROVAL FAILED.<br>" +
-                "> PERSONNEL RECORD WAS NOT CONFIRMED.";
-
-
-            if (
-                error.message ===
-                "CLASSIFICATION_FIELDS_MISSING"
-            ) {
-
-                message =
-                    "> APPROVAL FAILED.<br>" +
-                    "> CLASSIFICATION DATA COULD NOT BE READ.";
-
-            }
-
-
             showReviewResult(
-                message
+                "> APPROVAL FAILED.<br>" +
+                "> PERSONNEL RECORD WAS NOT CONFIRMED."
             );
 
 
@@ -5254,7 +5385,7 @@
 
 
     /* ==========================================
-       REJECT BUTTON
+       REJECT
     ========================================== */
 
     rejectButton.addEventListener(
@@ -5273,10 +5404,6 @@
         }
     );
 
-
-    /* ==========================================
-       REJECT
-    ========================================== */
 
     async function rejectCurrentSubmission() {
 
@@ -5340,49 +5467,50 @@
             );
 
 
-        } else {
-
-            currentSubmission.submission_status =
-                "REJECTED";
-
-
-            showReviewResult(
-                "> RECORD REJECTED.<br>" +
-                "> SUBMISSION ARCHIVED.<br>" +
-                "> REVIEW REMAINS OPEN."
-            );
-
-
-            approveButton.disabled =
-                true;
-
-
-            rejectButton.disabled =
-                true;
-
-
-            approveButton.textContent =
-                "RECORD CLOSED";
-
-
-            rejectButton.textContent =
-                "RECORD REJECTED";
-
-
-            await loadSubmissions();
-
-
-            restoreScrollPosition(
-                preservedScroll
-            );
+            return;
 
         }
+
+
+        currentSubmission.submission_status =
+            "REJECTED";
+
+
+        showReviewResult(
+            "> RECORD REJECTED.<br>" +
+            "> SUBMISSION ARCHIVED.<br>" +
+            "> REVIEW REMAINS OPEN."
+        );
+
+
+        approveButton.disabled =
+            true;
+
+
+        rejectButton.disabled =
+            true;
+
+
+        approveButton.textContent =
+            "RECORD CLOSED";
+
+
+        rejectButton.textContent =
+            "RECORD REJECTED";
+
+
+        await loadSubmissions();
+
+
+        restoreScrollPosition(
+            preservedScroll
+        );
 
     }
 
 
     /* ==========================================
-       RESULT
+       REVIEW RESULT
     ========================================== */
 
     function showReviewResult(
@@ -5401,6 +5529,440 @@
 
 
     /* ==========================================
+       HISTORY PARSER
+    ========================================== */
+
+    function parseHistoryValue(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return [];
+
+        }
+
+
+        if (
+            Array.isArray(
+                value
+            )
+        ) {
+
+            return value
+                .map(
+                    entry =>
+                        String(
+                            entry
+                        ).trim()
+                )
+                .filter(
+                    entry =>
+                        entry !== ""
+                );
+
+        }
+
+
+        const text =
+            String(
+                value
+            ).trim();
+
+
+        if (!text) {
+
+            return [];
+
+        }
+
+
+        if (
+            text.startsWith("[")
+            &&
+            text.endsWith("]")
+        ) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+                        .map(
+                            entry =>
+                                String(
+                                    entry
+                                ).trim()
+                        )
+                        .filter(
+                            entry =>
+                                entry !== ""
+                        );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "HISTORY JSON PARSE ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        return [
+            text
+        ];
+
+    }
+
+
+    /* ==========================================
+       NORMALIZE NOTES FOR STORAGE
+    ========================================== */
+
+    function normalizeNotesForStorage(
+        value
+    ) {
+
+        const entries =
+            parseHistoryValue(
+                value
+            );
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            return null;
+
+        }
+
+
+        return JSON.stringify(
+            entries
+        );
+
+    }
+
+
+    /* ==========================================
+       ADD HISTORY ENTRY
+    ========================================== */
+
+    function addHistoryEntry(
+        value = ""
+    ) {
+
+        const entry =
+            document.createElement(
+                "div"
+            );
+
+
+        entry.className =
+            "history-entry";
+
+
+        const entryNumber =
+            document.createElement(
+                "div"
+            );
+
+
+        entryNumber.className =
+            "history-entry-number";
+
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.className =
+            "history-entry-text";
+
+
+        textarea.placeholder =
+            "Write incident, history or additional information...";
+
+
+        textarea.value =
+            value;
+
+
+        const removeButton =
+            document.createElement(
+                "button"
+            );
+
+
+        removeButton.type =
+            "button";
+
+
+        removeButton.className =
+            "history-remove";
+
+
+        removeButton.textContent =
+            "REMOVE ENTRY";
+
+
+        removeButton.addEventListener(
+            "click",
+            function() {
+
+                entry.remove();
+
+                refreshHistoryEntryNumbers();
+
+                ensureHistoryEmptyState();
+
+            }
+        );
+
+
+        entry.appendChild(
+            entryNumber
+        );
+
+
+        entry.appendChild(
+            textarea
+        );
+
+
+        entry.appendChild(
+            removeButton
+        );
+
+
+        historyList.appendChild(
+            entry
+        );
+
+
+        refreshHistoryEntryNumbers();
+
+        ensureHistoryEmptyState();
+
+
+        if (
+            value === ""
+        ) {
+
+            textarea.focus();
+
+        }
+
+    }
+
+
+    /* ==========================================
+       HISTORY ENTRY NUMBERS
+    ========================================== */
+
+    function refreshHistoryEntryNumbers() {
+
+        const entries =
+            historyList.querySelectorAll(
+                ".history-entry"
+            );
+
+
+        entries.forEach(
+            (
+                entry,
+                index
+            ) => {
+
+                const number =
+                    entry.querySelector(
+                        ".history-entry-number"
+                    );
+
+
+                if (number) {
+
+                    number.textContent =
+                        `HISTORY ENTRY ${String(
+                            index + 1
+                        ).padStart(
+                            3,
+                            "0"
+                        )}`;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       EMPTY HISTORY STATE
+    ========================================== */
+
+    function ensureHistoryEmptyState() {
+
+        const entries =
+            historyList.querySelectorAll(
+                ".history-entry"
+            );
+
+
+        const existingEmpty =
+            historyList.querySelector(
+                ".history-empty"
+            );
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            if (!existingEmpty) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "history-empty";
+
+
+                empty.textContent =
+                    "> NO HISTORY ENTRIES.";
+
+                historyList.appendChild(
+                    empty
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        if (
+            existingEmpty
+        ) {
+
+            existingEmpty.remove();
+
+        }
+
+    }
+
+
+    /* ==========================================
+       GET HISTORY ENTRIES
+    ========================================== */
+
+    function getHistoryEntries() {
+
+        return Array.from(
+            historyList.querySelectorAll(
+                ".history-entry-text"
+            )
+        )
+            .map(
+                textarea =>
+                    textarea.value.trim()
+            )
+            .filter(
+                entry =>
+                    entry !== ""
+            );
+
+    }
+
+
+    /* ==========================================
+       LOAD HISTORY INTO EDITOR
+    ========================================== */
+
+    function loadHistoryIntoEditor(
+        value
+    ) {
+
+        historyList.innerHTML =
+            "";
+
+
+        const entries =
+            parseHistoryValue(
+                value
+            );
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            ensureHistoryEmptyState();
+
+            return;
+
+        }
+
+
+        entries.forEach(
+            entry => {
+
+                addHistoryEntry(
+                    entry
+                );
+
+            }
+        );
+
+
+        ensureHistoryEmptyState();
+
+    }
+
+
+    /* ==========================================
+       ADD HISTORY BUTTON
+    ========================================== */
+
+    addHistoryButton.addEventListener(
+        "click",
+        function() {
+
+            addHistoryEntry();
+
+        }
+    );
+
+
+    /* ==========================================
        LOAD PERSONNEL
     ========================================== */
 
@@ -5412,7 +5974,9 @@
         } =
             await db
 
-                .from("personnel")
+                .from(
+                    "personnel"
+                )
 
                 .select(
                     "id, file_number, name, alias, status, clearance, observation, threat_level, description, notes, primary_activity, location, affiliation, origin, twitch, youtube, tiktok, discord, photo, visible"
@@ -5465,10 +6029,6 @@
             data || [];
 
 
-        /* =========================
-           ARCHIVE PERSONNEL LIST
-        ========================= */
-
         archiveSubject.innerHTML = `
 
             <option value="">
@@ -5505,10 +6065,6 @@
 
         resetSubjectPreview();
 
-
-        /* =========================
-           EDITOR PERSONNEL LIST
-        ========================= */
 
         const previousEditId =
             editPersonnel.value;
@@ -5674,10 +6230,9 @@
             "";
 
 
-        editNotes.value =
-            formatEditableNotes(
-                person.notes
-            );
+        loadHistoryIntoEditor(
+            person.notes
+        );
 
 
         editTwitch.value =
@@ -5703,109 +6258,6 @@
         personnelEditorResult.classList.remove(
             "visible"
         );
-
-    }
-
-
-    /* ==========================================
-       FORMAT EDITABLE NOTES
-    ========================================== */
-
-    function formatEditableNotes(
-        value
-    ) {
-
-        if (
-            value === null ||
-            value === undefined ||
-            value === ""
-        ) {
-
-            return "";
-
-        }
-
-
-        if (
-            Array.isArray(
-                value
-            )
-        ) {
-
-            return value
-                .map(
-                    item =>
-                        String(
-                            item
-                        )
-                )
-                .filter(
-                    item =>
-                        item.trim() !== ""
-                )
-                .join(
-                    "\n\n"
-                );
-
-        }
-
-
-        const text =
-            String(
-                value
-            );
-
-
-        if (
-            text.trim().startsWith("[")
-            &&
-            text.trim().endsWith("]")
-        ) {
-
-            try {
-
-                const parsed =
-                    JSON.parse(
-                        text
-                    );
-
-
-                if (
-                    Array.isArray(
-                        parsed
-                    )
-                ) {
-
-                    return parsed
-                        .map(
-                            item =>
-                                String(
-                                    item
-                                )
-                        )
-                        .filter(
-                            item =>
-                                item.trim() !== ""
-                        )
-                        .join(
-                            "\n\n"
-                        );
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "NOTES JSON PARSE FAILED:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        return text;
 
     }
 
@@ -5919,8 +6371,9 @@
             "";
 
 
-        editNotes.value =
-            "";
+        loadHistoryIntoEditor(
+            []
+        );
 
 
         editTwitch.value =
@@ -5942,7 +6395,7 @@
 
 
     /* ==========================================
-       PERSONNEL EDITOR RESULT
+       EDITOR RESULT
     ========================================== */
 
     function showPersonnelEditorResult(
@@ -6049,6 +6502,10 @@
             }
 
 
+            const historyEntries =
+                getHistoryEntries();
+
+
             const personnelUpdate = {
 
                 name:
@@ -6075,9 +6532,19 @@
                     editDescription.value.trim() ||
                     null,
 
+                /*
+                    IMPORTANT:
+                    Store history as a real JSON array
+                    so the file page can render every
+                    entry independently.
+                */
+
                 notes:
-                    editNotes.value.trim() ||
-                    null,
+                    historyEntries.length > 0
+                        ? JSON.stringify(
+                            historyEntries
+                        )
+                        : null,
 
                 primary_activity:
                     editPrimaryActivity.value.trim() ||
@@ -6147,16 +6614,15 @@
                     currentPersonnel.file_number ||
                     personnelId
                 )}.<br>` +
+                `> HISTORY ENTRIES: ${
+                    historyEntries.length
+                }.<br>` +
                 `> DATABASE UPDATED SUCCESSFULLY.`
             );
 
 
             await loadPersonnel();
 
-
-            /*
-                Keep the edited file selected.
-            */
 
             editPersonnel.value =
                 String(
@@ -6187,12 +6653,10 @@
 
             showPersonnelEditorResult(
                 `> PERSONNEL FILE UPDATE FAILED.<br>` +
-                `> ${
-                    escapeHTML(
-                        error.message ||
-                        "UNKNOWN DATABASE ERROR."
-                    )
-                }`
+                `> ${escapeHTML(
+                    error.message ||
+                    "UNKNOWN DATABASE ERROR."
+                )}`
             );
 
 
@@ -6218,7 +6682,7 @@
 
 
     /* ==========================================
-       PERSONNEL EDITOR SELECT
+       EDITOR SELECT
     ========================================== */
 
     editPersonnel.addEventListener(
@@ -6235,9 +6699,11 @@
 
                 resetPersonnelEditor();
 
+
                 personnelEditorResult.classList.remove(
                     "visible"
                 );
+
 
                 return;
 
@@ -6253,7 +6719,7 @@
 
 
     /* ==========================================
-       PERSONNEL EDITOR REFRESH
+       EDITOR REFRESH
     ========================================== */
 
     refreshPersonnelEditor.addEventListener(
@@ -6277,7 +6743,6 @@
 
 
             await loadPersonnel();
-
 
             await loadArchives();
 
@@ -6315,7 +6780,7 @@
 
 
     /* ==========================================
-       SAVE PERSONNEL BUTTON
+       SAVE EDITOR
     ========================================== */
 
     savePersonnelButton.addEventListener(
@@ -6638,7 +7103,9 @@
             } =
                 await db
 
-                    .from("archives")
+                    .from(
+                        "archives"
+                    )
 
                     .insert(
                         [archiveRecord]
@@ -6781,7 +7248,9 @@
         } =
             await db
 
-                .from("archives")
+                .from(
+                    "archives"
+                )
 
                 .select(`
                     id,
