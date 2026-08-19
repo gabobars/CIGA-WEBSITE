@@ -11,7 +11,13 @@
     >
 
     <title>CIGA SYSTEMS // ADMINISTRATION</title>
-    <link rel="icon" type="image/png" href="logo.png">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -381,14 +387,6 @@
            BUTTONS
         ========================= */
 
-        .actions {
-            display: flex;
-
-            gap: 10px;
-
-            margin-top: 15px;
-        }
-
         button {
             padding: 11px 15px;
 
@@ -420,6 +418,14 @@
             opacity: 0.4;
 
             cursor: not-allowed;
+        }
+
+        .actions {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
         }
 
         .logout {
@@ -557,6 +563,74 @@
 
             word-break:
                 break-word;
+        }
+
+
+        /* =========================
+           REVIEW CLASSIFICATION
+        ========================= */
+
+        .classification-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+        .classification-field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .classification-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+        }
+
+        .classification-select {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 12px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            letter-spacing: 0.8px;
+
+            cursor: pointer;
+        }
+
+        .classification-select:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+        .classification-select option {
+            background: #000;
+            color: #fff;
         }
 
 
@@ -1312,6 +1386,11 @@
                     1fr;
             }
 
+            .classification-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
             .review-actions {
                 flex-direction:
                     column;
@@ -1547,6 +1626,8 @@
             <div id="reviewContent">
             </div>
 
+
+            <!-- CONFIRMATION -->
 
             <div
                 class="confirmation"
@@ -3062,6 +3143,9 @@
                         ${escapeHTML(
                             data.description ||
                             "NO DESCRIPTION PROVIDED."
+                        ).replace(
+                            /\n/g,
+                            "<br>"
                         )}
 
                     </div>
@@ -3071,6 +3155,8 @@
 
             </div>
 
+
+            <!-- SUBMITTED ENTITY INFORMATION -->
 
             <div class="panel">
 
@@ -3144,6 +3230,209 @@
 
             </div>
 
+
+            <!-- CIGA CLASSIFICATION -->
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    // CIGA CLASSIFICATION
+                </div>
+
+
+                <div class="classification-grid">
+
+
+                    <!-- STATUS -->
+
+                    <div class="classification-field">
+
+                        <label
+                            class="classification-label"
+                            for="reviewStatus"
+                        >
+                            STATUS
+                        </label>
+
+                        <select
+                            id="reviewStatus"
+                            class="classification-select"
+                        >
+
+                            <option value="ACTIVE">
+                                ACTIVE
+                            </option>
+
+                            <option value="INACTIVE">
+                                INACTIVE
+                            </option>
+
+                            <option value="MISSING">
+                                MISSING
+                            </option>
+
+                            <option value="DECEASED">
+                                DECEASED
+                            </option>
+
+                            <option value="MONITORING">
+                                MONITORING
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CLEARANCE -->
+
+                    <div class="classification-field">
+
+                        <label
+                            class="classification-label"
+                            for="reviewClearance"
+                        >
+                            CLEARANCE
+                        </label>
+
+                        <select
+                            id="reviewClearance"
+                            class="classification-select"
+                        >
+
+                            <option value="OPERATIVE">
+                                OPERATIVE
+                            </option>
+
+                            <option value="RESTRICTED">
+                                RESTRICTED
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="ADMIN">
+                                ADMIN
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- OBSERVATION -->
+
+                    <div class="classification-field">
+
+                        <label
+                            class="classification-label"
+                            for="reviewObservation"
+                        >
+                            OBSERVATION
+                        </label>
+
+                        <select
+                            id="reviewObservation"
+                            class="classification-select"
+                        >
+
+                            <option value="ONGOING">
+                                ONGOING
+                            </option>
+
+                            <option value="NOT REQUIRED">
+                                NOT REQUIRED
+                            </option>
+
+                            <option value="ELEVATED STATUS">
+                                ELEVATED STATUS
+                            </option>
+
+                            <option value="SUSPENDED">
+                                SUSPENDED
+                            </option>
+
+                            <option value="TERMINATED">
+                                TERMINATED
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- THREAT LEVEL -->
+
+                    <div class="classification-field">
+
+                        <label
+                            class="classification-label"
+                            for="reviewThreatLevel"
+                        >
+                            THREAT LEVEL
+                        </label>
+
+                        <select
+                            id="reviewThreatLevel"
+                            class="classification-select"
+                        >
+
+                            <option value="NONE">
+                                NONE
+                            </option>
+
+                            <option value="NON HOSTILE">
+                                NON HOSTILE
+                            </option>
+
+                            <option value="HOSTILE BEHAVIOUR">
+                                HOSTILE BEHAVIOUR
+                            </option>
+
+                            <option value="ANOMALOUS">
+                                ANOMALOUS
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- KNOWN CONNECTIONS -->
 
             <div class="panel">
 
@@ -3230,6 +3519,8 @@
             </div>
 
 
+            <!-- LORE -->
+
             <div class="panel">
 
                 <div class="panel-title">
@@ -3252,6 +3543,79 @@
             </div>
 
         `;
+
+
+        /*
+            Restore current database values when
+            reopening or reviewing an existing
+            submission that may already contain
+            classification values.
+        */
+
+        const reviewStatus =
+            document.getElementById(
+                "reviewStatus"
+            );
+
+        const reviewClearance =
+            document.getElementById(
+                "reviewClearance"
+            );
+
+        const reviewObservation =
+            document.getElementById(
+                "reviewObservation"
+            );
+
+        const reviewThreatLevel =
+            document.getElementById(
+                "reviewThreatLevel"
+            );
+
+
+        if (
+            data.status &&
+            reviewStatus.querySelector(
+                `option[value="${CSS.escape(
+                    data.status
+                )}"]`
+            )
+        ) {
+
+            reviewStatus.value =
+                data.status;
+
+        }
+
+
+        /*
+            Submissions normally do not contain these
+            admin classifications, so these defaults
+            are used for new submissions.
+        */
+
+        if (!reviewClearance.value) {
+
+            reviewClearance.value =
+                "OPERATIVE";
+
+        }
+
+
+        if (!reviewObservation.value) {
+
+            reviewObservation.value =
+                "ONGOING";
+
+        }
+
+
+        if (!reviewThreatLevel.value) {
+
+            reviewThreatLevel.value =
+                "UNKNOWN";
+
+        }
 
 
         confirmation.classList.remove(
@@ -3307,6 +3671,7 @@
 
             confirmationText.innerHTML =
                 "&gt; CONFIRM APPROVAL OF THIS PERSONNEL RECORD?<br>" +
+                "&gt; THE SELECTED CIGA CLASSIFICATION WILL BE APPLIED.<br>" +
                 "&gt; A NEW FILE WILL BE CREATED IN THE PERSONNEL DATABASE.";
 
         }
@@ -3441,6 +3806,66 @@
 
         try {
 
+            /*
+                Read the administrator's
+                classification choices.
+            */
+
+            const reviewStatus =
+                document.getElementById(
+                    "reviewStatus"
+                );
+
+            const reviewClearance =
+                document.getElementById(
+                    "reviewClearance"
+                );
+
+            const reviewObservation =
+                document.getElementById(
+                    "reviewObservation"
+                );
+
+            const reviewThreatLevel =
+                document.getElementById(
+                    "reviewThreatLevel"
+                );
+
+
+            if (
+                !reviewStatus ||
+                !reviewClearance ||
+                !reviewObservation ||
+                !reviewThreatLevel
+            ) {
+
+                throw new Error(
+                    "CLASSIFICATION_FIELDS_MISSING"
+                );
+
+            }
+
+
+            const selectedStatus =
+                reviewStatus.value;
+
+
+            const selectedClearance =
+                reviewClearance.value;
+
+
+            const selectedObservation =
+                reviewObservation.value;
+
+
+            const selectedThreatLevel =
+                reviewThreatLevel.value;
+
+
+            /*
+                Find next personnel file number.
+            */
+
             const {
                 data: existingPersonnel,
                 error: personnelQueryError
@@ -3500,6 +3925,11 @@
                 );
 
 
+            /*
+                Create personnel record using
+                administrator-selected values.
+            */
+
             const personnelRecord = {
 
                 file_number:
@@ -3512,17 +3942,16 @@
                     currentSubmission.alias,
 
                 status:
-                    currentSubmission.status ||
-                    "ACTIVE",
+                    selectedStatus,
 
                 clearance:
-                    "OPERATIVE",
+                    selectedClearance,
 
                 observation:
-                    "ONGOING",
+                    selectedObservation,
 
                 threat_level:
-                    "UNASSESSED",
+                    selectedThreatLevel,
 
                 description:
                     currentSubmission.description,
@@ -3585,6 +4014,10 @@
             }
 
 
+            /*
+                Mark submission as approved.
+            */
+
             const {
                 error:
                 updateSubmissionError
@@ -3620,6 +4053,18 @@
             showReviewResult(
                 `> RECORD APPROVED.<br>` +
                 `> FILE_${nextFileNumber} CREATED.<br>` +
+                `> STATUS: ${escapeHTML(
+                    selectedStatus
+                )}.<br>` +
+                `> CLEARANCE: ${escapeHTML(
+                    selectedClearance
+                )}.<br>` +
+                `> OBSERVATION: ${escapeHTML(
+                    selectedObservation
+                )}.<br>` +
+                `> THREAT LEVEL: ${escapeHTML(
+                    selectedThreatLevel
+                )}.<br>` +
                 `> PERSONNEL DATABASE UPDATED.`
             );
 
@@ -3645,9 +4090,25 @@
             );
 
 
-            showReviewResult(
+            let message =
                 "> APPROVAL FAILED.<br>" +
-                "> PERSONNEL RECORD WAS NOT CONFIRMED."
+                "> PERSONNEL RECORD WAS NOT CONFIRMED.";
+
+
+            if (
+                error.message ===
+                "CLASSIFICATION_FIELDS_MISSING"
+            ) {
+
+                message =
+                    "> APPROVAL FAILED.<br>" +
+                    "> CLASSIFICATION DATA COULD NOT BE READ.";
+
+            }
+
+
+            showReviewResult(
+                message
             );
 
         }
