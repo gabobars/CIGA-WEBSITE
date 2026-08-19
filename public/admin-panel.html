@@ -20,6 +20,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- CIGA LORE LINK SYSTEM -->
+    <script src="ciga-links.js"></script>
+
 
     <style>
 
@@ -85,8 +88,6 @@
 
 
         .title:hover {
-            text-decoration: none;
-
             text-shadow:
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.35);
@@ -903,6 +904,77 @@
 
 
         /* =========================
+           CIGA LINK HELP
+        ========================= */
+
+        .ciga-link-help {
+            margin-top: 10px;
+
+            padding:
+                12px 14px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.32);
+
+            background:
+                rgba(255,255,255,0.018);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.48;
+        }
+
+
+        .ciga-link-help strong {
+            color: #fff;
+
+            opacity: 0.95;
+        }
+
+
+        .ciga-link-example {
+            margin-top: 5px;
+
+            font-size: 9px;
+
+            letter-spacing: 0.6px;
+
+            opacity: 0.75;
+        }
+
+
+        .ciga-link-note {
+            margin-top: 4px;
+
+            font-size: 8px;
+
+            line-height: 1.7;
+
+            opacity: 0.62;
+        }
+
+
+        /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-underline-offset:
+                3px;
+        }
+
+
+        /* =========================
            PERSONNEL EDITOR
         ========================= */
 
@@ -982,6 +1054,20 @@
             resize: vertical;
 
             line-height: 1.8;
+        }
+
+
+        .personnel-editor-input:focus,
+        .personnel-editor-select:focus,
+        .personnel-editor-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
+        .personnel-editor-select option {
+            background: #000;
+            color: #fff;
         }
 
 
@@ -2561,9 +2647,7 @@
                 </div>
 
 
-                <!-- =========================
-                     HISTORY
-                ========================= -->
+                <!-- HISTORY -->
 
                 <div
                     class="personnel-editor-field personnel-editor-full"
@@ -2591,6 +2675,39 @@
                         >
                             + ADD HISTORY ENTRY
                         </button>
+
+                    </div>
+
+
+                    <div class="ciga-link-help">
+
+                        &gt; CIGA LORE LINK SYNTAX
+
+                        <br>
+
+                        CLICKABLE LINKS:
+
+                        <strong>
+                            [[TEXT|DESTINATION]]
+                        </strong>
+
+                        <div class="ciga-link-example">
+
+                            EXAMPLE:
+                            [[ANOMALOUS|anomalous.html]]
+
+                        </div>
+
+                        <div class="ciga-link-note">
+
+                            &gt; LINKS ARE RENDERED WHEN THE
+                            PERSONNEL FILE IS DISPLAYED.
+
+                            <br>
+
+                            &gt; DO NOT PASTE HTML INTO THIS FIELD.
+
+                        </div>
 
                     </div>
 
@@ -2864,6 +2981,28 @@
                             placeholder="Brief description of the incident..."
                         ></textarea>
 
+
+                        <div class="ciga-link-help">
+
+                            &gt; CIGA LORE LINK SYNTAX
+
+                            <br>
+
+                            TO CREATE A CLICKABLE LINK USE:
+
+                            <strong>
+                                [[TEXT|DESTINATION]]
+                            </strong>
+
+                            <div class="ciga-link-example">
+
+                                EXAMPLE:
+                                [[ANOMALOUS|anomalous.html]]
+
+                            </div>
+
+                        </div>
+
                     </div>
 
 
@@ -2885,6 +3024,28 @@
                             placeholder="Write the complete archive report here..."
                         ></textarea>
 
+
+                        <div class="ciga-link-help">
+
+                            &gt; CIGA LORE LINK SYNTAX
+
+                            <br>
+
+                            TO CREATE A CLICKABLE LINK USE:
+
+                            <strong>
+                                [[TEXT|DESTINATION]]
+                            </strong>
+
+                            <div class="ciga-link-example">
+
+                                EXAMPLE:
+                                [[ANOMALOUS|anomalous.html]]
+
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -2896,7 +3057,9 @@
                 >
 
                     <div class="subject-preview-title">
+
                         // SELECTED PERSONNEL FILE
+
                     </div>
 
 
@@ -3277,6 +3440,28 @@
                             placeholder="Write the complete internal communication here..."
                             required
                         ></textarea>
+
+
+                        <div class="ciga-link-help">
+
+                            &gt; CIGA LORE LINK SYNTAX
+
+                            <br>
+
+                            TO CREATE A CLICKABLE LINK USE:
+
+                            <strong>
+                                [[TEXT|DESTINATION]]
+                            </strong>
+
+                            <div class="ciga-link-example">
+
+                                EXAMPLE:
+                                [[ANOMALOUS|anomalous.html]]
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -4013,8 +4198,10 @@
             terminalStatus.textContent =
                 "> NO ACTIVE SESSION.";
 
+
             deniedMessage.style.display =
                 "block";
+
 
             return;
 
@@ -4693,6 +4880,19 @@
 
                 </div>
 
+
+                <div class="classification-note">
+
+                    &gt; CLASSIFICATION VALUES ARE APPLIED
+                    WHEN THE RECORD IS APPROVED.
+
+                    <br>
+
+                    &gt; STATUS, CLEARANCE, OBSERVATION AND
+                    THREAT LEVEL ARE ADMINISTRATIVE DATA.
+
+                </div>
+
             </div>
 
 
@@ -4896,8 +5096,11 @@
 
 
         reviewPanel.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            behavior:
+                "smooth",
+
+            block:
+                "start"
         });
 
 
@@ -4955,8 +5158,11 @@
 
 
         confirmation.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
+            behavior:
+                "smooth",
+
+            block:
+                "center"
         });
 
     }
@@ -5554,12 +5760,14 @@
         ) {
 
             return value
+
                 .map(
                     entry =>
                         String(
                             entry
                         ).trim()
                 )
+
                 .filter(
                     entry =>
                         entry !== ""
@@ -5602,12 +5810,14 @@
                 ) {
 
                     return parsed
+
                         .map(
                             entry =>
                                 String(
                                     entry
                                 ).trim()
                         )
+
                         .filter(
                             entry =>
                                 entry !== ""
@@ -5857,6 +6067,7 @@
                 empty.textContent =
                     "> NO HISTORY ENTRIES.";
 
+
                 historyList.appendChild(
                     empty
                 );
@@ -5891,10 +6102,12 @@
                 ".history-entry-text"
             )
         )
+
             .map(
                 textarea =>
                     textarea.value.trim()
             )
+
             .filter(
                 entry =>
                     entry !== ""
@@ -5985,7 +6198,8 @@
                 .order(
                     "file_number",
                     {
-                        ascending: true
+                        ascending:
+                            true
                     }
                 );
 
@@ -6532,18 +6746,13 @@
                     editDescription.value.trim() ||
                     null,
 
-                /*
-                    IMPORTANT:
-                    Store history as a real JSON array
-                    so the file page can render every
-                    entry independently.
-                */
-
                 notes:
                     historyEntries.length > 0
+
                         ? JSON.stringify(
                             historyEntries
                         )
+
                         : null,
 
                 primary_activity:
@@ -7164,6 +7373,7 @@
 
             archiveForm.reset();
 
+
             resetSubjectPreview();
 
 
@@ -7248,9 +7458,7 @@
         } =
             await db
 
-                .from(
-                    "archives"
-                )
+                .from("archives")
 
                 .select(`
                     id,
@@ -7272,7 +7480,8 @@
                 .order(
                     "id",
                     {
-                        ascending: false
+                        ascending:
+                            false
                     }
                 );
 
@@ -7758,7 +7967,8 @@
                 .order(
                     "id",
                     {
-                        ascending: false
+                        ascending:
+                            false
                     }
                 );
 
