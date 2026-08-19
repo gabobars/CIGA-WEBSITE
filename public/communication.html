@@ -44,10 +44,6 @@
         }
 
 
-        /* =========================
-           PAGE
-        ========================= */
-
         .page {
             width: 100%;
             min-height: 100vh;
@@ -99,9 +95,11 @@
 
 
         .title-link:hover {
+
             text-shadow:
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.35);
+
         }
 
 
@@ -508,6 +506,8 @@
             text-underline-offset:
                 3px;
 
+            cursor: pointer;
+
             transition:
                 opacity 0.2s ease,
                 text-shadow 0.2s ease;
@@ -849,9 +849,7 @@
     >
 
 
-        <!-- =========================
-             TRANSMISSION HEADER
-        ========================= -->
+        <!-- TRANSMISSION HEADER -->
 
         <section class="transmission-header">
 
@@ -921,9 +919,7 @@
         </section>
 
 
-        <!-- =========================
-             METADATA
-        ========================= -->
+        <!-- METADATA -->
 
         <section class="panel">
 
@@ -934,11 +930,9 @@
 
             <div class="metadata">
 
-
                 <div class="metadata-label">
                     MESSAGE ID
                 </div>
-
 
                 <div
                     class="metadata-value"
@@ -952,7 +946,6 @@
                     ORIGIN
                 </div>
 
-
                 <div
                     class="metadata-value"
                     id="metadataSender"
@@ -964,7 +957,6 @@
                 <div class="metadata-label">
                     DESTINATION
                 </div>
-
 
                 <div
                     class="metadata-value"
@@ -978,7 +970,6 @@
                     CLASSIFICATION
                 </div>
 
-
                 <div
                     class="metadata-value"
                     id="metadataClassification"
@@ -991,7 +982,6 @@
                     STATUS
                 </div>
 
-
                 <div
                     class="metadata-value"
                     id="metadataStatus"
@@ -1003,7 +993,6 @@
                 <div class="metadata-label">
                     TRANSMISSION TIME
                 </div>
-
 
                 <div
                     class="metadata-value"
@@ -1029,9 +1018,7 @@
         </section>
 
 
-        <!-- =========================
-             MESSAGE
-        ========================= -->
+        <!-- MESSAGE -->
 
         <section class="panel">
 
@@ -1068,9 +1055,7 @@
         </section>
 
 
-        <!-- =========================
-             BACK
-        ========================= -->
+        <!-- BACK -->
 
         <a
             href="communications-log.html"
@@ -1083,9 +1068,7 @@
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer class="footer">
 
@@ -1311,8 +1294,9 @@
 
 
     /* ==========================================
-       CIGA LORE TEXT PARSER
-       FORMAT:
+       RENDER CIGA LORE TEXT
+       
+       Supported format:
 
        [[VISIBLE TEXT|https://example.com]]
     ========================================== */
@@ -1321,13 +1305,17 @@
         value
     ) {
 
+        const fragment =
+            document.createDocumentFragment();
+
+
         if (
             value === null ||
             value === undefined ||
             value === ""
         ) {
 
-            return "";
+            return fragment;
 
         }
 
@@ -1338,81 +1326,143 @@
             );
 
 
-        /*
-            First escape everything so that
-            user/database content cannot inject HTML.
-        */
-
-        const escaped =
-            escapeHTML(
-                text
-            );
+        const linkPattern =
+            /\[\[([^\]|]+)\|([^\]]+)\]\]/g;
 
 
-        /*
-            Then convert only our special
-            CIGA link syntax into real links.
-        */
-
-        return escaped
-
-            .replace(
-                /\[\[([^\]|]+)\|([^\]]+)\]\]/g,
-
-                (
-                    match,
-                    label,
-                    url
-                ) => {
-
-                    const safeLabel =
-                        label.trim();
+        let lastIndex =
+            0;
 
 
-                    const safeUrl =
-                        url.trim();
+        let match;
 
 
-                    /*
-                        Only allow normal HTTP/HTTPS
-                        destinations.
-                    */
+        while (
+            (
+                match =
+                    linkPattern.exec(
+                        text
+                    )
+            ) !== null
+        ) {
 
-                    if (
-                        !/^https?:\/\//i.test(
-                            safeUrl
+
+            /* =========================
+               NORMAL TEXT BEFORE LINK
+            ========================= */
+
+            if (
+                match.index >
+                lastIndex
+            ) {
+
+                fragment.appendChild(
+                    document.createTextNode(
+                        text.slice(
+                            lastIndex,
+                            match.index
                         )
-                    ) {
+                    )
+                );
 
-                        return escapeHTML(
-                            safeLabel
-                        );
-
-                    }
+            }
 
 
-                    return `
+            /* =========================
+               LINK DATA
+            ========================= */
 
-                        <a
-                            href="${escapeHTML(
-                                safeUrl
-                            )}"
-                            class="ciga-lore-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >${escapeHTML(
-                            safeLabel
-                        )}</a>
+            const label =
+                match[1].trim();
 
-                    `;
 
-                }
-            )
+            const url =
+                match[2].trim();
 
-            .replace(
-                /\r?\n/g,
-                "<br>"
+
+            /* =========================
+               VALID URL
+            ========================= */
+
+            if (
+                /^https?:\/\//i.test(
+                    url
+                )
+            ) {
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.className =
+                    "ciga-lore-link";
+
+
+                link.href =
+                    url;
+
+
+                link.target =
+                    "_blank";
+
+
+                link.rel =
+                    "noopener noreferrer";
+
+
+                link.textContent =
+                    label;
+
+
+                fragment.appendChild(
+                    link
+                );
+
+            } else {
+
+                /*
+                    Invalid URL:
+                    display only the visible label.
+                */
+
+                fragment.appendChild(
+                    document.createTextNode(
+                        label
+                    )
+                );
+
+            }
+
+
+            lastIndex =
+                linkPattern.lastIndex;
+
+        }
+
+
+        /* =========================
+           REMAINING TEXT
+        ========================= */
+
+        if (
+            lastIndex <
+            text.length
+        ) {
+
+            fragment.appendChild(
+                document.createTextNode(
+                    text.slice(
+                        lastIndex
+                    )
+                )
             );
+
+        }
+
+
+        return fragment;
 
     }
 
@@ -1488,10 +1538,8 @@
         message
     ) {
 
-        errorText.innerHTML =
-            `&gt; ${escapeHTML(
-                message
-            )}`;
+        errorText.textContent =
+            `> ${message}`;
 
 
         errorMessage.style.display =
@@ -1687,19 +1735,22 @@
         ========================= */
 
         /*
-            IMPORTANT:
-            Use innerHTML with our SAFE parser.
+            Do NOT use innerHTML here.
 
-            Do NOT use textContent here,
-            otherwise the generated link HTML
-            would appear literally on screen.
+            The parser creates the <a> elements
+            directly in the DOM.
         */
 
         messageBody.innerHTML =
+            "";
+
+
+        messageBody.appendChild(
             renderCigaLoreText(
                 data.content ||
                 "NO MESSAGE CONTENT AVAILABLE."
-            );
+            )
+        );
 
 
         /* =========================
