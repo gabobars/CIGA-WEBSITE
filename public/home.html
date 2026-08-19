@@ -46,6 +46,220 @@
 
 
         /* =========================
+           AUDIO
+        ========================= */
+
+        .audio-channel {
+            position: fixed;
+
+            right: 25px;
+            bottom: 22px;
+
+            z-index: 200;
+
+            width: 245px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.92
+                );
+
+            backdrop-filter:
+                blur(6px);
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .audio-channel-header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 10px;
+
+            opacity: 0.55;
+        }
+
+
+        .audio-channel-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+
+        .audio-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            opacity: 0.35;
+        }
+
+
+        .audio-dot.active {
+            opacity: 1;
+
+            box-shadow:
+                0 0 7px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+        }
+
+
+        .audio-controls {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr
+                auto;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .audio-button {
+            padding:
+                7px 9px;
+
+            background:
+                #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            font-family: inherit;
+
+            font-size: 8px;
+
+            letter-spacing: 1.3px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .audio-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.60
+                );
+        }
+
+
+        .audio-volume {
+            width: 100%;
+
+            height: 3px;
+
+            appearance: none;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        .audio-volume::-webkit-slider-thumb {
+            appearance: none;
+
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            cursor: pointer;
+        }
+
+
+        .audio-volume::-moz-range-thumb {
+            width: 9px;
+            height: 9px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            cursor: pointer;
+        }
+
+
+        .audio-value {
+            min-width: 28px;
+
+            text-align: right;
+
+            opacity: 0.45;
+        }
+
+
+        /* =========================
            WELCOME SCREEN
         ========================= */
 
@@ -1673,6 +1887,14 @@
                 gap: 12px;
             }
 
+
+            .audio-channel {
+                right: 15px;
+                bottom: 15px;
+
+                width: 220px;
+            }
+
         }
 
     </style>
@@ -1681,6 +1903,18 @@
 
 
 <body>
+
+
+    <!-- =========================
+         AUDIO
+    ========================= -->
+
+    <audio
+        id="cigaEnvironmentAudio"
+        src="ciga-environment.mp3"
+        loop
+        preload="auto"
+    ></audio>
 
 
     <!-- =========================
@@ -2457,6 +2691,349 @@
             document.getElementById(
                 "operatorId"
             );
+
+
+        /* =========================
+           AUDIO
+        ========================= */
+
+        const cigaAudio =
+            document.getElementById(
+                "cigaEnvironmentAudio"
+            );
+
+
+        const CIGA_AUDIO_VOLUME_KEY =
+            "ciga_audio_volume";
+
+
+        const CIGA_AUDIO_MUTED_KEY =
+            "ciga_audio_muted";
+
+
+        let savedVolume =
+            parseFloat(
+                localStorage.getItem(
+                    CIGA_AUDIO_VOLUME_KEY
+                )
+            );
+
+
+        if (
+            Number.isNaN(
+                savedVolume
+            )
+        ) {
+
+            savedVolume =
+                0.25;
+
+        }
+
+
+        let savedMuted =
+            localStorage.getItem(
+                CIGA_AUDIO_MUTED_KEY
+            );
+
+
+        savedMuted =
+            savedMuted === null
+                ? true
+                : savedMuted === "true";
+
+
+        cigaAudio.volume =
+            savedVolume;
+
+
+        cigaAudio.muted =
+            savedMuted;
+
+
+        /* =========================
+           CREATE AUDIO UI
+        ========================= */
+
+        const audioChannel =
+            document.createElement(
+                "div"
+            );
+
+
+        audioChannel.className =
+            "audio-channel";
+
+
+        audioChannel.innerHTML = `
+
+            <div class="audio-channel-header">
+
+                <span>
+                    // AUDIO CHANNEL
+                </span>
+
+
+                <span class="audio-channel-status">
+
+                    <span
+                        class="audio-dot"
+                        id="audioDot"
+                    ></span>
+
+                    <span id="audioStatus">
+                        MUTED
+                    </span>
+
+                </span>
+
+            </div>
+
+
+            <div class="audio-controls">
+
+                <button
+                    type="button"
+                    class="audio-button"
+                    id="audioMuteButton"
+                >
+                    UNMUTE
+                </button>
+
+
+                <input
+                    type="range"
+                    class="audio-volume"
+                    id="audioVolume"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="${savedVolume}"
+                    aria-label="Audio volume"
+                >
+
+
+                <span
+                    class="audio-value"
+                    id="audioValue"
+                >
+                    ${Math.round(
+                        savedVolume * 100
+                    )}%
+                </span>
+
+            </div>
+
+        `;
+
+
+        document.body.appendChild(
+            audioChannel
+        );
+
+
+        const audioMuteButton =
+            document.getElementById(
+                "audioMuteButton"
+            );
+
+
+        const audioVolume =
+            document.getElementById(
+                "audioVolume"
+            );
+
+
+        const audioValue =
+            document.getElementById(
+                "audioValue"
+            );
+
+
+        const audioDot =
+            document.getElementById(
+                "audioDot"
+            );
+
+
+        const audioStatus =
+            document.getElementById(
+                "audioStatus"
+            );
+
+
+        /* =========================
+           AUDIO UI UPDATE
+        ========================= */
+
+        function cigaUpdateAudioUI() {
+
+            const muted =
+                cigaAudio.muted ||
+                cigaAudio.volume === 0;
+
+
+            audioMuteButton.textContent =
+                muted
+                    ? "UNMUTE"
+                    : "MUTE";
+
+
+            audioStatus.textContent =
+                muted
+                    ? "MUTED"
+                    : "ACTIVE";
+
+
+            audioDot.classList.toggle(
+                "active",
+                !muted
+            );
+
+
+            audioValue.textContent =
+                `${Math.round(
+                    cigaAudio.volume * 100
+                )}%`;
+
+        }
+
+
+        /* =========================
+           MUTE
+        ========================= */
+
+        audioMuteButton.addEventListener(
+            "click",
+            async function() {
+
+                cigaAudio.muted =
+                    !cigaAudio.muted;
+
+
+                localStorage.setItem(
+                    CIGA_AUDIO_MUTED_KEY,
+                    String(
+                        cigaAudio.muted
+                    )
+                );
+
+
+                try {
+
+                    await cigaAudio.play();
+
+                } catch (error) {
+
+                    console.warn(
+                        "AUDIO PLAYBACK BLOCKED:",
+                        error
+                    );
+
+                }
+
+
+                cigaUpdateAudioUI();
+
+            }
+        );
+
+
+        /* =========================
+           VOLUME
+        ========================= */
+
+        audioVolume.addEventListener(
+            "input",
+            function() {
+
+                const volume =
+                    parseFloat(
+                        audioVolume.value
+                    );
+
+
+                cigaAudio.volume =
+                    volume;
+
+
+                if (
+                    volume === 0
+                ) {
+
+                    cigaAudio.muted =
+                        true;
+
+
+                    localStorage.setItem(
+                        CIGA_AUDIO_MUTED_KEY,
+                        "true"
+                    );
+
+                }
+
+
+                localStorage.setItem(
+                    CIGA_AUDIO_VOLUME_KEY,
+                    String(
+                        volume
+                    )
+                );
+
+
+                cigaUpdateAudioUI();
+
+            }
+        );
+
+
+        /* =========================
+           START AUDIO
+        ========================= */
+
+        async function cigaStartAudio() {
+
+            try {
+
+                /*
+                    Start muted so browsers can
+                    allow playback without sound.
+                */
+
+                cigaAudio.muted =
+                    true;
+
+
+                await cigaAudio.play();
+
+
+                /*
+                    Restore saved state after
+                    playback has started.
+                */
+
+                cigaAudio.muted =
+                    savedMuted;
+
+
+                cigaUpdateAudioUI();
+
+            } catch (error) {
+
+                console.warn(
+                    "CIGA AUDIO AUTOPLAY BLOCKED:",
+                    error
+                );
+
+
+                cigaUpdateAudioUI();
+
+            }
+
+        }
+
+
+        cigaUpdateAudioUI();
 
 
         /* =========================
@@ -3971,6 +4548,8 @@
 
             cigaLoadLiveStatus();
 
+            cigaStartAudio();
+
         } else {
 
             sessionStorage.setItem(
@@ -4003,6 +4582,8 @@
 
 
                     await cigaLoadLiveStatus();
+
+                    cigaStartAudio();
 
                 },
                 2400
