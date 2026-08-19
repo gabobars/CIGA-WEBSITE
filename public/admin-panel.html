@@ -42,9 +42,6 @@
             --border-normal:
                 rgba(255,255,255,0.26);
 
-            --border-strong:
-                rgba(255,255,255,0.46);
-
             --panel-bg:
                 rgba(255,255,255,0.018);
 
@@ -56,9 +53,7 @@
 
         * {
             box-sizing: border-box;
-
             margin: 0;
-
             padding: 0;
         }
 
@@ -66,9 +61,7 @@
         body {
 
             background: #000;
-
             color: #fff;
-
             min-height: 100vh;
 
             font-family:
@@ -288,16 +281,12 @@
         ========================================== */
 
         .dashboard {
-
             display: none;
-
         }
 
 
         .dashboard.visible {
-
             display: block;
-
         }
 
 
@@ -310,10 +299,7 @@
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    3,
-                    1fr
-                );
+                repeat(3,1fr);
 
             gap: 16px;
 
@@ -365,7 +351,7 @@
 
 
         /* ==========================================
-           PANEL
+           PANELS
         ========================================== */
 
         .panel {
@@ -392,8 +378,7 @@
 
             align-items: center;
 
-            justify-content:
-                space-between;
+            justify-content: space-between;
 
             gap: 18px;
 
@@ -474,7 +459,7 @@
 
 
         /* ==========================================
-           HELP / CIGA LINKS
+           CIGA LINK HELP
         ========================================== */
 
         .ciga-link-help {
@@ -579,7 +564,7 @@
 
 
         /* ==========================================
-           GENERAL BUTTONS
+           BUTTONS
         ========================================== */
 
         button {
@@ -605,7 +590,8 @@
             font-family:
                 inherit;
 
-            font-size: 10px;
+            font-size:
+                10px;
 
             letter-spacing:
                 1.5px;
@@ -654,11 +640,14 @@
 
         .actions {
 
-            display: flex;
+            display:
+                flex;
 
-            gap: 10px;
+            gap:
+                10px;
 
-            margin-top: 16px;
+            margin-top:
+                16px;
 
         }
 
@@ -677,17 +666,21 @@
 
         .submission {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 1fr
                 auto;
 
-            gap: 22px;
+            gap:
+                22px;
 
-            padding: 19px;
+            padding:
+                19px;
 
-            margin-bottom: 11px;
+            margin-bottom:
+                11px;
 
             border:
                 1px solid
@@ -731,7 +724,8 @@
 
         .submission-id {
 
-            font-size: 10px;
+            font-size:
+                10px;
 
             letter-spacing:
                 2px;
@@ -739,14 +733,16 @@
             color:
                 var(--text-faint);
 
-            margin-bottom: 9px;
+            margin-bottom:
+                9px;
 
         }
 
 
         .submission-name {
 
-            font-size: 16px;
+            font-size:
+                16px;
 
             letter-spacing:
                 2px;
@@ -754,14 +750,16 @@
             color:
                 var(--text-main);
 
-            margin-bottom: 11px;
+            margin-bottom:
+                11px;
 
         }
 
 
         .submission-meta {
 
-            font-size: 10px;
+            font-size:
+                10px;
 
             line-height:
                 1.95;
@@ -777,12 +775,14 @@
 
         .submission-status {
 
-            display: flex;
+            display:
+                flex;
 
             align-items:
                 center;
 
-            font-size: 10px;
+            font-size:
+                10px;
 
             letter-spacing:
                 2px;
@@ -798,11 +798,14 @@
 
         .submission-status::before {
 
-            content: "";
+            content:
+                "";
 
-            width: 6px;
+            width:
+                6px;
 
-            height: 6px;
+            height:
+                6px;
 
             margin-right:
                 9px;
@@ -821,39 +824,40 @@
         ========================================== */
 
         .review-panel {
-
             display: none;
-
         }
 
 
         .review-panel.visible {
-
             display: block;
-
         }
 
 
         .review-top {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 200px
                 1fr;
 
-            gap: 30px;
+            gap:
+                30px;
 
-            margin-bottom: 26px;
+            margin-bottom:
+                26px;
 
         }
 
 
         .review-photo {
 
-            width: 170px;
+            width:
+                170px;
 
-            height: 210px;
+            height:
+                210px;
 
             object-fit:
                 cover;
@@ -880,11 +884,14 @@
 
         .review-photo-unavailable {
 
-            width: 170px;
+            width:
+                170px;
 
-            height: 210px;
+            height:
+                210px;
 
-            display: flex;
+            display:
+                flex;
 
             align-items:
                 center;
@@ -921,7 +928,8 @@
 
         .review-subject {
 
-            display: flex;
+            display:
+                flex;
 
             flex-direction:
                 column;
@@ -934,7 +942,8 @@
 
         .review-subject-label {
 
-            font-size: 9px;
+            font-size:
+                9px;
 
             letter-spacing:
                 2px;
@@ -984,7 +993,8 @@
 
         .review-data {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 180px
@@ -1028,12 +1038,56 @@
 
 
         /* ==========================================
+           ALL SELECTS - DARK
+        ========================================== */
+
+        select {
+
+            color-scheme:
+                dark;
+
+        }
+
+
+        .personnel-editor-select,
+        .archive-select,
+        .communication-select,
+        .classification-select {
+
+            color:
+                #fff;
+
+            background:
+                #000;
+
+            color-scheme:
+                dark;
+
+        }
+
+
+        .personnel-editor-select option,
+        .archive-select option,
+        .communication-select option,
+        .classification-select option {
+
+            background:
+                #000;
+
+            color:
+                #fff;
+
+        }
+
+
+        /* ==========================================
            CLASSIFICATION
         ========================================== */
 
         .classification-grid {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 1fr
@@ -1047,7 +1101,8 @@
 
         .classification-field {
 
-            display: flex;
+            display:
+                flex;
 
             flex-direction:
                 column;
@@ -1116,24 +1171,14 @@
         }
 
 
-        .classification-select option {
-
-            background:
-                #000;
-
-            color:
-                #fff;
-
-        }
-
-
         /* ==========================================
            SOCIALS
         ========================================== */
 
         .social-grid {
 
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 1fr
@@ -1240,10 +1285,7 @@
 
 
         .confirmation.visible {
-
-            display:
-                block;
-
+            display: block;
         }
 
 
@@ -1335,10 +1377,7 @@
 
 
         .result.visible {
-
-            display:
-                block;
-
+            display: block;
         }
 
 
@@ -1871,10 +1910,7 @@
 
 
         .personnel-editor-result.visible {
-
-            display:
-                block;
-
+            display: block;
         }
 
 
@@ -1980,10 +2016,7 @@
 
 
         .editor-select-wrap.visible {
-
-            display:
-                block;
-
+            display: block;
         }
 
 
@@ -2008,7 +2041,7 @@
 
 
         /* ==========================================
-           ARCHIVE PREVIEW
+           SUBJECT PREVIEW
         ========================================== */
 
         .subject-preview {
@@ -2633,9 +2666,7 @@
 <div class="page">
 
 
-    <!-- ==========================================
-         HEADER
-    ========================================== -->
+    <!-- HEADER -->
 
     <header class="header">
 
@@ -2667,9 +2698,7 @@
     </header>
 
 
-    <!-- ==========================================
-         TERMINAL
-    ========================================== -->
+    <!-- TERMINAL -->
 
     <section class="terminal">
 
@@ -2692,9 +2721,7 @@
     </section>
 
 
-    <!-- ==========================================
-         ACCESS DENIED
-    ========================================== -->
+    <!-- ACCESS DENIED -->
 
     <section
         class="message"
@@ -2716,9 +2743,7 @@
     </section>
 
 
-    <!-- ==========================================
-         DASHBOARD
-    ========================================== -->
+    <!-- DASHBOARD -->
 
     <main
         class="dashboard"
@@ -2726,9 +2751,7 @@
     >
 
 
-        <!-- ======================================
-             STATS
-        ======================================= -->
+        <!-- STATS -->
 
         <section class="stats">
 
@@ -2776,9 +2799,7 @@
         </section>
 
 
-        <!-- ======================================
-             PENDING SUBMISSIONS
-        ======================================= -->
+        <!-- PENDING SUBMISSIONS -->
 
         <section class="panel">
 
@@ -2798,9 +2819,7 @@
         </section>
 
 
-        <!-- ======================================
-             REVIEW
-        ======================================= -->
+        <!-- REVIEW -->
 
         <section
             class="panel review-panel"
@@ -2882,9 +2901,7 @@
         </section>
 
 
-        <!-- ======================================
-             PERSONNEL FILE EDITOR
-        ======================================= -->
+        <!-- PERSONNEL FILE EDITOR -->
 
         <section class="panel">
 
@@ -2894,7 +2911,6 @@
 
 
             <div class="personnel-editor-grid">
-
 
                 <div
                     class="personnel-editor-field personnel-editor-full"
@@ -2928,7 +2944,6 @@
                         FILE NUMBER
                     </label>
 
-
                     <input
                         type="text"
                         id="editFileNumber"
@@ -2945,7 +2960,6 @@
                         DISPLAY NAME
                     </label>
 
-
                     <input
                         type="text"
                         id="editName"
@@ -2960,7 +2974,6 @@
                     <label class="personnel-editor-label">
                         ALIAS
                     </label>
-
 
                     <input
                         type="text"
@@ -2977,7 +2990,6 @@
                         PRIMARY ACTIVITY
                     </label>
 
-
                     <input
                         type="text"
                         id="editPrimaryActivity"
@@ -2992,7 +3004,6 @@
                     <label class="personnel-editor-label">
                         LOCATION
                     </label>
-
 
                     <input
                         type="text"
@@ -3009,7 +3020,6 @@
                         AFFILIATION
                     </label>
 
-
                     <input
                         type="text"
                         id="editAffiliation"
@@ -3025,7 +3035,6 @@
                         ORIGIN
                     </label>
 
-
                     <input
                         type="text"
                         id="editOrigin"
@@ -3040,7 +3049,6 @@
                     <label class="personnel-editor-label">
                         STATUS
                     </label>
-
 
                     <select
                         id="editStatus"
@@ -3086,7 +3094,6 @@
                         CLEARANCE
                     </label>
 
-
                     <select
                         id="editClearance"
                         class="personnel-editor-select"
@@ -3122,7 +3129,6 @@
                     <label class="personnel-editor-label">
                         OBSERVATION
                     </label>
-
 
                     <select
                         id="editObservation"
@@ -3167,7 +3173,6 @@
                     <label class="personnel-editor-label">
                         THREAT LEVEL
                     </label>
-
 
                     <select
                         id="editThreatLevel"
@@ -3278,14 +3283,6 @@
 
                     </div>
 
-
-                    <div class="history-note">
-
-                        &gt; EACH ENTRY IS STORED AS A
-                        SEPARATE HISTORY RECORD.
-
-                    </div>
-
                 </div>
 
 
@@ -3380,9 +3377,7 @@
         </section>
 
 
-        <!-- ======================================
-             ARCHIVE CREATOR / EDITOR
-        ======================================= -->
+        <!-- ARCHIVE CREATOR / EDITOR -->
 
         <section class="panel">
 
@@ -3449,7 +3444,6 @@
                         <label class="archive-label">
                             ARCHIVE NUMBER
                         </label>
-
 
                         <input
                             type="text"
@@ -3767,9 +3761,7 @@
         </section>
 
 
-        <!-- ======================================
-             ARCHIVE DATABASE
-        ======================================= -->
+        <!-- ARCHIVE DATABASE -->
 
         <section class="panel">
 
@@ -3789,9 +3781,7 @@
         </section>
 
 
-        <!-- ======================================
-             COMMUNICATION CREATOR / EDITOR
-        ======================================= -->
+        <!-- TRANSMISSION CREATOR / EDITOR -->
 
         <section class="panel">
 
@@ -4095,9 +4085,7 @@
         </section>
 
 
-        <!-- ======================================
-             COMMUNICATION DATABASE
-        ======================================= -->
+        <!-- COMMUNICATION DATABASE -->
 
         <section class="panel">
 
@@ -4130,9 +4118,7 @@
     </main>
 
 
-    <!-- ==========================================
-         FOOTER
-    ========================================== -->
+    <!-- FOOTER -->
 
     <footer class="footer">
 
@@ -4146,7 +4132,6 @@
         </span>
 
     </footer>
-
 
 </div>
 
@@ -4522,7 +4507,7 @@
 
 
     /* ==========================================
-       PREVIEW ELEMENTS
+       PREVIEW
     ========================================== */
 
     const previewStatus =
@@ -4712,7 +4697,7 @@
 
 
     /* ==========================================
-       HTML ESCAPE
+       ESCAPE
     ========================================== */
 
     function escapeHTML(
@@ -4816,9 +4801,7 @@
 
 
                             if (!panel) {
-
                                 return;
-
                             }
 
 
@@ -4888,18 +4871,25 @@
             error
         } =
             await db
-                .from("admins")
+
+                .from(
+                    "admins"
+                )
+
                 .select(
                     "user_id, role"
                 )
+
                 .eq(
                     "user_id",
                     user.id
                 )
+
                 .eq(
                     "role",
                     "ADMIN"
                 )
+
                 .maybeSingle();
 
 
@@ -5236,8 +5226,7 @@
 
                     <div class="review-photo-unavailable">
 
-                        IMAGE
-                        <br>
+                        IMAGE<br>
                         UNAVAILABLE
 
                     </div>
@@ -5384,13 +5373,33 @@
                             class="classification-select"
                         >
 
-                            <option>ACTIVE</option>
-                            <option>INACTIVE</option>
-                            <option>MISSING</option>
-                            <option>DECEASED</option>
-                            <option>MONITORING</option>
-                            <option>CLASSIFIED</option>
-                            <option>UNKNOWN</option>
+                            <option value="ACTIVE">
+                                ACTIVE
+                            </option>
+
+                            <option value="INACTIVE">
+                                INACTIVE
+                            </option>
+
+                            <option value="MISSING">
+                                MISSING
+                            </option>
+
+                            <option value="DECEASED">
+                                DECEASED
+                            </option>
+
+                            <option value="MONITORING">
+                                MONITORING
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
 
                         </select>
 
@@ -5409,11 +5418,25 @@
                             class="classification-select"
                         >
 
-                            <option>OPERATIVE</option>
-                            <option>RESTRICTED</option>
-                            <option>CLASSIFIED</option>
-                            <option>ADMIN</option>
-                            <option>UNKNOWN</option>
+                            <option value="OPERATIVE">
+                                OPERATIVE
+                            </option>
+
+                            <option value="RESTRICTED">
+                                RESTRICTED
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="ADMIN">
+                                ADMIN
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
 
                         </select>
 
@@ -5432,13 +5455,33 @@
                             class="classification-select"
                         >
 
-                            <option>ONGOING</option>
-                            <option>NOT REQUIRED</option>
-                            <option>ELEVATED STATUS</option>
-                            <option>SUSPENDED</option>
-                            <option>TERMINATED</option>
-                            <option>CLASSIFIED</option>
-                            <option>UNKNOWN</option>
+                            <option value="ONGOING">
+                                ONGOING
+                            </option>
+
+                            <option value="NOT REQUIRED">
+                                NOT REQUIRED
+                            </option>
+
+                            <option value="ELEVATED STATUS">
+                                ELEVATED STATUS
+                            </option>
+
+                            <option value="SUSPENDED">
+                                SUSPENDED
+                            </option>
+
+                            <option value="TERMINATED">
+                                TERMINATED
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
 
                         </select>
 
@@ -5457,12 +5500,29 @@
                             class="classification-select"
                         >
 
-                            <option>NONE</option>
-                            <option>NON HOSTILE</option>
-                            <option>HOSTILE BEHAVIOUR</option>
-                            <option>ANOMALOUS</option>
-                            <option>CLASSIFIED</option>
-                            <option>UNKNOWN</option>
+                            <option value="NONE">
+                                NONE
+                            </option>
+
+                            <option value="NON HOSTILE">
+                                NON HOSTILE
+                            </option>
+
+                            <option value="HOSTILE BEHAVIOUR">
+                                HOSTILE BEHAVIOUR
+                            </option>
+
+                            <option value="ANOMALOUS">
+                                ANOMALOUS
+                            </option>
+
+                            <option value="CLASSIFIED">
+                                CLASSIFIED
+                            </option>
+
+                            <option value="UNKNOWN">
+                                UNKNOWN
+                            </option>
 
                         </select>
 
@@ -5656,9 +5716,7 @@
 
         const desired =
             value
-                ? String(
-                    value
-                )
+                ? String(value)
                 : fallback;
 
 
@@ -5939,9 +5997,7 @@
 
 
                     if (
-                        !Number.isNaN(
-                            number
-                        ) &&
+                        !Number.isNaN(number) &&
                         number >
                         highestNumber
                     ) {
@@ -6277,15 +6333,10 @@
         ) {
 
             return value
-
                 .map(
                     entry =>
-                        String(
-                            entry
-                        )
-                        .trim()
+                        String(entry).trim()
                 )
-
                 .filter(
                     Boolean
                 );
@@ -6296,17 +6347,12 @@
         const text =
             String(
                 value
-            )
-            .trim();
+            ).trim();
 
 
         if (
-            text.startsWith(
-                "["
-            ) &&
-            text.endsWith(
-                "]"
-            )
+            text.startsWith("[") &&
+            text.endsWith("]")
         ) {
 
             try {
@@ -6324,15 +6370,10 @@
                 ) {
 
                     return parsed
-
                         .map(
                             entry =>
-                                String(
-                                    entry
-                                )
-                                .trim()
+                                String(entry).trim()
                         )
-
                         .filter(
                             Boolean
                         );
@@ -6446,11 +6487,9 @@
     function refreshHistoryNumbers() {
 
         historyList
-
             .querySelectorAll(
                 ".history-entry"
             )
-
             .forEach(
                 (
                     entry,
@@ -6466,12 +6505,15 @@
                     if (number) {
 
                         number.textContent =
-                            `HISTORY ENTRY ${String(
-                                index + 1
-                            ).padStart(
-                                3,
-                                "0"
-                            )}`;
+
+                            `HISTORY ENTRY ${
+                                String(
+                                    index + 1
+                                ).padStart(
+                                    3,
+                                    "0"
+                                )
+                            }`;
 
                     }
 
@@ -6573,12 +6615,10 @@
                 ".history-entry-text"
             )
         )
-
             .map(
                 textarea =>
                     textarea.value.trim()
             )
-
             .filter(
                 Boolean
             );
@@ -6647,7 +6687,6 @@
             editTiktok,
             editDiscord
         ]
-
             .forEach(
                 input => {
 
@@ -6751,9 +6790,7 @@
             [];
 
 
-        /* =========================
-           ARCHIVE PERSONNEL SELECT
-        ========================= */
+        /* ARCHIVE PERSONNEL SELECT */
 
         archiveSubject.innerHTML = `
 
@@ -6798,9 +6835,7 @@
         );
 
 
-        /* =========================
-           PERSONNEL EDITOR SELECT
-        ========================= */
+        /* PERSONNEL EDITOR SELECT */
 
         const previousEditId =
             editPersonnel.value;
@@ -7271,13 +7306,7 @@
 
             archiveForm.reset();
 
-
-            archiveSubject.value =
-                "";
-
-
             resetSubjectPreview();
-
 
             prepareNextArchiveNumber();
 
@@ -7312,6 +7341,10 @@
         }
     );
 
+
+    /* ==========================================
+       ARCHIVE EDIT LIST
+    ========================================== */
 
     async function populateArchiveEditor() {
 
@@ -7370,9 +7403,7 @@
         editArchiveSelect.innerHTML = `
 
             <option value="">
-
                 SELECT ARCHIVE
-
             </option>
 
         `;
@@ -7388,7 +7419,9 @@
 
 
                 option.value =
-                    archive.id;
+                    String(
+                        archive.id
+                    );
 
 
                 option.textContent =
@@ -7418,157 +7451,150 @@
 
     editArchiveSelect.addEventListener(
         "change",
-        async () => {
+        function() {
 
-            const id =
+            const selectedId =
                 Number(
                     editArchiveSelect.value
                 );
 
 
-            if (!id) {
+            if (!selectedId) {
 
                 return;
 
             }
 
 
-            const {
-                data,
-                error
-            } =
-                await db
-
-                    .from(
-                        "archives"
-                    )
-
-                    .select(
-                        `
-                            id,
-                            archive_number,
-                            title,
-                            personnel_id,
-                            incident_date,
-                            summary,
-                            content,
-                            visible
-                        `
-                    )
-
-                    .eq(
-                        "id",
-                        id
-                    )
-
-                    .maybeSingle();
-
-
-            if (
-                error ||
-                !data
-            ) {
-
-                console.error(
-                    "ARCHIVE EDIT LOAD ERROR:",
-                    error
+            const archive =
+                archiveRecords.find(
+                    record =>
+                        Number(
+                            record.id
+                        ) ===
+                        selectedId
                 );
 
 
+            if (!archive) {
+
+                console.error(
+                    "SELECTED ARCHIVE NOT FOUND:",
+                    selectedId
+                );
+
                 return;
 
             }
 
 
-            /* =========================
-               REAL ARCHIVE NUMBER
-            ========================= */
+            /* REAL ARCHIVE NUMBER */
 
             archiveNumber.value =
-                data.archive_number ||
+                archive.archive_number ||
                 "";
 
 
-            /* =========================
-               REAL CONTENT
-            ========================= */
+            /* REAL ARCHIVE DATA */
 
             archiveTitle.value =
-                data.title ||
+                archive.title ||
                 "";
 
 
             archiveDate.value =
-                data.incident_date ||
+                archive.incident_date ||
                 "";
 
 
             archiveSummary.value =
-                data.summary ||
+                archive.summary ||
                 "";
 
 
             archiveContent.value =
-                data.content ||
+                archive.content ||
                 "";
 
 
             archiveVisible.checked =
                 Boolean(
-                    data.visible
+                    archive.visible
                 );
 
 
-            /* =========================
-               REAL PERSONNEL ASSOCIATION
-            ========================= */
+            /* REAL PERSONNEL ASSOCIATION */
 
             archiveSubject.value =
-                data.personnel_id
+                archive.personnel_id !== null &&
+                archive.personnel_id !== undefined
                     ? String(
-                        data.personnel_id
+                        archive.personnel_id
                     )
                     : "";
 
 
-            if (
-                data.personnel_id
-            ) {
+            /* PREVIEW */
 
-                const exists =
-                    Array.from(
-                        archiveSubject.options
-                    ).some(
-                        option =>
-                            String(
-                                option.value
-                            ) ===
-                            String(
-                                data.personnel_id
-                            )
-                    );
+            const person =
+                personnelRecords.find(
+                    record =>
+                        Number(
+                            record.id
+                        ) ===
+                        Number(
+                            archive.personnel_id
+                        )
+                );
 
 
-                if (!exists) {
+            if (!person) {
 
-                    await loadPersonnel();
+                resetSubjectPreview();
 
-                }
-
-
-                archiveSubject.value =
-                    String(
-                        data.personnel_id
-                    );
+                return;
 
             }
 
 
-            archiveSubject.dispatchEvent(
-                new Event(
-                    "change"
-                )
-            );
+            previewStatus.textContent =
+                person.status ||
+                "UNAVAILABLE";
+
+
+            previewClearance.textContent =
+                person.clearance ||
+                "UNAVAILABLE";
+
+
+            previewThreat.textContent =
+                person.threat_level ||
+                "UNAVAILABLE";
+
+
+            previewLocation.textContent =
+                person.location ||
+                "UNAVAILABLE";
+
+
+            previewAffiliation.textContent =
+                person.affiliation ||
+                "UNAVAILABLE";
+
+
+            previewOrigin.textContent =
+                person.origin ||
+                "UNAVAILABLE";
+
+
+            previewObservation.textContent =
+                person.observation ||
+                "UNAVAILABLE";
+
+
+            previewActivity.textContent =
+                person.primary_activity ||
+                "UNAVAILABLE";
 
         }
     );
@@ -7778,7 +7804,7 @@
 
 
     /* ==========================================
-       ARCHIVE CREATE / EDIT
+       ARCHIVE CREATE / EDIT SAVE
     ========================================== */
 
     archiveForm.addEventListener(
@@ -7850,10 +7876,6 @@
                 };
 
 
-                /* =========================
-                   CREATE
-                ========================= */
-
                 if (
                     archiveMode ===
                     "create"
@@ -7895,18 +7917,12 @@
 
                     archiveForm.reset();
 
-
                     resetSubjectPreview();
-
 
                     await prepareNextArchiveNumber();
 
                 }
 
-
-                /* =========================
-                   EDIT
-                ========================= */
 
                 else {
 
@@ -7969,6 +7985,13 @@
                         String(
                             id
                         );
+
+
+                    editArchiveSelect.dispatchEvent(
+                        new Event(
+                            "change"
+                        )
+                    );
 
                 }
 
@@ -8037,7 +8060,26 @@
                 "edit"
             ) {
 
+                const currentId =
+                    editArchiveSelect.value;
+
+
                 await populateArchiveEditor();
+
+
+                if (currentId) {
+
+                    editArchiveSelect.value =
+                        currentId;
+
+
+                    editArchiveSelect.dispatchEvent(
+                        new Event(
+                            "change"
+                        )
+                    );
+
+                }
 
             }
 
@@ -8386,9 +8428,7 @@
         editCommunicationSelect.innerHTML = `
 
             <option value="">
-
                 SELECT TRANSMISSION
-
             </option>
 
         `;
@@ -8429,7 +8469,7 @@
 
 
     /* ==========================================
-       COMMUNICATION EDIT LOAD
+       COMMUNICATION EDIT
     ========================================== */
 
     editCommunicationSelect.addEventListener(
@@ -8497,18 +8537,10 @@
             }
 
 
-            /* =========================
-               REAL MESSAGE ID
-            ========================= */
-
             communicationMessageId.value =
                 data.message_id ||
                 "";
 
-
-            /* =========================
-               REAL CONTENT
-            ========================= */
 
             communicationSender.value =
                 data.sender ||
@@ -8614,7 +8646,6 @@
                     highestNumber =
                         Math.max(
                             highestNumber,
-
                             parseInt(
                                 match[1],
                                 10
@@ -8719,10 +8750,6 @@
                 };
 
 
-                /* =========================
-                   CREATE
-                ========================= */
-
                 if (
                     communicationMode ===
                     "create"
@@ -8777,10 +8804,6 @@
 
                 }
 
-
-                /* =========================
-                   EDIT
-                ========================= */
 
                 else {
 
@@ -8844,6 +8867,13 @@
                             id
                         );
 
+
+                    editCommunicationSelect.dispatchEvent(
+                        new Event(
+                            "change"
+                        )
+                    );
+
                 }
 
 
@@ -8899,6 +8929,10 @@
         "click",
         async () => {
 
+            const currentId =
+                editCommunicationSelect.value;
+
+
             await prepareNextCommunicationId();
 
             await loadCommunications();
@@ -8910,6 +8944,21 @@
             ) {
 
                 await populateCommunicationEditor();
+
+
+                if (currentId) {
+
+                    editCommunicationSelect.value =
+                        currentId;
+
+
+                    editCommunicationSelect.dispatchEvent(
+                        new Event(
+                            "change"
+                        )
+                    );
+
+                }
 
             }
 
