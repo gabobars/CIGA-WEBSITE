@@ -18,10 +18,9 @@
         href="logo.png"
     >
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- CIGA LORE LINK SYSTEM -->
-    <script src="ciga-links.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
 
     <style>
@@ -56,8 +55,7 @@
             width: 100%;
             min-height: 100vh;
 
-            padding:
-                45px 60px;
+            padding: 45px 60px;
         }
 
 
@@ -108,6 +106,8 @@
 
 
         .title:hover {
+            text-decoration: none;
+
             text-shadow:
                 0 0 6px
                 rgba(
@@ -416,7 +416,8 @@
         .transmission-status {
             display: flex;
 
-            align-items: center;
+            align-items:
+                center;
 
             gap: 10px;
 
@@ -500,6 +501,9 @@
             word-break:
                 break-word;
 
+            overflow-wrap:
+                anywhere;
+
             opacity: 0.90;
         }
 
@@ -509,6 +513,7 @@
         ========================= */
 
         .ciga-lore-link {
+
             color: #fff;
 
             text-decoration:
@@ -522,16 +527,21 @@
                     0.45
                 );
 
+            text-decoration-thickness:
+                1px;
+
             text-underline-offset:
-                3px;
+                4px;
 
             transition:
                 opacity 0.2s ease,
                 text-shadow 0.2s ease;
+
         }
 
 
         .ciga-lore-link:hover {
+
             opacity: 1;
 
             text-shadow:
@@ -541,7 +551,16 @@
                     255,
                     255,
                     0.8
+                ),
+
+                0 0 14px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
                 );
+
         }
 
 
@@ -736,6 +755,7 @@
 
 <body>
 
+
 <div class="page">
 
 
@@ -751,16 +771,12 @@
                 href="home.html"
                 class="title"
             >
-
                 CIGA SYSTEMS
-
             </a>
 
 
             <div class="subtitle">
-
                 COMMUNICATIONS DATABASE // TRANSMISSION
-
             </div>
 
         </div>
@@ -1379,6 +1395,129 @@
 
 
     /* ==========================================
+       CIGA LORE LINK PARSER
+    ========================================== */
+
+    function parseCigaLinks(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        let text =
+            String(
+                value
+            );
+
+
+        /*
+            Escape all existing HTML first.
+
+            This means a normal message cannot
+            inject arbitrary HTML into the page.
+        */
+
+        text =
+            text
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+
+        /*
+            Supported format:
+
+            [[VISIBLE TEXT|https://example.com]]
+
+            The visible text becomes the clickable
+            CIGA lore link.
+        */
+
+        text =
+            text.replace(
+                /\[\[([^\]|]+)\|((?:https?:\/\/)[^\]]+)\]\]/gi,
+                function(
+                    match,
+                    label,
+                    url
+                ) {
+
+                    return `
+                        <a
+                            href="${url}"
+                            class="ciga-lore-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            ${label}
+                        </a>
+                    `;
+
+                }
+            );
+
+
+        /*
+            Preserve line breaks from Supabase.
+        */
+
+        text =
+            text.replace(
+                /\r\n/g,
+                "\n"
+            );
+
+
+        text =
+            text.replace(
+                /\r/g,
+                "\n"
+            );
+
+
+        text =
+            text.replace(
+                /\n/g,
+                "<br>"
+            );
+
+
+        return text;
+
+    }
+
+
+    /* ==========================================
        FORMAT DATE
     ========================================== */
 
@@ -1647,24 +1786,11 @@
            MESSAGE
         ========================= */
 
-        /*
-            Use the shared CIGA renderer.
-
-            Example:
-
-            Subject class is now
-            [[ANOMALOUS|anomalous.html]]
-
-            becomes a normal sentence with
-            ANOMALOUS as a clickable link.
-        */
-
         messageBody.innerHTML =
-            data.content
-                ? cigaRenderLinks(
-                    data.content
-                )
-                : "NO MESSAGE CONTENT AVAILABLE.";
+            parseCigaLinks(
+                data.content ||
+                "NO MESSAGE CONTENT AVAILABLE."
+            );
 
 
         /* =========================
