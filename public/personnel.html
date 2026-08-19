@@ -241,9 +241,17 @@
 
             display: grid;
 
+            /*
+                FIXED LAYOUT:
+
+                1. Main information
+                2. Fixed status column
+                3. Fixed photo column
+            */
+
             grid-template-columns:
-                1fr
-                auto
+                minmax(0, 1fr)
+                190px
                 80px;
 
             gap: 20px;
@@ -256,6 +264,8 @@
                 transform 0.25s ease;
 
             cursor: pointer;
+
+            min-width: 0;
         }
 
 
@@ -298,6 +308,12 @@
             letter-spacing: 2px;
 
             margin-bottom: 12px;
+
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
         }
 
 
@@ -309,17 +325,29 @@
             letter-spacing: 1px;
 
             opacity: 0.63;
+
+            word-break:
+                break-word;
         }
 
 
         .file-status-wrap {
+            width: 190px;
+
             display: flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
-            justify-content: center;
+            justify-content:
+                center;
+
+            align-items:
+                flex-start;
 
             gap: 7px;
+
+            min-width: 0;
         }
 
 
@@ -346,6 +374,8 @@
             width: 6px;
 
             height: 6px;
+
+            flex-shrink: 0;
 
             margin-right: 8px;
 
@@ -579,10 +609,19 @@
 
 
             .file {
+
                 grid-template-columns:
-                    1fr
-                    auto
+                    minmax(0, 1fr)
+                    150px
                     60px;
+
+            }
+
+
+            .file-status-wrap {
+
+                width: 150px;
+
             }
 
 
@@ -598,11 +637,11 @@
 
             .file-photo,
             .file-photo-placeholder {
+
                 width: 55px;
 
                 height: 68px;
 
-                font-size: 8px;
             }
 
 
@@ -631,25 +670,33 @@
         @media (max-width: 500px) {
 
             .file {
+
                 grid-template-columns:
-                    1fr
+                    minmax(0, 1fr)
                     60px;
+
             }
 
 
             .file-status-wrap {
+
+                width: auto;
+
                 grid-column: 1;
 
                 grid-row: 2;
+
             }
 
 
             .file-photo,
             .file-photo-placeholder {
+
                 grid-column: 2;
 
                 grid-row:
                     1 / span 2;
+
             }
 
         }
@@ -1131,6 +1178,8 @@
                         <div class="file">
 
 
+                            <!-- MAIN INFORMATION -->
+
                             <div>
 
 
@@ -1146,11 +1195,9 @@
                                 <div class="file-subject">
 
                                     [
-
                                     ${escapeHTML(
                                         name
                                     )}
-
                                     ]
 
                                 </div>
@@ -1183,6 +1230,8 @@
                             </div>
 
 
+                            <!-- FIXED STATUS COLUMN -->
+
                             <div class="file-status-wrap">
 
                                 <div class="file-status-main">
@@ -1203,6 +1252,8 @@
 
                             </div>
 
+
+                            <!-- PHOTO -->
 
                             ${photoHTML}
 
