@@ -280,6 +280,8 @@
 
             justify-content:
                 center;
+
+            min-width: 0;
         }
 
 
@@ -321,6 +323,9 @@
 
             word-break:
                 break-word;
+
+            overflow-wrap:
+                anywhere;
         }
 
 
@@ -330,6 +335,8 @@
 
         .classification {
             text-align: right;
+
+            min-width: 0;
         }
 
 
@@ -457,6 +464,9 @@
 
             word-break:
                 break-word;
+
+            overflow-wrap:
+                anywhere;
         }
 
 
@@ -541,6 +551,50 @@
 
 
         /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            text-decoration-thickness:
+                1px;
+
+            text-underline-offset:
+                3px;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+        }
+
+
+        .ciga-lore-link:hover {
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+        }
+
+
+        /* =========================
            INCIDENT / HISTORY
         ========================= */
 
@@ -598,6 +652,9 @@
 
             word-break:
                 break-word;
+
+            overflow-wrap:
+                anywhere;
         }
 
 
@@ -810,6 +867,9 @@
             letter-spacing: 0.8px;
 
             opacity: 0.80;
+
+            word-break:
+                break-word;
         }
 
 
@@ -834,11 +894,9 @@
             flex-direction:
                 column;
 
-            align-items:
-                center;
+            align-items: center;
 
-            justify-content:
-                center;
+            justify-content: center;
 
             min-height: 75px;
 
@@ -1408,6 +1466,98 @@
 
 
         /* ==========================================
+           CIGA LINK PARSER
+        ========================================== */
+
+        function renderCigaText(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                value === ""
+            ) {
+
+                return "";
+
+            }
+
+
+            const text =
+                String(
+                    value
+                );
+
+
+            const tokenRegex =
+                /\[\[([^\]\n|]+)\|(https?:\/\/[^\]\s]+)\]\]/gi;
+
+
+            let output = "";
+
+            let lastIndex = 0;
+
+
+            text.replace(
+                tokenRegex,
+                function(
+                    fullMatch,
+                    label,
+                    url,
+                    offset
+                ) {
+
+                    output +=
+                        escapeHTML(
+                            text.slice(
+                                lastIndex,
+                                offset
+                            )
+                        );
+
+
+                    output += `
+
+                        <a
+                            href="${escapeHTML(
+                                url
+                            )}"
+                            class="ciga-lore-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >${escapeHTML(
+                            label
+                        )}</a>
+
+                    `;
+
+
+                    lastIndex =
+                        offset +
+                        fullMatch.length;
+
+                }
+            );
+
+
+            output +=
+                escapeHTML(
+                    text.slice(
+                        lastIndex
+                    )
+                );
+
+
+            return output.replace(
+                /\r?\n/g,
+                "<br>"
+            );
+
+        }
+
+
+        /* ==========================================
            SOCIAL USERNAME
         ========================================== */
 
@@ -1670,6 +1820,30 @@
             }
 
 
+            if (
+                Array.isArray(
+                    notes
+                )
+            ) {
+
+                return notes
+
+                    .map(
+                        entry =>
+                            String(
+                                entry ?? ""
+                            )
+                            .trim()
+                    )
+
+                    .filter(
+                        entry =>
+                            entry.length > 0
+                    );
+
+            }
+
+
             const raw =
                 String(
                     notes
@@ -1696,7 +1870,8 @@
                             entry =>
                                 String(
                                     entry ?? ""
-                                ).trim()
+                                )
+                                .trim()
                         )
 
                         .filter(
@@ -1710,7 +1885,9 @@
                 error
             ) {
 
-                /* Legacy plain-text notes. */
+                /*
+                    Legacy plain-text notes.
+                */
 
             }
 
@@ -1783,11 +1960,8 @@
 
                                             <div class="incident-text">
 
-                                                ${escapeHTML(
+                                                ${renderCigaText(
                                                     entry
-                                                ).replace(
-                                                    /\n/g,
-                                                    "<br>"
                                                 )}
 
                                             </div>
@@ -1820,6 +1994,7 @@
                     "> INVALID FILE REQUEST.<br>" +
                     "> NO FILE IDENTIFIER PROVIDED."
                 );
+
 
                 return;
 
@@ -1866,6 +2041,7 @@
                     "> FILE ACCESS ERROR.<br>" +
                     "> RECORD NOT FOUND OR ACCESS DENIED."
                 );
+
 
                 return;
 
@@ -2462,11 +2638,8 @@
 
                             <div class="description">
 
-                                ${escapeHTML(
+                                ${renderCigaText(
                                     description
-                                ).replace(
-                                    /\n/g,
-                                    "<br>"
                                 )}
 
                             </div>
