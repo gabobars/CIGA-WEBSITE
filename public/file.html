@@ -780,6 +780,30 @@
         }
 
 
+        .connection.unavailable {
+            cursor: default;
+
+            opacity: 0.55;
+        }
+
+
+        .connection.unavailable:hover {
+            background:
+                transparent;
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            transform:
+                none;
+        }
+
+
         .connection-name {
             font-size: 12px;
 
@@ -1233,7 +1257,7 @@
                 url === "#"
             ) {
 
-                return "UNAVAILABLE";
+                return "NO PUBLIC RECORD";
 
             }
 
@@ -1255,7 +1279,7 @@
 
                 if (!username) {
 
-                    return "UNAVAILABLE";
+                    return "NO PUBLIC RECORD";
 
                 }
 
@@ -1278,6 +1302,22 @@
                 return "EXTERNAL LINK";
 
             }
+
+        }
+
+
+        /* ==========================================
+           HAS SOCIAL LINK
+        ========================================== */
+
+        function hasSocialLink(
+            url
+        ) {
+
+            return !!(
+                url &&
+                url !== "#"
+            );
 
         }
 
@@ -1473,11 +1513,6 @@
                 ).trim();
 
 
-            /*
-                New format:
-                JSON array of strings
-            */
-
             try {
 
                 const parsed =
@@ -1512,19 +1547,10 @@
                 error
             ) {
 
-                /*
-                    Old format:
-                    plain text stored directly
-                    in the notes column.
-                */
+                /* Old plain-text notes. */
 
             }
 
-
-            /*
-                Backwards compatibility
-                for old plain-text notes.
-            */
 
             return [
                 raw
@@ -1741,6 +1767,92 @@
 
 
         /* ==========================================
+           SOCIAL CARD
+        ========================================== */
+
+        function renderConnection(
+            name,
+            url
+        ) {
+
+            const available =
+                hasSocialLink(
+                    url
+                );
+
+
+            const username =
+                getUsername(
+                    url
+                );
+
+
+            if (!available) {
+
+                return `
+
+                    <div class="connection unavailable">
+
+                        <span class="connection-name">
+
+                            ${escapeHTML(
+                                name
+                            )}
+
+                        </span>
+
+
+                        <span class="connection-user">
+
+                            NO PUBLIC RECORD
+
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <a
+                    href="${escapeHTML(
+                        getSocialLink(
+                            url
+                        )
+                    )}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="connection"
+                >
+
+                    <span class="connection-name">
+
+                        ${escapeHTML(
+                            name
+                        )}
+
+                    </span>
+
+
+                    <span class="connection-user">
+
+                        ${escapeHTML(
+                            username
+                        )}
+
+                    </span>
+
+                </a>
+
+            `;
+
+        }
+
+
+        /* ==========================================
            RENDER FILE
         ========================================== */
 
@@ -1857,28 +1969,6 @@
 
 
             /* =========================
-               SOCIAL USERNAMES
-            ========================= */
-
-            const twitchUser =
-                getUsername(
-                    twitch
-                );
-
-
-            const youtubeUser =
-                getUsername(
-                    youtube
-                );
-
-
-            const tiktokUser =
-                getUsername(
-                    tiktok
-                );
-
-
-            /* =========================
                PHOTO
             ========================= */
 
@@ -1952,7 +2042,6 @@
                                                 class="archive-item"
                                             >
 
-
                                                 <div>
 
                                                     <div
@@ -1973,14 +2062,12 @@
                                                         class="archive-item-title"
                                                     >
 
-                                                        ${
-                                                            escapeHTML(
-                                                                safe(
-                                                                    archive.title,
-                                                                    "UNTITLED ARCHIVE"
-                                                                ).toUpperCase()
-                                                            )
-                                                        }
+                                                        ${escapeHTML(
+                                                            safe(
+                                                                archive.title,
+                                                                "UNTITLED ARCHIVE"
+                                                            ).toUpperCase()
+                                                        )}
 
                                                     </div>
 
@@ -2332,9 +2419,11 @@
                                 </div>
 
                                 <div class="info-value">
+
                                     ${escapeHTML(
                                         name
                                     )}
+
                                 </div>
 
 
@@ -2343,9 +2432,11 @@
                                 </div>
 
                                 <div class="info-value">
+
                                     ${escapeHTML(
                                         alias
                                     )}
+
                                 </div>
 
 
@@ -2354,9 +2445,11 @@
                                 </div>
 
                                 <div class="info-value">
+
                                     ${escapeHTML(
                                         status
                                     )}
+
                                 </div>
 
 
@@ -2365,9 +2458,11 @@
                                 </div>
 
                                 <div class="info-value">
+
                                     ${escapeHTML(
                                         primaryActivity
                                     )}
+
                                 </div>
 
 
@@ -2512,120 +2607,25 @@
 
                             <div class="connections">
 
+                                ${renderConnection(
+                                    "TWITCH",
+                                    twitch
+                                )}
 
-                                <a
-                                    href="${escapeHTML(
-                                        getSocialLink(
-                                            twitch
-                                        )
-                                    )}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="connection"
-                                >
+                                ${renderConnection(
+                                    "YOUTUBE",
+                                    youtube
+                                )}
 
-                                    <span class="connection-name">
+                                ${renderConnection(
+                                    "TIKTOK",
+                                    tiktok
+                                )}
 
-                                        TWITCH
-
-                                    </span>
-
-
-                                    <span class="connection-user">
-
-                                        ${escapeHTML(
-                                            twitchUser
-                                        )}
-
-                                    </span>
-
-                                </a>
-
-
-                                <a
-                                    href="${escapeHTML(
-                                        getSocialLink(
-                                            youtube
-                                        )
-                                    )}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="connection"
-                                >
-
-                                    <span class="connection-name">
-
-                                        YOUTUBE
-
-                                    </span>
-
-
-                                    <span class="connection-user">
-
-                                        ${escapeHTML(
-                                            youtubeUser
-                                        )}
-
-                                    </span>
-
-                                </a>
-
-
-                                <a
-                                    href="${escapeHTML(
-                                        getSocialLink(
-                                            tiktok
-                                        )
-                                    )}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="connection"
-                                >
-
-                                    <span class="connection-name">
-
-                                        TIKTOK
-
-                                    </span>
-
-
-                                    <span class="connection-user">
-
-                                        ${escapeHTML(
-                                            tiktokUser
-                                        )}
-
-                                    </span>
-
-                                </a>
-
-
-                                <a
-                                    href="${escapeHTML(
-                                        getSocialLink(
-                                            discord
-                                        )
-                                    )}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="connection"
-                                >
-
-                                    <span class="connection-name">
-
-                                        DISCORD
-
-                                    </span>
-
-
-                                    <span class="connection-user">
-
-                                        CHANNEL
-
-                                    </span>
-
-                                </a>
-
+                                ${renderConnection(
+                                    "DISCORD",
+                                    discord
+                                )}
 
                             </div>
 
