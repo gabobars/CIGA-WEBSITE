@@ -93,6 +93,9 @@
             text-decoration: none;
 
             cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
         }
 
 
@@ -573,6 +576,9 @@
                     255,
                     0.02
                 );
+
+            filter:
+                grayscale(100%);
         }
 
 
@@ -760,6 +766,133 @@
         }
 
 
+        .links-empty {
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.40;
+        }
+
+
+        /* =========================
+           CIGA CLASSIFICATION
+        ========================= */
+
+        .classification-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+
+        .classification-field {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            gap: 8px;
+        }
+
+
+        .classification-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+        }
+
+
+        .classification-select {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 12px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            letter-spacing: 0.8px;
+
+            cursor: pointer;
+        }
+
+
+        .classification-select:focus {
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        .classification-select option {
+            background: #000;
+
+            color: #fff;
+        }
+
+
+        .classification-note {
+            margin-top: 16px;
+
+            padding:
+                12px 14px;
+
+            border-left:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.48;
+        }
+
+
         /* =========================
            ACTIONS
         ========================= */
@@ -821,22 +954,16 @@
         .accept {
             border-color:
                 rgba(
-                    150,
                     255,
-                    150,
-                    0.45
+                    255,
+                    255,
+                    0.55
                 );
         }
 
 
         .reject {
-            border-color:
-                rgba(
-                    255,
-                    120,
-                    120,
-                    0.45
-                );
+            opacity: 0.75;
         }
 
 
@@ -870,6 +997,41 @@
 
         .result.visible {
             display: block;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.38;
         }
 
 
@@ -937,6 +1099,12 @@
             }
 
 
+            .classification-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
             .actions {
                 flex-direction:
                     column;
@@ -945,6 +1113,14 @@
 
             .action-button {
                 width: 100%;
+            }
+
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
             }
 
         }
@@ -959,6 +1135,10 @@
 <div class="page">
 
 
+    <!-- =========================
+         HEADER
+    ========================= -->
+
     <header class="header">
 
         <div>
@@ -966,6 +1146,7 @@
             <a
                 href="home.html"
                 class="title"
+                aria-label="Return to CIGA SYSTEMS home"
             >
                 CIGA SYSTEMS
             </a>
@@ -988,6 +1169,10 @@
 
     </header>
 
+
+    <!-- =========================
+         SYSTEM STATUS
+    ========================= -->
 
     <div
         class="system-status"
@@ -1125,6 +1310,10 @@
     >
 
 
+        <!-- =========================
+             PERSONNEL RECORD
+        ========================= -->
+
         <section class="panel">
 
             <div class="panel-title">
@@ -1161,6 +1350,10 @@
         </section>
 
 
+        <!-- =========================
+             ENTITY INFORMATION
+        ========================= -->
+
         <section class="panel">
 
             <div class="panel-title">
@@ -1175,6 +1368,10 @@
 
         </section>
 
+
+        <!-- =========================
+             DESCRIPTION
+        ========================= -->
 
         <section class="panel">
 
@@ -1191,6 +1388,10 @@
         </section>
 
 
+        <!-- =========================
+             LORE / INCIDENT
+        ========================= -->
+
         <section class="panel">
 
             <div class="panel-title">
@@ -1206,6 +1407,10 @@
         </section>
 
 
+        <!-- =========================
+             CONNECTIONS
+        ========================= -->
+
         <section class="panel">
 
             <div class="panel-title">
@@ -1220,6 +1425,226 @@
 
         </section>
 
+
+        <!-- =========================
+             CIGA CLASSIFICATION
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // CIGA CLASSIFICATION
+            </div>
+
+
+            <div class="classification-grid">
+
+
+                <!-- STATUS -->
+
+                <div class="classification-field">
+
+                    <label
+                        class="classification-label"
+                        for="reviewStatus"
+                    >
+                        STATUS
+                    </label>
+
+
+                    <select
+                        id="reviewStatus"
+                        class="classification-select"
+                    >
+
+                        <option value="ACTIVE">
+                            ACTIVE
+                        </option>
+
+                        <option value="INACTIVE">
+                            INACTIVE
+                        </option>
+
+                        <option value="MISSING">
+                            MISSING
+                        </option>
+
+                        <option value="DECEASED">
+                            DECEASED
+                        </option>
+
+                        <option value="MONITORING">
+                            MONITORING
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CLEARANCE -->
+
+                <div class="classification-field">
+
+                    <label
+                        class="classification-label"
+                        for="reviewClearance"
+                    >
+                        CLEARANCE
+                    </label>
+
+
+                    <select
+                        id="reviewClearance"
+                        class="classification-select"
+                    >
+
+                        <option value="OPERATIVE">
+                            OPERATIVE
+                        </option>
+
+                        <option value="RESTRICTED">
+                            RESTRICTED
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="ADMIN">
+                            ADMIN
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- OBSERVATION -->
+
+                <div class="classification-field">
+
+                    <label
+                        class="classification-label"
+                        for="reviewObservation"
+                    >
+                        OBSERVATION
+                    </label>
+
+
+                    <select
+                        id="reviewObservation"
+                        class="classification-select"
+                    >
+
+                        <option value="ONGOING">
+                            ONGOING
+                        </option>
+
+                        <option value="NOT REQUIRED">
+                            NOT REQUIRED
+                        </option>
+
+                        <option value="ELEVATED STATUS">
+                            ELEVATED STATUS
+                        </option>
+
+                        <option value="SUSPENDED">
+                            SUSPENDED
+                        </option>
+
+                        <option value="TERMINATED">
+                            TERMINATED
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- THREAT LEVEL -->
+
+                <div class="classification-field">
+
+                    <label
+                        class="classification-label"
+                        for="reviewThreatLevel"
+                    >
+                        THREAT LEVEL
+                    </label>
+
+
+                    <select
+                        id="reviewThreatLevel"
+                        class="classification-select"
+                    >
+
+                        <option value="NONE">
+                            NONE
+                        </option>
+
+                        <option value="NON HOSTILE">
+                            NON HOSTILE
+                        </option>
+
+                        <option value="HOSTILE BEHAVIOUR">
+                            HOSTILE BEHAVIOUR
+                        </option>
+
+                        <option value="ANOMALOUS">
+                            ANOMALOUS
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="classification-note">
+
+                &gt; THESE VALUES REPRESENT THE OFFICIAL CIGA
+                CLASSIFICATION AND ARE NOT PROVIDED BY THE
+                SUBMITTING SUBJECT.
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PERSONNEL DISPOSITION
+        ========================= -->
 
         <section class="panel">
 
@@ -1241,7 +1666,7 @@
                     id="acceptButton"
                     type="button"
                 >
-                    ✓ ACCEPT PERSONNEL
+                    ACCEPT PERSONNEL
                 </button>
 
 
@@ -1250,7 +1675,7 @@
                     id="rejectButton"
                     type="button"
                 >
-                    ✕ REJECT PERSONNEL
+                    REJECT PERSONNEL
                 </button>
 
             </div>
@@ -1265,6 +1690,23 @@
 
 
     </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <span>
+            CIGA SYSTEMS // PERSONNEL REVIEW
+        </span>
+
+        <span>
+            ALL ADMINISTRATIVE ACTIONS ARE LOGGED
+        </span>
+
+    </footer>
 
 
 </div>
@@ -1288,17 +1730,6 @@
         createClient
     } = supabase;
 
-
-    /*
-        Persistent Supabase session.
-
-        This allows multiple tabs from the same
-        browser to share the same authenticated
-        admin session.
-
-        The session can be explicitly terminated
-        with the logout button.
-    */
 
     const db =
         createClient(
@@ -1439,6 +1870,30 @@
         );
 
 
+    const reviewStatus =
+        document.getElementById(
+            "reviewStatus"
+        );
+
+
+    const reviewClearance =
+        document.getElementById(
+            "reviewClearance"
+        );
+
+
+    const reviewObservation =
+        document.getElementById(
+            "reviewObservation"
+        );
+
+
+    const reviewThreatLevel =
+        document.getElementById(
+            "reviewThreatLevel"
+        );
+
+
     const acceptButton =
         document.getElementById(
             "acceptButton"
@@ -1483,17 +1938,21 @@
             "visible"
         );
 
+
         adminBar.classList.remove(
             "visible"
         );
+
 
         denied.classList.remove(
             "visible"
         );
 
+
         review.classList.remove(
             "visible"
         );
+
 
         systemStatus.textContent =
             "> ADMINISTRATIVE AUTHENTICATION REQUIRED.";
@@ -1977,7 +2436,10 @@
             "";
 
 
-        if (data.photo) {
+        if (
+            data.photo &&
+            String(data.photo).trim() !== ""
+        ) {
 
             const image =
                 document.createElement(
@@ -1995,6 +2457,32 @@
 
             image.className =
                 "subject-image";
+
+
+            image.addEventListener(
+                "error",
+                function() {
+
+                    imageContainer.innerHTML =
+                        "";
+
+                    const placeholder =
+                        document.createElement(
+                            "div"
+                        );
+
+                    placeholder.className =
+                        "subject-placeholder";
+
+                    placeholder.textContent =
+                        "IMAGE UNAVAILABLE";
+
+                    imageContainer.appendChild(
+                        placeholder
+                    );
+
+                }
+            );
 
 
             imageContainer.appendChild(
@@ -2088,8 +2576,9 @@
         ========================= */
 
         notes.textContent =
-            data.notes ||
-            "NO ADDITIONAL NOTES";
+            formatNotes(
+                data.notes
+            );
 
 
         /* =========================
@@ -2128,6 +2617,63 @@
         );
 
 
+        if (
+            links.children.length === 0
+        ) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+
+            empty.className =
+                "links-empty";
+
+
+            empty.textContent =
+                "> NO KNOWN CONNECTIONS AVAILABLE.";
+
+
+            links.appendChild(
+                empty
+            );
+
+        }
+
+
+        /* =========================
+           CLASSIFICATION
+        ========================= */
+
+        setSelectValue(
+            reviewStatus,
+            data.status,
+            "ACTIVE"
+        );
+
+
+        setSelectValue(
+            reviewClearance,
+            data.clearance,
+            "OPERATIVE"
+        );
+
+
+        setSelectValue(
+            reviewObservation,
+            data.observation,
+            "ONGOING"
+        );
+
+
+        setSelectValue(
+            reviewThreatLevel,
+            data.threat_level,
+            "UNKNOWN"
+        );
+
+
         /* =========================
            STATUS
         ========================= */
@@ -2152,14 +2698,14 @@
 
         addDataItem(
             statusGrid,
-            "STATUS",
+            "CURRENT STATUS",
             data.status ||
-            "PENDING"
+            "NOT ASSIGNED"
         );
 
 
         /* =========================
-           BUTTON STATE
+           ACTION STATE
         ========================= */
 
         const currentStatus =
@@ -2169,16 +2715,226 @@
             ).toUpperCase();
 
 
-if (
-    currentStatus === "APPROVED"
-    ||
-    currentStatus === "REJECTED"
-) {
+        if (
+            currentStatus === "APPROVED"
+            ||
+            currentStatus === "REJECTED"
+        ) {
 
-    acceptButton.disabled = true;
-    rejectButton.disabled = true;
+            acceptButton.disabled =
+                true;
 
-}
+
+            rejectButton.disabled =
+                true;
+
+
+            reviewStatus.disabled =
+                true;
+
+
+            reviewClearance.disabled =
+                true;
+
+
+            reviewObservation.disabled =
+                true;
+
+
+            reviewThreatLevel.disabled =
+                true;
+
+
+            result.textContent =
+                `> THIS SUBMISSION HAS ALREADY BEEN ${currentStatus}.`;
+
+
+            result.classList.add(
+                "visible"
+            );
+
+        } else {
+
+            acceptButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
+
+
+            reviewStatus.disabled =
+                false;
+
+
+            reviewClearance.disabled =
+                false;
+
+
+            reviewObservation.disabled =
+                false;
+
+
+            reviewThreatLevel.disabled =
+                false;
+
+
+            result.classList.remove(
+                "visible"
+            );
+
+        }
+
+    }
+
+
+    /* ==========================================
+       FORMAT NOTES
+    ========================================== */
+
+    function formatNotes(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return "NO ADDITIONAL NOTES";
+
+        }
+
+
+        if (
+            Array.isArray(
+                value
+            )
+        ) {
+
+            return value
+                .map(
+                    item =>
+                        String(item)
+                )
+                .filter(
+                    item =>
+                        item.trim() !== ""
+                )
+                .join(
+                    "\n\n"
+                )
+                ||
+                "NO ADDITIONAL NOTES";
+
+        }
+
+
+        const text =
+            String(
+                value
+            );
+
+
+        /*
+            Handles submissions created with
+            the previous JSON-array format.
+        */
+
+        if (
+            text.trim().startsWith("[")
+            &&
+            text.trim().endsWith("]")
+        ) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+                        .map(
+                            item =>
+                                String(item)
+                        )
+                        .filter(
+                            item =>
+                                item.trim() !== ""
+                        )
+                        .join(
+                            "\n\n"
+                        )
+                        ||
+                        "NO ADDITIONAL NOTES";
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "NOTES JSON PARSE FAILED:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        return text;
+
+    }
+
+
+    /* ==========================================
+       SELECT VALUE
+    ========================================== */
+
+    function setSelectValue(
+        select,
+        value,
+        fallback
+    ) {
+
+        const desired =
+            value
+                ? String(
+                    value
+                )
+                : fallback;
+
+
+        const exists =
+            Array.from(
+                select.options
+            ).some(
+                option =>
+                    option.value ===
+                    desired
+            );
+
+
+        if (exists) {
+
+            select.value =
+                desired;
+
+        } else {
+
+            select.value =
+                fallback;
+
+        }
 
     }
 
@@ -2228,8 +2984,15 @@ if (
 
 
         valueElement.textContent =
-            value ||
-            "NOT PROVIDED";
+            (
+                value === null ||
+                value === undefined ||
+                value === ""
+            )
+                ? "NOT PROVIDED"
+                : String(
+                    value
+                );
 
 
         item.appendChild(
@@ -2259,8 +3022,13 @@ if (
         url
     ) {
 
-        if (!url) {
+        if (
+            !url ||
+            String(url).trim() === ""
+        ) {
+
             return;
+
         }
 
 
@@ -2296,111 +3064,869 @@ if (
 
     }
 
-/* ==========================================
-   UPDATE SUBMISSION STATUS
-========================================== */
 
-async function updateSubmissionStatus(status) {
+    /* ==========================================
+       GET NEXT FILE NUMBER
+    ========================================== */
 
-    if (!submissionId) {
-        return;
+    async function getNextFileNumber() {
+
+        const {
+            data,
+            error
+        } =
+            await db
+                .from(
+                    "personnel"
+                )
+                .select(
+                    "file_number"
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        let highestNumber =
+            0;
+
+
+        (data || []).forEach(
+            person => {
+
+                const number =
+                    parseInt(
+                        person.file_number,
+                        10
+                    );
+
+
+                if (
+                    !Number.isNaN(number)
+                    &&
+                    number >
+                    highestNumber
+                ) {
+
+                    highestNumber =
+                        number;
+
+                }
+
+            }
+        );
+
+
+        return String(
+            highestNumber + 1
+        ).padStart(
+            3,
+            "0"
+        );
+
     }
 
 
-    acceptButton.disabled = true;
-    rejectButton.disabled = true;
+    /* ==========================================
+       ACCEPT PERSONNEL
+    ========================================== */
+
+    async function acceptPersonnel() {
+
+        if (!submissionId) {
+
+            return;
+
+        }
 
 
-    result.textContent =
-        `> UPDATING PERSONNEL STATUS TO ${status}...`;
-
-    result.classList.add(
-        "visible"
-    );
+        acceptButton.disabled =
+            true;
 
 
-    const {
-        error
-    } =
-        await db
-            .from(
-                "personnel_submissions"
-            )
-            .update({
+        rejectButton.disabled =
+            true;
 
-                submission_status:
-                    status
 
-            })
-            .eq(
-                "id",
+        reviewStatus.disabled =
+            true;
+
+
+        reviewClearance.disabled =
+            true;
+
+
+        reviewObservation.disabled =
+            true;
+
+
+        reviewThreatLevel.disabled =
+            true;
+
+
+        result.textContent =
+            "> CREATING PERSONNEL RECORD...";
+
+
+        result.classList.add(
+            "visible"
+        );
+
+
+        try {
+
+            /*
+                Make sure the current authenticated
+                user is still an administrator.
+            */
+
+            const isAdmin =
+                await verifyAdmin();
+
+
+            if (!isAdmin) {
+
+                throw new Error(
+                    "ADMIN_CLEARANCE_REQUIRED"
+                );
+
+            }
+
+
+            /*
+                Reload submission immediately before
+                approval to avoid using stale data.
+            */
+
+            const {
+                data:
+                submission,
+                error:
+                submissionError
+            } =
+                await db
+                    .from(
+                        "personnel_submissions"
+                    )
+                    .select("*")
+                    .eq(
+                        "id",
+                        submissionId
+                    )
+                    .maybeSingle();
+
+
+            if (
+                submissionError ||
+                !submission
+            ) {
+
+                throw (
+                    submissionError ||
+                    new Error(
+                        "SUBMISSION_NOT_FOUND"
+                    )
+                );
+
+            }
+
+
+            const submissionStatus =
+                String(
+                    submission.submission_status ||
+                    "PENDING"
+                ).toUpperCase();
+
+
+            if (
+                submissionStatus !==
+                "PENDING"
+            ) {
+
+                throw new Error(
+                    `SUBMISSION_ALREADY_${submissionStatus}`
+                );
+
+            }
+
+
+            /*
+                Administrator classification.
+            */
+
+            const selectedStatus =
+                reviewStatus.value;
+
+
+            const selectedClearance =
+                reviewClearance.value;
+
+
+            const selectedObservation =
+                reviewObservation.value;
+
+
+            const selectedThreatLevel =
+                reviewThreatLevel.value;
+
+
+            /*
+                Generate next personnel file.
+            */
+
+            const nextFileNumber =
+                await getNextFileNumber();
+
+
+            /*
+                Build official personnel record.
+            */
+
+            const personnelRecord = {
+
+                file_number:
+                    nextFileNumber,
+
+                name:
+                    submission.name,
+
+                alias:
+                    submission.alias,
+
+                status:
+                    selectedStatus,
+
+                clearance:
+                    selectedClearance,
+
+                observation:
+                    selectedObservation,
+
+                threat_level:
+                    selectedThreatLevel,
+
+                description:
+                    submission.description,
+
+                notes:
+                    submission.notes,
+
+                primary_activity:
+                    submission.primary_activity,
+
+                location:
+                    submission.location,
+
+                affiliation:
+                    submission.affiliation,
+
+                origin:
+                    submission.origin,
+
+                twitch:
+                    submission.twitch,
+
+                youtube:
+                    submission.youtube,
+
+                tiktok:
+                    submission.tiktok,
+
+                discord:
+                    submission.discord,
+
+                photo:
+                    submission.photo,
+
+                visible:
+                    true
+
+            };
+
+
+            /*
+                Insert personnel file.
+            */
+
+            const {
+                data:
+                personnelData,
+                error:
+                personnelInsertError
+            } =
+                await db
+                    .from(
+                        "personnel"
+                    )
+                    .insert(
+                        [
+                            personnelRecord
+                        ]
+                    )
+                    .select(
+                        "id, file_number, name"
+                    )
+                    .single();
+
+
+            if (personnelInsertError) {
+
+                throw personnelInsertError;
+
+            }
+
+
+            /*
+                Mark submission as approved.
+            */
+
+            const {
+                error:
+                submissionUpdateError
+            } =
+                await db
+                    .from(
+                        "personnel_submissions"
+                    )
+                    .update({
+
+                        submission_status:
+                            "APPROVED"
+
+                    })
+                    .eq(
+                        "id",
+                        submission.id
+                    );
+
+
+            if (submissionUpdateError) {
+
+                /*
+                    If the personnel insert worked but
+                    the submission update failed, tell
+                    the administrator clearly.
+
+                    We intentionally do not silently
+                    create another record.
+                */
+
+                throw submissionUpdateError;
+
+            }
+
+
+            /*
+                Update interface.
+            */
+
+            subjectMeta.textContent =
+                `RECORD ID: ${submission.id} // STATUS: APPROVED // FILE_${nextFileNumber}`;
+
+
+            statusGrid.innerHTML =
+                "";
+
+
+            addDataItem(
+                statusGrid,
+                "SUBMISSION ID",
+                submission.id
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "SUBMISSION STATUS",
+                "APPROVED"
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "FILE NUMBER",
+                nextFileNumber
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "STATUS",
+                selectedStatus
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "CLEARANCE",
+                selectedClearance
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "OBSERVATION",
+                selectedObservation
+            );
+
+
+            addDataItem(
+                statusGrid,
+                "THREAT LEVEL",
+                selectedThreatLevel
+            );
+
+
+            result.innerHTML =
+                `> PERSONNEL RECORD ACCEPTED.<br>` +
+                `> FILE_${escapeHTML(
+                    personnelData.file_number
+                )} CREATED.<br>` +
+                `> STATUS: ${escapeHTML(
+                    selectedStatus
+                )}<br>` +
+                `> CLEARANCE: ${escapeHTML(
+                    selectedClearance
+                )}<br>` +
+                `> OBSERVATION: ${escapeHTML(
+                    selectedObservation
+                )}<br>` +
+                `> THREAT LEVEL: ${escapeHTML(
+                    selectedThreatLevel
+                )}<br>` +
+                `> PERSONNEL DATABASE UPDATED.`;
+
+
+            result.classList.add(
+                "visible"
+            );
+
+
+            acceptButton.textContent =
+                "PERSONNEL ACCEPTED";
+
+
+            rejectButton.textContent =
+                "RECORD CLOSED";
+
+
+        } catch (error) {
+
+            console.error(
+                "PERSONNEL ACCEPT ERROR:",
+                error
+            );
+
+
+            acceptButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
+
+
+            reviewStatus.disabled =
+                false;
+
+
+            reviewClearance.disabled =
+                false;
+
+
+            reviewObservation.disabled =
+                false;
+
+
+            reviewThreatLevel.disabled =
+                false;
+
+
+            let message =
+                "> PERSONNEL ACCEPTANCE FAILED.";
+
+
+            if (
+                error.message ===
+                "ADMIN_CLEARANCE_REQUIRED"
+            ) {
+
+                message =
+                    "> ADMINISTRATIVE CLEARANCE REQUIRED.";
+
+            }
+
+
+            else if (
+                error.message ===
+                "SUBMISSION_NOT_FOUND"
+            ) {
+
+                message =
+                    "> SUBMISSION RECORD NOT FOUND.";
+
+            }
+
+
+            else if (
+                error.message &&
+                error.message.startsWith(
+                    "SUBMISSION_ALREADY_"
+                )
+            ) {
+
+                const existingStatus =
+                    error.message.replace(
+                        "SUBMISSION_ALREADY_",
+                        ""
+                    );
+
+
+                message =
+                    `> SUBMISSION ALREADY ${existingStatus}.`;
+
+            }
+
+
+            else if (
+                error.message
+            ) {
+
+                message +=
+                    `<br>> ${escapeHTML(
+                        error.message
+                    )}`;
+
+            }
+
+
+            result.innerHTML =
+                message;
+
+
+            result.classList.add(
+                "visible"
+            );
+
+        }
+
+    }
+
+
+    /* ==========================================
+       REJECT PERSONNEL
+    ========================================== */
+
+    async function rejectPersonnel() {
+
+        if (!submissionId) {
+
+            return;
+
+        }
+
+
+        acceptButton.disabled =
+            true;
+
+
+        rejectButton.disabled =
+            true;
+
+
+        reviewStatus.disabled =
+            true;
+
+
+        reviewClearance.disabled =
+            true;
+
+
+        reviewObservation.disabled =
+            true;
+
+
+        reviewThreatLevel.disabled =
+            true;
+
+
+        result.textContent =
+            "> REJECTING PERSONNEL SUBMISSION...";
+
+
+        result.classList.add(
+            "visible"
+        );
+
+
+        try {
+
+            const isAdmin =
+                await verifyAdmin();
+
+
+            if (!isAdmin) {
+
+                throw new Error(
+                    "ADMIN_CLEARANCE_REQUIRED"
+                );
+
+            }
+
+
+            const {
+                data:
+                currentSubmission,
+                error:
+                loadError
+            } =
+                await db
+                    .from(
+                        "personnel_submissions"
+                    )
+                    .select(
+                        "id, submission_status"
+                    )
+                    .eq(
+                        "id",
+                        submissionId
+                    )
+                    .maybeSingle();
+
+
+            if (
+                loadError ||
+                !currentSubmission
+            ) {
+
+                throw (
+                    loadError ||
+                    new Error(
+                        "SUBMISSION_NOT_FOUND"
+                    )
+                );
+
+            }
+
+
+            const currentStatus =
+                String(
+                    currentSubmission.submission_status ||
+                    "PENDING"
+                ).toUpperCase();
+
+
+            if (
+                currentStatus !==
+                "PENDING"
+            ) {
+
+                throw new Error(
+                    `SUBMISSION_ALREADY_${currentStatus}`
+                );
+
+            }
+
+
+            const {
+                error
+            } =
+                await db
+                    .from(
+                        "personnel_submissions"
+                    )
+                    .update({
+
+                        submission_status:
+                            "REJECTED"
+
+                    })
+                    .eq(
+                        "id",
+                        submissionId
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            subjectMeta.textContent =
+                `RECORD ID: ${submissionId} // STATUS: REJECTED`;
+
+
+            statusGrid.innerHTML =
+                "";
+
+
+            addDataItem(
+                statusGrid,
+                "SUBMISSION ID",
                 submissionId
             );
 
 
-    if (error) {
-
-        console.error(
-            "STATUS UPDATE ERROR:",
-            error
-        );
-
-
-        result.textContent =
-            "> ERROR: STATUS UPDATE FAILED.";
+            addDataItem(
+                statusGrid,
+                "SUBMISSION STATUS",
+                "REJECTED"
+            );
 
 
-        acceptButton.disabled = false;
-        rejectButton.disabled = false;
+            result.innerHTML =
+                "> PERSONNEL SUBMISSION REJECTED.<br>" +
+                "> RECORD ARCHIVED.<br>" +
+                "> NO PERSONNEL FILE CREATED.";
 
 
-        return;
+            result.classList.add(
+                "visible"
+            );
+
+
+            acceptButton.textContent =
+                "RECORD CLOSED";
+
+
+            rejectButton.textContent =
+                "PERSONNEL REJECTED";
+
+
+        } catch (error) {
+
+            console.error(
+                "PERSONNEL REJECTION ERROR:",
+                error
+            );
+
+
+            acceptButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
+
+
+            reviewStatus.disabled =
+                false;
+
+
+            reviewClearance.disabled =
+                false;
+
+
+            reviewObservation.disabled =
+                false;
+
+
+            reviewThreatLevel.disabled =
+                false;
+
+
+            let message =
+                "> PERSONNEL REJECTION FAILED.";
+
+
+            if (
+                error.message ===
+                "ADMIN_CLEARANCE_REQUIRED"
+            ) {
+
+                message =
+                    "> ADMINISTRATIVE CLEARANCE REQUIRED.";
+
+            }
+
+
+            else if (
+                error.message ===
+                "SUBMISSION_NOT_FOUND"
+            ) {
+
+                message =
+                    "> SUBMISSION RECORD NOT FOUND.";
+
+            }
+
+
+            else if (
+                error.message &&
+                error.message.startsWith(
+                    "SUBMISSION_ALREADY_"
+                )
+            ) {
+
+                const existingStatus =
+                    error.message.replace(
+                        "SUBMISSION_ALREADY_",
+                        ""
+                    );
+
+
+                message =
+                    `> SUBMISSION ALREADY ${existingStatus}.`;
+
+            }
+
+
+            else if (
+                error.message
+            ) {
+
+                message +=
+                    `<br>> ${escapeHTML(
+                        error.message
+                    )}`;
+
+            }
+
+
+            result.innerHTML =
+                message;
+
+
+            result.classList.add(
+                "visible"
+            );
+
+        }
 
     }
 
 
-    result.textContent =
-        `> PERSONNEL STATUS UPDATED: ${status.toUpperCase()}.`;
-
-
-
-    addDataItem(
-        statusGrid,
-        "SUBMISSION STATUS",
-        status
-    );
-
-}
     /* ==========================================
        EVENT LISTENERS
     ========================================== */
 
-acceptButton.addEventListener(
-    "click",
-    function() {
+    loginButton.addEventListener(
+        "click",
+        authenticateAdmin
+    );
 
-        updateSubmissionStatus(
-            "approved"
-        );
-
-    }
-);
-
-
-rejectButton.addEventListener(
-    "click",
-    function() {
-
-        updateSubmissionStatus(
-            "rejected"
-        );
-
-    }
-);
 
     logoutButton.addEventListener(
         "click",
         logoutAdmin
+    );
+
+
+    acceptButton.addEventListener(
+        "click",
+        acceptPersonnel
+    );
+
+
+    rejectButton.addEventListener(
+        "click",
+        rejectPersonnel
     );
 
 
@@ -2440,11 +3966,14 @@ rejectButton.addEventListener(
                     "visible"
                 );
 
+
                 adminBar.classList.remove(
                     "visible"
                 );
 
+
                 showLogin();
+
 
                 return;
 
@@ -2467,7 +3996,9 @@ rejectButton.addEventListener(
                         scope: "local"
                     });
 
+
                     showLogin();
+
 
                     return;
 
@@ -2516,7 +4047,9 @@ rejectButton.addEventListener(
             await db.auth.getSession();
 
 
-        if (data.session) {
+        if (
+            data.session
+        ) {
 
             const isAdmin =
                 await verifyAdmin();
@@ -2539,6 +4072,7 @@ rejectButton.addEventListener(
 
 
                 await loadSubmission();
+
 
                 return;
 
