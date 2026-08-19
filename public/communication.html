@@ -20,6 +20,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- CIGA LORE LINK SYSTEM -->
+    <script src="ciga-links.js"></script>
+
+
     <style>
 
         * {
@@ -52,7 +56,8 @@
             width: 100%;
             min-height: 100vh;
 
-            padding: 45px 60px;
+            padding:
+                45px 60px;
         }
 
 
@@ -85,9 +90,40 @@
 
 
         .title {
+            display: inline-block;
+
+            color: #fff;
+
+            text-decoration: none;
+
             font-size: 24px;
 
             letter-spacing: 4px;
+
+            cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
+        }
+
+
+        .title:hover {
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                ),
+
+                0 0 15px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
         }
 
 
@@ -458,9 +494,54 @@
 
             letter-spacing: 0.8px;
 
-            white-space: pre-wrap;
+            white-space:
+                normal;
+
+            word-break:
+                break-word;
 
             opacity: 0.90;
+        }
+
+
+        /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+
+            text-underline-offset:
+                3px;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+        }
+
+
+        .ciga-lore-link:hover {
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                );
         }
 
 
@@ -666,13 +747,20 @@
 
         <div>
 
-            <div class="title">
+            <a
+                href="home.html"
+                class="title"
+            >
+
                 CIGA SYSTEMS
-            </div>
+
+            </a>
 
 
             <div class="subtitle">
+
                 COMMUNICATIONS DATABASE // TRANSMISSION
+
             </div>
 
         </div>
@@ -1559,9 +1647,24 @@
            MESSAGE
         ========================= */
 
-        messageBody.textContent =
-            data.content ||
-            "NO MESSAGE CONTENT AVAILABLE.";
+        /*
+            Use the shared CIGA renderer.
+
+            Example:
+
+            Subject class is now
+            [[ANOMALOUS|anomalous.html]]
+
+            becomes a normal sentence with
+            ANOMALOUS as a clickable link.
+        */
+
+        messageBody.innerHTML =
+            data.content
+                ? cigaRenderLinks(
+                    data.content
+                )
+                : "NO MESSAGE CONTENT AVAILABLE.";
 
 
         /* =========================
@@ -1578,6 +1681,10 @@
         /* =========================
            SHOW
         ========================= */
+
+        errorMessage.style.display =
+            "none";
+
 
         communication.classList.add(
             "visible"
