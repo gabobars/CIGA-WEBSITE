@@ -1,96 +1,3126 @@
-function renderCigaText(value) {
+<!DOCTYPE html>
+<html lang="en">
 
-    if (
-        value === null ||
-        value === undefined ||
-        value === ""
-    ) {
-        return "";
-    }
+<head>
 
-    const text =
-        String(value);
+    <meta charset="UTF-8">
 
-    const tokenRegex =
-        /\[\[([^\]\n|]+)\|(https?:\/\/[^\]\s]+)\]\]/gi;
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    let output = "";
-    let lastIndex = 0;
-    let match;
+    <title>CIGA SYSTEMS // FILE</title>
 
-    while (
-        (
-            match =
-                tokenRegex.exec(text)
-        ) !== null
-    ) {
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
 
-        const fullMatch =
-            match[0];
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        const label =
-            match[1];
+    <style>
 
-        const url =
-            match[2];
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        const matchStart =
-            match.index;
+        body {
+            background: #000;
+            color: #fff;
 
-        /*
-            Text before the CIGA link.
-        */
+            min-height: 100vh;
 
-        output +=
-            escapeHTML(
-                text.substring(
-                    lastIndex,
-                    matchStart
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding:
+                45px 60px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 32px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
+        }
+
+        .title {
+            font-size: 25px;
+
+            letter-spacing: 4px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
+        }
+
+        .title:hover {
+            text-decoration: none;
+
+            text-shadow:
+                0 0 6px rgba(255,255,255,0.8),
+                0 0 15px rgba(255,255,255,0.35);
+        }
+
+        .subtitle {
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+        }
+
+        .header-status {
+            text-align: right;
+
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.65;
+        }
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            padding:
+                19px 22px;
+
+            margin-bottom: 28px;
+
+            border-left:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.50
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.76;
+        }
+
+        /* =========================
+           SUBJECT HEADER
+        ========================= */
+
+        .subject-header {
+            display: grid;
+
+            grid-template-columns:
+                250px
+                1fr
+                220px;
+
+            gap: 35px;
+
+            padding: 30px;
+
+            margin-bottom: 26px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+        }
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-area {
+            border-right:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.16
+                );
+
+            padding-right: 30px;
+        }
+
+        .photo-label {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.52;
+
+            margin-bottom: 14px;
+        }
+
+        .photo {
+            width: 185px;
+            height: 230px;
+
+            display: block;
+
+            object-fit: cover;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.42
+                );
+
+            background: #080808;
+
+            filter:
+                grayscale(100%);
+        }
+
+        .photo-caption {
+            margin-top: 11px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.45;
+        }
+
+        /* =========================
+           SUBJECT
+        ========================= */
+
+        .subject-info {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                center;
+
+            min-width: 0;
+        }
+
+        .label {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 10px;
+        }
+
+        .subject-name {
+            font-size: 34px;
+
+            letter-spacing: 5px;
+
+            line-height: 1.25;
+
+            margin-bottom: 20px;
+
+            word-break:
+                break-word;
+        }
+
+        .description {
+            max-width: 720px;
+
+            font-size: 14px;
+
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.80;
+
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+        /* =========================
+           CLASSIFICATION
+        ========================= */
+
+        .classification {
+            text-align: right;
+
+            min-width: 0;
+        }
+
+        .classification-block {
+            margin-bottom: 20px;
+        }
+
+        .classification-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .classification-value {
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            line-height: 1.4;
+
+            word-break:
+                break-word;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 22px;
+
+            align-items:
+                stretch;
+        }
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+            padding: 28px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.015
+                );
+
+            min-width: 0;
+        }
+
+        .panel-title {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.58;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 22px;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+        }
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .info {
+            display: grid;
+
+            grid-template-columns:
+                180px
+                1fr;
+
+            gap:
+                15px 22px;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+        .info-label {
+            opacity: 0.42;
+
+            letter-spacing: 1.5px;
+        }
+
+        .info-value {
+            opacity: 0.92;
+
+            letter-spacing: 1px;
+
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+        /* =========================
+           CONTROLLED SCROLL
+        ========================= */
+
+        .scroll-area {
+            max-height: 430px;
+
+            overflow-y: auto;
+
+            overflow-x: hidden;
+
+            padding-right: 8px;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
                 )
+                transparent;
+        }
+
+        /* =========================
+           CUSTOM SCROLLBAR
+        ========================= */
+
+        .scroll-area::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .scroll-area::-webkit-scrollbar-track {
+            background:
+                transparent;
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.24
+                );
+
+            border-radius:
+                0;
+
+            transition:
+                background 0.2s ease;
+        }
+
+        .scroll-area:hover::-webkit-scrollbar-thumb {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.48
+                );
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.70
+                );
+        }
+
+        /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            text-decoration-thickness:
+                1px;
+
+            text-underline-offset:
+                3px;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+        }
+
+        .ciga-lore-link:hover {
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+        }
+
+        /* =========================
+           INCIDENT / HISTORY
+        ========================= */
+
+        .incident-list {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            gap: 12px;
+        }
+
+        .incident {
+            padding: 17px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.17
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+        }
+
+        .incident-id {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.55;
+
+            margin-bottom: 9px;
+        }
+
+        .incident-text {
+            font-size: 12px;
+
+            line-height: 1.9;
+
+            opacity: 0.80;
+
+            white-space: normal;
+
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+        .incident-empty {
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.48;
+        }
+
+        /* =========================
+           ASSOCIATED ARCHIVES
+        ========================= */
+
+        .archive-count {
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+
+            margin-bottom: 14px;
+        }
+
+        .archive-list {
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .archive-link {
+            display: block;
+
+            color: #fff;
+
+            text-decoration: none;
+        }
+
+        .archive-item {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap: 18px;
+
+            padding: 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.17
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.02
+                );
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .archive-link:hover .archive-item {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.055
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.50
+                );
+
+            transform:
+                translateX(4px);
+        }
+
+        .archive-item-number {
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+
+            margin-bottom: 7px;
+        }
+
+        .archive-item-title {
+            font-size: 13px;
+
+            letter-spacing: 1.8px;
+
+            line-height: 1.5;
+
+            word-break:
+                break-word;
+        }
+
+        .archive-item-date {
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.42;
+
+            text-align: right;
+
+            margin-top: 5px;
+        }
+
+        .archive-item-status {
+            font-size: 9px;
+
+            letter-spacing: 1.8px;
+
+            opacity: 0.55;
+
+            white-space: nowrap;
+        }
+
+        .archive-item-status::before {
+            content: "";
+
+            display: inline-block;
+
+            width: 5px;
+            height: 5px;
+
+            margin-right: 7px;
+
+            background: #fff;
+
+            border-radius: 50%;
+        }
+
+        .archive-empty {
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.48;
+        }
+
+        /* =========================
+           OBSERVATION
+        ========================= */
+
+        .observation {
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.80;
+
+            word-break:
+                break-word;
+        }
+
+        /* =========================
+           CONNECTIONS
+        ========================= */
+
+        .connections {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 12px;
+        }
+
+        .connection {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 75px;
+
+            padding: 14px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .connection:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.60
+                );
+
+            transform:
+                translateY(-2px);
+        }
+
+        .connection.unavailable {
+            cursor: default;
+
+            opacity: 0.55;
+        }
+
+        .connection.unavailable:hover {
+            background:
+                transparent;
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            transform:
+                none;
+        }
+
+        .connection-name {
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 7px;
+        }
+
+        .connection-user {
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.55;
+
+            word-break:
+                break-word;
+
+            text-align:
+                center;
+        }
+
+        /* =========================
+           REDACTED
+        ========================= */
+
+        .redacted {
+            display: inline-block;
+
+            background: #fff;
+
+            color: #000;
+
+            padding:
+                2px 7px;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           WARNING
+        ========================= */
+
+        .warning {
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.75;
+        }
+
+        /* =========================
+           INTERNAL NOTE
+        ========================= */
+
+        .internal-note {
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.80;
+        }
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 28px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.54;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+        }
+
+        .back:hover {
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            width: 100%;
+
+            margin:
+                30px auto 0 auto;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
+        }
+
+        /* =========================
+           ERROR / LOADING
+        ========================= */
+
+        .message {
+            width:
+                min(
+                    700px,
+                    90vw
+                );
+
+            margin:
+                100px auto;
+
+            padding: 25px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.22
+                );
+
+            font-size: 12px;
+
+            line-height: 2;
+
+            letter-spacing: 1px;
+
+            opacity: 0.72;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .subject-header {
+                grid-template-columns:
+                    210px
+                    1fr;
+            }
+
+            .classification {
+                grid-column:
+                    1 / -1;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(
+                        4,
+                        1fr
+                    );
+
+                gap: 15px;
+
+                padding-top: 20px;
+
+                border-top:
+                    1px solid
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.15
+                    );
+
+                text-align: left;
+            }
+
+        }
+
+        /* =========================
+           MOBILE GRID
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+                padding: 28px;
+            }
+
+            .grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .page {
+                padding: 18px;
+            }
+
+            .header {
+                gap: 20px;
+
+                align-items:
+                    flex-start;
+            }
+
+            .title {
+                font-size: 18px;
+            }
+
+            .subtitle {
+                font-size: 10px;
+            }
+
+            .header-status {
+                font-size: 9px;
+            }
+
+            .terminal {
+                font-size: 11px;
+            }
+
+            .subject-header {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .photo-area {
+                border-right:
+                    none;
+
+                border-bottom:
+                    1px solid
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.15
+                    );
+
+                padding-right: 0;
+
+                padding-bottom: 22px;
+            }
+
+            .classification {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+            .subject-name {
+                font-size: 23px;
+            }
+
+            .description,
+            .observation,
+            .incident-text,
+            .internal-note {
+                font-size: 11px;
+            }
+
+            .panel {
+                padding: 22px;
+            }
+
+            .info {
+                grid-template-columns:
+                    1fr;
+
+                gap: 4px;
+            }
+
+            .info-label {
+                margin-top: 7px;
+            }
+
+            .connections {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .archive-item {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+            .archive-item-date {
+                text-align:
+                    left;
+            }
+
+            .archive-item-status {
+                font-size: 9px;
+            }
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="app"></div>
+
+
+    <script>
+
+        /* ==========================================
+           SUPABASE
+        ========================================== */
+
+        const SUPABASE_URL =
+            "https://ryefnjxwyjpeuwyoqbil.supabase.co";
+
+
+        const SUPABASE_KEY =
+            "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
+
+
+        const {
+            createClient
+        } = supabase;
+
+
+        const db =
+            createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
             );
 
-        /*
-            Create the real HTML link.
-        */
 
-        output +=
-            '<a' +
-                ' href="' +
-                    escapeHTML(
-                        url
-                    ) +
-                '"' +
-                ' class="ciga-lore-link"' +
-                ' target="_blank"' +
-                ' rel="noopener noreferrer"' +
-            '>' +
-                escapeHTML(
-                    label
-                ) +
-            '</a>';
+        const app =
+            document.getElementById(
+                "app"
+            );
 
-        lastIndex =
-            matchStart +
-            fullMatch.length;
-    }
 
-    /*
-        Remaining text after the final link.
-    */
+        /* ==========================================
+           GET FILE ID
+        ========================================== */
 
-    output +=
-        escapeHTML(
-            text.substring(
-                lastIndex
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const personId =
+            params.get(
+                "id"
+            );
+
+
+        /* ==========================================
+           HTML ESCAPE
+        ========================================== */
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
             )
-        );
 
-    /*
-        Preserve line breaks.
-    */
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
 
-    return output.replace(
-        /\r?\n/g,
-        "<br>"
-    );
-}
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* ==========================================
+           CIGA LINK PARSER
+        ========================================== */
+
+        function renderCigaText(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                value === ""
+            ) {
+
+                return "";
+
+            }
+
+
+            const text =
+                String(
+                    value
+                );
+
+
+            const tokenRegex =
+                /\[\[([^\]\n|]+)\|(https?:\/\/[^\]\s]+)\]\]/gi;
+
+
+            let output = "";
+
+            let lastIndex = 0;
+
+            let match;
+
+
+            while (
+                (
+                    match =
+                        tokenRegex.exec(text)
+                ) !== null
+            ) {
+
+                const fullMatch =
+                    match[0];
+
+
+                const label =
+                    match[1];
+
+
+                const url =
+                    match[2];
+
+
+                const matchStart =
+                    match.index;
+
+
+                /*
+                    Normal text before the CIGA Link.
+                */
+
+                output +=
+                    escapeHTML(
+                        text.substring(
+                            lastIndex,
+                            matchStart
+                        )
+                    );
+
+
+                /*
+                    REAL HTML LINK.
+
+                    Only the user-controlled
+                    label and URL are escaped.
+                */
+
+                output +=
+                    '<a' +
+                        ' href="' +
+                            escapeHTML(
+                                url
+                            ) +
+                        '"' +
+                        ' class="ciga-lore-link"' +
+                        ' target="_blank"' +
+                        ' rel="noopener noreferrer"' +
+                    '>' +
+                        escapeHTML(
+                            label
+                        ) +
+                    '</a>';
+
+
+                lastIndex =
+                    matchStart +
+                    fullMatch.length;
+
+            }
+
+
+            /*
+                Remaining text after
+                the final CIGA Link.
+            */
+
+            output +=
+                escapeHTML(
+                    text.substring(
+                        lastIndex
+                    )
+                );
+
+
+            /*
+                Preserve line breaks.
+            */
+
+            return output.replace(
+                /\r?\n/g,
+                "<br>"
+            );
+
+        }
+
+
+        /* ==========================================
+           SOCIAL USERNAME
+        ========================================== */
+
+        function getUsername(
+            url
+        ) {
+
+            if (
+                !url ||
+                url === "#"
+            ) {
+
+                return "NO PUBLIC RECORD";
+
+            }
+
+
+            try {
+
+                const parsedUrl =
+                    new URL(url);
+
+
+                let username =
+                    parsedUrl.pathname
+                        .split("/")
+                        .filter(
+                            Boolean
+                        )
+                        .pop();
+
+
+                if (!username) {
+
+                    return "NO PUBLIC RECORD";
+
+                }
+
+
+                if (
+                    username.startsWith("@")
+                ) {
+
+                    return username;
+
+                }
+
+
+                return "@" +
+                    username;
+
+
+            } catch (error) {
+
+                return "EXTERNAL LINK";
+
+            }
+
+        }
+
+
+        /* ==========================================
+           HAS SOCIAL LINK
+        ========================================== */
+
+        function hasSocialLink(
+            url
+        ) {
+
+            return !!(
+                url &&
+                url !== "#"
+            );
+
+        }
+
+
+        /* ==========================================
+           SAFE VALUE
+        ========================================== */
+
+        function safe(
+            value,
+            fallback = "UNAVAILABLE"
+        ) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                value === ""
+            ) {
+
+                return fallback;
+
+            }
+
+
+            return String(
+                value
+            );
+
+        }
+
+
+        /* ==========================================
+           REDACTED VALUE
+        ========================================== */
+
+        function redacted(
+            value
+        ) {
+
+            const text =
+                safe(
+                    value
+                );
+
+
+            if (
+                text === "UNAVAILABLE" ||
+                text === "UNDISCLOSED" ||
+                text === "DATA INCOMPLETE"
+            ) {
+
+                return `
+
+                    <span class="redacted">
+
+                        ${escapeHTML(
+                            text
+                        )}
+
+                    </span>
+
+                `;
+
+            }
+
+
+            return escapeHTML(
+                text
+            );
+
+        }
+
+
+        /* ==========================================
+           LOAD ARCHIVES
+        ========================================== */
+
+        async function loadAssociatedArchives(
+            personId
+        ) {
+
+            const {
+                data,
+                error
+            } =
+                await db
+
+                    .from(
+                        "archives"
+                    )
+
+                    .select(
+                        "id, archive_number, title, incident_date"
+                    )
+
+                    .eq(
+                        "personnel_id",
+                        personId
+                    )
+
+                    .eq(
+                        "visible",
+                        true
+                    )
+
+                    .order(
+                        "id",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "ARCHIVE DATABASE ERROR:",
+                    error
+                );
+
+
+                return {
+
+                    data: [],
+
+                    error:
+                        error
+
+                };
+
+            }
+
+
+            return {
+
+                data:
+                    data || [],
+
+                error:
+                    null
+
+            };
+
+        }
+
+
+        /* ==========================================
+           SOCIAL LINK
+        ========================================== */
+
+        function getSocialLink(
+            value
+        ) {
+
+            if (
+                !value ||
+                value === "UNAVAILABLE" ||
+                value === "#"
+            ) {
+
+                return "#";
+
+            }
+
+
+            return value;
+
+        }
+
+
+        /* ==========================================
+           PARSE HISTORY
+        ========================================== */
+
+        function parseHistory(
+            notes
+        ) {
+
+            if (
+                notes === null ||
+                notes === undefined ||
+                String(notes).trim() === ""
+            ) {
+
+                return [];
+
+            }
+
+
+            if (
+                Array.isArray(
+                    notes
+                )
+            ) {
+
+                return notes
+
+                    .map(
+                        entry =>
+                            String(
+                                entry ?? ""
+                            )
+                            .trim()
+                    )
+
+                    .filter(
+                        entry =>
+                            entry.length > 0
+                    );
+
+            }
+
+
+            const raw =
+                String(
+                    notes
+                ).trim();
+
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        raw
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+
+                        .map(
+                            entry =>
+                                String(
+                                    entry ?? ""
+                                )
+                                .trim()
+                        )
+
+                        .filter(
+                            entry =>
+                                entry.length > 0
+                        );
+
+                }
+
+            } catch (
+                error
+            ) {
+
+                /*
+                    Legacy plain-text notes.
+                */
+
+            }
+
+
+            return [
+                raw
+            ];
+
+        }
+
+
+        /* ==========================================
+           RENDER HISTORY
+        ========================================== */
+
+        function renderHistory(
+            notes
+        ) {
+
+            const history =
+                parseHistory(
+                    notes
+                );
+
+
+            if (
+                history.length === 0
+            ) {
+
+                return `
+
+                    <div class="incident-empty">
+
+                        &gt; NO ADDITIONAL HISTORY AVAILABLE.
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <div class="scroll-area">
+
+                    <div class="incident-list">
+
+                        ${
+                            history
+                                .map(
+                                    (
+                                        entry,
+                                        index
+                                    ) => `
+
+                                        <div class="incident">
+
+                                            <div class="incident-id">
+
+                                                HISTORY ENTRY ${String(
+                                                    index + 1
+                                                ).padStart(
+                                                    3,
+                                                    "0"
+                                                )}
+
+                                            </div>
+
+
+                                            <div class="incident-text">
+
+                                                ${renderCigaText(
+                                                    entry
+                                                )}
+
+                                            </div>
+
+                                        </div>
+
+                                    `
+                                )
+                                .join("")
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* ==========================================
+           LOAD FILE
+        ========================================== */
+
+        async function loadFile() {
+
+            if (!personId) {
+
+                showMessage(
+                    "> INVALID FILE REQUEST.<br>" +
+                    "> NO FILE IDENTIFIER PROVIDED."
+                );
+
+
+                return;
+
+            }
+
+
+            const {
+                data,
+                error
+            } =
+                await db
+
+                    .from(
+                        "personnel"
+                    )
+
+                    .select("*")
+
+                    .eq(
+                        "id",
+                        personId
+                    )
+
+                    .eq(
+                        "visible",
+                        true
+                    )
+
+                    .single();
+
+
+            if (
+                error ||
+                !data
+            ) {
+
+                console.error(
+                    "FILE DATABASE ERROR:",
+                    error
+                );
+
+
+                showMessage(
+                    "> FILE ACCESS ERROR.<br>" +
+                    "> RECORD NOT FOUND OR ACCESS DENIED."
+                );
+
+
+                return;
+
+            }
+
+
+            const {
+                data:
+                associatedArchives,
+                error:
+                archiveError
+            } =
+                await loadAssociatedArchives(
+                    personId
+                );
+
+
+            if (archiveError) {
+
+                console.warn(
+                    "ASSOCIATED ARCHIVES ERROR:",
+                    archiveError
+                );
+
+            }
+
+
+            renderFile(
+                data,
+                associatedArchives
+            );
+
+        }
+
+
+        /* ==========================================
+           MESSAGE
+        ========================================== */
+
+        function showMessage(
+            text
+        ) {
+
+            app.innerHTML = `
+
+                <div class="message">
+
+                    ${text}
+
+                    <br><br>
+
+                    <a
+                        href="personnel.html"
+                        class="back"
+                    >
+
+                        &lt;&lt; RETURN TO PERSONNEL DATABASE
+
+                    </a>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* ==========================================
+           SOCIAL CARD
+        ========================================== */
+
+        function renderConnection(
+            name,
+            url
+        ) {
+
+            const available =
+                hasSocialLink(
+                    url
+                );
+
+
+            const username =
+                getUsername(
+                    url
+                );
+
+
+            if (!available) {
+
+                return `
+
+                    <div class="connection unavailable">
+
+                        <span class="connection-name">
+
+                            ${escapeHTML(
+                                name
+                            )}
+
+                        </span>
+
+
+                        <span class="connection-user">
+
+                            NO PUBLIC RECORD
+
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <a
+                    href="${escapeHTML(
+                        getSocialLink(
+                            url
+                        )
+                    )}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="connection"
+                >
+
+                    <span class="connection-name">
+
+                        ${escapeHTML(
+                            name
+                        )}
+
+                    </span>
+
+
+                    <span class="connection-user">
+
+                        ${escapeHTML(
+                            username
+                        )}
+
+                    </span>
+
+                </a>
+
+            `;
+
+        }
+
+
+        /* ==========================================
+           RENDER FILE
+        ========================================== */
+
+        function renderFile(
+            person,
+            associatedArchives
+        ) {
+
+            const fileNumber =
+                String(
+                    person.file_number ||
+                    person.id
+                ).padStart(
+                    3,
+                    "0"
+                );
+
+
+            const name =
+                safe(
+                    person.name,
+                    "UNKNOWN"
+                ).toUpperCase();
+
+
+            const alias =
+                safe(
+                    person.alias,
+                    "UNKNOWN"
+                ).toUpperCase();
+
+
+            const status =
+                safe(
+                    person.status
+                ).toUpperCase();
+
+
+            const clearance =
+                safe(
+                    person.clearance
+                ).toUpperCase();
+
+
+            const observation =
+                safe(
+                    person.observation
+                ).toUpperCase();
+
+
+            const threat =
+                safe(
+                    person.threat_level
+                ).toUpperCase();
+
+
+            const description =
+                safe(
+                    person.description,
+                    "NO DESCRIPTION AVAILABLE."
+                );
+
+
+            const primaryActivity =
+                safe(
+                    person.primary_activity
+                ).toUpperCase();
+
+
+            const location =
+                safe(
+                    person.location
+                ).toUpperCase();
+
+
+            const affiliation =
+                safe(
+                    person.affiliation
+                ).toUpperCase();
+
+
+            const origin =
+                safe(
+                    person.origin
+                ).toUpperCase();
+
+
+            const twitch =
+                safe(
+                    person.twitch,
+                    "#"
+                );
+
+
+            const youtube =
+                safe(
+                    person.youtube,
+                    "#"
+                );
+
+
+            const tiktok =
+                safe(
+                    person.tiktok,
+                    "#"
+                );
+
+
+            const discord =
+                safe(
+                    person.discord,
+                    "#"
+                );
+
+
+            /* =========================
+               PHOTO
+            ========================= */
+
+            const photo =
+                person.photo &&
+                person.photo.trim() !== ""
+
+                    ? person.photo
+
+                    : "";
+
+
+            /* =========================
+               ARCHIVES
+            ========================= */
+
+            const archiveCount =
+                associatedArchives.length;
+
+
+            let associatedArchivesHTML;
+
+
+            if (
+                archiveCount === 0
+            ) {
+
+                associatedArchivesHTML = `
+
+                    <div class="archive-empty">
+
+                        &gt; NO ASSOCIATED ARCHIVES FOUND.
+
+                    </div>
+
+                `;
+
+            } else {
+
+                associatedArchivesHTML = `
+
+                    <div class="archive-count">
+
+                        ${String(
+                            archiveCount
+                        ).padStart(
+                            2,
+                            "0"
+                        )}
+
+                        RECORDS FOUND.
+
+                    </div>
+
+
+                    <div class="scroll-area">
+
+                        <div class="archive-list">
+
+                            ${
+                                associatedArchives
+                                    .map(
+                                        archive => `
+
+                                            <a
+                                                href="archive.html?id=${encodeURIComponent(
+                                                    archive.id
+                                                )}"
+                                                class="archive-link"
+                                            >
+
+                                                <div class="archive-item">
+
+                                                    <div>
+
+                                                        <div class="archive-item-number">
+
+                                                            ${escapeHTML(
+                                                                safe(
+                                                                    archive.archive_number,
+                                                                    "ARCHIVE-UNKNOWN"
+                                                                )
+                                                            )}
+
+                                                        </div>
+
+
+                                                        <div class="archive-item-title">
+
+                                                            ${escapeHTML(
+                                                                safe(
+                                                                    archive.title,
+                                                                    "UNTITLED ARCHIVE"
+                                                                ).toUpperCase()
+                                                            )}
+
+                                                        </div>
+
+
+                                                        ${
+                                                            archive.incident_date
+                                                                ? `
+
+                                                                    <div class="archive-item-date">
+
+                                                                        INCIDENT:
+                                                                        ${escapeHTML(
+                                                                            safe(
+                                                                                archive.incident_date
+                                                                            )
+                                                                        )}
+
+                                                                    </div>
+
+                                                                `
+                                                                : ""
+                                                        }
+
+                                                    </div>
+
+
+                                                    <div class="archive-item-status">
+
+                                                        ACCESS AVAILABLE
+
+                                                    </div>
+
+                                                </div>
+
+                                            </a>
+
+                                        `
+                                    )
+                                    .join("")
+                            }
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            document.title =
+                `CIGA SYSTEMS // FILE_${fileNumber}`;
+
+
+            /* =========================
+               PAGE
+            ========================= */
+
+            app.innerHTML = `
+
+                <main class="page">
+
+
+                    <!-- HEADER -->
+
+                    <header class="header">
+
+                        <div>
+
+                            <a
+                                href="home.html"
+                                class="title"
+                            >
+
+                                CIGA SYSTEMS
+
+                            </a>
+
+
+                            <div class="subtitle">
+
+                                ENTITY RECORD // INTERNAL
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="header-status">
+
+                            RECORD:
+                            FILE_${escapeHTML(
+                                fileNumber
+                            )}
+
+                            <br>
+
+                            STATUS:
+                            ${escapeHTML(
+                                status
+                            )}
+
+                        </div>
+
+                    </header>
+
+
+                    <!-- TERMINAL -->
+
+                    <section class="terminal">
+
+                        <div>
+                            &gt; OPENING ENTITY RECORD...
+                        </div>
+
+
+                        <div>
+                            &gt; SUBJECT IDENTIFIED:
+                            ${escapeHTML(
+                                name
+                            )}
+                        </div>
+
+
+                        <div>
+                            &gt; RECORD STATUS:
+                            ${escapeHTML(
+                                status
+                            )}
+                        </div>
+
+
+                        <div>
+                            &gt; OBSERVATION PROTOCOL:
+                            ${escapeHTML(
+                                observation
+                            )}
+                        </div>
+
+                    </section>
+
+
+                    <!-- SUBJECT HEADER -->
+
+                    <section class="subject-header">
+
+
+                        <!-- PHOTO -->
+
+                        <div class="photo-area">
+
+                            <div class="photo-label">
+
+                                IDENTIFICATION IMAGE
+
+                            </div>
+
+
+                            ${
+                                photo
+
+                                    ? `
+
+                                        <img
+                                            src="${escapeHTML(
+                                                photo
+                                            )}"
+                                            alt="${escapeHTML(
+                                                name
+                                            )}"
+                                            class="photo"
+                                        >
+
+                                    `
+
+                                    : `
+
+                                        <div
+                                            class="photo"
+                                            style="
+                                                display:flex;
+                                                align-items:center;
+                                                justify-content:center;
+                                                text-align:center;
+                                                font-size:10px;
+                                                letter-spacing:2px;
+                                                opacity:0.4;
+                                            "
+                                        >
+
+                                            IMAGE
+                                            <br>
+                                            UNAVAILABLE
+
+                                        </div>
+
+                                    `
+                            }
+
+
+                            <div class="photo-caption">
+
+                                SUBJECT // VISUAL RECORD
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SUBJECT -->
+
+                        <div class="subject-info">
+
+                            <div class="label">
+
+                                DESIGNATION
+
+                            </div>
+
+
+                            <div class="subject-name">
+
+                                ${escapeHTML(
+                                    name
+                                )}
+
+                            </div>
+
+
+                            <div class="description">
+
+                                ${renderCigaText(
+                                    description
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CLASSIFICATION -->
+
+                        <div class="classification">
+
+
+                            <div class="classification-block">
+
+                                <div class="label">
+
+                                    STATUS
+
+                                </div>
+
+
+                                <div class="classification-value">
+
+                                    ${escapeHTML(
+                                        status
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="classification-block">
+
+                                <div class="label">
+
+                                    CLEARANCE
+
+                                </div>
+
+
+                                <div class="classification-value">
+
+                                    ${escapeHTML(
+                                        clearance
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="classification-block">
+
+                                <div class="label">
+
+                                    OBSERVATION
+
+                                </div>
+
+
+                                <div class="classification-value">
+
+                                    ${escapeHTML(
+                                        observation
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="classification-block">
+
+                                <div class="label">
+
+                                    THREAT LEVEL
+
+                                </div>
+
+
+                                <div class="classification-value">
+
+                                    ${escapeHTML(
+                                        threat
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CONTENT -->
+
+                    <section class="grid">
+
+
+                        <!-- ENTITY INFORMATION -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // ENTITY INFORMATION
+
+                            </div>
+
+
+                            <div class="info">
+
+
+                                <div class="info-label">
+                                    DESIGNATION
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        name
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    KNOWN ALIAS
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        alias
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    ENTITY STATUS
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        status
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    PRIMARY ACTIVITY
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        primaryActivity
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    CURRENT LOCATION
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${redacted(
+                                        location
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    AFFILIATION
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${redacted(
+                                        affiliation
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    ORIGIN
+                                </div>
+
+                                <div class="info-value">
+
+                                    ${redacted(
+                                        origin
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- INCIDENT / HISTORY -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // INCIDENT / HISTORY
+
+                            </div>
+
+
+                            ${renderHistory(
+                                person.notes
+                            )}
+
+                        </section>
+
+
+                        <!-- ASSOCIATED ARCHIVES -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // ASSOCIATED ARCHIVES
+
+                            </div>
+
+
+                            ${associatedArchivesHTML}
+
+                        </section>
+
+
+                        <!-- BEHAVIOURAL ASSESSMENT -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // BEHAVIOURAL ASSESSMENT
+
+                            </div>
+
+
+                            <div class="observation">
+
+                                ${escapeHTML(
+                                    observation
+                                )}
+
+                                <br>
+                                <br>
+
+                                Subject continues normal
+                                activity despite ongoing
+                                observation.
+
+                                <br>
+                                <br>
+
+                                Further assessment remains
+                                recommended.
+
+                            </div>
+
+
+                            <div class="warning">
+
+                                OBSERVATION STATUS:
+
+                                ${escapeHTML(
+                                    observation
+                                )}
+
+                                <br>
+
+                                DIRECT INTERVENTION:
+
+                                NOT REQUIRED
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- KNOWN CONNECTIONS -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // KNOWN CONNECTIONS
+
+                            </div>
+
+
+                            <div class="connections">
+
+                                ${renderConnection(
+                                    "TWITCH",
+                                    twitch
+                                )}
+
+                                ${renderConnection(
+                                    "YOUTUBE",
+                                    youtube
+                                )}
+
+                                ${renderConnection(
+                                    "TIKTOK",
+                                    tiktok
+                                )}
+
+                                ${renderConnection(
+                                    "DISCORD",
+                                    discord
+                                )}
+
+                            </div>
+
+
+                            <div class="warning">
+
+                                ALL KNOWN CONNECTIONS ARE
+                                MONITORED BY CIGA SYSTEMS.
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- CURRENT STATUS -->
+
+                        <section class="panel">
+
+                            <div class="panel-title">
+
+                                // CURRENT STATUS
+
+                            </div>
+
+
+                            <div class="info">
+
+
+                                <div class="info-label">
+                                    STATUS
+                                </div>
+
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        status
+                                    )}
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    ACTIVITY
+                                </div>
+
+
+                                <div class="info-value">
+
+                                    ONGOING
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    MONITORING
+                                </div>
+
+
+                                <div class="info-value">
+
+                                    ENABLED
+
+                                </div>
+
+
+                                <div class="info-label">
+                                    THREAT LEVEL
+                                </div>
+
+
+                                <div class="info-value">
+
+                                    ${escapeHTML(
+                                        threat
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="warning">
+
+                                SUBJECT REMAINS UNAFFECTED.
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- INTERNAL NOTE -->
+
+                        <section
+                            class="panel"
+                            style="
+                                grid-column:
+                                    1 / -1;
+                            "
+                        >
+
+                            <div class="panel-title">
+
+                                // INTERNAL NOTE
+
+                            </div>
+
+
+                            <div class="internal-note">
+
+                                Subject has displayed unusual
+                                interest in CIGA systems and
+                                internal material.
+
+                                <br>
+                                <br>
+
+                                Nature of this relationship
+                                remains
+
+                                <span class="redacted">
+
+                                    UNDETERMINED
+
+                                </span>
+
+                                at current clearance level.
+
+                                <br>
+                                <br>
+
+                                Further observation is
+                                recommended.
+
+                            </div>
+
+
+                            <div class="warning">
+
+                                NEXT REVIEW:
+
+                                <span class="redacted">
+
+                                    CLASSIFIED
+
+                                </span>
+
+                            </div>
+
+                        </section>
+
+
+                    </section>
+
+
+                    <!-- BACK -->
+
+                    <a
+                        href="personnel.html"
+                        class="back"
+                    >
+
+                        &lt;&lt; RETURN TO PERSONNEL DATABASE
+
+                    </a>
+
+
+                    <!-- FOOTER -->
+
+                    <footer class="footer">
+
+                        <span>
+
+                            CIGA SYSTEMS //
+                            FILE_${escapeHTML(
+                                fileNumber
+                            )}
+
+                        </span>
+
+
+                        <span>
+
+                            ALL ACCESS IS LOGGED
+
+                        </span>
+
+                    </footer>
+
+
+                </main>
+
+            `;
+
+        }
+
+
+        /* ==========================================
+           START
+        ========================================== */
+
+        loadFile();
+
+    </script>
+
+</body>
+
+</html>
