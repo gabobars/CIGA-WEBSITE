@@ -2352,8 +2352,6 @@
             <div class="systems-grid">
 
 
-                <!-- PERSONNEL -->
-
                 <button
                     class="system-button"
                     onclick="
@@ -2374,8 +2372,6 @@
 
                 </button>
 
-
-                <!-- COMMUNICATIONS -->
 
                 <button
                     class="system-button"
@@ -2398,8 +2394,6 @@
                 </button>
 
 
-                <!-- ARCHIVES -->
-
                 <button
                     class="system-button"
                     onclick="
@@ -2421,8 +2415,6 @@
                 </button>
 
 
-                <!-- CIGA TRANSMISSIONS -->
-
                 <button
                     class="system-button"
                     onclick="
@@ -2443,8 +2435,6 @@
 
                 </button>
 
-
-                <!-- CLASSIFIED -->
 
                 <div
                     class="system-button classified-button"
@@ -2596,7 +2586,7 @@
                 class="ciga-music-status"
                 id="cigaMusicStatus"
             >
-                AUDIO CHANNEL MUTED.
+                MUTED
             </div>
 
 
@@ -2653,15 +2643,10 @@
         /*
             ALTERA APENAS ESTA LINHA
             PARA O NOME EXATO DO TEU FICHEIRO.
-
-            Exemplo:
-
-            const CIGA_MUSIC_SOURCE =
-                "CIGAEnvironment.mp3";
         */
 
         const CIGA_MUSIC_SOURCE =
-            "cigaost.mp3";
+            "YOUR-MUSIC-FILE.mp3";
 
 
         const CIGA_MUSIC_MUTED_KEY =
@@ -2670,6 +2655,10 @@
 
         const CIGA_MUSIC_VOLUME_KEY =
             "ciga_music_volume";
+
+
+        const CIGA_MUSIC_POSITION_KEY =
+            "ciga_music_position";
 
 
         const cigaMusic =
@@ -2700,6 +2689,10 @@
             document.getElementById(
                 "cigaMusicStatus"
             );
+
+
+        let cigaMusicPositionRestored =
+            false;
 
 
         function cigaGetStoredMusicMuted() {
@@ -2758,22 +2751,81 @@
         }
 
 
+        function cigaGetStoredMusicPosition() {
+
+            const stored =
+                localStorage.getItem(
+                    CIGA_MUSIC_POSITION_KEY
+                );
+
+
+            const position =
+                Number(
+                    stored
+                );
+
+
+            if (
+                Number.isNaN(
+                    position
+                )
+                ||
+                position < 0
+            ) {
+
+                return 0;
+
+            }
+
+
+            return position;
+
+        }
+
+
         function cigaSaveMusicState() {
 
-            localStorage.setItem(
-                CIGA_MUSIC_MUTED_KEY,
-                String(
-                    cigaMusic.muted
-                )
-            );
+            try {
+
+                localStorage.setItem(
+                    CIGA_MUSIC_MUTED_KEY,
+                    String(
+                        cigaMusic.muted
+                    )
+                );
 
 
-            localStorage.setItem(
-                CIGA_MUSIC_VOLUME_KEY,
-                String(
-                    cigaMusic.volume
-                )
-            );
+                localStorage.setItem(
+                    CIGA_MUSIC_VOLUME_KEY,
+                    String(
+                        cigaMusic.volume
+                    )
+                );
+
+
+                if (
+                    Number.isFinite(
+                        cigaMusic.currentTime
+                    )
+                ) {
+
+                    localStorage.setItem(
+                        CIGA_MUSIC_POSITION_KEY,
+                        String(
+                            cigaMusic.currentTime
+                        )
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "CIGA MUSIC STATE SAVE ERROR:",
+                    error
+                );
+
+            }
 
         }
 
@@ -2811,6 +2863,84 @@
                             ? "READY"
                             : "ACTIVE"
                     );
+
+        }
+
+
+        function cigaRestoreMusicPosition() {
+
+            if (
+                cigaMusicPositionRestored
+            ) {
+
+                return;
+
+            }
+
+
+            const savedPosition =
+                cigaGetStoredMusicPosition();
+
+
+            if (
+                savedPosition <= 0
+            ) {
+
+                cigaMusicPositionRestored =
+                    true;
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(
+                    cigaMusic.duration
+                )
+                ||
+                cigaMusic.duration <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const safePosition =
+                Math.min(
+                    savedPosition,
+                    Math.max(
+                        0,
+                        cigaMusic.duration -
+                        0.25
+                    )
+                );
+
+
+            if (
+                safePosition > 0
+            ) {
+
+                try {
+
+                    cigaMusic.currentTime =
+                        safePosition;
+
+                } catch (error) {
+
+                    console.warn(
+                        "CIGA MUSIC POSITION RESTORE ERROR:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            cigaMusicPositionRestored =
+                true;
 
         }
 
@@ -2883,20 +3013,43 @@
 
 
             /*
-                Start muted so that the browser
-                is allowed to begin playback.
+                Start muted for autoplay compatibility.
             */
 
             cigaMusic.muted =
                 true;
 
 
-            /*
-                Always show the real initial state.
-            */
-
             cigaUpdateMusicUI();
 
+
+            /*
+                Restore position as soon as the
+                browser knows the duration.
+            */
+
+            cigaMusic.addEventListener(
+                "loadedmetadata",
+                function() {
+
+                    cigaRestoreMusicPosition();
+
+                },
+                {
+                    once: true
+                }
+            );
+
+
+            cigaMusic.addEventListener(
+                "durationchange",
+                cigaRestoreMusicPosition
+            );
+
+
+            /*
+                Start muted in the background.
+            */
 
             cigaStartMusic(
                 false
@@ -2962,15 +3115,62 @@
                     volume;
 
 
-                localStorage.setItem(
-                    CIGA_MUSIC_VOLUME_KEY,
-                    String(
-                        volume
-                    )
-                );
-
+                cigaSaveMusicState();
 
                 cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        /*
+            Save the position while the track
+            is playing. This keeps the position
+            fresh even when the user navigates
+            away from the Home page.
+        */
+
+        setInterval(
+            function() {
+
+                cigaSaveMusicState();
+
+            },
+            1000
+        );
+
+
+        /*
+            Save once more immediately before
+            the page is unloaded/reloaded.
+        */
+
+        window.addEventListener(
+            "beforeunload",
+            function() {
+
+                cigaSaveMusicState();
+
+            }
+        );
+
+
+        /*
+            Also save when visibility changes.
+        */
+
+        document.addEventListener(
+            "visibilitychange",
+            function() {
+
+                if (
+                    document.visibilityState ===
+                    "hidden"
+                ) {
+
+                    cigaSaveMusicState();
+
+                }
 
             }
         );
@@ -2990,7 +3190,24 @@
             "pause",
             function() {
 
+                cigaSaveMusicState();
+
                 cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        cigaMusic.addEventListener(
+            "timeupdate",
+            function() {
+
+                /*
+                    Only save frequently enough
+                    without writing excessively.
+                    The one-second interval above
+                    remains the main saver.
+                */
 
             }
         );
