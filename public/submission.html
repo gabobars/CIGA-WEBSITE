@@ -365,6 +365,126 @@
 
 
         /* =========================
+           CIGA LINK HELP
+        ========================= */
+
+        .ciga-link-help {
+            margin-top: 14px;
+
+            padding:
+                16px 18px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.40
+                );
+
+            border-left:
+                3px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.82
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            box-shadow:
+                0 0 18px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+            letter-spacing: 0.7px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.78
+                );
+        }
+
+
+        .ciga-link-help-title {
+            margin-bottom: 9px;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            color: #fff;
+
+            opacity: 0.95;
+        }
+
+
+        .ciga-link-help strong {
+            color: #fff;
+
+            opacity: 1;
+        }
+
+
+        .ciga-link-example {
+            display: inline-block;
+
+            margin-top: 7px;
+
+            padding:
+                6px 9px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                );
+
+            background:
+                #000;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.95
+                );
+
+            font-size: 9px;
+
+            line-height: 1.6;
+
+            letter-spacing: 0.4px;
+
+            word-break:
+                break-word;
+        }
+
+
+        /* =========================
            FILE INPUT
         ========================= */
 
@@ -859,6 +979,21 @@
             }
 
 
+            .ciga-link-help {
+                padding:
+                    14px 14px;
+
+                font-size: 9px;
+            }
+
+
+            .ciga-link-example {
+                display: block;
+
+                width: 100%;
+            }
+
+
             .submit-area {
                 flex-direction:
                     column;
@@ -961,7 +1096,9 @@
     >
 
 
-        <!-- BASIC INFORMATION -->
+        <!-- =========================
+             BASIC INFORMATION
+        ========================= -->
 
         <section class="panel">
 
@@ -1021,7 +1158,56 @@
 
 
                     <div class="hint">
+
                         A short description of the entity/person.
+
+                    </div>
+
+
+                    <div class="ciga-link-help">
+
+                        <div class="ciga-link-help-title">
+
+                            // CIGA LINK FORMAT
+
+                        </div>
+
+
+                        <div>
+
+                            Need to make a word or phrase
+                            clickable?
+
+                            <br>
+
+                            Use:
+
+                            <strong>
+                                [[TEXT|URL]]
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ciga-link-example">
+
+                            [[ANOMALOUS|https://example.com]]
+
+                        </div>
+
+
+                        <div style="margin-top:8px;">
+
+                            The visitor will see only
+
+                            <strong>
+                                ANOMALOUS
+                            </strong>
+
+                            as a clickable link.
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -1096,7 +1282,9 @@
         </section>
 
 
-        <!-- CONNECTIONS -->
+        <!-- =========================
+             CONNECTIONS
+        ========================= -->
 
         <section class="panel">
 
@@ -1181,7 +1369,9 @@
         </section>
 
 
-        <!-- IMAGE -->
+        <!-- =========================
+             IMAGE
+        ========================= -->
 
         <section class="panel">
 
@@ -1221,7 +1411,9 @@
         </section>
 
 
-        <!-- LORE -->
+        <!-- =========================
+             LORE
+        ========================= -->
 
         <section class="panel">
 
@@ -1250,6 +1442,49 @@
                 Add separate incidents, historical events,
                 or additional information. Each entry is
                 stored separately in the personnel record.
+
+            </div>
+
+
+            <div class="ciga-link-help">
+
+                <div class="ciga-link-help-title">
+
+                    // CIGA LINK SUPPORT
+
+                </div>
+
+
+                <div>
+
+                    You can also place clickable lore links
+                    inside any history entry.
+
+                    <br>
+
+                    Format:
+
+                    <strong>
+                        [[TEXT|URL]]
+                    </strong>
+
+                </div>
+
+
+                <div class="ciga-link-example">
+
+                    SUBJECT CLASSIFICATION IS NOW
+                    [[ANOMALOUS|https://example.com]].
+
+                </div>
+
+
+                <div style="margin-top:8px;">
+
+                    Multiple links can be used in the same
+                    entry, and normal line breaks are preserved.
+
+                </div>
 
             </div>
 
@@ -1430,9 +1665,19 @@
             <textarea
                 class="history-textarea"
                 placeholder="Incidents, history, additional information..."
-            >${initialValue}</textarea>
+            ></textarea>
 
         `;
+
+
+        const textarea =
+            entry.querySelector(
+                ".history-textarea"
+            );
+
+
+        textarea.value =
+            initialValue;
 
 
         const removeButton =
