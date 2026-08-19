@@ -341,17 +341,15 @@
 
 
         /* =========================
-           GRID
+           MASONRY GRID
         ========================= */
 
         .grid {
-            display: grid;
+            column-count: 2;
 
-            grid-template-columns:
-                1fr
-                1fr;
+            column-gap: 22px;
 
-            gap: 22px;
+            width: 100%;
         }
 
 
@@ -361,6 +359,8 @@
 
         .panel {
             padding: 28px;
+
+            margin-bottom: 22px;
 
             border:
                 1px solid
@@ -378,6 +378,16 @@
                     255,
                     0.015
                 );
+
+            break-inside: avoid;
+
+            -webkit-column-break-inside: avoid;
+
+            display: inline-block;
+
+            width: 100%;
+
+            vertical-align: top;
         }
 
 
@@ -973,7 +983,7 @@
 
 
         /* =========================
-           MOBILE
+           TABLET
         ========================= */
 
         @media (max-width: 950px) {
@@ -1020,12 +1030,15 @@
 
 
             .grid {
-                grid-template-columns:
-                    1fr;
+                column-count: 1;
             }
 
         }
 
+
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 650px) {
 
@@ -1142,6 +1155,14 @@
 
             .archive-item-status {
                 font-size: 9px;
+            }
+
+
+            .footer {
+                flex-direction:
+                    column;
+
+                gap: 8px;
             }
 
         }
