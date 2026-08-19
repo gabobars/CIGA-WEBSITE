@@ -20,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
 
         * {
@@ -27,6 +28,7 @@
             margin: 0;
             padding: 0;
         }
+
 
         body {
             background: #000;
@@ -40,6 +42,7 @@
 
             overflow-x: hidden;
         }
+
 
         .page {
             min-height: 100vh;
@@ -64,6 +67,7 @@
                 rgba(255,255,255,0.30);
         }
 
+
         .title {
             display: inline-block;
 
@@ -79,6 +83,7 @@
                 text-shadow 0.2s ease;
         }
 
+
         .title:hover {
             text-decoration: none;
 
@@ -86,6 +91,7 @@
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.35);
         }
+
 
         .subtitle {
             margin-top: 8px;
@@ -95,6 +101,7 @@
 
             opacity: 0.55;
         }
+
 
         .header-status {
             text-align: right;
@@ -156,6 +163,7 @@
             opacity: 0.75;
         }
 
+
         .message-title {
             font-size: 19px;
             letter-spacing: 3px;
@@ -173,6 +181,7 @@
         .dashboard {
             display: none;
         }
+
 
         .dashboard.visible {
             display: block;
@@ -194,6 +203,7 @@
             margin-bottom: 25px;
         }
 
+
         .stat {
             padding: 18px;
 
@@ -205,6 +215,7 @@
                 rgba(255,255,255,0.015);
         }
 
+
         .stat-label {
             font-size: 9px;
             letter-spacing: 2px;
@@ -213,6 +224,7 @@
 
             margin-bottom: 9px;
         }
+
 
         .stat-value {
             font-size: 19px;
@@ -239,6 +251,7 @@
             overflow: hidden;
         }
 
+
         .panel-title {
             display: flex;
             align-items: center;
@@ -263,6 +276,7 @@
             user-select: none;
         }
 
+
         .panel-title::after {
             content: "▼";
 
@@ -274,18 +288,25 @@
                 transform 0.2s ease;
         }
 
+
         .panel.collapsed > .panel-title {
             margin-bottom: 0;
-            border-bottom-color: transparent;
+
+            border-bottom-color:
+                transparent;
         }
 
+
         .panel.collapsed > .panel-title::after {
-            transform: rotate(-90deg);
+            transform:
+                rotate(-90deg);
         }
+
 
         .panel.collapsed > :not(.panel-title) {
             display: none;
         }
+
 
         .panel .panel.collapsed > .panel-title {
             display: flex;
@@ -320,6 +341,7 @@
                 border-color 0.2s ease;
         }
 
+
         .submission:hover {
             background:
                 rgba(255,255,255,0.045);
@@ -327,6 +349,7 @@
             border-color:
                 rgba(255,255,255,0.4);
         }
+
 
         .submission-id {
             font-size: 10px;
@@ -338,6 +361,7 @@
             margin-bottom: 8px;
         }
 
+
         .submission-name {
             font-size: 16px;
 
@@ -345,6 +369,7 @@
 
             margin-bottom: 10px;
         }
+
 
         .submission-meta {
             font-size: 10px;
@@ -355,6 +380,7 @@
 
             opacity: 0.62;
         }
+
 
         .submission-status {
             display: flex;
@@ -368,6 +394,7 @@
 
             opacity: 0.58;
         }
+
 
         .submission-status::before {
             content: "";
@@ -406,6 +433,7 @@
             cursor: pointer;
         }
 
+
         button:hover {
             background:
                 rgba(255,255,255,0.06);
@@ -414,11 +442,13 @@
                 rgba(255,255,255,0.6);
         }
 
+
         button:disabled {
             opacity: 0.4;
 
             cursor: not-allowed;
         }
+
 
         .actions {
             display: flex;
@@ -427,6 +457,7 @@
 
             margin-top: 15px;
         }
+
 
         .logout {
             float: right;
@@ -441,9 +472,11 @@
             display: none;
         }
 
+
         .review-panel.visible {
             display: block;
         }
+
 
         .review-top {
             display: grid;
@@ -457,6 +490,7 @@
             margin-bottom: 25px;
         }
 
+
         .review-photo {
             width: 170px;
             height: 210px;
@@ -469,8 +503,10 @@
 
             background: #080808;
 
-            filter: grayscale(100%);
+            filter:
+                grayscale(100%);
         }
+
 
         .review-photo-unavailable {
             width: 170px;
@@ -495,13 +531,17 @@
             opacity: 0.45;
         }
 
+
         .review-subject {
             display: flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
-            justify-content: center;
+            justify-content:
+                center;
         }
+
 
         .review-subject-label {
             font-size: 9px;
@@ -513,6 +553,7 @@
             margin-bottom: 10px;
         }
 
+
         .review-subject-name {
             font-size: 29px;
 
@@ -520,6 +561,7 @@
 
             margin-bottom: 15px;
         }
+
 
         .review-subject-description {
             font-size: 12px;
@@ -550,11 +592,13 @@
             line-height: 1.7;
         }
 
+
         .review-label {
             opacity: 0.40;
 
             letter-spacing: 1.5px;
         }
+
 
         .review-value {
             opacity: 0.90;
@@ -580,13 +624,16 @@
             gap: 18px;
         }
 
+
         .classification-field {
             display: flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
             gap: 8px;
         }
+
 
         .classification-label {
             font-size: 9px;
@@ -595,6 +642,7 @@
 
             opacity: 0.48;
         }
+
 
         .classification-select {
             width: 100%;
@@ -623,14 +671,39 @@
             cursor: pointer;
         }
 
+
         .classification-select:focus {
             border-color:
                 rgba(255,255,255,0.65);
         }
 
+
         .classification-select option {
             background: #000;
             color: #fff;
+        }
+
+
+        .classification-note {
+            margin-top: 16px;
+
+            padding:
+                12px 14px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.35);
+
+            background:
+                rgba(255,255,255,0.02);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.48;
         }
 
 
@@ -648,6 +721,7 @@
             gap: 10px;
         }
 
+
         .social {
             padding: 13px;
 
@@ -659,6 +733,7 @@
                 rgba(255,255,255,0.02);
         }
 
+
         .social-name {
             font-size: 9px;
 
@@ -668,6 +743,7 @@
 
             margin-bottom: 6px;
         }
+
 
         .social-url {
             font-size: 10px;
@@ -702,10 +778,12 @@
                 rgba(255,255,255,0.15);
         }
 
+
         .approve {
             border-color:
                 rgba(255,255,255,0.55);
         }
+
 
         .reject {
             opacity: 0.7;
@@ -731,9 +809,11 @@
                 rgba(255,255,255,0.025);
         }
 
+
         .confirmation.visible {
             display: block;
         }
+
 
         .confirmation-title {
             font-size: 12px;
@@ -744,6 +824,7 @@
 
             opacity: 0.85;
         }
+
 
         .confirmation-text {
             font-size: 11px;
@@ -757,16 +838,19 @@
             margin-bottom: 17px;
         }
 
+
         .confirmation-actions {
             display: flex;
 
             gap: 10px;
         }
 
+
         .confirmation-yes {
             border-color:
                 rgba(255,255,255,0.55);
         }
+
 
         .confirmation-no {
             opacity: 0.6;
@@ -797,6 +881,7 @@
             opacity: 0.76;
         }
 
+
         .result.visible {
             display: block;
         }
@@ -818,6 +903,165 @@
 
 
         /* =========================
+           PERSONNEL EDITOR
+        ========================= */
+
+        .personnel-editor-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+
+        .personnel-editor-full {
+            grid-column:
+                1 / -1;
+        }
+
+
+        .personnel-editor-field {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            gap: 8px;
+        }
+
+
+        .personnel-editor-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.48;
+        }
+
+
+        .personnel-editor-input,
+        .personnel-editor-select,
+        .personnel-editor-textarea {
+            width: 100%;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .personnel-editor-input,
+        .personnel-editor-select {
+            height: 42px;
+
+            padding:
+                0 12px;
+        }
+
+
+        .personnel-editor-textarea {
+            min-height: 120px;
+
+            padding: 12px;
+
+            resize: vertical;
+
+            line-height: 1.8;
+        }
+
+
+        .personnel-editor-textarea.large {
+            min-height: 190px;
+        }
+
+
+        .personnel-editor-input:focus,
+        .personnel-editor-select:focus,
+        .personnel-editor-textarea:focus {
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
+        .personnel-editor-select option {
+            background: #000;
+            color: #fff;
+        }
+
+
+        .personnel-editor-readonly {
+            opacity: 0.55;
+
+            cursor: not-allowed;
+        }
+
+
+        .personnel-editor-actions {
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+
+        .personnel-save-button {
+            border-color:
+                rgba(255,255,255,0.55);
+        }
+
+
+        .personnel-editor-result {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+
+            opacity: 0.76;
+        }
+
+
+        .personnel-editor-result.visible {
+            display: block;
+        }
+
+
+        /* =========================
            ARCHIVE CREATOR
         ========================= */
 
@@ -831,17 +1075,22 @@
             gap: 18px;
         }
 
+
         .archive-full {
-            grid-column: 1 / -1;
+            grid-column:
+                1 / -1;
         }
+
 
         .archive-field {
             display: flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
             gap: 8px;
         }
+
 
         .archive-label {
             font-size: 9px;
@@ -850,6 +1099,7 @@
 
             opacity: 0.48;
         }
+
 
         .archive-input,
         .archive-select,
@@ -873,6 +1123,7 @@
             letter-spacing: 0.8px;
         }
 
+
         .archive-input,
         .archive-select {
             height: 42px;
@@ -880,6 +1131,7 @@
             padding:
                 0 12px;
         }
+
 
         .archive-textarea {
             min-height: 110px;
@@ -891,9 +1143,11 @@
             line-height: 1.7;
         }
 
+
         .archive-textarea.large {
             min-height: 260px;
         }
+
 
         .archive-input:focus,
         .archive-select:focus,
@@ -902,16 +1156,19 @@
                 rgba(255,255,255,0.65);
         }
 
+
         .archive-select option {
             background: #000;
             color: #fff;
         }
+
 
         .archive-number {
             opacity: 0.55;
 
             cursor: not-allowed;
         }
+
 
         .subject-preview {
             margin-top: 20px;
@@ -926,6 +1183,7 @@
                 rgba(255,255,255,0.02);
         }
 
+
         .subject-preview-title {
             font-size: 9px;
 
@@ -935,6 +1193,7 @@
 
             margin-bottom: 14px;
         }
+
 
         .subject-preview-grid {
             display: grid;
@@ -950,17 +1209,21 @@
             line-height: 1.7;
         }
 
+
         .subject-preview-label {
             opacity: 0.40;
 
             letter-spacing: 1.5px;
         }
 
+
         .subject-preview-value {
             opacity: 0.88;
 
-            word-break: break-word;
+            word-break:
+                break-word;
         }
+
 
         .archive-options {
             display: flex;
@@ -972,12 +1235,14 @@
             margin-top: 6px;
         }
 
+
         .archive-checkbox {
             width: 14px;
             height: 14px;
 
             accent-color: #fff;
         }
+
 
         .archive-option-label {
             font-size: 10px;
@@ -988,6 +1253,7 @@
 
             cursor: pointer;
         }
+
 
         .archive-actions {
             display: flex;
@@ -1005,6 +1271,7 @@
                 1px solid
                 rgba(255,255,255,0.15);
         }
+
 
         .archive-create-button {
             border-color:
@@ -1036,6 +1303,7 @@
                 rgba(255,255,255,0.02);
         }
 
+
         .archive-item:hover {
             background:
                 rgba(255,255,255,0.045);
@@ -1043,6 +1311,7 @@
             border-color:
                 rgba(255,255,255,0.4);
         }
+
 
         .archive-item-number {
             font-size: 9px;
@@ -1054,6 +1323,7 @@
             margin-bottom: 7px;
         }
 
+
         .archive-item-title {
             font-size: 15px;
 
@@ -1061,6 +1331,7 @@
 
             margin-bottom: 8px;
         }
+
 
         .archive-item-meta {
             font-size: 9px;
@@ -1071,6 +1342,7 @@
 
             opacity: 0.62;
         }
+
 
         .archive-item-status {
             display: flex;
@@ -1084,6 +1356,7 @@
 
             opacity: 0.60;
         }
+
 
         .archive-item-status::before {
             content: "";
@@ -1113,17 +1386,22 @@
             gap: 18px;
         }
 
+
         .communication-full {
-            grid-column: 1 / -1;
+            grid-column:
+                1 / -1;
         }
+
 
         .communication-field {
             display: flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
             gap: 8px;
         }
+
 
         .communication-label {
             font-size: 9px;
@@ -1132,6 +1410,7 @@
 
             opacity: 0.48;
         }
+
 
         .communication-input,
         .communication-select,
@@ -1155,6 +1434,7 @@
             letter-spacing: 0.8px;
         }
 
+
         .communication-input,
         .communication-select {
             height: 42px;
@@ -1162,6 +1442,7 @@
             padding:
                 0 12px;
         }
+
 
         .communication-textarea {
             min-height: 230px;
@@ -1173,6 +1454,7 @@
             line-height: 1.8;
         }
 
+
         .communication-input:focus,
         .communication-select:focus,
         .communication-textarea:focus {
@@ -1180,16 +1462,19 @@
                 rgba(255,255,255,0.65);
         }
 
+
         .communication-select option {
             background: #000;
             color: #fff;
         }
+
 
         .communication-number {
             opacity: 0.55;
 
             cursor: not-allowed;
         }
+
 
         .communication-options {
             display: flex;
@@ -1201,12 +1486,14 @@
             margin-top: 6px;
         }
 
+
         .communication-checkbox {
             width: 14px;
             height: 14px;
 
             accent-color: #fff;
         }
+
 
         .communication-option-label {
             font-size: 10px;
@@ -1217,6 +1504,7 @@
 
             cursor: pointer;
         }
+
 
         .communication-actions {
             display: flex;
@@ -1234,6 +1522,7 @@
                 1px solid
                 rgba(255,255,255,0.15);
         }
+
 
         .communication-create-button {
             border-color:
@@ -1262,6 +1551,7 @@
                 border-color 0.2s ease;
         }
 
+
         .communication-item:hover {
             background:
                 rgba(255,255,255,0.045);
@@ -1269,6 +1559,7 @@
             border-color:
                 rgba(255,255,255,0.4);
         }
+
 
         .communication-item-id {
             font-size: 9px;
@@ -1280,6 +1571,7 @@
             margin-bottom: 7px;
         }
 
+
         .communication-item-subject {
             font-size: 15px;
 
@@ -1287,6 +1579,7 @@
 
             margin-bottom: 9px;
         }
+
 
         .communication-item-meta {
             font-size: 9px;
@@ -1297,6 +1590,7 @@
 
             opacity: 0.62;
         }
+
 
         .communication-item-status {
             margin-top: 12px;
@@ -1342,8 +1636,10 @@
         @media (max-width: 700px) {
 
             .page {
-                padding: 22px 18px;
+                padding:
+                    22px 18px;
             }
+
 
             .header {
                 gap: 20px;
@@ -1352,94 +1648,131 @@
                     flex-start;
             }
 
+
             .title {
                 font-size: 17px;
             }
+
 
             .stats {
                 grid-template-columns:
                     1fr;
             }
 
+
             .submission {
                 grid-template-columns:
                     1fr;
             }
+
 
             .submission-status {
                 justify-content:
                     flex-start;
             }
 
+
             .review-top {
                 grid-template-columns:
                     1fr;
             }
+
 
             .social-grid {
                 grid-template-columns:
                     1fr;
             }
 
+
             .review-data {
                 grid-template-columns:
                     1fr;
             }
+
 
             .classification-grid {
                 grid-template-columns:
                     1fr;
             }
 
+
             .review-actions {
                 flex-direction:
                     column;
             }
+
 
             .confirmation-actions {
                 flex-direction:
                     column;
             }
 
+
+            .personnel-editor-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .personnel-editor-full {
+                grid-column:
+                    auto;
+            }
+
+
+            .personnel-editor-actions {
+                flex-direction:
+                    column;
+            }
+
+
             .archive-grid {
                 grid-template-columns:
                     1fr;
             }
+
 
             .archive-full {
                 grid-column:
                     auto;
             }
 
+
             .subject-preview-grid {
                 grid-template-columns:
                     1fr;
             }
+
 
             .archive-actions {
                 flex-direction:
                     column;
             }
 
+
             .archive-item {
                 grid-template-columns:
                     1fr;
             }
+
 
             .communication-grid {
                 grid-template-columns:
                     1fr;
             }
 
+
             .communication-full {
                 grid-column:
                     auto;
             }
 
+
             .communication-actions {
                 flex-direction:
                     column;
             }
+
 
             .footer {
                 flex-direction:
@@ -1447,6 +1780,7 @@
 
                 gap: 8px;
             }
+
         }
 
     </style>
@@ -1472,15 +1806,18 @@
                 CIGA SYSTEMS
             </a>
 
+
             <div class="subtitle">
                 ADMINISTRATION // RESTRICTED
             </div>
 
         </div>
 
+
         <div class="header-status">
 
             CLEARANCE: ADMIN<br>
+
             CHANNEL: SECURE
 
         </div>
@@ -1589,7 +1926,9 @@
         </section>
 
 
-        <!-- SUBMISSIONS -->
+        <!-- =========================
+             PENDING SUBMISSIONS
+        ========================= -->
 
         <section
             class="panel"
@@ -1599,6 +1938,7 @@
             <div class="panel-title">
                 // PENDING PERSONNEL SUBMISSIONS
             </div>
+
 
             <div id="submissionList">
 
@@ -1611,7 +1951,9 @@
         </section>
 
 
-        <!-- REVIEW PANEL -->
+        <!-- =========================
+             SUBMISSION REVIEW
+        ========================= -->
 
         <section
             class="panel review-panel"
@@ -1627,8 +1969,6 @@
             </div>
 
 
-            <!-- CONFIRMATION -->
-
             <div
                 class="confirmation"
                 id="confirmation"
@@ -1641,12 +1981,14 @@
                     // CONFIRM ACTION
                 </div>
 
+
                 <div
                     class="confirmation-text"
                     id="confirmationText"
                 >
                     CONFIRMATION REQUIRED.
                 </div>
+
 
                 <div class="confirmation-actions">
 
@@ -1656,6 +1998,7 @@
                     >
                         CONFIRM
                     </button>
+
 
                     <button
                         class="confirmation-no"
@@ -1698,7 +2041,510 @@
         </section>
 
 
-        <!-- ARCHIVE CREATION -->
+        <!-- =========================
+             PERSONNEL FILE EDITOR
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+                // PERSONNEL FILE EDITOR
+            </div>
+
+
+            <div class="personnel-editor-grid">
+
+
+                <div
+                    class="personnel-editor-field personnel-editor-full"
+                >
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editPersonnel"
+                    >
+                        SELECT PERSONNEL FILE
+                    </label>
+
+
+                    <select
+                        id="editPersonnel"
+                        class="personnel-editor-select"
+                    >
+
+                        <option value="">
+                            SELECT PERSONNEL FILE
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editFileNumber"
+                    >
+                        FILE NUMBER
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editFileNumber"
+                        class="personnel-editor-input personnel-editor-readonly"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editName"
+                    >
+                        DISPLAY NAME
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editName"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editAlias"
+                    >
+                        ALIAS
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editAlias"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editPrimaryActivity"
+                    >
+                        PRIMARY ACTIVITY
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editPrimaryActivity"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editLocation"
+                    >
+                        LOCATION
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editLocation"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editAffiliation"
+                    >
+                        AFFILIATION
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editAffiliation"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editOrigin"
+                    >
+                        ORIGIN
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editOrigin"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editStatus"
+                    >
+                        STATUS
+                    </label>
+
+
+                    <select
+                        id="editStatus"
+                        class="personnel-editor-select"
+                    >
+
+                        <option value="ACTIVE">
+                            ACTIVE
+                        </option>
+
+                        <option value="INACTIVE">
+                            INACTIVE
+                        </option>
+
+                        <option value="MISSING">
+                            MISSING
+                        </option>
+
+                        <option value="DECEASED">
+                            DECEASED
+                        </option>
+
+                        <option value="MONITORING">
+                            MONITORING
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editClearance"
+                    >
+                        CLEARANCE
+                    </label>
+
+
+                    <select
+                        id="editClearance"
+                        class="personnel-editor-select"
+                    >
+
+                        <option value="OPERATIVE">
+                            OPERATIVE
+                        </option>
+
+                        <option value="RESTRICTED">
+                            RESTRICTED
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="ADMIN">
+                            ADMIN
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editObservation"
+                    >
+                        OBSERVATION
+                    </label>
+
+
+                    <select
+                        id="editObservation"
+                        class="personnel-editor-select"
+                    >
+
+                        <option value="ONGOING">
+                            ONGOING
+                        </option>
+
+                        <option value="NOT REQUIRED">
+                            NOT REQUIRED
+                        </option>
+
+                        <option value="ELEVATED STATUS">
+                            ELEVATED STATUS
+                        </option>
+
+                        <option value="SUSPENDED">
+                            SUSPENDED
+                        </option>
+
+                        <option value="TERMINATED">
+                            TERMINATED
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editThreatLevel"
+                    >
+                        THREAT LEVEL
+                    </label>
+
+
+                    <select
+                        id="editThreatLevel"
+                        class="personnel-editor-select"
+                    >
+
+                        <option value="NONE">
+                            NONE
+                        </option>
+
+                        <option value="NON HOSTILE">
+                            NON HOSTILE
+                        </option>
+
+                        <option value="HOSTILE BEHAVIOUR">
+                            HOSTILE BEHAVIOUR
+                        </option>
+
+                        <option value="ANOMALOUS">
+                            ANOMALOUS
+                        </option>
+
+                        <option value="CLASSIFIED">
+                            CLASSIFIED
+                        </option>
+
+                        <option value="UNKNOWN">
+                            UNKNOWN
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="personnel-editor-field personnel-editor-full"
+                >
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editDescription"
+                    >
+                        DESCRIPTION
+                    </label>
+
+
+                    <textarea
+                        id="editDescription"
+                        class="personnel-editor-textarea"
+                    ></textarea>
+
+                </div>
+
+
+                <div
+                    class="personnel-editor-field personnel-editor-full"
+                >
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editNotes"
+                    >
+                        LORE / INCIDENT INFORMATION
+                    </label>
+
+
+                    <textarea
+                        id="editNotes"
+                        class="personnel-editor-textarea large"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editTwitch"
+                    >
+                        TWITCH
+                    </label>
+
+
+                    <input
+                        type="url"
+                        id="editTwitch"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editYoutube"
+                    >
+                        YOUTUBE
+                    </label>
+
+
+                    <input
+                        type="url"
+                        id="editYoutube"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editTiktok"
+                    >
+                        TIKTOK
+                    </label>
+
+
+                    <input
+                        type="url"
+                        id="editTiktok"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+
+                <div class="personnel-editor-field">
+
+                    <label
+                        class="personnel-editor-label"
+                        for="editDiscord"
+                    >
+                        DISCORD
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="editDiscord"
+                        class="personnel-editor-input"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="personnel-editor-result"
+                id="personnelEditorResult"
+            ></div>
+
+
+            <div class="personnel-editor-actions">
+
+                <button
+                    type="button"
+                    id="refreshPersonnelEditor"
+                >
+                    REFRESH FILES
+                </button>
+
+
+                <button
+                    type="button"
+                    class="personnel-save-button"
+                    id="savePersonnelButton"
+                >
+                    SAVE PERSONNEL FILE
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ARCHIVE CREATION
+        ========================= -->
 
         <section class="panel">
 
@@ -1711,11 +2557,13 @@
 
                 <div class="archive-grid">
 
+
                     <div class="archive-field">
 
                         <label class="archive-label">
                             ARCHIVE NUMBER
                         </label>
+
 
                         <input
                             type="text"
@@ -1735,6 +2583,7 @@
                         >
                             SUBJECT / PERSONNEL FILE
                         </label>
+
 
                         <select
                             id="archiveSubject"
@@ -1762,6 +2611,7 @@
                             ARCHIVE TITLE
                         </label>
 
+
                         <input
                             type="text"
                             id="archiveTitle"
@@ -1782,6 +2632,7 @@
                             INCIDENT DATE
                         </label>
 
+
                         <input
                             type="text"
                             id="archiveDate"
@@ -1798,6 +2649,7 @@
                             PUBLIC VISIBILITY
                         </label>
 
+
                         <div class="archive-options">
 
                             <input
@@ -1805,6 +2657,7 @@
                                 id="archiveVisible"
                                 class="archive-checkbox"
                             >
+
 
                             <label
                                 for="archiveVisible"
@@ -1829,6 +2682,7 @@
                             INCIDENT SUMMARY
                         </label>
 
+
                         <textarea
                             id="archiveSummary"
                             class="archive-textarea"
@@ -1848,6 +2702,7 @@
                         >
                             FULL ARCHIVE REPORT
                         </label>
+
 
                         <textarea
                             id="archiveContent"
@@ -1987,6 +2842,7 @@
                         REFRESH DATA
                     </button>
 
+
                     <button
                         type="submit"
                         class="archive-create-button"
@@ -2002,7 +2858,9 @@
         </section>
 
 
-        <!-- ARCHIVE LIST -->
+        <!-- =========================
+             ARCHIVE LIST
+        ========================= -->
 
         <section class="panel">
 
@@ -2022,7 +2880,9 @@
         </section>
 
 
-        <!-- COMMUNICATION CREATION -->
+        <!-- =========================
+             COMMUNICATION CREATION
+        ========================= -->
 
         <section class="panel">
 
@@ -2035,11 +2895,13 @@
 
                 <div class="communication-grid">
 
+
                     <div class="communication-field">
 
                         <label class="communication-label">
                             MESSAGE ID
                         </label>
+
 
                         <input
                             type="text"
@@ -2059,6 +2921,7 @@
                         >
                             CLASSIFICATION
                         </label>
+
 
                         <select
                             id="communicationClassification"
@@ -2098,6 +2961,7 @@
                             SENDER
                         </label>
 
+
                         <input
                             type="text"
                             id="communicationSender"
@@ -2117,6 +2981,7 @@
                         >
                             RECIPIENT
                         </label>
+
 
                         <input
                             type="text"
@@ -2140,6 +3005,7 @@
                             SUBJECT
                         </label>
 
+
                         <input
                             type="text"
                             id="communicationSubject"
@@ -2159,6 +3025,7 @@
                         >
                             STATUS
                         </label>
+
 
                         <select
                             id="communicationStatus"
@@ -2195,6 +3062,7 @@
                             VISIBILITY
                         </label>
 
+
                         <div class="communication-options">
 
                             <input
@@ -2202,6 +3070,7 @@
                                 id="communicationVisible"
                                 class="communication-checkbox"
                             >
+
 
                             <label
                                 for="communicationVisible"
@@ -2225,6 +3094,7 @@
                         >
                             MESSAGE CONTENT
                         </label>
+
 
                         <textarea
                             id="communicationContent"
@@ -2253,6 +3123,7 @@
                         REFRESH DATA
                     </button>
 
+
                     <button
                         type="submit"
                         class="communication-create-button"
@@ -2268,7 +3139,9 @@
         </section>
 
 
-        <!-- COMMUNICATION LIST -->
+        <!-- =========================
+             COMMUNICATION LIST
+        ========================= -->
 
         <section class="panel">
 
@@ -2309,6 +3182,7 @@
             CIGA SYSTEMS // ADMINISTRATION
         </span>
 
+
         <span>
             ALL ADMINISTRATIVE ACCESS IS LOGGED
         </span>
@@ -2328,12 +3202,14 @@
     const SUPABASE_URL =
         "https://ryefnjxwyjpeuwyoqbil.supabase.co";
 
+
     const SUPABASE_KEY =
         "sb_publishable_w25FJ3VA6LGLRVwzy7ZHgw_9Ll_3zPt";
 
 
-    const { createClient } =
-        supabase;
+    const {
+        createClient
+    } = supabase;
 
 
     const db =
@@ -2366,74 +3242,218 @@
             "dashboard"
         );
 
+
     const deniedMessage =
         document.getElementById(
             "deniedMessage"
         );
+
 
     const terminalStatus =
         document.getElementById(
             "terminalStatus"
         );
 
+
     const pendingCount =
         document.getElementById(
             "pendingCount"
         );
+
 
     const submissionList =
         document.getElementById(
             "submissionList"
         );
 
+
     const reviewPanel =
         document.getElementById(
             "reviewPanel"
         );
+
 
     const reviewContent =
         document.getElementById(
             "reviewContent"
         );
 
+
     const reviewResult =
         document.getElementById(
             "reviewResult"
         );
+
 
     const approveButton =
         document.getElementById(
             "approveButton"
         );
 
+
     const rejectButton =
         document.getElementById(
             "rejectButton"
         );
+
 
     const confirmation =
         document.getElementById(
             "confirmation"
         );
 
+
     const confirmationTitle =
         document.getElementById(
             "confirmationTitle"
         );
+
 
     const confirmationText =
         document.getElementById(
             "confirmationText"
         );
 
+
     const confirmationYes =
         document.getElementById(
             "confirmationYes"
         );
 
+
     const confirmationNo =
         document.getElementById(
             "confirmationNo"
+        );
+
+
+    /* ==========================================
+       PERSONNEL EDITOR ELEMENTS
+    ========================================== */
+
+    const editPersonnel =
+        document.getElementById(
+            "editPersonnel"
+        );
+
+
+    const editFileNumber =
+        document.getElementById(
+            "editFileNumber"
+        );
+
+
+    const editName =
+        document.getElementById(
+            "editName"
+        );
+
+
+    const editAlias =
+        document.getElementById(
+            "editAlias"
+        );
+
+
+    const editPrimaryActivity =
+        document.getElementById(
+            "editPrimaryActivity"
+        );
+
+
+    const editLocation =
+        document.getElementById(
+            "editLocation"
+        );
+
+
+    const editAffiliation =
+        document.getElementById(
+            "editAffiliation"
+        );
+
+
+    const editOrigin =
+        document.getElementById(
+            "editOrigin"
+        );
+
+
+    const editStatus =
+        document.getElementById(
+            "editStatus"
+        );
+
+
+    const editClearance =
+        document.getElementById(
+            "editClearance"
+        );
+
+
+    const editObservation =
+        document.getElementById(
+            "editObservation"
+        );
+
+
+    const editThreatLevel =
+        document.getElementById(
+            "editThreatLevel"
+        );
+
+
+    const editDescription =
+        document.getElementById(
+            "editDescription"
+        );
+
+
+    const editNotes =
+        document.getElementById(
+            "editNotes"
+        );
+
+
+    const editTwitch =
+        document.getElementById(
+            "editTwitch"
+        );
+
+
+    const editYoutube =
+        document.getElementById(
+            "editYoutube"
+        );
+
+
+    const editTiktok =
+        document.getElementById(
+            "editTiktok"
+        );
+
+
+    const editDiscord =
+        document.getElementById(
+            "editDiscord"
+        );
+
+
+    const savePersonnelButton =
+        document.getElementById(
+            "savePersonnelButton"
+        );
+
+
+    const refreshPersonnelEditor =
+        document.getElementById(
+            "refreshPersonnelEditor"
+        );
+
+
+    const personnelEditorResult =
+        document.getElementById(
+            "personnelEditorResult"
         );
 
 
@@ -2446,55 +3466,66 @@
             "archiveForm"
         );
 
+
     const archiveNumber =
         document.getElementById(
             "archiveNumber"
         );
+
 
     const archiveSubject =
         document.getElementById(
             "archiveSubject"
         );
 
+
     const archiveTitle =
         document.getElementById(
             "archiveTitle"
         );
+
 
     const archiveDate =
         document.getElementById(
             "archiveDate"
         );
 
+
     const archiveSummary =
         document.getElementById(
             "archiveSummary"
         );
+
 
     const archiveContent =
         document.getElementById(
             "archiveContent"
         );
 
+
     const archiveVisible =
         document.getElementById(
             "archiveVisible"
         );
+
 
     const archiveResult =
         document.getElementById(
             "archiveResult"
         );
 
+
     const archiveList =
         document.getElementById(
             "archiveList"
         );
 
+
     const createArchiveButton =
         document.getElementById(
             "createArchiveButton"
         );
+
 
     const refreshArchiveData =
         document.getElementById(
@@ -2507,35 +3538,42 @@
             "previewStatus"
         );
 
+
     const previewClearance =
         document.getElementById(
             "previewClearance"
         );
+
 
     const previewThreat =
         document.getElementById(
             "previewThreat"
         );
 
+
     const previewLocation =
         document.getElementById(
             "previewLocation"
         );
+
 
     const previewAffiliation =
         document.getElementById(
             "previewAffiliation"
         );
 
+
     const previewOrigin =
         document.getElementById(
             "previewOrigin"
         );
 
+
     const previewObservation =
         document.getElementById(
             "previewObservation"
         );
+
 
     const previewActivity =
         document.getElementById(
@@ -2552,60 +3590,72 @@
             "communicationForm"
         );
 
+
     const communicationMessageId =
         document.getElementById(
             "communicationMessageId"
         );
+
 
     const communicationSender =
         document.getElementById(
             "communicationSender"
         );
 
+
     const communicationRecipient =
         document.getElementById(
             "communicationRecipient"
         );
+
 
     const communicationSubject =
         document.getElementById(
             "communicationSubject"
         );
 
+
     const communicationClassification =
         document.getElementById(
             "communicationClassification"
         );
+
 
     const communicationStatus =
         document.getElementById(
             "communicationStatus"
         );
 
+
     const communicationContent =
         document.getElementById(
             "communicationContent"
         );
+
 
     const communicationVisible =
         document.getElementById(
             "communicationVisible"
         );
 
+
     const communicationResult =
         document.getElementById(
             "communicationResult"
         );
+
 
     const communicationList =
         document.getElementById(
             "communicationList"
         );
 
+
     const createCommunicationButton =
         document.getElementById(
             "createCommunicationButton"
         );
+
 
     const refreshCommunicationData =
         document.getElementById(
@@ -2624,9 +3674,13 @@
        HTML ESCAPE
     ========================================== */
 
-    function escapeHTML(value) {
+    function escapeHTML(
+        value
+    ) {
 
-        return String(value ?? "")
+        return String(
+            value ?? ""
+        )
 
             .replace(
                 /&/g,
@@ -2652,6 +3706,33 @@
                 /'/g,
                 "&#039;"
             );
+
+    }
+
+
+    /* ==========================================
+       RESTORE SCROLL POSITION
+    ========================================== */
+
+    function restoreScrollPosition(
+        position
+    ) {
+
+        requestAnimationFrame(
+            () => {
+
+                window.scrollTo(
+                    {
+                        top:
+                            position,
+
+                        behavior:
+                            "instant"
+                    }
+                );
+
+            }
+        );
 
     }
 
@@ -2794,13 +3875,17 @@
                 error
             );
 
+
             await db.auth.signOut();
+
 
             terminalStatus.textContent =
                 "> ADMINISTRATOR VERIFICATION FAILED.";
 
+
             deniedMessage.style.display =
                 "block";
+
 
             return;
 
@@ -2810,8 +3895,10 @@
         terminalStatus.textContent =
             "> ADMINISTRATOR VERIFIED.";
 
+
         deniedMessage.style.display =
             "none";
+
 
         dashboard.classList.add(
             "visible"
@@ -2870,6 +3957,7 @@
                 "SUBMISSION LOAD ERROR:",
                 error
             );
+
 
             submissionList.innerHTML = `
 
@@ -2942,12 +4030,10 @@
                         <div class="submission-name">
 
                             [
-
                             ${escapeHTML(
                                 submission.name ||
                                 "UNKNOWN"
                             ).toUpperCase()}
-
                             ]
 
                         </div>
@@ -3076,6 +4162,7 @@
                 "> SUBMISSION COULD NOT BE LOADED."
             );
 
+
             return;
 
         }
@@ -3092,7 +4179,9 @@
                 ? `
 
                     <img
-                        src="${escapeHTML(data.photo)}"
+                        src="${escapeHTML(
+                            data.photo
+                        )}"
                         alt="SUBJECT IMAGE"
                         class="review-photo"
                     >
@@ -3128,6 +4217,7 @@
                         DESIGNATION
                     </div>
 
+
                     <div class="review-subject-name">
 
                         ${escapeHTML(
@@ -3156,16 +4246,19 @@
             </div>
 
 
-            <!-- SUBMITTED ENTITY INFORMATION -->
+            <!-- ENTITY INFORMATION -->
 
             <div class="panel">
 
                 <div class="panel-title">
+
                     // ENTITY INFORMATION
+
                 </div>
 
 
                 <div class="review-data">
+
 
                     <div class="review-label">
                         ALIAS
@@ -3236,14 +4329,14 @@
             <div class="panel">
 
                 <div class="panel-title">
+
                     // CIGA CLASSIFICATION
+
                 </div>
 
 
                 <div class="classification-grid">
 
-
-                    <!-- STATUS -->
 
                     <div class="classification-field">
 
@@ -3253,6 +4346,7 @@
                         >
                             STATUS
                         </label>
+
 
                         <select
                             id="reviewStatus"
@@ -3292,8 +4386,6 @@
                     </div>
 
 
-                    <!-- CLEARANCE -->
-
                     <div class="classification-field">
 
                         <label
@@ -3302,6 +4394,7 @@
                         >
                             CLEARANCE
                         </label>
+
 
                         <select
                             id="reviewClearance"
@@ -3333,8 +4426,6 @@
                     </div>
 
 
-                    <!-- OBSERVATION -->
-
                     <div class="classification-field">
 
                         <label
@@ -3343,6 +4434,7 @@
                         >
                             OBSERVATION
                         </label>
+
 
                         <select
                             id="reviewObservation"
@@ -3382,8 +4474,6 @@
                     </div>
 
 
-                    <!-- THREAT LEVEL -->
-
                     <div class="classification-field">
 
                         <label
@@ -3392,6 +4482,7 @@
                         >
                             THREAT LEVEL
                         </label>
+
 
                         <select
                             id="reviewThreatLevel"
@@ -3426,6 +4517,13 @@
 
                     </div>
 
+                </div>
+
+
+                <div class="classification-note">
+
+                    &gt; CLASSIFICATION VALUES ARE ASSIGNED
+                    BY CIGA ADMINISTRATION.
 
                 </div>
 
@@ -3437,11 +4535,14 @@
             <div class="panel">
 
                 <div class="panel-title">
+
                     // KNOWN CONNECTIONS
+
                 </div>
 
 
                 <div class="social-grid">
+
 
                     <div class="social">
 
@@ -3524,7 +4625,9 @@
             <div class="panel">
 
                 <div class="panel-title">
+
                     // LORE / INCIDENT INFORMATION
+
                 </div>
 
 
@@ -3545,27 +4648,23 @@
         `;
 
 
-        /*
-            Restore current database values when
-            reopening or reviewing an existing
-            submission that may already contain
-            classification values.
-        */
-
         const reviewStatus =
             document.getElementById(
                 "reviewStatus"
             );
+
 
         const reviewClearance =
             document.getElementById(
                 "reviewClearance"
             );
 
+
         const reviewObservation =
             document.getElementById(
                 "reviewObservation"
             );
+
 
         const reviewThreatLevel =
             document.getElementById(
@@ -3574,48 +4673,38 @@
 
 
         if (
-            data.status &&
-            reviewStatus.querySelector(
-                `option[value="${CSS.escape(
+            data.status
+            &&
+            Array.from(
+                reviewStatus.options
+            ).some(
+                option =>
+                    option.value ===
                     data.status
-                )}"]`
             )
         ) {
 
             reviewStatus.value =
                 data.status;
 
-        }
+        } else {
 
-
-        /*
-            Submissions normally do not contain these
-            admin classifications, so these defaults
-            are used for new submissions.
-        */
-
-        if (!reviewClearance.value) {
-
-            reviewClearance.value =
-                "OPERATIVE";
+            reviewStatus.value =
+                "ACTIVE";
 
         }
 
 
-        if (!reviewObservation.value) {
-
-            reviewObservation.value =
-                "ONGOING";
-
-        }
+        reviewClearance.value =
+            "OPERATIVE";
 
 
-        if (!reviewThreatLevel.value) {
+        reviewObservation.value =
+            "ONGOING";
 
-            reviewThreatLevel.value =
-                "UNKNOWN";
 
-        }
+        reviewThreatLevel.value =
+            "UNKNOWN";
 
 
         confirmation.classList.remove(
@@ -3626,6 +4715,22 @@
         reviewResult.classList.remove(
             "visible"
         );
+
+
+        approveButton.disabled =
+            false;
+
+
+        rejectButton.disabled =
+            false;
+
+
+        approveButton.textContent =
+            "APPROVE RECORD";
+
+
+        rejectButton.textContent =
+            "REJECT RECORD";
 
 
         reviewPanel.classList.add(
@@ -3711,6 +4816,7 @@
             pendingAction =
                 null;
 
+
             confirmation.classList.remove(
                 "visible"
             );
@@ -3783,6 +4889,7 @@
                 return;
             }
 
+
             showConfirmation(
                 "approve"
             );
@@ -3797,8 +4904,13 @@
 
     async function approveCurrentSubmission() {
 
+        const preservedScroll =
+            window.scrollY;
+
+
         approveButton.disabled =
             true;
+
 
         rejectButton.disabled =
             true;
@@ -3806,25 +4918,23 @@
 
         try {
 
-            /*
-                Read the administrator's
-                classification choices.
-            */
-
             const reviewStatus =
                 document.getElementById(
                     "reviewStatus"
                 );
+
 
             const reviewClearance =
                 document.getElementById(
                     "reviewClearance"
                 );
 
+
             const reviewObservation =
                 document.getElementById(
                     "reviewObservation"
                 );
+
 
             const reviewThreatLevel =
                 document.getElementById(
@@ -3861,10 +4971,6 @@
             const selectedThreatLevel =
                 reviewThreatLevel.value;
 
-
-            /*
-                Find next personnel file number.
-            */
 
             const {
                 data: existingPersonnel,
@@ -3903,8 +5009,10 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
-                        number > highestNumber
+                        !Number.isNaN(number)
+                        &&
+                        number >
+                        highestNumber
                     ) {
 
                         highestNumber =
@@ -3924,11 +5032,6 @@
                     "0"
                 );
 
-
-            /*
-                Create personnel record using
-                administrator-selected values.
-            */
 
             const personnelRecord = {
 
@@ -4014,10 +5117,6 @@
             }
 
 
-            /*
-                Mark submission as approved.
-            */
-
             const {
                 error:
                 updateSubmissionError
@@ -4050,9 +5149,15 @@
             }
 
 
-            showReviewResult(
+            currentSubmission.submission_status =
+                "APPROVED";
+
+
+            reviewResult.innerHTML =
                 `> RECORD APPROVED.<br>` +
-                `> FILE_${nextFileNumber} CREATED.<br>` +
+                `> FILE_${escapeHTML(
+                    nextFileNumber
+                )} CREATED.<br>` +
                 `> STATUS: ${escapeHTML(
                     selectedStatus
                 )}.<br>` +
@@ -4065,21 +5170,40 @@
                 `> THREAT LEVEL: ${escapeHTML(
                     selectedThreatLevel
                 )}.<br>` +
-                `> PERSONNEL DATABASE UPDATED.`
+                `> PERSONNEL DATABASE UPDATED.`;
+
+
+            reviewResult.classList.add(
+                "visible"
             );
 
 
-            currentSubmission =
-                null;
+            approveButton.disabled =
+                true;
 
 
-            reviewContent.innerHTML =
-                "";
+            rejectButton.disabled =
+                true;
+
+
+            approveButton.textContent =
+                "RECORD APPROVED";
+
+
+            rejectButton.textContent =
+                "RECORD CLOSED";
 
 
             await loadSubmissions();
 
             await loadPersonnel();
+
+            await loadArchives();
+
+
+            restoreScrollPosition(
+                preservedScroll
+            );
 
 
         } catch (error) {
@@ -4088,6 +5212,14 @@
                 "APPROVAL ERROR:",
                 error
             );
+
+
+            approveButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
 
 
             let message =
@@ -4111,14 +5243,12 @@
                 message
             );
 
+
+            restoreScrollPosition(
+                preservedScroll
+            );
+
         }
-
-
-        approveButton.disabled =
-            false;
-
-        rejectButton.disabled =
-            false;
 
     }
 
@@ -4135,6 +5265,7 @@
                 return;
             }
 
+
             showConfirmation(
                 "reject"
             );
@@ -4149,8 +5280,13 @@
 
     async function rejectCurrentSubmission() {
 
+        const preservedScroll =
+            window.scrollY;
+
+
         approveButton.disabled =
             true;
+
 
         rejectButton.disabled =
             true;
@@ -4186,36 +5322,61 @@
             );
 
 
+            approveButton.disabled =
+                false;
+
+
+            rejectButton.disabled =
+                false;
+
+
             showReviewResult(
                 "> REJECTION FAILED."
             );
 
-        } else {
 
-            showReviewResult(
-                "> RECORD REJECTED.<br>" +
-                "> SUBMISSION ARCHIVED."
+            restoreScrollPosition(
+                preservedScroll
             );
 
 
-            currentSubmission =
-                null;
+        } else {
+
+            currentSubmission.submission_status =
+                "REJECTED";
 
 
-            reviewContent.innerHTML =
-                "";
+            showReviewResult(
+                "> RECORD REJECTED.<br>" +
+                "> SUBMISSION ARCHIVED.<br>" +
+                "> REVIEW REMAINS OPEN."
+            );
+
+
+            approveButton.disabled =
+                true;
+
+
+            rejectButton.disabled =
+                true;
+
+
+            approveButton.textContent =
+                "RECORD CLOSED";
+
+
+            rejectButton.textContent =
+                "RECORD REJECTED";
 
 
             await loadSubmissions();
 
+
+            restoreScrollPosition(
+                preservedScroll
+            );
+
         }
-
-
-        approveButton.disabled =
-            false;
-
-        rejectButton.disabled =
-            false;
 
     }
 
@@ -4230,6 +5391,7 @@
 
         reviewResult.innerHTML =
             message;
+
 
         reviewResult.classList.add(
             "visible"
@@ -4253,7 +5415,7 @@
                 .from("personnel")
 
                 .select(
-                    "id, file_number, name, alias, status, clearance, observation, threat_level, description, primary_activity, location, affiliation, origin, photo, visible"
+                    "id, file_number, name, alias, status, clearance, observation, threat_level, description, notes, primary_activity, location, affiliation, origin, twitch, youtube, tiktok, discord, photo, visible"
                 )
 
                 .order(
@@ -4280,7 +5442,19 @@
 
             `;
 
-            personnelRecords = [];
+
+            editPersonnel.innerHTML = `
+
+                <option value="">
+                    PERSONNEL DATABASE ERROR
+                </option>
+
+            `;
+
+
+            personnelRecords =
+                [];
+
 
             return;
 
@@ -4290,6 +5464,10 @@
         personnelRecords =
             data || [];
 
+
+        /* =========================
+           ARCHIVE PERSONNEL LIST
+        ========================= */
 
         archiveSubject.innerHTML = `
 
@@ -4327,7 +5505,823 @@
 
         resetSubjectPreview();
 
+
+        /* =========================
+           EDITOR PERSONNEL LIST
+        ========================= */
+
+        const previousEditId =
+            editPersonnel.value;
+
+
+        editPersonnel.innerHTML = `
+
+            <option value="">
+                SELECT PERSONNEL FILE
+            </option>
+
+        `;
+
+
+        personnelRecords.forEach(
+            person => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    person.id;
+
+
+                option.textContent =
+                    `${person.file_number || "UNKNOWN"} // ${person.name || "UNKNOWN"}`;
+
+
+                editPersonnel.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        if (
+            previousEditId
+            &&
+            personnelRecords.some(
+                person =>
+                    String(
+                        person.id
+                    ) ===
+                    String(
+                        previousEditId
+                    )
+            )
+        ) {
+
+            editPersonnel.value =
+                previousEditId;
+
+
+            loadPersonnelIntoEditor(
+                Number(
+                    previousEditId
+                )
+            );
+
+        }
+
     }
+
+
+    /* ==========================================
+       LOAD PERSONNEL INTO EDITOR
+    ========================================== */
+
+    function loadPersonnelIntoEditor(
+        personnelId
+    ) {
+
+        const person =
+            personnelRecords.find(
+                record =>
+                    Number(
+                        record.id
+                    ) ===
+                    Number(
+                        personnelId
+                    )
+            );
+
+
+        if (!person) {
+
+            resetPersonnelEditor();
+
+            return;
+
+        }
+
+
+        editFileNumber.value =
+            person.file_number ||
+            "";
+
+
+        editName.value =
+            person.name ||
+            "";
+
+
+        editAlias.value =
+            person.alias ||
+            "";
+
+
+        editPrimaryActivity.value =
+            person.primary_activity ||
+            "";
+
+
+        editLocation.value =
+            person.location ||
+            "";
+
+
+        editAffiliation.value =
+            person.affiliation ||
+            "";
+
+
+        editOrigin.value =
+            person.origin ||
+            "";
+
+
+        setSelectOrFallback(
+            editStatus,
+            person.status,
+            "UNKNOWN"
+        );
+
+
+        setSelectOrFallback(
+            editClearance,
+            person.clearance,
+            "UNKNOWN"
+        );
+
+
+        setSelectOrFallback(
+            editObservation,
+            person.observation,
+            "UNKNOWN"
+        );
+
+
+        setSelectOrFallback(
+            editThreatLevel,
+            person.threat_level,
+            "UNKNOWN"
+        );
+
+
+        editDescription.value =
+            person.description ||
+            "";
+
+
+        editNotes.value =
+            formatEditableNotes(
+                person.notes
+            );
+
+
+        editTwitch.value =
+            person.twitch ||
+            "";
+
+
+        editYoutube.value =
+            person.youtube ||
+            "";
+
+
+        editTiktok.value =
+            person.tiktok ||
+            "";
+
+
+        editDiscord.value =
+            person.discord ||
+            "";
+
+
+        personnelEditorResult.classList.remove(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       FORMAT EDITABLE NOTES
+    ========================================== */
+
+    function formatEditableNotes(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return "";
+
+        }
+
+
+        if (
+            Array.isArray(
+                value
+            )
+        ) {
+
+            return value
+                .map(
+                    item =>
+                        String(
+                            item
+                        )
+                )
+                .filter(
+                    item =>
+                        item.trim() !== ""
+                )
+                .join(
+                    "\n\n"
+                );
+
+        }
+
+
+        const text =
+            String(
+                value
+            );
+
+
+        if (
+            text.trim().startsWith("[")
+            &&
+            text.trim().endsWith("]")
+        ) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+                        .map(
+                            item =>
+                                String(
+                                    item
+                                )
+                        )
+                        .filter(
+                            item =>
+                                item.trim() !== ""
+                        )
+                        .join(
+                            "\n\n"
+                        );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "NOTES JSON PARSE FAILED:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        return text;
+
+    }
+
+
+    /* ==========================================
+       SELECT OR FALLBACK
+    ========================================== */
+
+    function setSelectOrFallback(
+        select,
+        value,
+        fallback
+    ) {
+
+        const desired =
+            String(
+                value ||
+                fallback
+            );
+
+
+        const exists =
+            Array.from(
+                select.options
+            ).some(
+                option =>
+                    option.value ===
+                    desired
+            );
+
+
+        if (exists) {
+
+            select.value =
+                desired;
+
+            return;
+
+        }
+
+
+        const fallbackExists =
+            Array.from(
+                select.options
+            ).some(
+                option =>
+                    option.value ===
+                    fallback
+            );
+
+
+        select.value =
+            fallbackExists
+                ? fallback
+                : "";
+
+    }
+
+
+    /* ==========================================
+       RESET PERSONNEL EDITOR
+    ========================================== */
+
+    function resetPersonnelEditor() {
+
+        editFileNumber.value =
+            "";
+
+
+        editName.value =
+            "";
+
+
+        editAlias.value =
+            "";
+
+
+        editPrimaryActivity.value =
+            "";
+
+
+        editLocation.value =
+            "";
+
+
+        editAffiliation.value =
+            "";
+
+
+        editOrigin.value =
+            "";
+
+
+        editStatus.value =
+            "UNKNOWN";
+
+
+        editClearance.value =
+            "UNKNOWN";
+
+
+        editObservation.value =
+            "UNKNOWN";
+
+
+        editThreatLevel.value =
+            "UNKNOWN";
+
+
+        editDescription.value =
+            "";
+
+
+        editNotes.value =
+            "";
+
+
+        editTwitch.value =
+            "";
+
+
+        editYoutube.value =
+            "";
+
+
+        editTiktok.value =
+            "";
+
+
+        editDiscord.value =
+            "";
+
+    }
+
+
+    /* ==========================================
+       PERSONNEL EDITOR RESULT
+    ========================================== */
+
+    function showPersonnelEditorResult(
+        message
+    ) {
+
+        personnelEditorResult.innerHTML =
+            message;
+
+
+        personnelEditorResult.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    /* ==========================================
+       SAVE PERSONNEL FILE
+    ========================================== */
+
+    async function savePersonnelFile() {
+
+        const personnelId =
+            Number(
+                editPersonnel.value
+            );
+
+
+        if (
+            !personnelId
+        ) {
+
+            showPersonnelEditorResult(
+                "> UPDATE FAILED.<br>" +
+                "> SELECT A PERSONNEL FILE."
+            );
+
+
+            return;
+
+        }
+
+
+        savePersonnelButton.disabled =
+            true;
+
+
+        refreshPersonnelEditor.disabled =
+            true;
+
+
+        savePersonnelButton.textContent =
+            "SAVING...";
+
+
+        personnelEditorResult.classList.remove(
+            "visible"
+        );
+
+
+        const preservedScroll =
+            window.scrollY;
+
+
+        try {
+
+            const {
+                data:
+                currentPersonnel,
+                error:
+                personnelLoadError
+            } =
+                await db
+
+                    .from(
+                        "personnel"
+                    )
+
+                    .select(
+                        "id, file_number"
+                    )
+
+                    .eq(
+                        "id",
+                        personnelId
+                    )
+
+                    .maybeSingle();
+
+
+            if (
+                personnelLoadError ||
+                !currentPersonnel
+            ) {
+
+                throw (
+                    personnelLoadError ||
+                    new Error(
+                        "PERSONNEL_RECORD_NOT_FOUND"
+                    )
+                );
+
+            }
+
+
+            const personnelUpdate = {
+
+                name:
+                    editName.value.trim() ||
+                    null,
+
+                alias:
+                    editAlias.value.trim() ||
+                    null,
+
+                status:
+                    editStatus.value,
+
+                clearance:
+                    editClearance.value,
+
+                observation:
+                    editObservation.value,
+
+                threat_level:
+                    editThreatLevel.value,
+
+                description:
+                    editDescription.value.trim() ||
+                    null,
+
+                notes:
+                    editNotes.value.trim() ||
+                    null,
+
+                primary_activity:
+                    editPrimaryActivity.value.trim() ||
+                    null,
+
+                location:
+                    editLocation.value.trim() ||
+                    null,
+
+                affiliation:
+                    editAffiliation.value.trim() ||
+                    null,
+
+                origin:
+                    editOrigin.value.trim() ||
+                    null,
+
+                twitch:
+                    editTwitch.value.trim() ||
+                    null,
+
+                youtube:
+                    editYoutube.value.trim() ||
+                    null,
+
+                tiktok:
+                    editTiktok.value.trim() ||
+                    null,
+
+                discord:
+                    editDiscord.value.trim() ||
+                    null
+
+            };
+
+
+            const {
+                error:
+                updateError
+            } =
+                await db
+
+                    .from(
+                        "personnel"
+                    )
+
+                    .update(
+                        personnelUpdate
+                    )
+
+                    .eq(
+                        "id",
+                        personnelId
+                    );
+
+
+            if (updateError) {
+
+                throw updateError;
+
+            }
+
+
+            showPersonnelEditorResult(
+                `> PERSONNEL FILE UPDATED.<br>` +
+                `> FILE_${escapeHTML(
+                    currentPersonnel.file_number ||
+                    personnelId
+                )}.<br>` +
+                `> DATABASE UPDATED SUCCESSFULLY.`
+            );
+
+
+            await loadPersonnel();
+
+
+            /*
+                Keep the edited file selected.
+            */
+
+            editPersonnel.value =
+                String(
+                    personnelId
+                );
+
+
+            loadPersonnelIntoEditor(
+                personnelId
+            );
+
+
+            await loadArchives();
+
+
+            restoreScrollPosition(
+                preservedScroll
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "PERSONNEL UPDATE ERROR:",
+                error
+            );
+
+
+            showPersonnelEditorResult(
+                `> PERSONNEL FILE UPDATE FAILED.<br>` +
+                `> ${
+                    escapeHTML(
+                        error.message ||
+                        "UNKNOWN DATABASE ERROR."
+                    )
+                }`
+            );
+
+
+            restoreScrollPosition(
+                preservedScroll
+            );
+
+        }
+
+
+        savePersonnelButton.disabled =
+            false;
+
+
+        refreshPersonnelEditor.disabled =
+            false;
+
+
+        savePersonnelButton.textContent =
+            "SAVE PERSONNEL FILE";
+
+    }
+
+
+    /* ==========================================
+       PERSONNEL EDITOR SELECT
+    ========================================== */
+
+    editPersonnel.addEventListener(
+        "change",
+        function() {
+
+            const selectedId =
+                Number(
+                    editPersonnel.value
+                );
+
+
+            if (!selectedId) {
+
+                resetPersonnelEditor();
+
+                personnelEditorResult.classList.remove(
+                    "visible"
+                );
+
+                return;
+
+            }
+
+
+            loadPersonnelIntoEditor(
+                selectedId
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       PERSONNEL EDITOR REFRESH
+    ========================================== */
+
+    refreshPersonnelEditor.addEventListener(
+        "click",
+        async function() {
+
+            const currentId =
+                editPersonnel.value;
+
+
+            refreshPersonnelEditor.disabled =
+                true;
+
+
+            savePersonnelButton.disabled =
+                true;
+
+
+            refreshPersonnelEditor.textContent =
+                "REFRESHING...";
+
+
+            await loadPersonnel();
+
+
+            await loadArchives();
+
+
+            if (
+                currentId
+            ) {
+
+                editPersonnel.value =
+                    currentId;
+
+
+                loadPersonnelIntoEditor(
+                    Number(
+                        currentId
+                    )
+                );
+
+            }
+
+
+            refreshPersonnelEditor.disabled =
+                false;
+
+
+            savePersonnelButton.disabled =
+                false;
+
+
+            refreshPersonnelEditor.textContent =
+                "REFRESH FILES";
+
+        }
+    );
+
+
+    /* ==========================================
+       SAVE PERSONNEL BUTTON
+    ========================================== */
+
+    savePersonnelButton.addEventListener(
+        "click",
+        savePersonnelFile
+    );
 
 
     /* ==========================================
@@ -4349,7 +6343,8 @@
                     record =>
                         Number(
                             record.id
-                        ) === selectedId
+                        ) ===
+                        selectedId
                 );
 
 
@@ -4366,29 +6361,36 @@
                 person.status ||
                 "UNAVAILABLE";
 
+
             previewClearance.textContent =
                 person.clearance ||
                 "UNAVAILABLE";
+
 
             previewThreat.textContent =
                 person.threat_level ||
                 "UNAVAILABLE";
 
+
             previewLocation.textContent =
                 person.location ||
                 "UNAVAILABLE";
+
 
             previewAffiliation.textContent =
                 person.affiliation ||
                 "UNAVAILABLE";
 
+
             previewOrigin.textContent =
                 person.origin ||
                 "UNAVAILABLE";
 
+
             previewObservation.textContent =
                 person.observation ||
                 "UNAVAILABLE";
+
 
             previewActivity.textContent =
                 person.primary_activity ||
@@ -4407,23 +6409,30 @@
         previewStatus.textContent =
             "UNAVAILABLE";
 
+
         previewClearance.textContent =
             "UNAVAILABLE";
+
 
         previewThreat.textContent =
             "UNAVAILABLE";
 
+
         previewLocation.textContent =
             "UNAVAILABLE";
+
 
         previewAffiliation.textContent =
             "UNAVAILABLE";
 
+
         previewOrigin.textContent =
             "UNAVAILABLE";
 
+
         previewObservation.textContent =
             "UNAVAILABLE";
+
 
         previewActivity.textContent =
             "UNAVAILABLE";
@@ -4461,6 +6470,7 @@
             archiveNumber.value =
                 "ARCHIVE-001";
 
+
             return;
 
         }
@@ -4492,8 +6502,10 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
-                        number > highestNumber
+                        !Number.isNaN(number)
+                        &&
+                        number >
+                        highestNumber
                     ) {
 
                         highestNumber =
@@ -4540,7 +6552,8 @@
                     person =>
                         Number(
                             person.id
-                        ) === selectedId
+                        ) ===
+                        selectedId
                 );
 
 
@@ -4550,6 +6563,7 @@
                     "> ARCHIVE CREATION FAILED.<br>" +
                     "> SELECT A PERSONNEL FILE."
                 );
+
 
                 return;
 
@@ -4575,6 +6589,7 @@
                     "> ARCHIVE TITLE REQUIRED."
                 );
 
+
                 return;
 
             }
@@ -4582,6 +6597,7 @@
 
             createArchiveButton.disabled =
                 true;
+
 
             createArchiveButton.textContent =
                 "CREATING ARCHIVE...";
@@ -4651,8 +6667,10 @@
                 createArchiveButton.disabled =
                     false;
 
+
                 createArchiveButton.textContent =
                     "CREATE ARCHIVE";
+
 
                 return;
 
@@ -4690,6 +6708,7 @@
             createArchiveButton.disabled =
                 false;
 
+
             createArchiveButton.textContent =
                 "CREATE ARCHIVE";
 
@@ -4707,6 +6726,7 @@
 
         archiveResult.innerHTML =
             message;
+
 
         archiveResult.classList.add(
             "visible"
@@ -4726,6 +6746,7 @@
             refreshArchiveData.disabled =
                 true;
 
+
             refreshArchiveData.textContent =
                 "REFRESHING...";
 
@@ -4739,6 +6760,7 @@
 
             refreshArchiveData.disabled =
                 false;
+
 
             refreshArchiveData.textContent =
                 "REFRESH DATA";
@@ -4808,6 +6830,7 @@
 
             `;
 
+
             return;
 
         }
@@ -4827,6 +6850,7 @@
                 </div>
 
             `;
+
 
             return;
 
@@ -4960,6 +6984,7 @@
             communicationMessageId.value =
                 "COMM-001";
 
+
             return;
 
         }
@@ -4991,8 +7016,10 @@
 
 
                     if (
-                        !Number.isNaN(number) &&
-                        number > highestNumber
+                        !Number.isNaN(number)
+                        &&
+                        number >
+                        highestNumber
                     ) {
 
                         highestNumber =
@@ -5056,6 +7083,7 @@
                     "> ALL REQUIRED FIELDS MUST BE COMPLETED."
                 );
 
+
                 return;
 
             }
@@ -5063,6 +7091,7 @@
 
             createCommunicationButton.disabled =
                 true;
+
 
             createCommunicationButton.textContent =
                 "CREATING COMMUNICATION...";
@@ -5134,8 +7163,10 @@
                 createCommunicationButton.disabled =
                     false;
 
+
                 createCommunicationButton.textContent =
                     "CREATE COMMUNICATION";
+
 
                 return;
 
@@ -5176,6 +7207,7 @@
             createCommunicationButton.disabled =
                 false;
 
+
             createCommunicationButton.textContent =
                 "CREATE COMMUNICATION";
 
@@ -5193,6 +7225,7 @@
 
         communicationResult.innerHTML =
             message;
+
 
         communicationResult.classList.add(
             "visible"
@@ -5212,6 +7245,7 @@
             refreshCommunicationData.disabled =
                 true;
 
+
             refreshCommunicationData.textContent =
                 "REFRESHING...";
 
@@ -5223,6 +7257,7 @@
 
             refreshCommunicationData.disabled =
                 false;
+
 
             refreshCommunicationData.textContent =
                 "REFRESH DATA";
@@ -5281,6 +7316,7 @@
 
             `;
 
+
             return;
 
         }
@@ -5300,6 +7336,7 @@
                 </div>
 
             `;
+
 
             return;
 
