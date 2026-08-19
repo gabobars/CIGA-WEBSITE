@@ -46,220 +46,6 @@
 
 
         /* =========================
-           AUDIO CHANNEL
-        ========================= */
-
-        .audio-channel {
-            position: fixed;
-
-            right: 25px;
-            bottom: 22px;
-
-            z-index: 200;
-
-            width: 245px;
-
-            padding: 13px 15px;
-
-            border:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.22
-                );
-
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.92
-                );
-
-            backdrop-filter:
-                blur(6px);
-
-            font-size: 8px;
-
-            letter-spacing: 1.5px;
-        }
-
-
-        .audio-channel-header {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items: center;
-
-            margin-bottom: 10px;
-
-            opacity: 0.55;
-        }
-
-
-        .audio-channel-status {
-            display: flex;
-
-            align-items: center;
-
-            gap: 6px;
-        }
-
-
-        .audio-dot {
-            width: 5px;
-            height: 5px;
-
-            border-radius: 50%;
-
-            background: #fff;
-
-            opacity: 0.35;
-        }
-
-
-        .audio-dot.active {
-            opacity: 1;
-
-            box-shadow:
-                0 0 7px
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.7
-                );
-        }
-
-
-        .audio-controls {
-            display: grid;
-
-            grid-template-columns:
-                auto
-                1fr
-                auto;
-
-            align-items: center;
-
-            gap: 9px;
-        }
-
-
-        .audio-button {
-            padding:
-                7px 9px;
-
-            background:
-                #000;
-
-            color: #fff;
-
-            border:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.22
-                );
-
-            font-family: inherit;
-
-            font-size: 8px;
-
-            letter-spacing: 1.3px;
-
-            cursor: pointer;
-
-            transition:
-                background 0.2s ease,
-                border-color 0.2s ease;
-        }
-
-
-        .audio-button:hover {
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.06
-                );
-
-            border-color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.60
-                );
-        }
-
-
-        .audio-volume {
-            width: 100%;
-
-            height: 3px;
-
-            appearance: none;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.18
-                );
-
-            outline: none;
-
-            cursor: pointer;
-        }
-
-
-        .audio-volume::-webkit-slider-thumb {
-            appearance: none;
-
-            width: 9px;
-            height: 9px;
-
-            border-radius: 50%;
-
-            background: #fff;
-
-            cursor: pointer;
-        }
-
-
-        .audio-volume::-moz-range-thumb {
-            width: 9px;
-            height: 9px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #fff;
-
-            cursor: pointer;
-        }
-
-
-        .audio-value {
-            min-width: 28px;
-
-            text-align: right;
-
-            opacity: 0.45;
-        }
-
-
-        /* =========================
            WELCOME SCREEN
         ========================= */
 
@@ -1596,6 +1382,193 @@
 
 
         /* =========================
+           CIGA MUSIC PLAYER
+        ========================= */
+
+        .ciga-music-player {
+            position: fixed;
+
+            right: 22px;
+
+            bottom: 20px;
+
+            z-index: 90;
+
+            width: 245px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.94
+                );
+
+            box-shadow:
+                0 8px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
+
+            backdrop-filter:
+                blur(5px);
+        }
+
+
+        .ciga-music-label {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.42;
+
+            margin-bottom: 8px;
+        }
+
+
+        .ciga-music-title {
+            font-size: 11px;
+
+            letter-spacing: 1.6px;
+
+            margin-bottom: 12px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .ciga-music-controls {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr;
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+
+        .ciga-music-button {
+            height: 34px;
+
+            padding:
+                0 12px;
+
+            background: #000;
+
+            color: #fff;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                );
+
+            font-family: inherit;
+
+            font-size: 8px;
+
+            letter-spacing: 1.2px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .ciga-music-button:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+        }
+
+
+        .ciga-music-volume {
+            width: 100%;
+
+            accent-color: #fff;
+
+            cursor: pointer;
+        }
+
+
+        .ciga-music-volume-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 10px;
+
+            align-items: center;
+
+            margin-top: 10px;
+        }
+
+
+        .ciga-music-volume-value {
+            min-width: 36px;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            text-align: right;
+
+            opacity: 0.45;
+        }
+
+
+        .ciga-music-status {
+            margin-top: 10px;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
            FOOTER
         ========================= */
 
@@ -1774,12 +1747,6 @@
                     1fr;
             }
 
-
-            .footer {
-                align-items:
-                    flex-start;
-            }
-
         }
 
 
@@ -1888,12 +1855,14 @@
             }
 
 
-            .audio-channel {
-                right: 15px;
+            .ciga-music-player {
+                right: 12px;
 
-                bottom: 15px;
+                bottom: 12px;
 
-                width: 220px;
+                left: 12px;
+
+                width: auto;
             }
 
         }
@@ -1904,24 +1873,6 @@
 
 
 <body>
-
-
-    <!-- =========================
-         AUDIO
-    ========================= -->
-
-    <audio
-        id="cigaEnvironmentAudio"
-        preload="auto"
-        loop
-    >
-
-        <source
-            src="cigaost.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
 
 
     <!-- =========================
@@ -2590,6 +2541,81 @@
     </main>
 
 
+    <!-- =========================
+         CIGA MUSIC
+    ========================= -->
+
+    <audio
+        id="cigaMusic"
+        preload="auto"
+        loop
+    ></audio>
+
+
+    <section
+        class="ciga-music-player"
+        id="cigaMusicPlayer"
+    >
+
+        <div class="ciga-music-label">
+            // AUDIO ENVIRONMENT
+        </div>
+
+
+        <div class="ciga-music-title">
+            CIGA ENVIRONMENT
+        </div>
+
+
+        <div class="ciga-music-controls">
+
+            <button
+                type="button"
+                class="ciga-music-button"
+                id="cigaMusicMute"
+            >
+                UNMUTE
+            </button>
+
+
+            <input
+                type="range"
+                id="cigaMusicVolume"
+                class="ciga-music-volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.45"
+                aria-label="CIGA music volume"
+            >
+
+        </div>
+
+
+        <div class="ciga-music-volume-row">
+
+            <div></div>
+
+            <div
+                class="ciga-music-volume-value"
+                id="cigaMusicVolumeValue"
+            >
+                45%
+            </div>
+
+        </div>
+
+
+        <div
+            class="ciga-music-status"
+            id="cigaMusicStatus"
+        >
+            AUDIO CHANNEL MUTED.
+        </div>
+
+    </section>
+
+
     <script>
 
         /* =========================
@@ -2622,6 +2648,393 @@
 
         const CIGA_WORKER_URL =
             "https://cigadiscordwebhook.ciga-hq.workers.dev";
+
+
+        /* =========================
+           CIGA MUSIC
+        ========================= */
+
+        /*
+            ALTERA APENAS ESTA LINHA
+            PARA O NOME EXATO DO TEU FICHEIRO.
+
+            Exemplo:
+            "CIGAEnvironment.mp3"
+
+            Se o ficheiro estiver numa pasta:
+            "audio/CIGAEnvironment.mp3"
+        */
+
+        const CIGA_MUSIC_SOURCE =
+            "cigaost.mp3";
+
+
+        const CIGA_MUSIC_MUTED_KEY =
+            "ciga_music_muted";
+
+
+        const CIGA_MUSIC_VOLUME_KEY =
+            "ciga_music_volume";
+
+
+        const cigaMusic =
+            document.getElementById(
+                "cigaMusic"
+            );
+
+
+        const cigaMusicMute =
+            document.getElementById(
+                "cigaMusicMute"
+            );
+
+
+        const cigaMusicVolume =
+            document.getElementById(
+                "cigaMusicVolume"
+            );
+
+
+        const cigaMusicVolumeValue =
+            document.getElementById(
+                "cigaMusicVolumeValue"
+            );
+
+
+        const cigaMusicStatus =
+            document.getElementById(
+                "cigaMusicStatus"
+            );
+
+
+        function cigaGetStoredMusicMuted() {
+
+            const stored =
+                localStorage.getItem(
+                    CIGA_MUSIC_MUTED_KEY
+                );
+
+
+            if (
+                stored === null
+            ) {
+
+                return true;
+
+            }
+
+
+            return stored === "true";
+
+        }
+
+
+        function cigaGetStoredMusicVolume() {
+
+            const stored =
+                localStorage.getItem(
+                    CIGA_MUSIC_VOLUME_KEY
+                );
+
+
+            const volume =
+                Number(
+                    stored
+                );
+
+
+            if (
+                Number.isNaN(volume)
+                ||
+                volume < 0
+                ||
+                volume > 1
+            ) {
+
+                return 0.45;
+
+            }
+
+
+            return volume;
+
+        }
+
+
+        function cigaSaveMusicState() {
+
+            localStorage.setItem(
+                CIGA_MUSIC_MUTED_KEY,
+                String(
+                    cigaMusic.muted
+                )
+            );
+
+
+            localStorage.setItem(
+                CIGA_MUSIC_VOLUME_KEY,
+                String(
+                    cigaMusic.volume
+                )
+            );
+
+        }
+
+
+        function cigaUpdateMusicUI() {
+
+            const percentage =
+                Math.round(
+                    cigaMusic.volume *
+                    100
+                );
+
+
+            cigaMusicVolume.value =
+                String(
+                    cigaMusic.volume
+                );
+
+
+            cigaMusicVolumeValue.textContent =
+                `${percentage}%`;
+
+
+            cigaMusicMute.textContent =
+                cigaMusic.muted
+                    ? "UNMUTE"
+                    : "MUTE";
+
+
+            cigaMusicStatus.textContent =
+                cigaMusic.muted
+                    ? "AUDIO CHANNEL MUTED."
+                    : (
+                        cigaMusic.paused
+                            ? "AUDIO CHANNEL READY."
+                            : "AUDIO CHANNEL ACTIVE."
+                    );
+
+        }
+
+
+        async function cigaStartMusic(
+            shouldUnmute = false
+        ) {
+
+            if (
+                shouldUnmute
+            ) {
+
+                cigaMusic.muted =
+                    false;
+
+            }
+
+
+            try {
+
+                await cigaMusic.play();
+
+                cigaUpdateMusicUI();
+
+                return true;
+
+            } catch (error) {
+
+                console.warn(
+                    "CIGA MUSIC AUTOPLAY BLOCKED:",
+                    error
+                );
+
+
+                /*
+                    If the browser blocks playback,
+                    keep the real state honest.
+                */
+
+                if (
+                    !shouldUnmute
+                ) {
+
+                    cigaMusic.muted =
+                        true;
+
+                }
+
+
+                cigaUpdateMusicUI();
+
+                return false;
+
+            }
+
+        }
+
+
+        function cigaInitializeMusic() {
+
+            cigaMusic.src =
+                CIGA_MUSIC_SOURCE;
+
+
+            cigaMusic.loop =
+                true;
+
+
+            cigaMusic.preload =
+                "auto";
+
+
+            cigaMusic.volume =
+                cigaGetStoredMusicVolume();
+
+
+            /*
+                Always begin muted unless
+                the browser already allows the
+                previous unmuted preference.
+            */
+
+            const storedMuted =
+                cigaGetStoredMusicMuted();
+
+
+            cigaMusic.muted =
+                storedMuted;
+
+
+            cigaUpdateMusicUI();
+
+
+            /*
+                Muted autoplay is allowed by
+                normal browser autoplay policies.
+            */
+
+            cigaStartMusic(
+                false
+            );
+
+        }
+
+
+        cigaMusicMute.addEventListener(
+            "click",
+            async function() {
+
+                if (
+                    cigaMusic.muted
+                ) {
+
+                    /*
+                        The user's click provides
+                        the interaction required
+                        to start audible playback.
+                    */
+
+                    cigaMusic.muted =
+                        false;
+
+
+                    const started =
+                        await cigaStartMusic(
+                            true
+                        );
+
+
+                    if (
+                        !started
+                    ) {
+
+                        cigaMusic.muted =
+                            true;
+
+                    }
+
+                } else {
+
+                    cigaMusic.muted =
+                        true;
+
+                }
+
+
+                cigaSaveMusicState();
+
+
+                cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        cigaMusicVolume.addEventListener(
+            "input",
+            function() {
+
+                const volume =
+                    Number(
+                        cigaMusicVolume.value
+                    );
+
+
+                cigaMusic.volume =
+                    volume;
+
+
+                localStorage.setItem(
+                    CIGA_MUSIC_VOLUME_KEY,
+                    String(
+                        volume
+                    )
+                );
+
+
+                cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        cigaMusic.addEventListener(
+            "play",
+            function() {
+
+                cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        cigaMusic.addEventListener(
+            "pause",
+            function() {
+
+                cigaUpdateMusicUI();
+
+            }
+        );
+
+
+        cigaMusic.addEventListener(
+            "error",
+            function() {
+
+                cigaMusicStatus.textContent =
+                    "AUDIO CHANNEL ERROR.";
+
+
+                console.error(
+                    "CIGA MUSIC LOAD ERROR.",
+                    cigaMusic.error
+                );
+
+            }
+        );
+
+
+        cigaInitializeMusic();
 
 
         /* =========================
@@ -2698,379 +3111,6 @@
             document.getElementById(
                 "operatorId"
             );
-
-
-        /* =========================
-           AUDIO
-        ========================= */
-
-        const cigaAudio =
-            document.getElementById(
-                "cigaEnvironmentAudio"
-            );
-
-
-        const CIGA_AUDIO_VOLUME_KEY =
-            "ciga_audio_volume";
-
-
-        const CIGA_AUDIO_MUTED_KEY =
-            "ciga_audio_muted";
-
-
-        let savedVolume =
-            parseFloat(
-                localStorage.getItem(
-                    CIGA_AUDIO_VOLUME_KEY
-                )
-            );
-
-
-        if (
-            Number.isNaN(
-                savedVolume
-            )
-        ) {
-
-            savedVolume =
-                0.25;
-
-        }
-
-
-        cigaAudio.volume =
-            savedVolume;
-
-
-        const savedMuted =
-            localStorage.getItem(
-                CIGA_AUDIO_MUTED_KEY
-            );
-
-
-        cigaAudio.muted =
-            savedMuted === null
-                ? true
-                : savedMuted === "true";
-
-
-        /* =========================
-           CREATE AUDIO UI
-        ========================= */
-
-        const audioChannel =
-            document.createElement(
-                "div"
-            );
-
-
-        audioChannel.className =
-            "audio-channel";
-
-
-        audioChannel.innerHTML = `
-
-            <div class="audio-channel-header">
-
-                <span>
-                    // AUDIO CHANNEL
-                </span>
-
-
-                <span class="audio-channel-status">
-
-                    <span
-                        class="audio-dot"
-                        id="audioDot"
-                    ></span>
-
-                    <span id="audioStatus">
-                        MUTED
-                    </span>
-
-                </span>
-
-            </div>
-
-
-            <div class="audio-controls">
-
-                <button
-                    type="button"
-                    class="audio-button"
-                    id="audioMuteButton"
-                >
-                    UNMUTE
-                </button>
-
-
-                <input
-                    type="range"
-                    class="audio-volume"
-                    id="audioVolume"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value="${savedVolume}"
-                    aria-label="Audio volume"
-                >
-
-
-                <span
-                    class="audio-value"
-                    id="audioValue"
-                >
-                    ${Math.round(
-                        savedVolume * 100
-                    )}%
-                </span>
-
-            </div>
-
-        `;
-
-
-        document.body.appendChild(
-            audioChannel
-        );
-
-
-        const audioMuteButton =
-            document.getElementById(
-                "audioMuteButton"
-            );
-
-
-        const audioVolume =
-            document.getElementById(
-                "audioVolume"
-            );
-
-
-        const audioValue =
-            document.getElementById(
-                "audioValue"
-            );
-
-
-        const audioDot =
-            document.getElementById(
-                "audioDot"
-            );
-
-
-        const audioStatus =
-            document.getElementById(
-                "audioStatus"
-            );
-
-
-        /* =========================
-           AUDIO UI UPDATE
-        ========================= */
-
-        function cigaUpdateAudioUI() {
-
-            const muted =
-                cigaAudio.muted ||
-                cigaAudio.volume === 0;
-
-
-            audioMuteButton.textContent =
-                muted
-                    ? "UNMUTE"
-                    : "MUTE";
-
-
-            audioStatus.textContent =
-                muted
-                    ? "MUTED"
-                    : "ACTIVE";
-
-
-            audioDot.classList.toggle(
-                "active",
-                !muted
-            );
-
-
-            audioValue.textContent =
-                `${Math.round(
-                    cigaAudio.volume * 100
-                )}%`;
-
-        }
-
-
-        /* =========================
-           MUTE / UNMUTE
-        ========================= */
-
-        audioMuteButton.addEventListener(
-            "click",
-            async function() {
-
-                /*
-                    The click itself is a user gesture,
-                    allowing the browser to start audio.
-                */
-
-                if (
-                    cigaAudio.paused
-                ) {
-
-                    try {
-
-                        cigaAudio.muted =
-                            false;
-
-
-                        if (
-                            cigaAudio.volume === 0
-                        ) {
-
-                            cigaAudio.volume =
-                                savedVolume > 0
-                                    ? savedVolume
-                                    : 0.25;
-
-
-                            audioVolume.value =
-                                cigaAudio.volume;
-
-                        }
-
-
-                        await cigaAudio.play();
-
-
-                        localStorage.setItem(
-                            CIGA_AUDIO_MUTED_KEY,
-                            "false"
-                        );
-
-
-                    } catch (error) {
-
-                        console.error(
-                            "CIGA AUDIO PLAY ERROR:",
-                            error
-                        );
-
-
-                        audioStatus.textContent =
-                            "ERROR";
-
-
-                        return;
-
-                    }
-
-                } else {
-
-                    cigaAudio.muted =
-                        !cigaAudio.muted;
-
-
-                    localStorage.setItem(
-                        CIGA_AUDIO_MUTED_KEY,
-                        String(
-                            cigaAudio.muted
-                        )
-                    );
-
-                }
-
-
-                cigaUpdateAudioUI();
-
-            }
-        );
-
-
-        /* =========================
-           VOLUME
-        ========================= */
-
-        audioVolume.addEventListener(
-            "input",
-            function() {
-
-                const volume =
-                    parseFloat(
-                        audioVolume.value
-                    );
-
-
-                cigaAudio.volume =
-                    volume;
-
-
-                localStorage.setItem(
-                    CIGA_AUDIO_VOLUME_KEY,
-                    String(
-                        volume
-                    )
-                );
-
-
-                if (
-                    volume === 0
-                ) {
-
-                    cigaAudio.muted =
-                        true;
-
-
-                    localStorage.setItem(
-                        CIGA_AUDIO_MUTED_KEY,
-                        "true"
-                    );
-
-                }
-
-
-                cigaUpdateAudioUI();
-
-            }
-        );
-
-
-        /* =========================
-           AUDIO EVENTS
-        ========================= */
-
-        cigaAudio.addEventListener(
-            "loadeddata",
-            function() {
-
-                console.log(
-                    "CIGA AUDIO LOADED:",
-                    cigaAudio.currentSrc
-                );
-
-            }
-        );
-
-
-        cigaAudio.addEventListener(
-            "error",
-            function() {
-
-                console.error(
-                    "CIGA AUDIO ERROR:",
-                    cigaAudio.error
-                );
-
-
-                audioStatus.textContent =
-                    "ERROR";
-
-            }
-        );
-
-
-        cigaUpdateAudioUI();
 
 
         /* =========================
