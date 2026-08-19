@@ -314,6 +314,73 @@
 
 
         /* =========================
+           CIGA LINK HELP
+        ========================= */
+
+        .ciga-link-help {
+            margin-top: 12px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.24);
+
+            border-left:
+                3px solid
+                rgba(255,255,255,0.65);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.82;
+        }
+
+
+        .ciga-link-help strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.6px;
+
+            opacity: 1;
+        }
+
+
+        .ciga-link-help code {
+            display: inline-block;
+
+            margin-top: 4px;
+
+            padding:
+                2px 6px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            background: #000;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
            SUBMISSIONS
         ========================= */
 
@@ -1294,19 +1361,6 @@
         }
 
 
-        .archive-subject-optional-note {
-            margin-top: 4px;
-
-            font-size: 8px;
-
-            line-height: 1.7;
-
-            letter-spacing: 0.7px;
-
-            opacity: 0.38;
-        }
-
-
         .subject-preview {
             margin-top: 20px;
 
@@ -1993,16 +2047,13 @@
             &gt; VERIFYING ADMINISTRATOR SESSION...
         </div>
 
-
         <div id="terminalStatus">
             &gt; WAITING FOR AUTHORIZATION...
         </div>
 
-
         <div>
             &gt; ARCHIVE SYSTEM: AVAILABLE
         </div>
-
 
         <div>
             &gt; COMMUNICATIONS SYSTEM: AVAILABLE
@@ -2022,11 +2073,9 @@
             ACCESS DENIED
         </div>
 
-
         <div>
             &gt; ADMINISTRATOR CLEARANCE REQUIRED.
         </div>
-
 
         <div>
             &gt; THIS ATTEMPT HAS BEEN LOGGED.
@@ -2130,7 +2179,8 @@
             </div>
 
 
-            <div id="reviewContent"></div>
+            <div id="reviewContent">
+            </div>
 
 
             <div
@@ -2575,6 +2625,27 @@
                         class="personnel-editor-textarea"
                     ></textarea>
 
+
+                    <div class="ciga-link-help">
+
+                        <strong>
+                            // CIGA LINK FORMAT
+                        </strong>
+
+                        Need a clickable lore link?
+
+                        Write it exactly like:
+
+                        <code>[[ANOMALOUS|https://youtube.com]]</code>
+
+                        <br>
+
+                        The reader will see only
+                        <b>ANOMALOUS</b>
+                        and it will become clickable.
+
+                    </div>
+
                 </div>
 
 
@@ -2606,6 +2677,26 @@
                         >
                             + ADD HISTORY ENTRY
                         </button>
+
+                    </div>
+
+
+                    <div class="ciga-link-help">
+
+                        <strong>
+                            // CIGA LINKS IN HISTORY
+                        </strong>
+
+                        Use the same format inside any
+                        history entry:
+
+                        <code>[[ANOMALOUS|https://youtube.com]]</code>
+
+                        <br>
+
+                        Example:
+
+                        <code>SUBJECT BECAME [[ANOMALOUS|https://youtube.com]] AFTER INCIDENT.</code>
 
                     </div>
 
@@ -2733,7 +2824,7 @@
 
 
         <!-- =========================
-             CREATE ARCHIVE
+             ARCHIVE CREATION
         ========================= -->
 
         <section class="panel">
@@ -2781,19 +2872,10 @@
                         >
 
                             <option value="">
-                                NO PERSONNEL FILE // STANDALONE ARCHIVE
+                                NO PERSONNEL FILE // STANDALONE EVENT
                             </option>
 
                         </select>
-
-
-                        <div class="archive-subject-optional-note">
-
-                            &gt; OPTIONAL FIELD.
-                            LEAVE UNSELECTED FOR A STANDALONE
-                            EVENT / ANOMALOUS RECORD.
-
-                        </div>
 
                     </div>
 
@@ -2887,6 +2969,25 @@
                             placeholder="Brief description of the incident..."
                         ></textarea>
 
+
+                        <div class="ciga-link-help">
+
+                            <strong>
+                                // CIGA LINK FORMAT
+                            </strong>
+
+                            Use:
+
+                            <code>[[ANOMALOUS|https://youtube.com]]</code>
+
+                            <br>
+
+                            Example:
+
+                            <code>SUBJECT CLASSIFICATION IS NOW [[ANOMALOUS|https://youtube.com]].</code>
+
+                        </div>
+
                     </div>
 
 
@@ -2907,6 +3008,25 @@
                             class="archive-textarea large"
                             placeholder="Write the complete archive report here..."
                         ></textarea>
+
+
+                        <div class="ciga-link-help">
+
+                            <strong>
+                                // CIGA LINK FORMAT
+                            </strong>
+
+                            Clickable lore text:
+
+                            <code>[[LABEL|https://example.com]]</code>
+
+                            <br>
+
+                            Example:
+
+                            <code>Witness identified [[ANOMALOUS|https://youtube.com]] entity during containment operation.</code>
+
+                        </div>
 
                     </div>
 
@@ -2929,7 +3049,6 @@
                             STATUS
                         </div>
 
-
                         <div
                             class="subject-preview-value"
                             id="previewStatus"
@@ -2941,7 +3060,6 @@
                         <div class="subject-preview-label">
                             CLEARANCE
                         </div>
-
 
                         <div
                             class="subject-preview-value"
@@ -2955,7 +3073,6 @@
                             THREAT LEVEL
                         </div>
 
-
                         <div
                             class="subject-preview-value"
                             id="previewThreat"
@@ -2967,7 +3084,6 @@
                         <div class="subject-preview-label">
                             LOCATION
                         </div>
-
 
                         <div
                             class="subject-preview-value"
@@ -2981,7 +3097,6 @@
                             AFFILIATION
                         </div>
 
-
                         <div
                             class="subject-preview-value"
                             id="previewAffiliation"
@@ -2993,7 +3108,6 @@
                         <div class="subject-preview-label">
                             ORIGIN
                         </div>
-
 
                         <div
                             class="subject-preview-value"
@@ -3007,7 +3121,6 @@
                             OBSERVATION
                         </div>
 
-
                         <div
                             class="subject-preview-value"
                             id="previewObservation"
@@ -3019,7 +3132,6 @@
                         <div class="subject-preview-label">
                             PRIMARY ACTIVITY
                         </div>
-
 
                         <div
                             class="subject-preview-value"
@@ -3065,7 +3177,7 @@
 
 
         <!-- =========================
-             ARCHIVE DATABASE
+             ARCHIVE LIST
         ========================= -->
 
         <section class="panel">
@@ -3087,7 +3199,7 @@
 
 
         <!-- =========================
-             CREATE COMMUNICATION
+             COMMUNICATION CREATION
         ========================= -->
 
         <section class="panel">
@@ -3309,6 +3421,25 @@
                             required
                         ></textarea>
 
+
+                        <div class="ciga-link-help">
+
+                            <strong>
+                                // CIGA LINK FORMAT
+                            </strong>
+
+                            To make a word clickable:
+
+                            <code>[[ANOMALOUS|https://youtube.com]]</code>
+
+                            <br>
+
+                            Example:
+
+                            <code>SUBJECT CLASSIFICATION IS NOW [[ANOMALOUS|https://youtube.com]].</code>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -3346,7 +3477,7 @@
 
 
         <!-- =========================
-             COMMUNICATION DATABASE
+             COMMUNICATION LIST
         ========================= -->
 
         <section class="panel">
@@ -3875,11 +4006,16 @@
         );
 
 
-    let currentSubmission = null;
+    let currentSubmission =
+        null;
 
-    let pendingAction = null;
 
-    let personnelRecords = [];
+    let pendingAction =
+        null;
+
+
+    let personnelRecords =
+        [];
 
 
     /* ==========================================
@@ -4044,8 +4180,10 @@
             terminalStatus.textContent =
                 "> NO ACTIVE SESSION.";
 
+
             deniedMessage.style.display =
                 "block";
+
 
             return;
 
@@ -4861,8 +4999,7 @@
 
 
         if (
-            data.status
-            &&
+            data.status &&
             Array.from(
                 reviewStatus.options
             ).some(
@@ -5666,7 +5803,7 @@
 
 
     /* ==========================================
-       NORMALIZE NOTES
+       NORMALIZE NOTES FOR STORAGE
     ========================================== */
 
     function normalizeNotesForStorage(
@@ -5810,7 +5947,7 @@
 
 
     /* ==========================================
-       HISTORY NUMBERS
+       HISTORY ENTRY NUMBERS
     ========================================== */
 
     function refreshHistoryEntryNumbers() {
@@ -5852,7 +5989,7 @@
 
 
     /* ==========================================
-       EMPTY HISTORY
+       EMPTY HISTORY STATE
     ========================================== */
 
     function ensureHistoryEmptyState() {
@@ -5888,7 +6025,6 @@
                 empty.textContent =
                     "> NO HISTORY ENTRIES.";
 
-
                 historyList.appendChild(
                     empty
                 );
@@ -5913,7 +6049,7 @@
 
 
     /* ==========================================
-       GET HISTORY
+       GET HISTORY ENTRIES
     ========================================== */
 
     function getHistoryEntries() {
@@ -5936,7 +6072,7 @@
 
 
     /* ==========================================
-       LOAD HISTORY
+       LOAD HISTORY INTO EDITOR
     ========================================== */
 
     function loadHistoryIntoEditor(
@@ -6064,7 +6200,7 @@
         archiveSubject.innerHTML = `
 
             <option value="">
-                NO PERSONNEL FILE // STANDALONE ARCHIVE
+                NO PERSONNEL FILE // STANDALONE EVENT
             </option>
 
         `;
@@ -6166,7 +6302,7 @@
 
 
     /* ==========================================
-       LOAD PERSONNEL EDITOR
+       LOAD PERSONNEL INTO EDITOR
     ========================================== */
 
     function loadPersonnelIntoEditor(
@@ -6295,7 +6431,7 @@
 
 
     /* ==========================================
-       SELECT FALLBACK
+       SELECT OR FALLBACK
     ========================================== */
 
     function setSelectOrFallback(
@@ -6446,7 +6582,7 @@
 
 
     /* ==========================================
-       SAVE PERSONNEL
+       SAVE PERSONNEL FILE
     ========================================== */
 
     async function savePersonnelFile() {
@@ -6931,7 +7067,7 @@
 
 
     /* ==========================================
-       PREPARE ARCHIVE NUMBER
+       PREPARE NEXT ARCHIVE NUMBER
     ========================================== */
 
     async function prepareNextArchiveNumber() {
@@ -7031,13 +7167,6 @@
             event.preventDefault();
 
 
-            /*
-                Personnel file is OPTIONAL.
-
-                Empty selection means this is
-                a standalone archive/event.
-            */
-
             const selectedId =
                 Number(
                     archiveSubject.value
@@ -7045,31 +7174,13 @@
 
 
             const selectedPersonnel =
-                selectedId
-                    ? personnelRecords.find(
-                        person =>
-                            Number(
-                                person.id
-                            ) ===
-                            selectedId
-                    )
-                    : null;
-
-
-            if (
-                selectedId &&
-                !selectedPersonnel
-            ) {
-
-                showArchiveResult(
-                    "> ARCHIVE CREATION FAILED.<br>" +
-                    "> SELECTED PERSONNEL FILE COULD NOT BE FOUND."
+                personnelRecords.find(
+                    person =>
+                        Number(
+                            person.id
+                        ) ===
+                        selectedId
                 );
-
-
-                return;
-
-            }
 
 
             const archiveTitleValue =
@@ -7104,18 +7215,6 @@
             createArchiveButton.textContent =
                 "CREATING ARCHIVE...";
 
-
-            /*
-                IMPORTANT:
-
-                personnel_id is now nullable.
-
-                Selected personnel:
-                    personnel_id = ID
-
-                No personnel selected:
-                    personnel_id = null
-            */
 
             const archiveRecord = {
 
@@ -7154,7 +7253,9 @@
             } =
                 await db
 
-                    .from("archives")
+                    .from(
+                        "archives"
+                    )
 
                     .insert(
                         [archiveRecord]
@@ -7193,12 +7294,6 @@
             }
 
 
-            const subjectName =
-                selectedPersonnel
-                    ? selectedPersonnel.name
-                    : "STANDALONE EVENT";
-
-
             showArchiveResult(
                 `> ARCHIVE CREATED.<br>` +
                 `> ${escapeHTML(
@@ -7206,13 +7301,12 @@
                 )} // ${escapeHTML(
                     data.title
                 )}<br>` +
-                `> SUBJECT: ${escapeHTML(
-                    subjectName
-                )}<br>` +
-                `> ASSOCIATION: ${
+                `> SUBJECT: ${
                     selectedPersonnel
-                        ? "PERSONNEL FILE"
-                        : "STANDALONE ARCHIVE"
+                        ? escapeHTML(
+                            selectedPersonnel.name
+                        )
+                        : "STANDALONE EVENT"
                 }<br>` +
                 `> VISIBILITY: ${
                     data.visible
@@ -7223,11 +7317,6 @@
 
 
             archiveForm.reset();
-
-
-            archiveSubject.value =
-                "";
-
 
             resetSubjectPreview();
 
@@ -7444,16 +7533,13 @@
 
                             <br>
 
-                            ${
-                                person
-                                    ? `PERSONNEL FILE:
-                                        ${escapeHTML(
-                                            person.file_number ||
-                                            "UNKNOWN"
-                                        )}<br>`
-                                    : `ASSOCIATION:
-                                        STANDALONE ARCHIVE<br>`
-                            }
+                            PERSONNEL FILE:
+                            ${escapeHTML(
+                                person?.file_number ||
+                                "NONE"
+                            )}
+
+                            <br>
 
                             INCIDENT DATE:
                             ${escapeHTML(
@@ -7490,7 +7576,7 @@
 
 
     /* ==========================================
-       PREPARE COMMUNICATION ID
+       PREPARE NEXT COMMUNICATION ID
     ========================================== */
 
     async function prepareNextCommunicationId() {
@@ -7986,6 +8072,7 @@
             async function() {
 
                 await db.auth.signOut();
+
 
                 window.location.href =
                     "admin.html";
