@@ -3527,6 +3527,9 @@
                 description:
                     currentSubmission.description,
 
+                notes:
+                    currentSubmission.notes,
+
                 primary_activity:
                     currentSubmission.primary_activity,
 
@@ -3593,8 +3596,10 @@
                     )
 
                     .update({
+
                         submission_status:
                             "APPROVED"
+
                     })
 
                     .eq(
