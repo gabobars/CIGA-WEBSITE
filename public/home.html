@@ -46,7 +46,7 @@
 
 
         /* =========================
-           AUDIO
+           AUDIO CHANNEL
         ========================= */
 
         .audio-channel {
@@ -1890,6 +1890,7 @@
 
             .audio-channel {
                 right: 15px;
+
                 bottom: 15px;
 
                 width: 220px;
@@ -1911,10 +1912,16 @@
 
     <audio
         id="cigaEnvironmentAudio"
-        src="ciga-environment.mp3"
-        loop
         preload="auto"
-    ></audio>
+        loop
+    >
+
+        <source
+            src="ciga-environment.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
 
 
     <!-- =========================
@@ -2731,24 +2738,20 @@
         }
 
 
-        let savedMuted =
+        cigaAudio.volume =
+            savedVolume;
+
+
+        const savedMuted =
             localStorage.getItem(
                 CIGA_AUDIO_MUTED_KEY
             );
 
 
-        savedMuted =
+        cigaAudio.muted =
             savedMuted === null
                 ? true
                 : savedMuted === "true";
-
-
-        cigaAudio.volume =
-            savedVolume;
-
-
-        cigaAudio.muted =
-            savedMuted;
 
 
         /* =========================
@@ -2900,34 +2903,80 @@
 
 
         /* =========================
-           MUTE
+           MUTE / UNMUTE
         ========================= */
 
         audioMuteButton.addEventListener(
             "click",
             async function() {
 
-                cigaAudio.muted =
-                    !cigaAudio.muted;
+                /*
+                    The click itself is a user gesture,
+                    allowing the browser to start audio.
+                */
+
+                if (
+                    cigaAudio.paused
+                ) {
+
+                    try {
+
+                        cigaAudio.muted =
+                            false;
 
 
-                localStorage.setItem(
-                    CIGA_AUDIO_MUTED_KEY,
-                    String(
-                        cigaAudio.muted
-                    )
-                );
+                        if (
+                            cigaAudio.volume === 0
+                        ) {
+
+                            cigaAudio.volume =
+                                savedVolume > 0
+                                    ? savedVolume
+                                    : 0.25;
 
 
-                try {
+                            audioVolume.value =
+                                cigaAudio.volume;
 
-                    await cigaAudio.play();
+                        }
 
-                } catch (error) {
 
-                    console.warn(
-                        "AUDIO PLAYBACK BLOCKED:",
-                        error
+                        await cigaAudio.play();
+
+
+                        localStorage.setItem(
+                            CIGA_AUDIO_MUTED_KEY,
+                            "false"
+                        );
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "CIGA AUDIO PLAY ERROR:",
+                            error
+                        );
+
+
+                        audioStatus.textContent =
+                            "ERROR";
+
+
+                        return;
+
+                    }
+
+                } else {
+
+                    cigaAudio.muted =
+                        !cigaAudio.muted;
+
+
+                    localStorage.setItem(
+                        CIGA_AUDIO_MUTED_KEY,
+                        String(
+                            cigaAudio.muted
+                        )
                     );
 
                 }
@@ -2957,6 +3006,14 @@
                     volume;
 
 
+                localStorage.setItem(
+                    CIGA_AUDIO_VOLUME_KEY,
+                    String(
+                        volume
+                    )
+                );
+
+
                 if (
                     volume === 0
                 ) {
@@ -2973,14 +3030,6 @@
                 }
 
 
-                localStorage.setItem(
-                    CIGA_AUDIO_VOLUME_KEY,
-                    String(
-                        volume
-                    )
-                );
-
-
                 cigaUpdateAudioUI();
 
             }
@@ -2988,49 +3037,37 @@
 
 
         /* =========================
-           START AUDIO
+           AUDIO EVENTS
         ========================= */
 
-        async function cigaStartAudio() {
+        cigaAudio.addEventListener(
+            "loadeddata",
+            function() {
 
-            try {
+                console.log(
+                    "CIGA AUDIO LOADED:",
+                    cigaAudio.currentSrc
+                );
 
-                /*
-                    Start muted so browsers can
-                    allow playback without sound.
-                */
-
-                cigaAudio.muted =
-                    true;
-
-
-                await cigaAudio.play();
+            }
+        );
 
 
-                /*
-                    Restore saved state after
-                    playback has started.
-                */
+        cigaAudio.addEventListener(
+            "error",
+            function() {
 
-                cigaAudio.muted =
-                    savedMuted;
-
-
-                cigaUpdateAudioUI();
-
-            } catch (error) {
-
-                console.warn(
-                    "CIGA AUDIO AUTOPLAY BLOCKED:",
-                    error
+                console.error(
+                    "CIGA AUDIO ERROR:",
+                    cigaAudio.error
                 );
 
 
-                cigaUpdateAudioUI();
+                audioStatus.textContent =
+                    "ERROR";
 
             }
-
-        }
+        );
 
 
         cigaUpdateAudioUI();
@@ -3912,7 +3949,6 @@
 
         /* =========================
            LOAD LATEST VIDEO
-           DIAGNOSTIC VERSION
         ========================= */
 
         async function cigaLoadLatestVideo() {
@@ -4548,8 +4584,6 @@
 
             cigaLoadLiveStatus();
 
-            cigaStartAudio();
-
         } else {
 
             sessionStorage.setItem(
@@ -4582,8 +4616,6 @@
 
 
                     await cigaLoadLiveStatus();
-
-                    cigaStartAudio();
 
                 },
                 2400
