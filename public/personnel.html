@@ -42,6 +42,8 @@
                 "OCR A",
                 "Courier New",
                 monospace;
+
+            overflow-x: hidden;
         }
 
 
@@ -109,6 +111,9 @@
             text-decoration: none;
 
             cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
         }
 
 
@@ -162,8 +167,10 @@
         }
 
 
-        .terminal span {
+        .terminal-extra {
             opacity: 0.42;
+
+            margin-top: 2px;
         }
 
 
@@ -295,9 +302,9 @@
 
 
         .file-meta {
-            font-size: 11px;
+            font-size: 10px;
 
-            line-height: 1.8;
+            line-height: 1.9;
 
             letter-spacing: 1px;
 
@@ -305,20 +312,35 @@
         }
 
 
-        .file-status {
+        .file-status-wrap {
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            gap: 7px;
+        }
+
+
+        .file-status-main {
             display: flex;
 
             align-items: center;
 
-            font-size: 10px;
+            font-size: 9px;
 
-            letter-spacing: 2px;
+            line-height: 1.8;
+
+            letter-spacing: 1.6px;
 
             opacity: 0.65;
+
+            white-space: nowrap;
         }
 
 
-        .file-status::before {
+        .file-status-main::before {
             content: "";
 
             width: 6px;
@@ -342,6 +364,19 @@
         }
 
 
+        .file-threat {
+            font-size: 8px;
+
+            letter-spacing: 1.2px;
+
+            opacity: 0.42;
+
+            padding-left: 14px;
+
+            white-space: nowrap;
+        }
+
+
         /* =========================
            FILE PHOTO
         ========================= */
@@ -353,11 +388,11 @@
 
             object-fit: cover;
 
-            display: flex;
+            display: block;
 
-            align-items: center;
+            align-self: center;
 
-            justify-content: center;
+            justify-self: end;
 
             border:
                 1px solid
@@ -373,15 +408,45 @@
             filter:
                 grayscale(100%);
 
+            opacity: 0.88;
+        }
+
+
+        .file-photo-placeholder {
+            width: 70px;
+
+            height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            align-self: center;
+
+            justify-self: end;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.3
+                );
+
+            background: #080808;
+
             font-size: 9px;
 
             line-height: 1.4;
 
             letter-spacing: 1px;
 
-            text-align: center;
-
-            opacity: 0.88;
+            opacity: 0.55;
         }
 
 
@@ -527,11 +592,12 @@
 
 
             .file-meta {
-                font-size: 10px;
+                font-size: 9px;
             }
 
 
-            .file-photo {
+            .file-photo,
+            .file-photo-placeholder {
                 width: 55px;
 
                 height: 68px;
@@ -540,8 +606,15 @@
             }
 
 
-            .file-status {
-                font-size: 9px;
+            .file-status-main {
+                font-size: 8px;
+            }
+
+
+            .file-threat {
+                font-size: 7px;
+
+                padding-left: 13px;
             }
 
 
@@ -564,14 +637,15 @@
             }
 
 
-            .file-status {
+            .file-status-wrap {
                 grid-column: 1;
 
                 grid-row: 2;
             }
 
 
-            .file-photo {
+            .file-photo,
+            .file-photo-placeholder {
                 grid-column: 2;
 
                 grid-row:
@@ -642,6 +716,14 @@
 
             <div id="recordCount">
                 &gt; SCANNING RECORDS...
+            </div>
+
+
+            <div
+                class="terminal-extra"
+                id="indexStatus"
+            >
+                &gt; PERSONNEL INDEX: INITIALIZING.
             </div>
 
         </section>
@@ -741,6 +823,47 @@
 
 
         /* ==========================================
+           HTML ESCAPE
+        ========================================== */
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ??
+                ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* ==========================================
            LOAD PERSONNEL
         ========================================== */
 
@@ -758,6 +881,12 @@
                 );
 
 
+            const indexStatus =
+                document.getElementById(
+                    "indexStatus"
+                );
+
+
             const {
                 data,
                 error
@@ -768,7 +897,9 @@
                         "personnel"
                     )
 
-                    .select("*")
+                    .select(
+                        "id, file_number, name, status, clearance, observation, threat_level, photo, visible"
+                    )
 
                     .eq(
                         "visible",
@@ -776,7 +907,7 @@
                     )
 
                     .order(
-                        "id",
+                        "file_number",
                         {
                             ascending: true
                         }
@@ -797,6 +928,10 @@
 
                 recordCount.textContent =
                     "> DATABASE CONNECTION ERROR.";
+
+
+                indexStatus.textContent =
+                    "> PERSONNEL INDEX: UNAVAILABLE.";
 
 
                 personnelList.innerHTML = `
@@ -832,6 +967,10 @@
                         "0"
                     )
                 } RECORDS FOUND.`;
+
+
+            indexStatus.textContent =
+                "> PERSONNEL INDEX: ACTIVE.";
 
 
             /* ======================================
@@ -872,7 +1011,6 @@
             data.forEach(
                 person => {
 
-
                     const fileLink =
                         document.createElement(
                             "a"
@@ -883,12 +1021,10 @@
                         "file-link";
 
 
-                    /*
-                        Universal file page.
-                    */
-
                     fileLink.href =
-                        `file.html?id=${person.id}`;
+                        `file.html?id=${encodeURIComponent(
+                            person.id
+                        )}`;
 
 
                     const fileNumber =
@@ -922,16 +1058,33 @@
                         ).toUpperCase();
 
 
-                    /*
-                        Get this person's photo
-                        from the Supabase photo field.
-                    */
+                    const observation =
+                        String(
+                            person.observation ||
+                            "UNKNOWN"
+                        ).toUpperCase();
+
+
+                    const threatLevel =
+                        String(
+                            person.threat_level ||
+                            "UNKNOWN"
+                        ).toUpperCase();
+
+
+                    /* =========================
+                       PHOTO
+                    ========================= */
 
                     const photo =
                         person.photo &&
-                        person.photo.trim() !== ""
+                        String(
+                            person.photo
+                        ).trim() !== ""
 
-                            ? person.photo
+                            ? String(
+                                person.photo
+                            ).trim()
 
                             : "";
 
@@ -944,9 +1097,14 @@
                         photoHTML = `
 
                             <img
-                                src="${photo}"
-                                alt="${name}"
+                                src="${escapeHTML(
+                                    photo
+                                )}"
+                                alt="${escapeHTML(
+                                    name
+                                )}"
                                 class="file-photo"
+                                loading="lazy"
                             >
 
                         `;
@@ -955,7 +1113,7 @@
 
                         photoHTML = `
 
-                            <div class="file-photo">
+                            <div class="file-photo-placeholder">
 
                                 IMAGE
                                 <br>
@@ -978,14 +1136,22 @@
 
                                 <div class="file-id">
 
-                                    FILE_${fileNumber}
+                                    FILE_${escapeHTML(
+                                        fileNumber
+                                    )}
 
                                 </div>
 
 
                                 <div class="file-subject">
 
-                                    [ ${name} ]
+                                    [
+
+                                    ${escapeHTML(
+                                        name
+                                    )}
+
+                                    ]
 
                                 </div>
 
@@ -993,17 +1159,23 @@
                                 <div class="file-meta">
 
                                     STATUS:
-                                    ${status}
+                                    ${escapeHTML(
+                                        status
+                                    )}
 
                                     <br>
 
                                     CLEARANCE:
-                                    ${clearance}
+                                    ${escapeHTML(
+                                        clearance
+                                    )}
 
                                     <br>
 
-                                    RECORD:
-                                    AUTHORIZED
+                                    OBSERVATION:
+                                    ${escapeHTML(
+                                        observation
+                                    )}
 
                                 </div>
 
@@ -1011,9 +1183,23 @@
                             </div>
 
 
-                            <div class="file-status">
+                            <div class="file-status-wrap">
 
-                                AVAILABLE
+                                <div class="file-status-main">
+
+                                    FILE ACCESSIBLE
+
+                                </div>
+
+
+                                <div class="file-threat">
+
+                                    THREAT:
+                                    ${escapeHTML(
+                                        threatLevel
+                                    )}
+
+                                </div>
 
                             </div>
 
