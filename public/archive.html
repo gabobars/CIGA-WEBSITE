@@ -20,10 +20,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- CIGA LORE LINK SYSTEM -->
-    <script src="ciga-links.js"></script>
-
-
     <style>
 
         * {
@@ -93,13 +89,9 @@
         }
 
 
-        .title {
+        .title-link {
 
             display: inline-block;
-
-            font-size: 24px;
-
-            letter-spacing: 4px;
 
             color: #fff;
 
@@ -113,9 +105,7 @@
         }
 
 
-        .title:hover {
-
-            text-decoration: none;
+        .title-link:hover {
 
             text-shadow:
                 0 0 6px
@@ -133,6 +123,15 @@
                     255,
                     0.35
                 );
+
+        }
+
+
+        .title {
+
+            font-size: 24px;
+
+            letter-spacing: 4px;
 
         }
 
@@ -356,7 +355,7 @@
 
 
         /* =========================
-           PERSONNEL DATA
+           PANELS
         ========================= */
 
         .panel {
@@ -408,6 +407,10 @@
 
         }
 
+
+        /* =========================
+           PERSONNEL DATA
+        ========================= */
 
         .personnel-top {
 
@@ -542,6 +545,8 @@
             letter-spacing: 0.8px;
 
             opacity: 0.76;
+
+            white-space: pre-wrap;
 
         }
 
@@ -678,19 +683,21 @@
 
         .text-content {
 
+            min-height: 40px;
+
             font-size: 13px;
 
             line-height: 2;
 
             letter-spacing: 0.7px;
 
-            white-space:
-                normal;
-
-            opacity: 0.88;
+            overflow-wrap:
+                anywhere;
 
             word-break:
                 break-word;
+
+            opacity: 0.88;
 
         }
 
@@ -711,11 +718,13 @@
                     255,
                     255,
                     255,
-                    0.45
+                    0.55
                 );
 
             text-underline-offset:
                 3px;
+
+            cursor: pointer;
 
             transition:
                 opacity 0.2s ease,
@@ -734,7 +743,15 @@
                     255,
                     255,
                     255,
-                    0.8
+                    0.75
+                );
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.95
                 );
 
         }
@@ -912,12 +929,6 @@
                 grid-template-columns:
                     1fr;
 
-            }
-
-
-            .data-grid,
-            .incident-grid {
-
                 font-size: 10px;
 
             }
@@ -972,18 +983,18 @@
 
             <a
                 href="home.html"
-                class="title"
+                class="title-link"
             >
 
-                CIGA SYSTEMS
+                <div class="title">
+                    CIGA SYSTEMS
+                </div>
 
             </a>
 
 
             <div class="subtitle">
-
                 ARCHIVE DATABASE // RECORD
-
             </div>
 
         </div>
@@ -994,9 +1005,7 @@
             DATABASE:
 
             <span id="databaseStatus">
-
                 CONNECTING
-
             </span>
 
             <br>
@@ -1004,9 +1013,7 @@
             RECORD:
 
             <span id="recordStatus">
-
                 LOADING
-
             </span>
 
         </div>
@@ -1085,7 +1092,9 @@
     >
 
 
-        <!-- ARCHIVE HEADER -->
+        <!-- =========================
+             ARCHIVE HEADER
+        ========================= -->
 
         <section class="archive-header">
 
@@ -1124,12 +1133,14 @@
         </section>
 
 
-        <!-- STANDALONE NOTICE -->
+        <!-- =========================
+             STANDALONE NOTICE
+        ========================= -->
 
         <section
             class="standalone-notice"
             id="standaloneNotice"
-            style="display: none;"
+            style="display:none;"
         >
 
             &gt; THIS ARCHIVE IS NOT ASSOCIATED WITH A PERSONNEL FILE.
@@ -1141,7 +1152,9 @@
         </section>
 
 
-        <!-- PERSONNEL FILE -->
+        <!-- =========================
+             PERSONNEL FILE
+        ========================= -->
 
         <section
             class="panel"
@@ -1213,13 +1226,14 @@
 
                 </div>
 
-
             </div>
 
         </section>
 
 
-        <!-- PERSONNEL DATA -->
+        <!-- =========================
+             PERSONNEL DATA
+        ========================= -->
 
         <section
             class="panel"
@@ -1237,9 +1251,7 @@
 
 
                 <div class="data-label">
-
                     FILE NUMBER
-
                 </div>
 
 
@@ -1247,16 +1259,12 @@
                     class="data-value"
                     id="personnelFileNumber"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     STATUS
-
                 </div>
 
 
@@ -1264,16 +1272,12 @@
                     class="data-value"
                     id="personnelStatus"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     CLEARANCE
-
                 </div>
 
 
@@ -1281,16 +1285,12 @@
                     class="data-value"
                     id="personnelClearance"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     THREAT LEVEL
-
                 </div>
 
 
@@ -1298,16 +1298,12 @@
                     class="data-value"
                     id="personnelThreat"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     OBSERVATION
-
                 </div>
 
 
@@ -1315,16 +1311,12 @@
                     class="data-value"
                     id="personnelObservation"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     PRIMARY ACTIVITY
-
                 </div>
 
 
@@ -1332,16 +1324,12 @@
                     class="data-value"
                     id="personnelActivity"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     LOCATION
-
                 </div>
 
 
@@ -1349,16 +1337,12 @@
                     class="data-value"
                     id="personnelLocation"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     AFFILIATION
-
                 </div>
 
 
@@ -1366,16 +1350,12 @@
                     class="data-value"
                     id="personnelAffiliation"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="data-label">
-
                     ORIGIN
-
                 </div>
 
 
@@ -1383,9 +1363,7 @@
                     class="data-value"
                     id="personnelOrigin"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
@@ -1394,7 +1372,9 @@
         </section>
 
 
-        <!-- INCIDENT INFORMATION -->
+        <!-- =========================
+             INCIDENT INFORMATION
+        ========================= -->
 
         <section class="panel">
 
@@ -1461,7 +1441,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -1484,7 +1463,9 @@
         </section>
 
 
-        <!-- FULL REPORT -->
+        <!-- =========================
+             FULL REPORT
+        ========================= -->
 
         <section class="panel">
 
@@ -1507,7 +1488,9 @@
         </section>
 
 
-        <!-- RETURN -->
+        <!-- =========================
+             RETURN
+        ========================= -->
 
         <a
             href="archives.html"
@@ -1522,7 +1505,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer class="footer">
 
@@ -1784,6 +1769,248 @@
 
 
     /* ==========================================
+       ESCAPE HTML
+    ========================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       RENDER CIGA LORE TEXT
+
+       Supported:
+
+       [[VISIBLE TEXT|https://example.com]]
+    ========================================== */
+
+    function renderCigaLoreText(
+        value
+    ) {
+
+        const fragment =
+            document.createDocumentFragment();
+
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return fragment;
+
+        }
+
+
+        const text =
+            String(
+                value
+            );
+
+
+        const lines =
+            text.split(
+                /\r?\n/
+            );
+
+
+        const linkPattern =
+            /\[\[([^\]|]+)\|([^\]]+)\]\]/g;
+
+
+        lines.forEach(
+            (
+                line,
+                lineIndex
+            ) => {
+
+                let lastIndex =
+                    0;
+
+
+                let match;
+
+
+                while (
+                    (
+                        match =
+                            linkPattern.exec(
+                                line
+                            )
+                    ) !== null
+                ) {
+
+
+                    /* =========================
+                       TEXT BEFORE LINK
+                    ========================= */
+
+                    if (
+                        match.index >
+                        lastIndex
+                    ) {
+
+                        fragment.appendChild(
+                            document.createTextNode(
+                                line.slice(
+                                    lastIndex,
+                                    match.index
+                                )
+                            )
+                        );
+
+                    }
+
+
+                    /* =========================
+                       LINK
+                    ========================= */
+
+                    const label =
+                        match[1].trim();
+
+
+                    const url =
+                        match[2].trim();
+
+
+                    if (
+                        /^https?:\/\//i.test(
+                            url
+                        )
+                    ) {
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.className =
+                            "ciga-lore-link";
+
+
+                        link.href =
+                            url;
+
+
+                        link.target =
+                            "_blank";
+
+
+                        link.rel =
+                            "noopener noreferrer";
+
+
+                        link.textContent =
+                            label;
+
+
+                        fragment.appendChild(
+                            link
+                        );
+
+                    } else {
+
+                        fragment.appendChild(
+                            document.createTextNode(
+                                label
+                            )
+                        );
+
+                    }
+
+
+                    lastIndex =
+                        linkPattern.lastIndex;
+
+                }
+
+
+                linkPattern.lastIndex =
+                    0;
+
+
+                /* =========================
+                   REMAINING TEXT
+                ========================= */
+
+                if (
+                    lastIndex <
+                    line.length
+                ) {
+
+                    fragment.appendChild(
+                        document.createTextNode(
+                            line.slice(
+                                lastIndex
+                            )
+                        )
+                    );
+
+                }
+
+
+                /* =========================
+                   ORIGINAL NEWLINE
+                ========================= */
+
+                if (
+                    lineIndex <
+                    lines.length - 1
+                ) {
+
+                    fragment.appendChild(
+                        document.createElement(
+                            "br"
+                        )
+                    );
+
+                }
+
+            }
+        );
+
+
+        return fragment;
+
+    }
+
+
+    /* ==========================================
        SHOW ERROR
     ========================================== */
 
@@ -1791,12 +2018,8 @@
         message
     ) {
 
-        errorText.innerHTML =
-            `&gt; ${
-                window.cigaEscapeHTML
-                    ? cigaEscapeHTML(message)
-                    : String(message)
-            }`;
+        errorText.textContent =
+            `> ${message}`;
 
 
         errorPanel.classList.add(
@@ -1820,7 +2043,7 @@
 
 
     /* ==========================================
-       SHOW STANDALONE ARCHIVE
+       STANDALONE ARCHIVE
     ========================================== */
 
     function showStandaloneArchive() {
@@ -1852,7 +2075,7 @@
 
 
     /* ==========================================
-       SHOW PERSONNEL ARCHIVE
+       PERSONNEL ARCHIVE
     ========================================== */
 
     function showPersonnelArchive(
@@ -1941,9 +2164,16 @@
             }`;
 
 
-        personnelDescription.textContent =
-            person.description ||
-            "NO PERSONNEL DESCRIPTION AVAILABLE.";
+        personnelDescription.innerHTML =
+            "";
+
+
+        personnelDescription.appendChild(
+            renderCigaLoreText(
+                person.description ||
+                "NO PERSONNEL DESCRIPTION AVAILABLE."
+            )
+        );
 
 
         /* =========================
@@ -2081,7 +2311,6 @@
                 "DATABASE ERROR WHILE RETRIEVING ARCHIVE."
             );
 
-
             return;
 
         }
@@ -2092,7 +2321,6 @@
             showError(
                 "ARCHIVE RECORD NOT FOUND OR ACCESS IS RESTRICTED."
             );
-
 
             return;
 
@@ -2183,30 +2411,36 @@
                 : "INTERNAL RECORD";
 
 
-        /*
-            IMPORTANT:
-            The CIGA link renderer is used here
-            instead of textContent so syntax such as:
-
-            [[ANOMALOUS|anomalous.html]]
-
-            becomes an actual clickable link.
-        */
+        /* =========================
+           SUMMARY
+        ========================= */
 
         incidentSummary.innerHTML =
-            data.summary
-                ? cigaRenderLinks(
-                    data.summary
-                )
-                : "NO SUMMARY AVAILABLE.";
+            "";
 
+
+        incidentSummary.appendChild(
+            renderCigaLoreText(
+                data.summary ||
+                "NO SUMMARY AVAILABLE."
+            )
+        );
+
+
+        /* =========================
+           FULL CONTENT
+        ========================= */
 
         incidentContent.innerHTML =
-            data.content
-                ? cigaRenderLinks(
-                    data.content
-                )
-                : "NO INCIDENT REPORT AVAILABLE.";
+            "";
+
+
+        incidentContent.appendChild(
+            renderCigaLoreText(
+                data.content ||
+                "NO INCIDENT REPORT AVAILABLE."
+            )
+        );
 
 
         /* =========================
