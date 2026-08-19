@@ -444,10 +444,18 @@
            INCIDENT / HISTORY
         ========================= */
 
+        .incident-list {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            gap: 12px;
+        }
+
+
         .incident {
             padding: 17px;
-
-            margin-bottom: 12px;
 
             border:
                 1px solid
@@ -487,6 +495,8 @@
             opacity: 0.80;
 
             white-space: normal;
+
+            word-break: break-word;
         }
 
 
@@ -1171,6 +1181,46 @@
 
 
         /* ==========================================
+           HTML ESCAPE
+        ========================================== */
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* ==========================================
            SOCIAL USERNAME
         ========================================== */
 
@@ -1283,7 +1333,9 @@
 
                     <span class="redacted">
 
-                        ${text}
+                        ${escapeHTML(
+                            text
+                        )}
 
                     </span>
 
@@ -1292,7 +1344,9 @@
             }
 
 
-            return text;
+            return escapeHTML(
+                text
+            );
 
         }
 
@@ -1380,7 +1434,8 @@
 
             if (
                 !value ||
-                value === "UNAVAILABLE"
+                value === "UNAVAILABLE" ||
+                value === "#"
             ) {
 
                 return "#";
@@ -1389,6 +1444,173 @@
 
 
             return value;
+
+        }
+
+
+        /* ==========================================
+           PARSE HISTORY
+        ========================================== */
+
+        function parseHistory(
+            notes
+        ) {
+
+            if (
+                notes === null ||
+                notes === undefined ||
+                String(notes).trim() === ""
+            ) {
+
+                return [];
+
+            }
+
+
+            const raw =
+                String(
+                    notes
+                ).trim();
+
+
+            /*
+                New format:
+                JSON array of strings
+            */
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        raw
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+
+                        .map(
+                            entry =>
+                                String(
+                                    entry ?? ""
+                                ).trim()
+                        )
+
+                        .filter(
+                            entry =>
+                                entry.length > 0
+                        );
+
+                }
+
+            } catch (
+                error
+            ) {
+
+                /*
+                    Old format:
+                    plain text stored directly
+                    in the notes column.
+                */
+
+            }
+
+
+            /*
+                Backwards compatibility
+                for old plain-text notes.
+            */
+
+            return [
+                raw
+            ];
+
+        }
+
+
+        /* ==========================================
+           RENDER HISTORY
+        ========================================== */
+
+        function renderHistory(
+            notes
+        ) {
+
+            const history =
+                parseHistory(
+                    notes
+                );
+
+
+            if (
+                history.length === 0
+            ) {
+
+                return `
+
+                    <div class="incident-empty">
+
+                        &gt; NO ADDITIONAL HISTORY AVAILABLE.
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <div class="incident-list">
+
+                    ${
+                        history
+                            .map(
+                                (
+                                    entry,
+                                    index
+                                ) => `
+
+                                    <div class="incident">
+
+                                        <div class="incident-id">
+
+                                            HISTORY ENTRY ${String(
+                                                index + 1
+                                            ).padStart(
+                                                3,
+                                                "0"
+                                            )}
+
+                                        </div>
+
+
+                                        <div class="incident-text">
+
+                                            ${escapeHTML(
+                                                entry
+                                            ).replace(
+                                                /\n/g,
+                                                "<br>"
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            `;
 
         }
 
@@ -1582,13 +1804,6 @@
                 );
 
 
-            const notes =
-                safe(
-                    person.notes,
-                    "NO ADDITIONAL INFORMATION AVAILABLE."
-                );
-
-
             const primaryActivity =
                 safe(
                     person.primary_activity
@@ -1744,9 +1959,11 @@
                                                         class="archive-item-number"
                                                     >
 
-                                                        ${safe(
-                                                            archive.archive_number,
-                                                            "ARCHIVE-UNKNOWN"
+                                                        ${escapeHTML(
+                                                            safe(
+                                                                archive.archive_number,
+                                                                "ARCHIVE-UNKNOWN"
+                                                            )
                                                         )}
 
                                                     </div>
@@ -1757,10 +1974,12 @@
                                                     >
 
                                                         ${
-                                                            safe(
-                                                                archive.title,
-                                                                "UNTITLED ARCHIVE"
-                                                            ).toUpperCase()
+                                                            escapeHTML(
+                                                                safe(
+                                                                    archive.title,
+                                                                    "UNTITLED ARCHIVE"
+                                                                ).toUpperCase()
+                                                            )
                                                         }
 
                                                     </div>
@@ -1776,8 +1995,10 @@
                                                                 >
 
                                                                     INCIDENT:
-                                                                    ${safe(
-                                                                        archive.incident_date
+                                                                    ${escapeHTML(
+                                                                        safe(
+                                                                            archive.incident_date
+                                                                        )
                                                                     )}
 
                                                                 </div>
@@ -1816,48 +2037,6 @@
             }
 
 
-            /* =========================
-               NOTES / HISTORY
-            ========================= */
-
-            const notesHTML =
-                notes &&
-                notes !== "NO ADDITIONAL INFORMATION AVAILABLE."
-
-                    ? `
-
-                        <div class="incident">
-
-                            <div class="incident-id">
-
-                                PERSONNEL SUBMISSION // HISTORY
-
-                            </div>
-
-                            <div class="incident-text">
-
-                                ${notes.replace(
-                                    /\n/g,
-                                    "<br>"
-                                )}
-
-                            </div>
-
-                        </div>
-
-                    `
-
-                    : `
-
-                        <div class="incident-empty">
-
-                            &gt; NO ADDITIONAL HISTORY AVAILABLE.
-
-                        </div>
-
-                    `;
-
-
             document.title =
                 `CIGA SYSTEMS // FILE_${fileNumber}`;
 
@@ -1894,9 +2073,13 @@
 
                         <div class="header-status">
 
-                            RECORD: FILE_${fileNumber}<br>
+                            RECORD: FILE_${escapeHTML(
+                                fileNumber
+                            )}<br>
 
-                            STATUS: ${status}
+                            STATUS: ${escapeHTML(
+                                status
+                            )}
 
                         </div>
 
@@ -1913,17 +2096,23 @@
 
                         <div>
                             &gt; SUBJECT IDENTIFIED:
-                            ${name}
+                            ${escapeHTML(
+                                name
+                            )}
                         </div>
 
                         <div>
                             &gt; RECORD STATUS:
-                            ${status}
+                            ${escapeHTML(
+                                status
+                            )}
                         </div>
 
                         <div>
                             &gt; OBSERVATION PROTOCOL:
-                            ${observation}
+                            ${escapeHTML(
+                                observation
+                            )}
                         </div>
 
                     </section>
@@ -1951,8 +2140,12 @@
                                     ? `
 
                                         <img
-                                            src="${photo}"
-                                            alt="${name}"
+                                            src="${escapeHTML(
+                                                photo
+                                            )}"
+                                            alt="${escapeHTML(
+                                                name
+                                            )}"
                                             class="photo"
                                         >
 
@@ -2004,14 +2197,21 @@
 
                             <div class="subject-name">
 
-                                ${name}
+                                ${escapeHTML(
+                                    name
+                                )}
 
                             </div>
 
 
                             <div class="description">
 
-                                ${description}
+                                ${escapeHTML(
+                                    description
+                                ).replace(
+                                    /\n/g,
+                                    "<br>"
+                                )}
 
                             </div>
 
@@ -2034,7 +2234,9 @@
 
                                 <div class="classification-value">
 
-                                    ${status}
+                                    ${escapeHTML(
+                                        status
+                                    )}
 
                                 </div>
 
@@ -2052,7 +2254,9 @@
 
                                 <div class="classification-value">
 
-                                    ${clearance}
+                                    ${escapeHTML(
+                                        clearance
+                                    )}
 
                                 </div>
 
@@ -2070,7 +2274,9 @@
 
                                 <div class="classification-value">
 
-                                    ${observation}
+                                    ${escapeHTML(
+                                        observation
+                                    )}
 
                                 </div>
 
@@ -2088,7 +2294,9 @@
 
                                 <div class="classification-value">
 
-                                    ${threat}
+                                    ${escapeHTML(
+                                        threat
+                                    )}
 
                                 </div>
 
@@ -2124,7 +2332,9 @@
                                 </div>
 
                                 <div class="info-value">
-                                    ${name}
+                                    ${escapeHTML(
+                                        name
+                                    )}
                                 </div>
 
 
@@ -2133,7 +2343,9 @@
                                 </div>
 
                                 <div class="info-value">
-                                    ${alias}
+                                    ${escapeHTML(
+                                        alias
+                                    )}
                                 </div>
 
 
@@ -2142,7 +2354,9 @@
                                 </div>
 
                                 <div class="info-value">
-                                    ${status}
+                                    ${escapeHTML(
+                                        status
+                                    )}
                                 </div>
 
 
@@ -2151,7 +2365,9 @@
                                 </div>
 
                                 <div class="info-value">
-                                    ${primaryActivity}
+                                    ${escapeHTML(
+                                        primaryActivity
+                                    )}
                                 </div>
 
 
@@ -2210,7 +2426,9 @@
                             </div>
 
 
-                            ${notesHTML}
+                            ${renderHistory(
+                                person.notes
+                            )}
 
                         </section>
 
@@ -2244,7 +2462,9 @@
 
                             <div class="observation">
 
-                                ${observation}
+                                ${escapeHTML(
+                                    observation
+                                )}
 
                                 <br><br>
 
@@ -2264,7 +2484,9 @@
 
                                 OBSERVATION STATUS:
 
-                                ${observation}
+                                ${escapeHTML(
+                                    observation
+                                )}
 
                                 <br>
 
@@ -2292,8 +2514,10 @@
 
 
                                 <a
-                                    href="${getSocialLink(
-                                        twitch
+                                    href="${escapeHTML(
+                                        getSocialLink(
+                                            twitch
+                                        )
                                     )}"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -2309,7 +2533,9 @@
 
                                     <span class="connection-user">
 
-                                        ${twitchUser}
+                                        ${escapeHTML(
+                                            twitchUser
+                                        )}
 
                                     </span>
 
@@ -2317,8 +2543,10 @@
 
 
                                 <a
-                                    href="${getSocialLink(
-                                        youtube
+                                    href="${escapeHTML(
+                                        getSocialLink(
+                                            youtube
+                                        )
                                     )}"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -2334,7 +2562,9 @@
 
                                     <span class="connection-user">
 
-                                        ${youtubeUser}
+                                        ${escapeHTML(
+                                            youtubeUser
+                                        )}
 
                                     </span>
 
@@ -2342,8 +2572,10 @@
 
 
                                 <a
-                                    href="${getSocialLink(
-                                        tiktok
+                                    href="${escapeHTML(
+                                        getSocialLink(
+                                            tiktok
+                                        )
                                     )}"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -2359,7 +2591,9 @@
 
                                     <span class="connection-user">
 
-                                        ${tiktokUser}
+                                        ${escapeHTML(
+                                            tiktokUser
+                                        )}
 
                                     </span>
 
@@ -2367,8 +2601,10 @@
 
 
                                 <a
-                                    href="${getSocialLink(
-                                        discord
+                                    href="${escapeHTML(
+                                        getSocialLink(
+                                            discord
+                                        )
                                     )}"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -2427,7 +2663,9 @@
 
                                 <div class="info-value">
 
-                                    ${status}
+                                    ${escapeHTML(
+                                        status
+                                    )}
 
                                 </div>
 
@@ -2469,7 +2707,9 @@
 
                                 <div class="info-value">
 
-                                    ${threat}
+                                    ${escapeHTML(
+                                        threat
+                                    )}
 
                                 </div>
 
@@ -2560,7 +2800,9 @@
 
                         <span>
 
-                            CIGA SYSTEMS // FILE_${fileNumber}
+                            CIGA SYSTEMS // FILE_${escapeHTML(
+                                fileNumber
+                            )}
 
                         </span>
 
