@@ -441,7 +441,7 @@
 
 
         /* =========================
-           INCIDENTS
+           INCIDENT / HISTORY
         ========================= */
 
         .incident {
@@ -485,6 +485,30 @@
             line-height: 1.9;
 
             opacity: 0.80;
+
+            white-space: normal;
+        }
+
+
+        .incident-empty {
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            opacity: 0.48;
         }
 
 
@@ -556,8 +580,7 @@
         }
 
 
-        .archive-link:hover
-        .archive-item {
+        .archive-link:hover .archive-item {
             background:
                 rgba(
                     255,
@@ -843,6 +866,40 @@
 
         .back:hover {
             opacity: 1;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            width: 100%;
+
+            margin:
+                30px auto 0 auto;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.40;
         }
 
 
@@ -1525,6 +1582,13 @@
                 );
 
 
+            const notes =
+                safe(
+                    person.notes,
+                    "NO ADDITIONAL INFORMATION AVAILABLE."
+                );
+
+
             const primaryActivity =
                 safe(
                     person.primary_activity
@@ -1750,6 +1814,48 @@
                 `;
 
             }
+
+
+            /* =========================
+               NOTES / HISTORY
+            ========================= */
+
+            const notesHTML =
+                notes &&
+                notes !== "NO ADDITIONAL INFORMATION AVAILABLE."
+
+                    ? `
+
+                        <div class="incident">
+
+                            <div class="incident-id">
+
+                                PERSONNEL SUBMISSION // HISTORY
+
+                            </div>
+
+                            <div class="incident-text">
+
+                                ${notes.replace(
+                                    /\n/g,
+                                    "<br>"
+                                )}
+
+                            </div>
+
+                        </div>
+
+                    `
+
+                    : `
+
+                        <div class="incident-empty">
+
+                            &gt; NO ADDITIONAL HISTORY AVAILABLE.
+
+                        </div>
+
+                    `;
 
 
             document.title =
@@ -2093,81 +2199,18 @@
                         </section>
 
 
-                        <!-- INCIDENT RECORDS -->
+                        <!-- INCIDENT / HISTORY -->
 
                         <section class="panel">
 
                             <div class="panel-title">
 
-                                // INCIDENT RECORDS
+                                // INCIDENT / HISTORY
 
                             </div>
 
 
-                            <div class="incident">
-
-                                <div class="incident-id">
-
-                                    INCIDENT_001 // RECORD
-
-                                </div>
-
-
-                                <div class="incident-text">
-
-                                    Subject presence confirmed
-                                    during a classified event.
-
-                                    Further details remain
-                                    restricted.
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="incident">
-
-                                <div class="incident-id">
-
-                                    INCIDENT_002 // ARCHIVED
-
-                                </div>
-
-
-                                <div class="incident-text">
-
-                                    Subject detected in
-                                    proximity to an unidentified
-                                    anomaly.
-
-                                    No intervention was authorized.
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="incident">
-
-                                <div class="incident-id">
-
-                                    INCIDENT_003 // RESTRICTED
-
-                                </div>
-
-
-                                <div class="incident-text">
-
-                                    Subject involvement suspected.
-
-                                    Available records remain
-                                    incomplete.
-
-                                </div>
-
-                            </div>
-
+                            ${notesHTML}
 
                         </section>
 
@@ -2201,7 +2244,7 @@
 
                             <div class="observation">
 
-                                ${description}
+                                ${observation}
 
                                 <br><br>
 
