@@ -643,6 +643,8 @@
 
         .subject-info {
             flex: 1;
+
+            min-width: 0;
         }
 
 
@@ -652,6 +654,9 @@
             letter-spacing: 3px;
 
             margin-bottom: 14px;
+
+            word-break:
+                break-word;
         }
 
 
@@ -692,6 +697,8 @@
                     255,
                     0.10
                 );
+
+            min-width: 0;
         }
 
 
@@ -711,7 +718,11 @@
 
             line-height: 1.7;
 
-            word-break: break-word;
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
         }
 
 
@@ -726,9 +737,58 @@
 
             letter-spacing: 0.7px;
 
-            white-space: pre-wrap;
+            white-space: normal;
+
+            word-break: break-word;
+
+            overflow-wrap:
+                anywhere;
 
             opacity: 0.80;
+        }
+
+
+        /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            text-decoration-thickness:
+                1px;
+
+            text-underline-offset:
+                3px;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+        }
+
+
+        .ciga-lore-link:hover {
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
         }
 
 
@@ -1167,9 +1227,7 @@
 <div class="page">
 
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+    <!-- HEADER -->
 
     <header class="header">
 
@@ -1202,9 +1260,7 @@
     </header>
 
 
-    <!-- =========================
-         SYSTEM STATUS
-    ========================= -->
+    <!-- SYSTEM STATUS -->
 
     <div
         class="system-status"
@@ -1214,9 +1270,7 @@
     </div>
 
 
-    <!-- =========================
-         LOGIN
-    ========================= -->
+    <!-- LOGIN -->
 
     <section
         class="login"
@@ -1281,9 +1335,7 @@
     </section>
 
 
-    <!-- =========================
-         ADMIN SESSION
-    ========================= -->
+    <!-- ADMIN SESSION -->
 
     <div
         class="admin-bar"
@@ -1309,9 +1361,7 @@
     </div>
 
 
-    <!-- =========================
-         ACCESS DENIED
-    ========================= -->
+    <!-- ACCESS DENIED -->
 
     <div
         class="denied"
@@ -1332,9 +1382,7 @@
     </div>
 
 
-    <!-- =========================
-         REVIEW
-    ========================= -->
+    <!-- REVIEW -->
 
     <main
         class="review"
@@ -1342,9 +1390,7 @@
     >
 
 
-        <!-- =========================
-             PERSONNEL RECORD
-        ========================= -->
+        <!-- PERSONNEL RECORD -->
 
         <section class="panel">
 
@@ -1382,9 +1428,7 @@
         </section>
 
 
-        <!-- =========================
-             ENTITY INFORMATION
-        ========================= -->
+        <!-- ENTITY INFORMATION -->
 
         <section class="panel">
 
@@ -1401,9 +1445,7 @@
         </section>
 
 
-        <!-- =========================
-             DESCRIPTION
-        ========================= -->
+        <!-- DESCRIPTION -->
 
         <section class="panel">
 
@@ -1420,9 +1462,7 @@
         </section>
 
 
-        <!-- =========================
-             LORE / INCIDENT
-        ========================= -->
+        <!-- LORE / INCIDENT -->
 
         <section class="panel">
 
@@ -1439,9 +1479,7 @@
         </section>
 
 
-        <!-- =========================
-             CONNECTIONS
-        ========================= -->
+        <!-- CONNECTIONS -->
 
         <section class="panel">
 
@@ -1458,9 +1496,7 @@
         </section>
 
 
-        <!-- =========================
-             CIGA CLASSIFICATION
-        ========================= -->
+        <!-- CIGA CLASSIFICATION -->
 
         <section class="panel">
 
@@ -1651,7 +1687,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -1666,9 +1701,7 @@
         </section>
 
 
-        <!-- =========================
-             PERSONNEL DISPOSITION
-        ========================= -->
+        <!-- PERSONNEL DISPOSITION -->
 
         <section class="panel">
 
@@ -1716,9 +1749,7 @@
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer class="footer">
 
@@ -1953,6 +1984,292 @@
 
 
     /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==========================================
+       CIGA LINK PARSER
+    ========================================== */
+
+    function renderCigaText(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return "";
+
+        }
+
+
+        const text =
+            String(
+                value
+            );
+
+
+        const tokenRegex =
+            /\[\[([^\]\n|]+)\|(https?:\/\/[^\]\s]+)\]\]/gi;
+
+
+        let output = "";
+
+        let lastIndex = 0;
+
+
+        text.replace(
+            tokenRegex,
+            function(
+                fullMatch,
+                label,
+                url,
+                offset
+            ) {
+
+                output +=
+                    escapeHTML(
+                        text.slice(
+                            lastIndex,
+                            offset
+                        )
+                    );
+
+
+                output += `
+
+                    <a
+                        href="${escapeHTML(
+                            url
+                        )}"
+                        class="ciga-lore-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >${escapeHTML(
+                        label
+                    )}</a>
+
+                `;
+
+
+                lastIndex =
+                    offset +
+                    fullMatch.length;
+
+            }
+        );
+
+
+        output +=
+            escapeHTML(
+                text.slice(
+                    lastIndex
+                )
+            );
+
+
+        return output.replace(
+            /\r?\n/g,
+            "<br>"
+        );
+
+    }
+
+
+    /* ==========================================
+       PARSE NOTES
+    ========================================== */
+
+    function parseNotes(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return [];
+
+        }
+
+
+        if (
+            Array.isArray(
+                value
+            )
+        ) {
+
+            return value
+
+                .map(
+                    item =>
+                        String(
+                            item
+                        )
+                        .trim()
+                )
+
+                .filter(
+                    item =>
+                        item !== ""
+                );
+
+        }
+
+
+        const text =
+            String(
+                value
+            )
+            .trim();
+
+
+        if (!text) {
+
+            return [];
+
+        }
+
+
+        if (
+            text.startsWith("[")
+            &&
+            text.endsWith("]")
+        ) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if (
+                    Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    return parsed
+
+                        .map(
+                            item =>
+                                String(
+                                    item
+                                )
+                                .trim()
+                        )
+
+                        .filter(
+                            item =>
+                                item !== ""
+                        );
+
+                }
+
+            } catch (
+                error
+            ) {
+
+                console.warn(
+                    "NOTES JSON PARSE FAILED:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        return [
+            text
+        ];
+
+    }
+
+
+    /* ==========================================
+       RENDER NOTES
+    ========================================== */
+
+    function renderNotes(
+        value
+    ) {
+
+        const entries =
+            parseNotes(
+                value
+            );
+
+
+        if (
+            entries.length === 0
+        ) {
+
+            return "NO ADDITIONAL NOTES";
+
+        }
+
+
+        return entries
+
+            .map(
+                entry =>
+                    renderCigaText(
+                        entry
+                    )
+            )
+
+            .join(
+                "<br><br>"
+            );
+
+    }
+
+
+    /* ==========================================
        SHOW LOGIN
     ========================================== */
 
@@ -2036,20 +2353,25 @@
             adminError
         } =
             await db
+
                 .from(
                     "admins"
                 )
+
                 .select(
                     "user_id, role"
                 )
+
                 .eq(
                     "user_id",
                     userId
                 )
+
                 .eq(
                     "role",
                     "ADMIN"
                 )
+
                 .maybeSingle();
 
 
@@ -2337,14 +2659,18 @@
             error
         } =
             await db
+
                 .from(
                     "personnel_submissions"
                 )
+
                 .select("*")
+
                 .eq(
                     "id",
                     submissionId
                 )
+
                 .maybeSingle();
 
 
@@ -2444,13 +2770,19 @@
             }`;
 
 
+        /* =========================
+           IMAGE
+        ========================= */
+
         imageContainer.innerHTML =
             "";
 
 
         if (
             data.photo &&
-            String(data.photo).trim() !== ""
+            String(
+                data.photo
+            ).trim() !== ""
         ) {
 
             const image =
@@ -2478,16 +2810,20 @@
                     imageContainer.innerHTML =
                         "";
 
+
                     const placeholder =
                         document.createElement(
                             "div"
                         );
 
+
                     placeholder.className =
                         "subject-placeholder";
 
+
                     placeholder.textContent =
                         "IMAGE UNAVAILABLE";
+
 
                     imageContainer.appendChild(
                         placeholder
@@ -2578,23 +2914,26 @@
            DESCRIPTION
         ========================= */
 
-        description.textContent =
-            data.description ||
-            "NO DESCRIPTION PROVIDED";
+        description.innerHTML =
+            data.description
+                ? renderCigaText(
+                    data.description
+                )
+                : "NO DESCRIPTION PROVIDED";
 
 
         /* =========================
            NOTES
         ========================= */
 
-        notes.textContent =
-            formatNotes(
+        notes.innerHTML =
+            renderNotes(
                 data.notes
             );
 
 
         /* =========================
-           LINKS
+           CONNECTIONS
         ========================= */
 
         links.innerHTML =
@@ -2797,109 +3136,6 @@
 
 
     /* ==========================================
-       FORMAT NOTES
-    ========================================== */
-
-    function formatNotes(
-        value
-    ) {
-
-        if (
-            value === null ||
-            value === undefined ||
-            value === ""
-        ) {
-
-            return "NO ADDITIONAL NOTES";
-
-        }
-
-
-        if (
-            Array.isArray(
-                value
-            )
-        ) {
-
-            return value
-                .map(
-                    item =>
-                        String(item)
-                )
-                .filter(
-                    item =>
-                        item.trim() !== ""
-                )
-                .join(
-                    "\n\n"
-                )
-                ||
-                "NO ADDITIONAL NOTES";
-
-        }
-
-
-        const text =
-            String(
-                value
-            );
-
-
-        if (
-            text.trim().startsWith("[")
-            &&
-            text.trim().endsWith("]")
-        ) {
-
-            try {
-
-                const parsed =
-                    JSON.parse(
-                        text
-                    );
-
-
-                if (
-                    Array.isArray(
-                        parsed
-                    )
-                ) {
-
-                    return parsed
-                        .map(
-                            item =>
-                                String(item)
-                        )
-                        .filter(
-                            item =>
-                                item.trim() !== ""
-                        )
-                        .join(
-                            "\n\n"
-                        )
-                        ||
-                        "NO ADDITIONAL NOTES";
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "NOTES JSON PARSE FAILED:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        return text;
-
-    }
-
-
-    /* ==========================================
        SELECT VALUE
     ========================================== */
 
@@ -3016,7 +3252,7 @@
 
 
     /* ==========================================
-       LINK
+       SOCIAL LINK
     ========================================== */
 
     function addLink(
@@ -3079,9 +3315,11 @@
             error
         } =
             await db
+
                 .from(
                     "personnel"
                 )
+
                 .select(
                     "file_number"
                 );
@@ -3109,7 +3347,9 @@
 
 
                 if (
-                    !Number.isNaN(number)
+                    !Number.isNaN(
+                        number
+                    )
                     &&
                     number >
                     highestNumber
@@ -3202,14 +3442,18 @@
                 submissionError
             } =
                 await db
+
                     .from(
                         "personnel_submissions"
                     )
+
                     .select("*")
+
                     .eq(
                         "id",
                         submissionId
                     )
+
                     .maybeSingle();
 
 
@@ -3336,17 +3580,21 @@
                 personnelInsertError
             } =
                 await db
+
                     .from(
                         "personnel"
                     )
+
                     .insert(
                         [
                             personnelRecord
                         ]
                     )
+
                     .select(
                         "id, file_number, name"
                     )
+
                     .single();
 
 
@@ -3362,15 +3610,18 @@
                 submissionUpdateError
             } =
                 await db
+
                     .from(
                         "personnel_submissions"
                     )
+
                     .update({
 
                         submission_status:
                             "APPROVED"
 
                     })
+
                     .eq(
                         "id",
                         submission.id
@@ -3520,7 +3771,6 @@
 
             }
 
-
             else if (
                 error.message ===
                 "SUBMISSION_NOT_FOUND"
@@ -3530,7 +3780,6 @@
                     "> SUBMISSION RECORD NOT FOUND.";
 
             }
-
 
             else if (
                 error.message &&
@@ -3550,7 +3799,6 @@
                     `> SUBMISSION ALREADY ${existingStatus}.`;
 
             }
-
 
             else if (
                 error.message
@@ -3645,16 +3893,20 @@
                 loadError
             } =
                 await db
+
                     .from(
                         "personnel_submissions"
                     )
+
                     .select(
                         "id, submission_status"
                     )
+
                     .eq(
                         "id",
                         submissionId
                     )
+
                     .maybeSingle();
 
 
@@ -3696,15 +3948,18 @@
                 error
             } =
                 await db
+
                     .from(
                         "personnel_submissions"
                     )
+
                     .update({
 
                         submission_status:
                             "REJECTED"
 
                     })
+
                     .eq(
                         "id",
                         submissionId
@@ -3805,7 +4060,6 @@
 
             }
 
-
             else if (
                 error.message ===
                 "SUBMISSION_NOT_FOUND"
@@ -3815,7 +4069,6 @@
                     "> SUBMISSION RECORD NOT FOUND.";
 
             }
-
 
             else if (
                 error.message &&
@@ -3835,7 +4088,6 @@
                     `> SUBMISSION ALREADY ${existingStatus}.`;
 
             }
-
 
             else if (
                 error.message
@@ -3926,11 +4178,14 @@
                     "visible"
                 );
 
+
                 adminBar.classList.remove(
                     "visible"
                 );
 
+
                 showLogin();
+
 
                 return;
 
@@ -3953,7 +4208,9 @@
                         scope: "local"
                     });
 
+
                     showLogin();
+
 
                     return;
 
@@ -3990,6 +4247,7 @@
             denyAccess(
                 "SUBMISSION ID NOT PROVIDED"
             );
+
 
             return;
 
