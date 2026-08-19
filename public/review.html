@@ -137,7 +137,12 @@
         ========================= */
 
         .system-status {
-            margin-bottom: 24px;
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin:
+                0 auto 24px auto;
 
             padding:
                 15px 18px;
@@ -174,7 +179,12 @@
         .login {
             display: none;
 
+            width: 100%;
+
             max-width: 620px;
+
+            margin:
+                0 auto;
         }
 
 
@@ -389,7 +399,12 @@
         .admin-bar {
             display: none;
 
-            margin-bottom: 24px;
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin:
+                0 auto 24px auto;
 
             gap: 15px;
 
@@ -453,6 +468,13 @@
         .denied {
             display: none;
 
+            width: 100%;
+
+            max-width: 700px;
+
+            margin:
+                0 auto;
+
             padding: 30px;
 
             border:
@@ -484,7 +506,12 @@
         .review {
             display: none;
 
+            width: 100%;
+
             max-width: 1100px;
+
+            margin:
+                0 auto;
         }
 
 
@@ -1010,11 +1037,12 @@
             justify-content:
                 space-between;
 
-            gap: 15px;
+            width: 100%;
 
-            flex-wrap: wrap;
+            max-width: 1100px;
 
-            margin-top: 30px;
+            margin:
+                30px auto 0 auto;
 
             padding-top: 15px;
 
@@ -1032,6 +1060,10 @@
             letter-spacing: 2px;
 
             opacity: 0.38;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
         }
 
 
@@ -1440,8 +1472,6 @@
             <div class="classification-grid">
 
 
-                <!-- STATUS -->
-
                 <div class="classification-field">
 
                     <label
@@ -1490,8 +1520,6 @@
                 </div>
 
 
-                <!-- CLEARANCE -->
-
                 <div class="classification-field">
 
                     <label
@@ -1531,8 +1559,6 @@
 
                 </div>
 
-
-                <!-- OBSERVATION -->
 
                 <div class="classification-field">
 
@@ -1581,8 +1607,6 @@
 
                 </div>
 
-
-                <!-- THREAT LEVEL -->
 
                 <div class="classification-field">
 
@@ -1938,21 +1962,17 @@
             "visible"
         );
 
-
         adminBar.classList.remove(
             "visible"
         );
-
 
         denied.classList.remove(
             "visible"
         );
 
-
         review.classList.remove(
             "visible"
         );
-
 
         systemStatus.textContent =
             "> ADMINISTRATIVE AUTHENTICATION REQUIRED.";
@@ -2412,10 +2432,6 @@
         );
 
 
-        /* =========================
-           SUBJECT
-        ========================= */
-
         subjectName.textContent =
             data.name ||
             "UNKNOWN";
@@ -2427,10 +2443,6 @@
                 "UNKNOWN"
             }`;
 
-
-        /* =========================
-           IMAGE
-        ========================= */
 
         imageContainer.innerHTML =
             "";
@@ -2513,7 +2525,7 @@
 
 
         /* =========================
-           IDENTITY
+           ENTITY INFORMATION
         ========================= */
 
         identityGrid.innerHTML =
@@ -2643,7 +2655,7 @@
 
 
         /* =========================
-           CLASSIFICATION
+           CIGA CLASSIFICATION
         ========================= */
 
         setSelectValue(
@@ -2675,7 +2687,7 @@
 
 
         /* =========================
-           STATUS
+           PERSONNEL DISPOSITION
         ========================= */
 
         statusGrid.innerHTML =
@@ -2703,10 +2715,6 @@
             "NOT ASSIGNED"
         );
 
-
-        /* =========================
-           ACTION STATE
-        ========================= */
 
         const currentStatus =
             String(
@@ -2836,11 +2844,6 @@
                 value
             );
 
-
-        /*
-            Handles submissions created with
-            the previous JSON-array format.
-        */
 
         if (
             text.trim().startsWith("[")
@@ -3179,11 +3182,6 @@
 
         try {
 
-            /*
-                Make sure the current authenticated
-                user is still an administrator.
-            */
-
             const isAdmin =
                 await verifyAdmin();
 
@@ -3196,11 +3194,6 @@
 
             }
 
-
-            /*
-                Reload submission immediately before
-                approval to avoid using stale data.
-            */
 
             const {
                 data:
@@ -3254,10 +3247,6 @@
             }
 
 
-            /*
-                Administrator classification.
-            */
-
             const selectedStatus =
                 reviewStatus.value;
 
@@ -3274,17 +3263,9 @@
                 reviewThreatLevel.value;
 
 
-            /*
-                Generate next personnel file.
-            */
-
             const nextFileNumber =
                 await getNextFileNumber();
 
-
-            /*
-                Build official personnel record.
-            */
 
             const personnelRecord = {
 
@@ -3348,10 +3329,6 @@
             };
 
 
-            /*
-                Insert personnel file.
-            */
-
             const {
                 data:
                 personnelData,
@@ -3380,10 +3357,6 @@
             }
 
 
-            /*
-                Mark submission as approved.
-            */
-
             const {
                 error:
                 submissionUpdateError
@@ -3406,23 +3379,10 @@
 
             if (submissionUpdateError) {
 
-                /*
-                    If the personnel insert worked but
-                    the submission update failed, tell
-                    the administrator clearly.
-
-                    We intentionally do not silently
-                    create another record.
-                */
-
                 throw submissionUpdateError;
 
             }
 
-
-            /*
-                Update interface.
-            */
 
             subjectMeta.textContent =
                 `RECORD ID: ${submission.id} // STATUS: APPROVED // FILE_${nextFileNumber}`;
@@ -3966,14 +3926,11 @@
                     "visible"
                 );
 
-
                 adminBar.classList.remove(
                     "visible"
                 );
 
-
                 showLogin();
-
 
                 return;
 
@@ -3996,9 +3953,7 @@
                         scope: "local"
                     });
 
-
                     showLogin();
-
 
                     return;
 
