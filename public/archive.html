@@ -20,6 +20,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- CIGA LORE LINK SYSTEM -->
+    <script src="ciga-links.js"></script>
+
+
     <style>
 
         * {
@@ -91,9 +95,44 @@
 
         .title {
 
+            display: inline-block;
+
             font-size: 24px;
 
             letter-spacing: 4px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                text-shadow 0.2s ease;
+
+        }
+
+
+        .title:hover {
+
+            text-decoration: none;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                ),
+
+                0 0 15px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
 
         }
 
@@ -646,9 +685,57 @@
             letter-spacing: 0.7px;
 
             white-space:
-                pre-wrap;
+                normal;
 
             opacity: 0.88;
+
+            word-break:
+                break-word;
+
+        }
+
+
+        /* =========================
+           CIGA LORE LINKS
+        ========================= */
+
+        .ciga-lore-link {
+
+            color: #fff;
+
+            text-decoration:
+                underline;
+
+            text-decoration-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+
+            text-underline-offset:
+                3px;
+
+            transition:
+                opacity 0.2s ease,
+                text-shadow 0.2s ease;
+
+        }
+
+
+        .ciga-lore-link:hover {
+
+            opacity: 1;
+
+            text-shadow:
+                0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                );
 
         }
 
@@ -883,11 +970,14 @@
 
         <div>
 
-            <div class="title">
+            <a
+                href="home.html"
+                class="title"
+            >
 
                 CIGA SYSTEMS
 
-            </div>
+            </a>
 
 
             <div class="subtitle">
@@ -1678,46 +1768,6 @@
 
 
     /* ==========================================
-       HTML ESCAPE
-    ========================================== */
-
-    function escapeHTML(
-        value
-    ) {
-
-        return String(
-            value ?? ""
-        )
-
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-    }
-
-
-    /* ==========================================
        GET ARCHIVE ID
     ========================================== */
 
@@ -1742,9 +1792,11 @@
     ) {
 
         errorText.innerHTML =
-            `&gt; ${escapeHTML(
-                message
-            )}`;
+            `&gt; ${
+                window.cigaEscapeHTML
+                    ? cigaEscapeHTML(message)
+                    : String(message)
+            }`;
 
 
         errorPanel.classList.add(
@@ -1788,8 +1840,10 @@
         terminalLine2.textContent =
             "> NO ASSOCIATED PERSONNEL FILE // STANDALONE EVENT RECORD.";
 
+
         associationLabel.textContent =
             "ASSOCIATION";
+
 
         associationValue.textContent =
             "ANOMALOUS EVENT";
@@ -2027,6 +2081,7 @@
                 "DATABASE ERROR WHILE RETRIEVING ARCHIVE."
             );
 
+
             return;
 
         }
@@ -2037,6 +2092,7 @@
             showError(
                 "ARCHIVE RECORD NOT FOUND OR ACCESS IS RESTRICTED."
             );
+
 
             return;
 
@@ -2127,14 +2183,30 @@
                 : "INTERNAL RECORD";
 
 
-        incidentSummary.textContent =
-            data.summary ||
-            "NO SUMMARY AVAILABLE.";
+        /*
+            IMPORTANT:
+            The CIGA link renderer is used here
+            instead of textContent so syntax such as:
+
+            [[ANOMALOUS|anomalous.html]]
+
+            becomes an actual clickable link.
+        */
+
+        incidentSummary.innerHTML =
+            data.summary
+                ? cigaRenderLinks(
+                    data.summary
+                )
+                : "NO SUMMARY AVAILABLE.";
 
 
-        incidentContent.textContent =
-            data.content ||
-            "NO INCIDENT REPORT AVAILABLE.";
+        incidentContent.innerHTML =
+            data.content
+                ? cigaRenderLinks(
+                    data.content
+                )
+                : "NO INCIDENT REPORT AVAILABLE.";
 
 
         /* =========================
