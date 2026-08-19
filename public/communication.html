@@ -18,10 +18,7 @@
         href="logo.png"
     >
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
 
@@ -87,16 +84,12 @@
         }
 
 
-        .title {
+        .title-link {
             display: inline-block;
 
             color: #fff;
 
             text-decoration: none;
-
-            font-size: 24px;
-
-            letter-spacing: 4px;
 
             cursor: pointer;
 
@@ -105,25 +98,17 @@
         }
 
 
-        .title:hover {
-            text-decoration: none;
-
+        .title-link:hover {
             text-shadow:
-                0 0 6px
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.8
-                ),
+                0 0 6px rgba(255,255,255,0.8),
+                0 0 15px rgba(255,255,255,0.35);
+        }
 
-                0 0 15px
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.35
-                );
+
+        .title {
+            font-size: 24px;
+
+            letter-spacing: 4px;
         }
 
 
@@ -416,8 +401,7 @@
         .transmission-status {
             display: flex;
 
-            align-items:
-                center;
+            align-items: center;
 
             gap: 10px;
 
@@ -495,14 +479,9 @@
 
             letter-spacing: 0.8px;
 
-            white-space:
-                normal;
+            white-space: normal;
 
-            word-break:
-                break-word;
-
-            overflow-wrap:
-                anywhere;
+            overflow-wrap: anywhere;
 
             opacity: 0.90;
         }
@@ -513,7 +492,6 @@
         ========================= */
 
         .ciga-lore-link {
-
             color: #fff;
 
             text-decoration:
@@ -524,24 +502,19 @@
                     255,
                     255,
                     255,
-                    0.45
+                    0.55
                 );
 
-            text-decoration-thickness:
-                1px;
-
             text-underline-offset:
-                4px;
+                3px;
 
             transition:
                 opacity 0.2s ease,
                 text-shadow 0.2s ease;
-
         }
 
 
         .ciga-lore-link:hover {
-
             opacity: 1;
 
             text-shadow:
@@ -550,17 +523,16 @@
                     255,
                     255,
                     255,
-                    0.8
-                ),
+                    0.75
+                );
 
-                0 0 14px
+            text-decoration-color:
                 rgba(
                     255,
                     255,
                     255,
-                    0.35
+                    0.95
                 );
-
         }
 
 
@@ -755,7 +727,6 @@
 
 <body>
 
-
 <div class="page">
 
 
@@ -769,9 +740,13 @@
 
             <a
                 href="home.html"
-                class="title"
+                class="title-link"
             >
-                CIGA SYSTEMS
+
+                <div class="title">
+                    CIGA SYSTEMS
+                </div>
+
             </a>
 
 
@@ -809,31 +784,23 @@
 
     <section class="terminal">
 
-        <div id="terminalLine1">
-
+        <div>
             &gt; ACCESSING TRANSMISSION RECORD...
-
         </div>
 
 
-        <div id="terminalLine2">
-
+        <div>
             &gt; AUTHENTICATING COMMUNICATION...
-
         </div>
 
 
-        <div id="terminalLine3">
-
+        <div>
             &gt; VERIFYING TRANSMISSION STATUS...
-
         </div>
 
 
         <div id="terminalLine4">
-
             &gt; WAITING FOR DATABASE RESPONSE...
-
         </div>
 
     </section>
@@ -850,16 +817,12 @@
     >
 
         <div class="message-title">
-
             TRANSMISSION UNAVAILABLE
-
         </div>
 
 
         <div id="errorText">
-
             &gt; COMMUNICATION RECORD COULD NOT BE RETRIEVED.
-
         </div>
 
 
@@ -870,9 +833,7 @@
             href="communications-log.html"
             class="back"
         >
-
             &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
-
         </a>
 
     </section>
@@ -888,18 +849,17 @@
     >
 
 
-        <!-- TRANSMISSION HEADER -->
+        <!-- =========================
+             TRANSMISSION HEADER
+        ========================= -->
 
         <section class="transmission-header">
-
 
             <div
                 class="message-id"
                 id="messageId"
             >
-
                 COMM-000
-
             </div>
 
 
@@ -907,23 +867,18 @@
                 class="subject"
                 id="subject"
             >
-
                 UNTITLED TRANSMISSION
-
             </div>
 
 
             <div class="classification-row">
-
 
                 <span>
 
                     FROM:
 
                     <strong id="sender">
-
                         UNKNOWN
-
                     </strong>
 
                 </span>
@@ -934,9 +889,7 @@
                     TO:
 
                     <strong id="recipient">
-
                         UNKNOWN
-
                     </strong>
 
                 </span>
@@ -947,9 +900,7 @@
                     CLASSIFICATION:
 
                     <strong id="classification">
-
                         UNKNOWN
-
                     </strong>
 
                 </span>
@@ -960,9 +911,7 @@
                     STATUS:
 
                     <strong id="status">
-
                         UNKNOWN
-
                     </strong>
 
                 </span>
@@ -972,15 +921,14 @@
         </section>
 
 
-        <!-- METADATA -->
+        <!-- =========================
+             METADATA
+        ========================= -->
 
         <section class="panel">
 
-
             <div class="panel-title">
-
                 // TRANSMISSION DATA
-
             </div>
 
 
@@ -988,9 +936,7 @@
 
 
                 <div class="metadata-label">
-
                     MESSAGE ID
-
                 </div>
 
 
@@ -998,16 +944,12 @@
                     class="metadata-value"
                     id="metadataMessageId"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="metadata-label">
-
                     ORIGIN
-
                 </div>
 
 
@@ -1015,16 +957,12 @@
                     class="metadata-value"
                     id="metadataSender"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="metadata-label">
-
                     DESTINATION
-
                 </div>
 
 
@@ -1032,16 +970,12 @@
                     class="metadata-value"
                     id="metadataRecipient"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="metadata-label">
-
                     CLASSIFICATION
-
                 </div>
 
 
@@ -1049,16 +983,12 @@
                     class="metadata-value"
                     id="metadataClassification"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="metadata-label">
-
                     STATUS
-
                 </div>
 
 
@@ -1066,16 +996,12 @@
                     class="metadata-value"
                     id="metadataStatus"
                 >
-
                     UNKNOWN
-
                 </div>
 
 
                 <div class="metadata-label">
-
                     TRANSMISSION TIME
-
                 </div>
 
 
@@ -1083,11 +1009,8 @@
                     class="metadata-value"
                     id="metadataTime"
                 >
-
                     UNKNOWN
-
                 </div>
-
 
             </div>
 
@@ -1098,9 +1021,7 @@
 
 
                 <span id="transmissionStatusText">
-
                     TRANSMISSION VERIFIED
-
                 </span>
 
             </div>
@@ -1108,15 +1029,14 @@
         </section>
 
 
-        <!-- MESSAGE -->
+        <!-- =========================
+             MESSAGE
+        ========================= -->
 
         <section class="panel">
 
-
             <div class="panel-title">
-
                 // MESSAGE CONTENT
-
             </div>
 
 
@@ -1124,9 +1044,7 @@
                 class="message-body"
                 id="messageBody"
             >
-
                 NO MESSAGE CONTENT AVAILABLE.
-
             </div>
 
 
@@ -1150,36 +1068,34 @@
         </section>
 
 
-        <!-- BACK -->
+        <!-- =========================
+             BACK
+        ========================= -->
 
         <a
             href="communications-log.html"
             class="back"
         >
-
             &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
-
         </a>
 
 
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer class="footer">
 
         <span>
-
             CIGA SYSTEMS // COMMUNICATIONS DATABASE
-
         </span>
 
 
         <span>
-
             ALL ACCESS IS LOGGED
-
         </span>
 
     </footer>
@@ -1395,16 +1311,20 @@
 
 
     /* ==========================================
-       CIGA LORE LINK PARSER
+       CIGA LORE TEXT PARSER
+       FORMAT:
+
+       [[VISIBLE TEXT|https://example.com]]
     ========================================== */
 
-    function parseCigaLinks(
+    function renderCigaLoreText(
         value
     ) {
 
         if (
             value === null ||
-            value === undefined
+            value === undefined ||
+            value === ""
         ) {
 
             return "";
@@ -1412,107 +1332,87 @@
         }
 
 
-        let text =
+        const text =
             String(
                 value
             );
 
 
         /*
-            Escape all existing HTML first.
-
-            This means a normal message cannot
-            inject arbitrary HTML into the page.
+            First escape everything so that
+            user/database content cannot inject HTML.
         */
 
-        text =
-            text
-
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
+        const escaped =
+            escapeHTML(
+                text
+            );
 
 
         /*
-            Supported format:
-
-            [[VISIBLE TEXT|https://example.com]]
-
-            The visible text becomes the clickable
-            CIGA lore link.
+            Then convert only our special
+            CIGA link syntax into real links.
         */
 
-        text =
-            text.replace(
-                /\[\[([^\]|]+)\|((?:https?:\/\/)[^\]]+)\]\]/gi,
-                function(
+        return escaped
+
+            .replace(
+                /\[\[([^\]|]+)\|([^\]]+)\]\]/g,
+
+                (
                     match,
                     label,
                     url
-                ) {
+                ) => {
+
+                    const safeLabel =
+                        label.trim();
+
+
+                    const safeUrl =
+                        url.trim();
+
+
+                    /*
+                        Only allow normal HTTP/HTTPS
+                        destinations.
+                    */
+
+                    if (
+                        !/^https?:\/\//i.test(
+                            safeUrl
+                        )
+                    ) {
+
+                        return escapeHTML(
+                            safeLabel
+                        );
+
+                    }
+
 
                     return `
+
                         <a
-                            href="${url}"
+                            href="${escapeHTML(
+                                safeUrl
+                            )}"
                             class="ciga-lore-link"
                             target="_blank"
                             rel="noopener noreferrer"
-                        >
-                            ${label}
-                        </a>
+                        >${escapeHTML(
+                            safeLabel
+                        )}</a>
+
                     `;
 
                 }
-            );
+            )
 
-
-        /*
-            Preserve line breaks from Supabase.
-        */
-
-        text =
-            text.replace(
-                /\r\n/g,
-                "\n"
-            );
-
-
-        text =
-            text.replace(
-                /\r/g,
-                "\n"
-            );
-
-
-        text =
-            text.replace(
-                /\n/g,
+            .replace(
+                /\r?\n/g,
                 "<br>"
             );
-
-
-        return text;
 
     }
 
@@ -1786,8 +1686,17 @@
            MESSAGE
         ========================= */
 
+        /*
+            IMPORTANT:
+            Use innerHTML with our SAFE parser.
+
+            Do NOT use textContent here,
+            otherwise the generated link HTML
+            would appear literally on screen.
+        */
+
         messageBody.innerHTML =
-            parseCigaLinks(
+            renderCigaLoreText(
                 data.content ||
                 "NO MESSAGE CONTENT AVAILABLE."
             );
