@@ -1227,7 +1227,9 @@
 <div class="page">
 
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header class="header">
 
@@ -1260,7 +1262,9 @@
     </header>
 
 
-    <!-- SYSTEM STATUS -->
+    <!-- =========================
+         SYSTEM STATUS
+    ========================= -->
 
     <div
         class="system-status"
@@ -1270,7 +1274,9 @@
     </div>
 
 
-    <!-- LOGIN -->
+    <!-- =========================
+         LOGIN
+    ========================= -->
 
     <section
         class="login"
@@ -1335,7 +1341,9 @@
     </section>
 
 
-    <!-- ADMIN SESSION -->
+    <!-- =========================
+         ADMIN SESSION
+    ========================= -->
 
     <div
         class="admin-bar"
@@ -1361,7 +1369,9 @@
     </div>
 
 
-    <!-- ACCESS DENIED -->
+    <!-- =========================
+         ACCESS DENIED
+    ========================= -->
 
     <div
         class="denied"
@@ -1382,7 +1392,9 @@
     </div>
 
 
-    <!-- REVIEW -->
+    <!-- =========================
+         REVIEW
+    ========================= -->
 
     <main
         class="review"
@@ -1390,7 +1402,9 @@
     >
 
 
-        <!-- PERSONNEL RECORD -->
+        <!-- =========================
+             PERSONNEL RECORD
+        ========================= -->
 
         <section class="panel">
 
@@ -1428,7 +1442,9 @@
         </section>
 
 
-        <!-- ENTITY INFORMATION -->
+        <!-- =========================
+             ENTITY INFORMATION
+        ========================= -->
 
         <section class="panel">
 
@@ -1445,7 +1461,9 @@
         </section>
 
 
-        <!-- DESCRIPTION -->
+        <!-- =========================
+             DESCRIPTION
+        ========================= -->
 
         <section class="panel">
 
@@ -1462,7 +1480,9 @@
         </section>
 
 
-        <!-- LORE / INCIDENT -->
+        <!-- =========================
+             LORE / INCIDENT
+        ========================= -->
 
         <section class="panel">
 
@@ -1479,7 +1499,9 @@
         </section>
 
 
-        <!-- CONNECTIONS -->
+        <!-- =========================
+             CONNECTIONS
+        ========================= -->
 
         <section class="panel">
 
@@ -1496,7 +1518,9 @@
         </section>
 
 
-        <!-- CIGA CLASSIFICATION -->
+        <!-- =========================
+             CIGA CLASSIFICATION
+        ========================= -->
 
         <section class="panel">
 
@@ -1687,6 +1711,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1701,7 +1726,9 @@
         </section>
 
 
-        <!-- PERSONNEL DISPOSITION -->
+        <!-- =========================
+             PERSONNEL DISPOSITION
+        ========================= -->
 
         <section class="panel">
 
@@ -1749,7 +1776,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer class="footer">
 
@@ -2056,56 +2085,93 @@
 
         let lastIndex = 0;
 
-
-        text.replace(
-            tokenRegex,
-            function(
-                fullMatch,
-                label,
-                url,
-                offset
-            ) {
-
-                output +=
-                    escapeHTML(
-                        text.slice(
-                            lastIndex,
-                            offset
-                        )
-                    );
+        let match;
 
 
-                output += `
+        while (
+            (
+                match =
+                    tokenRegex.exec(text)
+            ) !== null
+        ) {
 
-                    <a
-                        href="${escapeHTML(
+            const fullMatch =
+                match[0];
+
+
+            const label =
+                match[1];
+
+
+            const url =
+                match[2];
+
+
+            const matchStart =
+                match.index;
+
+
+            /*
+                Escape normal text before the link.
+            */
+
+            output +=
+                escapeHTML(
+                    text.substring(
+                        lastIndex,
+                        matchStart
+                    )
+                );
+
+
+            /*
+                Generate the actual link.
+
+                Only the URL and label are escaped.
+                The <a> element itself remains HTML.
+            */
+
+            output +=
+                '<a' +
+                    ' href="' +
+                        escapeHTML(
                             url
-                        )}"
-                        class="ciga-lore-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >${escapeHTML(
+                        ) +
+                    '"' +
+                    ' class="ciga-lore-link"' +
+                    ' target="_blank"' +
+                    ' rel="noopener noreferrer"' +
+                '>' +
+                    escapeHTML(
                         label
-                    )}</a>
+                    ) +
+                '</a>';
 
-                `;
+
+            lastIndex =
+                matchStart +
+                fullMatch.length;
+
+        }
 
 
-                lastIndex =
-                    offset +
-                    fullMatch.length;
-
-            }
-        );
-
+        /*
+            Escape everything after
+            the final CIGA Link.
+        */
 
         output +=
             escapeHTML(
-                text.slice(
+                text.substring(
                     lastIndex
                 )
             );
 
+
+        /*
+            Preserve the original
+            line breaks.
+        */
 
         return output.replace(
             /\r?\n/g,
@@ -2209,9 +2275,7 @@
 
                 }
 
-            } catch (
-                error
-            ) {
+            } catch (error) {
 
                 console.warn(
                     "NOTES JSON PARSE FAILED:",
@@ -2414,6 +2478,7 @@
             showLoginError(
                 "EMAIL AND PASSWORD REQUIRED."
             );
+
 
             return;
 
@@ -2632,6 +2697,7 @@
                 "SUBMISSION ID NOT PROVIDED"
             );
 
+
             return;
 
         }
@@ -2644,6 +2710,7 @@
         if (!isAdmin) {
 
             showLogin();
+
 
             return;
 
@@ -2689,6 +2756,7 @@
             denyAccess(
                 "PERSONNEL RECORD NOT FOUND"
             );
+
 
             return;
 
@@ -3252,7 +3320,7 @@
 
 
     /* ==========================================
-       SOCIAL LINK
+       LINK
     ========================================== */
 
     function addLink(
@@ -3263,7 +3331,9 @@
 
         if (
             !url ||
-            String(url).trim() === ""
+            String(
+                url
+            ).trim() === ""
         ) {
 
             return;
