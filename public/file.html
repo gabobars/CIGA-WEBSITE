@@ -375,7 +375,8 @@
 
             gap: 22px;
 
-            align-items: stretch;
+            align-items:
+                start;
         }
 
 
@@ -477,6 +478,86 @@
 
 
         /* =========================
+           CONTROLLED SCROLL AREAS
+        ========================= */
+
+        .scroll-area {
+            max-height: 430px;
+
+            overflow-y: auto;
+
+            overflow-x: hidden;
+
+            padding-right: 8px;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                )
+                transparent;
+        }
+
+
+        /* =========================
+           CUSTOM SCROLLBAR
+        ========================= */
+
+        .scroll-area::-webkit-scrollbar {
+            width: 5px;
+        }
+
+
+        .scroll-area::-webkit-scrollbar-track {
+            background:
+                transparent;
+        }
+
+
+        .scroll-area::-webkit-scrollbar-thumb {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.24
+                );
+
+            border-radius:
+                0;
+
+            transition:
+                background 0.2s ease;
+        }
+
+
+        .scroll-area:hover::-webkit-scrollbar-thumb {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.48
+                );
+        }
+
+
+        .scroll-area::-webkit-scrollbar-thumb:hover {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.70
+                );
+        }
+
+
+        /* =========================
            INCIDENT / HISTORY
         ========================= */
 
@@ -560,7 +641,7 @@
 
 
         /* =========================
-           ARCHIVES
+           ASSOCIATED ARCHIVES
         ========================= */
 
         .archive-count {
@@ -1109,7 +1190,7 @@
 
 
         /* =========================
-           TABLET / SMALL DESKTOP
+           SMALL DESKTOP / TABLET
         ========================= */
 
         @media (max-width: 900px) {
@@ -1719,47 +1800,51 @@
 
             return `
 
-                <div class="incident-list">
+                <div class="scroll-area">
 
-                    ${
-                        history
-                            .map(
-                                (
-                                    entry,
-                                    index
-                                ) => `
+                    <div class="incident-list">
 
-                                    <div class="incident">
+                        ${
+                            history
+                                .map(
+                                    (
+                                        entry,
+                                        index
+                                    ) => `
 
-                                        <div class="incident-id">
+                                        <div class="incident">
 
-                                            HISTORY ENTRY ${String(
-                                                index + 1
-                                            ).padStart(
-                                                3,
-                                                "0"
-                                            )}
+                                            <div class="incident-id">
+
+                                                HISTORY ENTRY ${String(
+                                                    index + 1
+                                                ).padStart(
+                                                    3,
+                                                    "0"
+                                                )}
+
+                                            </div>
+
+
+                                            <div class="incident-text">
+
+                                                ${escapeHTML(
+                                                    entry
+                                                ).replace(
+                                                    /\n/g,
+                                                    "<br>"
+                                                )}
+
+                                            </div>
 
                                         </div>
 
+                                    `
+                                )
+                                .join("")
+                        }
 
-                                        <div class="incident-text">
-
-                                            ${escapeHTML(
-                                                entry
-                                            ).replace(
-                                                /\n/g,
-                                                "<br>"
-                                            )}
-
-                                        </div>
-
-                                    </div>
-
-                                `
-                            )
-                            .join("")
-                    }
+                    </div>
 
                 </div>
 
@@ -2151,84 +2236,88 @@
                     </div>
 
 
-                    <div class="archive-list">
+                    <div class="scroll-area">
 
-                        ${
-                            associatedArchives
-                                .map(
-                                    archive => `
+                        <div class="archive-list">
 
-                                        <a
-                                            href="archive.html?id=${encodeURIComponent(
-                                                archive.id
-                                            )}"
-                                            class="archive-link"
-                                        >
+                            ${
+                                associatedArchives
+                                    .map(
+                                        archive => `
 
-                                            <div class="archive-item">
+                                            <a
+                                                href="archive.html?id=${encodeURIComponent(
+                                                    archive.id
+                                                )}"
+                                                class="archive-link"
+                                            >
 
-                                                <div>
+                                                <div class="archive-item">
 
-                                                    <div class="archive-item-number">
+                                                    <div>
 
-                                                        ${escapeHTML(
-                                                            safe(
-                                                                archive.archive_number,
-                                                                "ARCHIVE-UNKNOWN"
-                                                            )
-                                                        )}
+                                                        <div class="archive-item-number">
+
+                                                            ${escapeHTML(
+                                                                safe(
+                                                                    archive.archive_number,
+                                                                    "ARCHIVE-UNKNOWN"
+                                                                )
+                                                            )}
+
+                                                        </div>
+
+
+                                                        <div class="archive-item-title">
+
+                                                            ${escapeHTML(
+                                                                safe(
+                                                                    archive.title,
+                                                                    "UNTITLED ARCHIVE"
+                                                                ).toUpperCase()
+                                                            )}
+
+                                                        </div>
+
+
+                                                        ${
+                                                            archive.incident_date
+                                                                ? `
+
+                                                                    <div class="archive-item-date">
+
+                                                                        INCIDENT:
+                                                                        ${escapeHTML(
+                                                                            safe(
+                                                                                archive.incident_date
+                                                                            )
+                                                                        )}
+
+                                                                    </div>
+
+                                                                `
+                                                                : ""
+                                                        }
 
                                                     </div>
 
 
-                                                    <div class="archive-item-title">
+                                                    <div class="archive-item-status">
 
-                                                        ${escapeHTML(
-                                                            safe(
-                                                                archive.title,
-                                                                "UNTITLED ARCHIVE"
-                                                            ).toUpperCase()
-                                                        )}
+                                                        ACCESS AVAILABLE
 
                                                     </div>
 
-
-                                                    ${
-                                                        archive.incident_date
-                                                            ? `
-
-                                                                <div class="archive-item-date">
-
-                                                                    INCIDENT:
-                                                                    ${escapeHTML(
-                                                                        safe(
-                                                                            archive.incident_date
-                                                                        )
-                                                                    )}
-
-                                                                </div>
-
-                                                            `
-                                                            : ""
-                                                    }
-
                                                 </div>
 
+                                            </a>
 
-                                                <div class="archive-item-status">
+                                        `
+                                    )
+                                    .join("")
+                            }
 
-                                                    ACCESS AVAILABLE
-
-                                                </div>
-
-                                            </div>
-
-                                        </a>
-
-                                    `
-                                )
-                                .join("")
-                        }
+                        </div>
 
                     </div>
 
