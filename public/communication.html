@@ -20,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
 
         * {
@@ -44,11 +45,16 @@
         }
 
 
+        /* =========================
+           PAGE
+        ========================= */
+
         .page {
             width: 100%;
             min-height: 100vh;
 
-            padding: 45px 60px;
+            padding:
+                45px 60px;
         }
 
 
@@ -95,11 +101,9 @@
 
 
         .title-link:hover {
-
             text-shadow:
                 0 0 6px rgba(255,255,255,0.8),
                 0 0 15px rgba(255,255,255,0.35);
-
         }
 
 
@@ -399,7 +403,8 @@
         .transmission-status {
             display: flex;
 
-            align-items: center;
+            align-items:
+                center;
 
             gap: 10px;
 
@@ -448,40 +453,43 @@
         /* =========================
            MESSAGE BODY
         ========================= */
-.message-body {
-    min-height: 260px;
 
-    padding: 22px;
+        .message-body {
+            min-height: 260px;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.14
-        );
+            padding: 22px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.012
-        );
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
 
-    font-size: 13px;
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.012
+                );
 
-    line-height: 2;
+            font-size: 13px;
 
-    letter-spacing: 0.8px;
+            line-height: 2;
 
-    white-space: pre-wrap;
+            letter-spacing: 0.8px;
 
-    overflow-wrap: anywhere;
+            overflow-wrap:
+                anywhere;
 
-    opacity: 0.90;
-}
+            word-break:
+                break-word;
+
+            opacity: 0.90;
+        }
 
 
         /* =========================
@@ -832,7 +840,9 @@
             href="communications-log.html"
             class="back"
         >
+
             &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
+
         </a>
 
     </section>
@@ -869,6 +879,7 @@
 
 
             <div class="classification-row">
+
 
                 <span>
 
@@ -929,9 +940,11 @@
 
             <div class="metadata">
 
+
                 <div class="metadata-label">
                     MESSAGE ID
                 </div>
+
 
                 <div
                     class="metadata-value"
@@ -945,6 +958,7 @@
                     ORIGIN
                 </div>
 
+
                 <div
                     class="metadata-value"
                     id="metadataSender"
@@ -956,6 +970,7 @@
                 <div class="metadata-label">
                     DESTINATION
                 </div>
+
 
                 <div
                     class="metadata-value"
@@ -969,6 +984,7 @@
                     CLASSIFICATION
                 </div>
 
+
                 <div
                     class="metadata-value"
                     id="metadataClassification"
@@ -980,6 +996,7 @@
                 <div class="metadata-label">
                     STATUS
                 </div>
+
 
                 <div
                     class="metadata-value"
@@ -993,12 +1010,14 @@
                     TRANSMISSION TIME
                 </div>
 
+
                 <div
                     class="metadata-value"
                     id="metadataTime"
                 >
                     UNKNOWN
                 </div>
+
 
             </div>
 
@@ -1060,7 +1079,9 @@
             href="communications-log.html"
             class="back"
         >
+
             &lt;&lt; RETURN TO COMMUNICATIONS DATABASE
+
         </a>
 
 
@@ -1253,51 +1274,16 @@
 
 
     /* ==========================================
-       HTML ESCAPE
-    ========================================== */
-
-    function escapeHTML(
-        value
-    ) {
-
-        return String(
-            value ?? ""
-        )
-
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-    }
-
-
-    /* ==========================================
        RENDER CIGA LORE TEXT
-       
+
        Supported format:
 
        [[VISIBLE TEXT|https://example.com]]
+
+       Example:
+
+       SUBJECT CLASSIFICATION IS NOW
+       [[ANOMALOUS|https://example.com]].
     ========================================== */
 
     function renderCigaLoreText(
@@ -1325,140 +1311,199 @@
             );
 
 
+        /*
+            Split the original content into lines.
+
+            This means every newline stored in
+            Supabase is explicitly recreated.
+        */
+
+        const lines =
+            text.split(
+                /\r?\n/
+            );
+
+
         const linkPattern =
             /\[\[([^\]|]+)\|([^\]]+)\]\]/g;
 
 
-        let lastIndex =
-            0;
-
-
-        let match;
-
-
-        while (
+        lines.forEach(
             (
-                match =
-                    linkPattern.exec(
-                        text
-                    )
-            ) !== null
-        ) {
+                line,
+                lineIndex
+            ) => {
+
+                let lastIndex =
+                    0;
 
 
-            /* =========================
-               NORMAL TEXT BEFORE LINK
-            ========================= */
+                let match;
 
-            if (
-                match.index >
-                lastIndex
-            ) {
-
-                fragment.appendChild(
-                    document.createTextNode(
-                        text.slice(
-                            lastIndex,
-                            match.index
-                        )
-                    )
-                );
-
-            }
-
-
-            /* =========================
-               LINK DATA
-            ========================= */
-
-            const label =
-                match[1].trim();
-
-
-            const url =
-                match[2].trim();
-
-
-            /* =========================
-               VALID URL
-            ========================= */
-
-            if (
-                /^https?:\/\//i.test(
-                    url
-                )
-            ) {
-
-                const link =
-                    document.createElement(
-                        "a"
-                    );
-
-
-                link.className =
-                    "ciga-lore-link";
-
-
-                link.href =
-                    url;
-
-
-                link.target =
-                    "_blank";
-
-
-                link.rel =
-                    "noopener noreferrer";
-
-
-                link.textContent =
-                    label;
-
-
-                fragment.appendChild(
-                    link
-                );
-
-            } else {
 
                 /*
-                    Invalid URL:
-                    display only the visible label.
+                    Find all lore links in
+                    the current line.
                 */
 
-                fragment.appendChild(
-                    document.createTextNode(
-                        label
-                    )
-                );
+                while (
+                    (
+                        match =
+                            linkPattern.exec(
+                                line
+                            )
+                    ) !== null
+                ) {
+
+
+                    /* =========================
+                       TEXT BEFORE LINK
+                    ========================= */
+
+                    if (
+                        match.index >
+                        lastIndex
+                    ) {
+
+                        fragment.appendChild(
+                            document.createTextNode(
+                                line.slice(
+                                    lastIndex,
+                                    match.index
+                                )
+                            )
+                        );
+
+                    }
+
+
+                    /* =========================
+                       LINK LABEL
+                    ========================= */
+
+                    const label =
+                        match[1].trim();
+
+
+                    /* =========================
+                       LINK URL
+                    ========================= */
+
+                    const url =
+                        match[2].trim();
+
+
+                    /*
+                        Only allow web links.
+                    */
+
+                    if (
+                        /^https?:\/\//i.test(
+                            url
+                        )
+                    ) {
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.className =
+                            "ciga-lore-link";
+
+
+                        link.href =
+                            url;
+
+
+                        link.target =
+                            "_blank";
+
+
+                        link.rel =
+                            "noopener noreferrer";
+
+
+                        link.textContent =
+                            label;
+
+
+                        fragment.appendChild(
+                            link
+                        );
+
+                    } else {
+
+                        /*
+                            Invalid URL:
+                            show only the label.
+                        */
+
+                        fragment.appendChild(
+                            document.createTextNode(
+                                label
+                            )
+                        );
+
+                    }
+
+
+                    lastIndex =
+                        linkPattern.lastIndex;
+
+                }
+
+
+                /*
+                    Reset regex state for
+                    the next line.
+                */
+
+                linkPattern.lastIndex =
+                    0;
+
+
+                /* =========================
+                   REMAINING TEXT
+                ========================= */
+
+                if (
+                    lastIndex <
+                    line.length
+                ) {
+
+                    fragment.appendChild(
+                        document.createTextNode(
+                            line.slice(
+                                lastIndex
+                            )
+                        )
+                    );
+
+                }
+
+
+                /*
+                    Explicitly recreate the
+                    original newline.
+                */
+
+                if (
+                    lineIndex <
+                    lines.length - 1
+                ) {
+
+                    fragment.appendChild(
+                        document.createElement(
+                            "br"
+                        )
+                    );
+
+                }
 
             }
-
-
-            lastIndex =
-                linkPattern.lastIndex;
-
-        }
-
-
-        /* =========================
-           REMAINING TEXT
-        ========================= */
-
-        if (
-            lastIndex <
-            text.length
-        ) {
-
-            fragment.appendChild(
-                document.createTextNode(
-                    text.slice(
-                        lastIndex
-                    )
-                )
-            );
-
-        }
+        );
 
 
         return fragment;
@@ -1730,14 +1775,16 @@
 
 
         /* =========================
-           MESSAGE
+           MESSAGE CONTENT
         ========================= */
 
         /*
-            Do NOT use innerHTML here.
+            Clear the old content.
 
-            The parser creates the <a> elements
-            directly in the DOM.
+            IMPORTANT:
+            We do NOT put the result into
+            innerHTML. The parser creates
+            every link as a real DOM element.
         */
 
         messageBody.innerHTML =
@@ -1764,7 +1811,7 @@
 
 
         /* =========================
-           SHOW
+           SHOW COMMUNICATION
         ========================= */
 
         errorMessage.style.display =
