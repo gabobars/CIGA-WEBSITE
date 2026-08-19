@@ -1388,15 +1388,15 @@
         .ciga-music-player {
             position: fixed;
 
-            right: 22px;
+            right: 20px;
 
-            bottom: 20px;
+            bottom: 18px;
 
             z-index: 90;
 
-            width: 245px;
+            width: 175px;
 
-            padding: 14px;
+            padding: 9px 10px;
 
             border:
                 1px solid
@@ -1404,7 +1404,7 @@
                     255,
                     255,
                     255,
-                    0.25
+                    0.22
                 );
 
             background:
@@ -1412,40 +1412,37 @@
                     0,
                     0,
                     0,
-                    0.94
+                    0.88
                 );
 
             box-shadow:
-                0 8px 30px
+                0 5px 20px
                 rgba(
                     0,
                     0,
                     0,
-                    0.55
+                    0.45
                 );
-
-            backdrop-filter:
-                blur(5px);
         }
 
 
         .ciga-music-label {
-            font-size: 8px;
+            font-size: 7px;
 
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
 
-            opacity: 0.42;
+            opacity: 0.38;
 
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
 
         .ciga-music-title {
-            font-size: 11px;
+            font-size: 9px;
 
-            letter-spacing: 1.6px;
+            letter-spacing: 1.1px;
 
-            margin-bottom: 12px;
+            margin-bottom: 7px;
 
             white-space: nowrap;
 
@@ -1462,17 +1459,17 @@
                 auto
                 1fr;
 
-            gap: 10px;
+            gap: 7px;
 
             align-items: center;
         }
 
 
         .ciga-music-button {
-            height: 34px;
+            height: 27px;
 
             padding:
-                0 12px;
+                0 8px;
 
             background: #000;
 
@@ -1484,14 +1481,14 @@
                     255,
                     255,
                     255,
-                    0.28
+                    0.25
                 );
 
             font-family: inherit;
 
-            font-size: 8px;
+            font-size: 7px;
 
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
 
             cursor: pointer;
 
@@ -1507,7 +1504,7 @@
                     255,
                     255,
                     255,
-                    0.06
+                    0.05
                 );
 
             border-color:
@@ -1515,7 +1512,7 @@
                     255,
                     255,
                     255,
-                    0.65
+                    0.60
                 );
         }
 
@@ -1523,48 +1520,49 @@
         .ciga-music-volume {
             width: 100%;
 
+            height: 12px;
+
             accent-color: #fff;
 
             cursor: pointer;
         }
 
 
-        .ciga-music-volume-row {
-            display: grid;
+        .ciga-music-bottom {
+            display: flex;
 
-            grid-template-columns:
-                1fr
-                auto;
-
-            gap: 10px;
+            justify-content:
+                space-between;
 
             align-items: center;
 
-            margin-top: 10px;
-        }
+            margin-top: 5px;
 
-
-        .ciga-music-volume-value {
-            min-width: 36px;
-
-            font-size: 8px;
-
-            letter-spacing: 1px;
-
-            text-align: right;
-
-            opacity: 0.45;
+            gap: 8px;
         }
 
 
         .ciga-music-status {
-            margin-top: 10px;
+            font-size: 7px;
 
-            font-size: 8px;
+            letter-spacing: 0.8px;
 
-            letter-spacing: 1px;
+            opacity: 0.30;
 
-            opacity: 0.35;
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .ciga-music-volume-value {
+            font-size: 7px;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.32;
         }
 
 
@@ -1856,13 +1854,13 @@
 
 
             .ciga-music-player {
-                right: 12px;
+                right: 10px;
 
-                bottom: 12px;
+                bottom: 10px;
 
-                left: 12px;
+                width: 160px;
 
-                width: auto;
+                padding: 8px;
             }
 
         }
@@ -2558,7 +2556,7 @@
     >
 
         <div class="ciga-music-label">
-            // AUDIO ENVIRONMENT
+            // AUDIO
         </div>
 
 
@@ -2592,9 +2590,15 @@
         </div>
 
 
-        <div class="ciga-music-volume-row">
+        <div class="ciga-music-bottom">
 
-            <div></div>
+            <div
+                class="ciga-music-status"
+                id="cigaMusicStatus"
+            >
+                AUDIO CHANNEL MUTED.
+            </div>
+
 
             <div
                 class="ciga-music-volume-value"
@@ -2603,14 +2607,6 @@
                 45%
             </div>
 
-        </div>
-
-
-        <div
-            class="ciga-music-status"
-            id="cigaMusicStatus"
-        >
-            AUDIO CHANNEL MUTED.
         </div>
 
     </section>
@@ -2659,10 +2655,9 @@
             PARA O NOME EXATO DO TEU FICHEIRO.
 
             Exemplo:
-            "CIGAEnvironment.mp3"
 
-            Se o ficheiro estiver numa pasta:
-            "audio/CIGAEnvironment.mp3"
+            const CIGA_MUSIC_SOURCE =
+                "CIGAEnvironment.mp3";
         */
 
         const CIGA_MUSIC_SOURCE =
@@ -2744,7 +2739,9 @@
 
 
             if (
-                Number.isNaN(volume)
+                Number.isNaN(
+                    volume
+                )
                 ||
                 volume < 0
                 ||
@@ -2808,11 +2805,11 @@
 
             cigaMusicStatus.textContent =
                 cigaMusic.muted
-                    ? "AUDIO CHANNEL MUTED."
+                    ? "MUTED"
                     : (
                         cigaMusic.paused
-                            ? "AUDIO CHANNEL READY."
-                            : "AUDIO CHANNEL ACTIVE."
+                            ? "READY"
+                            : "ACTIVE"
                     );
 
         }
@@ -2847,11 +2844,6 @@
                     error
                 );
 
-
-                /*
-                    If the browser blocks playback,
-                    keep the real state honest.
-                */
 
                 if (
                     !shouldUnmute
@@ -2891,26 +2883,20 @@
 
 
             /*
-                Always begin muted unless
-                the browser already allows the
-                previous unmuted preference.
+                Start muted so that the browser
+                is allowed to begin playback.
             */
 
-            const storedMuted =
-                cigaGetStoredMusicMuted();
-
-
             cigaMusic.muted =
-                storedMuted;
-
-
-            cigaUpdateMusicUI();
+                true;
 
 
             /*
-                Muted autoplay is allowed by
-                normal browser autoplay policies.
+                Always show the real initial state.
             */
+
+            cigaUpdateMusicUI();
+
 
             cigaStartMusic(
                 false
@@ -2926,12 +2912,6 @@
                 if (
                     cigaMusic.muted
                 ) {
-
-                    /*
-                        The user's click provides
-                        the interaction required
-                        to start audible playback.
-                    */
 
                     cigaMusic.muted =
                         false;
@@ -2961,7 +2941,6 @@
 
 
                 cigaSaveMusicState();
-
 
                 cigaUpdateMusicUI();
 
@@ -3022,11 +3001,11 @@
             function() {
 
                 cigaMusicStatus.textContent =
-                    "AUDIO CHANNEL ERROR.";
+                    "AUDIO ERROR.";
 
 
                 console.error(
-                    "CIGA MUSIC LOAD ERROR.",
+                    "CIGA MUSIC LOAD ERROR:",
                     cigaMusic.error
                 );
 
