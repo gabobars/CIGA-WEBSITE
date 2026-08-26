@@ -835,8 +835,20 @@
                     true
                 )
 
+                /*
+                 * ARCHIVE NUMBERS ARE ZERO-PADDED:
+                 *
+                 * ARCHIVE-001
+                 * ARCHIVE-002
+                 * ARCHIVE-010
+                 *
+                 * Therefore alphabetical ordering of the
+                 * archive_number column gives the correct
+                 * file order.
+                 */
+
                 .order(
-                    "id",
+                    "archive_number",
                     {
                         ascending:
                             true
