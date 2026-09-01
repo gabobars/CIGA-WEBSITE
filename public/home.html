@@ -1209,7 +1209,7 @@
 
             grid-template-columns:
                 repeat(
-                    5,
+                    3,
                     1fr
                 );
 
@@ -2436,6 +2436,31 @@
                 </button>
 
 
+                <!-- =========================
+                     CIGA STUDIO
+                ========================= -->
+
+                <button
+                    class="system-button"
+                    onclick="
+                        cigaAddLog('CIGA STUDIO ACCESSED');
+                        cigaSetNextPage('CIGA STUDIO');
+                        window.location.href='cigastudio.html';
+                    "
+                >
+
+                    <span class="system-button-title">
+                        CIGA STUDIO
+                    </span>
+
+
+                    <span class="system-button-status">
+                        APPLICATION ACCESS
+                    </span>
+
+                </button>
+
+
                 <div
                     class="system-button classified-button"
                 >
@@ -2639,11 +2664,6 @@
         /* =========================
            CIGA MUSIC
         ========================= */
-
-        /*
-            ALTERA APENAS ESTA LINHA
-            PARA O NOME EXATO DO TEU FICHEIRO.
-        */
 
         const CIGA_MUSIC_SOURCE =
             "YOUR-MUSIC-FILE.mp3";
@@ -3012,21 +3032,12 @@
                 cigaGetStoredMusicVolume();
 
 
-            /*
-                Start muted for autoplay compatibility.
-            */
-
             cigaMusic.muted =
                 true;
 
 
             cigaUpdateMusicUI();
 
-
-            /*
-                Restore position as soon as the
-                browser knows the duration.
-            */
 
             cigaMusic.addEventListener(
                 "loadedmetadata",
@@ -3046,10 +3057,6 @@
                 cigaRestoreMusicPosition
             );
 
-
-            /*
-                Start muted in the background.
-            */
 
             cigaStartMusic(
                 false
@@ -3123,13 +3130,6 @@
         );
 
 
-        /*
-            Save the position while the track
-            is playing. This keeps the position
-            fresh even when the user navigates
-            away from the Home page.
-        */
-
         setInterval(
             function() {
 
@@ -3140,11 +3140,6 @@
         );
 
 
-        /*
-            Save once more immediately before
-            the page is unloaded/reloaded.
-        */
-
         window.addEventListener(
             "beforeunload",
             function() {
@@ -3154,10 +3149,6 @@
             }
         );
 
-
-        /*
-            Also save when visibility changes.
-        */
 
         document.addEventListener(
             "visibilitychange",
@@ -3203,10 +3194,8 @@
             function() {
 
                 /*
-                    Only save frequently enough
-                    without writing excessively.
-                    The one-second interval above
-                    remains the main saver.
+                    Position is intentionally saved
+                    by the one-second interval above.
                 */
 
             }
