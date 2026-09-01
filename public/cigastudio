@@ -1,0 +1,1854 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CIGA SYSTEMS // HELP</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="logo.png"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            background: #000;
+
+            color: #fff;
+
+            min-height: 100vh;
+
+            font-family:
+                "OCR A",
+                "Courier New",
+                monospace;
+
+            overflow-x: hidden;
+
+            line-height: 1.75;
+        }
+
+        .page {
+
+            width: 100%;
+
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding:
+                32px 46px 65px;
+        }
+
+        .header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            padding-bottom: 17px;
+
+            margin-bottom: 42px;
+
+            border-bottom:
+                1px solid
+                #444;
+        }
+
+        .header-title {
+
+            display: inline-block;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 22px;
+
+            letter-spacing: 4px;
+        }
+
+        .header-title:hover {
+
+            text-decoration:
+                underline;
+        }
+
+        .header-subtitle {
+
+            margin-top: 8px;
+
+            color: #fff;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+
+            color: #fff;
+
+            text-align: right;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            line-height: 1.8;
+        }
+
+        .intro {
+
+            margin-bottom: 45px;
+        }
+
+        .intro-label {
+
+            color: #fff;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+        }
+
+        .intro-title {
+
+            color: #fff;
+
+            font-size: 30px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-text {
+
+            max-width: 900px;
+
+            color: #fff;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 16px;
+
+            line-height: 1.9;
+        }
+
+        .help-section {
+
+            margin-bottom: 34px;
+
+            padding:
+                30px 32px;
+
+            border:
+                1px solid
+                #444;
+
+            background: #000;
+        }
+
+        .section-header {
+
+            display: flex;
+
+            align-items:
+                baseline;
+
+            gap: 16px;
+
+            padding-bottom: 14px;
+
+            margin-bottom: 24px;
+
+            border-bottom:
+                1px solid
+                #333;
+        }
+
+        .section-number {
+
+            color: #fff;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
+        }
+
+        .section-title {
+
+            color: #fff;
+
+            font-size: 18px;
+
+            letter-spacing: 2px;
+        }
+
+        .section-content {
+
+            color: #fff;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 15px;
+
+            line-height: 1.9;
+        }
+
+        .section-content p {
+
+            margin-bottom: 20px;
+        }
+
+        .section-content p:last-child {
+
+            margin-bottom: 0;
+        }
+
+        .steps {
+
+            display: flex;
+
+            flex-direction:
+                column;
+
+            gap: 11px;
+
+            margin-top: 20px;
+        }
+
+        .step {
+
+            display: grid;
+
+            grid-template-columns:
+                45px
+                1fr;
+
+            gap: 14px;
+
+            padding:
+                15px 17px;
+
+            border:
+                1px solid
+                #333;
+
+            background: #050505;
+        }
+
+        .step-number {
+
+            color: #fff;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            padding-top: 2px;
+        }
+
+        .step-text {
+
+            color: #fff;
+
+            font-size: 15px;
+
+            line-height: 1.85;
+        }
+
+        .step-text strong {
+
+            color: #fff;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .note {
+
+            margin-top: 22px;
+
+            padding:
+                17px 18px;
+
+            border:
+                1px solid
+                #555;
+
+            border-left:
+                4px solid
+                #fff;
+
+            background: #050505;
+
+            color: #fff;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+        }
+
+        .note-title {
+
+            color: #fff;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 7px;
+        }
+
+        .feature-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 14px;
+
+            margin-top: 20px;
+        }
+
+        .feature {
+
+            padding:
+                18px;
+
+            border:
+                1px solid
+                #333;
+
+            background: #050505;
+        }
+
+        .feature-title {
+
+            color: #fff;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+
+            color: #fff;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .command {
+
+            display: inline-block;
+
+            padding:
+                2px 8px;
+
+            border:
+                1px solid
+                #555;
+
+            background: #050505;
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .workflow {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .workflow-item {
+
+            border:
+                1px solid
+                #333;
+
+            padding:
+                17px;
+
+            background: #050505;
+
+            color: #fff;
+        }
+
+        .workflow-title {
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.8px;
+
+            margin-bottom: 8px;
+        }
+
+        .workflow-text {
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .contact {
+
+            margin-top: 48px;
+
+            padding:
+                30px 24px;
+
+            text-align: center;
+
+            border:
+                1px solid
+                #444;
+
+            background: #000;
+        }
+
+        .contact-label {
+
+            color: #fff;
+
+            font-size: 10px;
+
+            letter-spacing: 2.5px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .contact-title {
+
+            color: #fff;
+
+            font-size: 19px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
+        .contact-text {
+
+            color: #fff;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-bottom: 13px;
+        }
+
+        .contact-email {
+
+            color: #fff;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            text-decoration:
+                underline;
+        }
+
+        .contact-email:hover {
+
+            text-decoration:
+                none;
+        }
+
+        .footer {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            padding-top: 21px;
+
+            margin-top: 27px;
+
+            border-top:
+                1px solid
+                #333;
+
+            color: #fff;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+        }
+
+        .footer a {
+
+            color: #fff;
+
+            text-decoration:
+                underline;
+        }
+
+        .footer a:hover {
+
+            text-decoration:
+                none;
+        }
+
+        @media (max-width: 850px) {
+
+            .page {
+
+                padding:
+                    25px 24px 50px;
+            }
+
+            .feature-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .workflow {
+
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+
+                padding:
+                    18px 14px 40px;
+            }
+
+            .header {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+                gap: 16px;
+            }
+
+            .header-right {
+
+                text-align:
+                    left;
+            }
+
+            .header-title {
+
+                font-size: 18px;
+            }
+
+            .intro-title {
+
+                font-size: 23px;
+            }
+
+            .intro-text {
+
+                font-size: 14px;
+            }
+
+            .help-section {
+
+                padding:
+                    22px 18px;
+            }
+
+            .section-title {
+
+                font-size: 15px;
+            }
+
+            .section-content {
+
+                font-size: 14px;
+            }
+
+            .step {
+
+                grid-template-columns:
+                    34px
+                    1fr;
+
+                padding:
+                    13px;
+            }
+
+            .step-text {
+
+                font-size: 14px;
+            }
+
+            .footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<main class="page">
+
+    <header class="header">
+
+        <div>
+
+            <a
+                href="https://ciga-website.ciga-hq.workers.dev/home"
+                class="header-title"
+            >
+                CIGA SYSTEMS
+            </a>
+
+            <div class="header-subtitle">
+                USER DOCUMENTATION // HELP
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            APPLICATION HELP<br>
+            USER GUIDE
+
+        </div>
+
+    </header>
+
+
+    <section class="intro">
+
+        <div class="intro-label">
+            CIGA APPLICATION
+        </div>
+
+        <h1 class="intro-title">
+            HELP &amp; DOCUMENTATION
+        </h1>
+
+        <p class="intro-text">
+            This page explains how to configure the main parts of CIGA:
+            avatars, objects, interactions, settings, StreamElements,
+            VMC, events, performance and the final viewport.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         01 AVATAR
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                01
+            </span>
+
+            <h2 class="section-title">
+                IMPORTING AN AVATAR
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                Adding an avatar is designed to be as automatic as possible.
+                You do not normally need to manually configure the bones for
+                a compatible VRM avatar.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Click <strong>IMPORT CHARACTER</strong> and select
+                        your <strong>.VRM</strong> avatar file.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Click <strong>LOAD AVATAR</strong>.
+                        CIGA loads the avatar into the application.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Click <strong>MAP AVATAR</strong>.
+                        CIGA automatically looks for the required bones and
+                        creates the mapping.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    AUTO MAPPING
+                </div>
+
+                CIGA includes automatic avatar bone mapping. For compatible
+                avatars, the system can identify the expected bones and
+                create the required hit point mapping for you.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    SAVED MAPPING
+                </div>
+
+                Once the avatar has been mapped, its mapping is saved.
+                You normally do not need to map the same avatar again.
+
+            </div>
+
+            <p style="margin-top: 20px;">
+
+                You can also enable
+                <span class="command">
+                    LOAD CHARACTER ON LAUNCH
+                </span>
+
+                so the selected avatar is loaded automatically when CIGA
+                starts.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         02 OBJECTS
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                02
+            </span>
+
+            <h2 class="section-title">
+                IMPORTING OBJECTS
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                CIGA supports importing 3D objects in
+                <strong>GLB</strong> and <strong>GLTF</strong> format.
+                Imported objects can then be configured and used as
+                interaction objects.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        OPTIMIZER
+                    </div>
+
+                    <div class="feature-text">
+                        The optimizer creates a CIGA cache for the object.
+                        It can remove unnecessary nodes, prepare materials
+                        and reduce oversized textures where appropriate.
+                        The original model is not modified.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        AUTO SCALE
+                    </div>
+
+                    <div class="feature-text">
+                        Auto Scale is mainly intended for objects that are
+                        extremely large compared with the character.
+                        CIGA calculates the model bounds and applies a
+                        smaller starting scale so the object can be used
+                        at a more reasonable size.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    AUTO SCALE IS NOT A UNIVERSAL NORMALIZER
+                </div>
+
+                Auto Scale does not try to resize every imported object.
+                Its main purpose is to prevent unusually large models from
+                entering CIGA at an impractical size. Smaller or normally
+                sized models may keep a scale much closer to their original
+                dimensions.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    IMPORTANT
+                </div>
+
+                CIGA does its best to calculate a useful result, but every
+                3D model is different. The importer cannot understand every
+                modelling decision automatically, so always check the
+                preview and adjust the object when necessary.
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Import the <strong>GLB</strong> or
+                        <strong>GLTF</strong> object.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Enable <strong>OPTIMIZER</strong> when you want CIGA
+                        to create an optimized runtime cache.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Enable <strong>AUTO SCALE</strong> when the object is
+                        unusually large and needs a more practical starting
+                        size.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Check the <strong>3D PREVIEW</strong> and manually
+                        adjust the scale when required.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         03 INTERACTION
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                03
+            </span>
+
+            <h2 class="section-title">
+                INTERACTION TESTING
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                The Interaction page is a testing environment. It lets you
+                preview how the avatar reacts when an object reaches one of
+                the configured hit points.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Choose the object you want to test.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Choose the target hit point, such as the
+                        <strong>HEAD</strong>, <strong>CHEST</strong>,
+                        <strong>SHOULDER</strong>, <strong>ARM</strong>
+                        or <strong>LEG</strong>.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Choose the object spawn position and configure the
+                        interaction values.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Launch the test object and watch the avatar response.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    TEST PAGE
+                </div>
+
+                The Interaction page is mainly intended for testing and
+                experimentation. It is useful for finding settings that feel
+                correct before using the event system or final viewport.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         04 SETTINGS
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                04
+            </span>
+
+            <h2 class="section-title">
+                SETTINGS
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                The Settings page contains the configuration used by CIGA
+                during normal operation.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        OBJECT SETTINGS
+                    </div>
+
+                    <div class="feature-text">
+                        Configure values such as object speed, lifetime,
+                        bounce behaviour and other object-related parameters.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        IMPACT SETTINGS
+                    </div>
+
+                    <div class="feature-text">
+                        Configure how strongly the avatar reacts when an
+                        object reaches a hit point.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    TESTING VS FINAL SETTINGS
+                </div>
+
+                Use the Interaction page to experiment with behaviour.
+                Use the Settings page when you want to define the values
+                that CIGA should use during normal operation.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         05 STREAM ELEMENTS / VMC
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                05
+            </span>
+
+            <h2 class="section-title">
+                SE / VMC
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                CIGA can connect to external services used for stream
+                integration and avatar output.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        STREAM ELEMENTS
+                    </div>
+
+                    <div class="feature-text">
+                        StreamElements can be connected to CIGA for
+                        stream-related events and integrations.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        VMC
+                    </div>
+
+                    <div class="feature-text">
+                        VMC is used to send avatar movement and bone data
+                        from CIGA to compatible external applications.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    VMC PORT
+                </div>
+
+                CIGA currently sends its VMC output through
+                <span class="command">
+                    UDP 127.0.0.1:39539
+                </span>
+
+                on the local computer. This address is intended for
+                communication with software running on the same machine.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    CONNECTION
+                </div>
+
+                Make sure the external application is running and configured
+                to receive the relevant CIGA output before testing the
+                connection.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         06 EVENTS
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                06
+            </span>
+
+            <h2 class="section-title">
+                EVENTS
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                Events allow CIGA to perform configured actions when a
+                supported trigger occurs.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Open the <strong>EVENTS</strong> section.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Create or select the event you want to configure.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Configure the trigger and the action that should
+                        happen when that trigger occurs.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Save the event configuration and test it with the
+                        connected integration.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    EVENTS ARE CONFIGURABLE
+                </div>
+
+                The exact behaviour depends on the trigger and actions
+                selected in the event configuration.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         07 PERFORMANCE
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                07
+            </span>
+
+            <h2 class="section-title">
+                OBJECTS &amp; PERFORMANCE
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                CIGA is designed so that having many objects in the library
+                does not automatically mean that all of them are being
+                rendered at the same time.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        LIBRARY VS ACTIVE OBJECTS
+                    </div>
+
+                    <div class="feature-text">
+                        You can keep a large number of objects in your CIGA
+                        library. Objects stored in the library are not all
+                        rendered continuously. The heavier part of the work
+                        happens when resources are imported, prepared,
+                        prewarmed or actively displayed.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        PROJECTILES
+                    </div>
+
+                    <div class="feature-text">
+                        Interaction objects are created from already prepared
+                        resources where possible. This avoids repeatedly
+                        importing the same model during a burst.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="workflow">
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        CPU
+                    </div>
+
+                    <div class="workflow-text">
+                        Handles tasks such as importing, preparing resources,
+                        application logic, events and other runtime work.
+                    </div>
+
+                </div>
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        GPU
+                    </div>
+
+                    <div class="workflow-text">
+                        Handles the visible avatar, objects, materials,
+                        textures and 3D rendering.
+                    </div>
+
+                </div>
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        RAM / VRAM
+                    </div>
+
+                    <div class="workflow-text">
+                        Large models and textures can consume additional
+                        memory, especially during importing and preparation.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    MANY OBJECTS AT ONCE
+                </div>
+
+                Launching several objects in a burst is possible, but the
+                practical limit depends on the computer being used and on
+                how complex those models are.
+
+                Ten simple objects can be very different from ten extremely
+                detailed objects with large textures.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    FIRST LOADS MAY TAKE LONGER
+                </div>
+
+                When CIGA prepares an object for the first time, loading can
+                take noticeably longer depending on the model.
+
+                Once the relevant resources are prepared and cached,
+                repeated use should avoid doing the same preparation again.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    PRACTICAL GUIDELINE
+                </div>
+
+                A large library is not automatically a performance problem.
+                The biggest impact usually comes from very complex assets,
+                unusually large textures and having many heavy objects active
+                and visible at the same time.
+
+                CIGA can prepare resources efficiently, but the final
+                performance still depends on the hardware running it.
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    CIGA DOES ITS BEST
+                </div>
+
+                CIGA is designed to handle resources as efficiently as
+                reasonably possible, but different computers and 3D models
+                will always have different limits.
+
+                The goal is to make the system practical and accessible,
+                not to pretend that hardware limitations do not exist.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         08 TROUBLESHOOTING
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                08
+            </span>
+
+            <h2 class="section-title">
+                TROUBLESHOOTING
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        CIGA TAKES A WHILE TO LOAD
+                    </div>
+
+                    <div class="feature-text">
+                        This is often caused by a large or complex object
+                        being prepared.
+
+                        Check which object CIGA is currently loading and
+                        give the application some time to finish if the
+                        process is still progressing.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        CIGA SEEMS STUCK
+                    </div>
+
+                    <div class="feature-text">
+                        If the application stays on the same object for a
+                        very long time without progressing, that model may
+                        be causing the problem.
+
+                        Try removing that object from the library and start
+                        CIGA again.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        AVATAR DOES NOT REACT
+                    </div>
+
+                    <div class="feature-text">
+                        Check that the correct avatar is loaded and mapped,
+                        and make sure the required hit points are available.
+                        Then test the interaction manually before checking
+                        the event configuration.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        EVENTS DO NOT FIRE
+                    </div>
+
+                    <div class="feature-text">
+                        Check the integration connection first.
+
+                        For StreamElements, confirm that the connection is
+                        active. For VMC, confirm that the receiving software
+                        is listening on the configured local port.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Restart CIGA and reproduce the problem once more.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Check whether the issue always happens with the same
+                        avatar, object, event or integration.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Check the Godot output for a clear error message.
+                        Relevant errors are much more useful than sending
+                        the entire output log without context.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Test the simplest possible configuration first:
+                        one avatar, one object and one interaction.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    DEBUGGING INFORMATION
+                </div>
+
+                When reporting a problem, include what you were doing when
+                it happened, which object or avatar was involved, and any
+                relevant error shown by CIGA or Godot.
+
+                This makes it much easier to identify whether the problem is
+                related to the model, configuration, integration or runtime.
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    OBJECT LOAD PROBLEMS
+                </div>
+
+                If CIGA repeatedly becomes stuck while preparing one specific
+                object, that object is a useful first suspect.
+
+                Removing the problematic model and restarting the application
+                can help confirm whether the asset itself is responsible.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         09 FINAL VIEWPORT
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                09
+            </span>
+
+            <h2 class="section-title">
+                FINAL VIEWPORT
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                The final viewport is where the configured CIGA setup is
+                actually used.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Make sure your avatar is loaded and mapped.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Calibrate and position the camera until the avatar
+                        appears correctly in the viewport.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Make sure the required objects, settings,
+                        integrations and events are ready.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Press <strong>TAB</strong> to enter/use the final
+                        viewport interface.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    FINAL CHECK
+                </div>
+
+                The final viewport brings together the avatar, camera,
+                objects, interactions, events and connected outputs into
+                the actual CIGA setup.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CONTACT
+    ================================================== -->
+
+    <section class="contact">
+
+        <div class="contact-label">
+            NEED HELP OR FOUND A BUG?
+        </div>
+
+        <div class="contact-title">
+            CONTACT CIGA SYSTEMS
+        </div>
+
+        <p class="contact-text">
+
+            CIGA has been tested during development, but there may still be
+            bugs or unusual cases that were not caught.
+
+            If something does not work as expected, please report it.
+            Include what happened, what you were doing, and any useful
+            error information you can provide.
+
+            Bug reports and feedback are genuinely useful for improving
+            future versions of CIGA.
+
+        </p>
+
+        <a
+            href="mailto:cigasystems.contact@gmail.com"
+            class="contact-email"
+        >
+            cigasystems.contact@gmail.com
+        </a>
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+        <div>
+            CIGA SYSTEMS // HELP
+        </div>
+
+        <div>
+
+            <a
+                href="https://ciga-website.ciga-hq.workers.dev/home"
+            >
+                RETURN TO HOME
+            </a>
+
+        </div>
+
+    </footer>
+
+</main>
+
+</body>
+
+</html>
+
