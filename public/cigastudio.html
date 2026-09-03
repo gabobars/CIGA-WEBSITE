@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -454,6 +453,33 @@
             line-height: 1.8;
         }
 
+        .flow {
+
+            margin-top: 20px;
+
+            padding:
+                20px;
+
+            border:
+                1px solid
+                #333;
+
+            background: #050505;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 2.2;
+
+            letter-spacing: 1px;
+        }
+
+        .flow span {
+
+            color: #aaa;
+        }
+
         .contact {
 
             margin-top: 48px;
@@ -724,16 +750,17 @@
         </h1>
 
         <p class="intro-text">
-            This page explains how to configure the main parts of CIGA:
-            avatars, objects, interactions, settings, StreamElements,
-            VMC, events, performance and the final viewport.
+            This page explains the main CIGA workflow:
+            importing your avatar, adding interaction objects,
+            connecting your VTuber software, creating events,
+            testing your setup, and preparing the final viewport.
         </p>
 
     </section>
 
 
     <!-- =================================================
-         01 AVATAR
+         01 UNDERSTANDING CIGA
     ================================================== -->
 
     <section class="help-section">
@@ -745,7 +772,7 @@
             </span>
 
             <h2 class="section-title">
-                IMPORTING AN AVATAR
+                UNDERSTANDING CIGA
             </h2>
 
         </div>
@@ -753,89 +780,61 @@
         <div class="section-content">
 
             <p>
-                Adding an avatar is designed to be as automatic as possible.
-                You do not normally need to manually configure the bones for
-                a compatible VRM avatar.
+                CIGA is an interaction layer that sits between your stream
+                events and your avatar. It handles the interaction itself
+                while your normal VTuber software remains responsible for
+                displaying and tracking the avatar.
             </p>
 
-            <div class="steps">
+            <div class="flow">
 
-                <div class="step">
+                STREAM EVENT
 
-                    <div class="step-number">
-                        01
+                <span>→</span>
+
+                CIGA
+
+                <span>→</span>
+
+                ACTION
+
+                <span>→</span>
+
+                AVATAR / VIEWPORT
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        3D
                     </div>
 
-                    <div class="step-text">
-                        Click <strong>IMPORT CHARACTER</strong> and select
-                        your <strong>.VRM</strong> avatar file.
+                    <div class="feature-text">
+                        CIGA works with compatible 3D VTuber workflows
+                        through VMC / OSC. The default VMC port is
+                        <strong>39539</strong>.
                     </div>
 
                 </div>
 
-                <div class="step">
+                <div class="feature">
 
-                    <div class="step-number">
-                        02
+                    <div class="feature-title">
+                        2D
                     </div>
 
-                    <div class="step-text">
-                        Click <strong>LOAD AVATAR</strong>.
-                        CIGA loads the avatar into the application.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        03
-                    </div>
-
-                    <div class="step-text">
-                        Click <strong>MAP AVATAR</strong>.
-                        CIGA automatically looks for the required bones and
-                        creates the mapping.
+                    <div class="feature-text">
+                        CIGA connects directly to VTube Studio and uses
+                        its calibration system to estimate where
+                        interactions should occur.
                     </div>
 
                 </div>
 
             </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    AUTO MAPPING
-                </div>
-
-                CIGA includes automatic avatar bone mapping. For compatible
-                avatars, the system can identify the expected bones and
-                create the required hit point mapping for you.
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    SAVED MAPPING
-                </div>
-
-                Once the avatar has been mapped, its mapping is saved.
-                You normally do not need to map the same avatar again.
-
-            </div>
-
-            <p style="margin-top: 20px;">
-
-                You can also enable
-                <span class="command">
-                    LOAD CHARACTER ON LAUNCH
-                </span>
-
-                so the selected avatar is loaded automatically when CIGA
-                starts.
-
-            </p>
 
         </div>
 
@@ -843,7 +842,7 @@
 
 
     <!-- =================================================
-         02 OBJECTS
+         02 AVATARS
     ================================================== -->
 
     <section class="help-section">
@@ -855,7 +854,7 @@
             </span>
 
             <h2 class="section-title">
-                IMPORTING OBJECTS
+                AVATARS
             </h2>
 
         </div>
@@ -863,72 +862,15 @@
         <div class="section-content">
 
             <p>
-                CIGA supports importing 3D objects in
-                <strong>GLB</strong> and <strong>GLTF</strong> format.
-                Imported objects can then be configured and used as
-                interaction objects.
+                CIGA's imported 3D character workflow is designed for
+                <strong>VRM avatars</strong>.
             </p>
 
-            <div class="feature-grid">
-
-                <div class="feature">
-
-                    <div class="feature-title">
-                        OPTIMIZER
-                    </div>
-
-                    <div class="feature-text">
-                        The optimizer creates a CIGA cache for the object.
-                        It can remove unnecessary nodes, prepare materials
-                        and reduce oversized textures where appropriate.
-                        The original model is not modified.
-                    </div>
-
-                </div>
-
-                <div class="feature">
-
-                    <div class="feature-title">
-                        AUTO SCALE
-                    </div>
-
-                    <div class="feature-text">
-                        Auto Scale is mainly intended for objects that are
-                        extremely large compared with the character.
-                        CIGA calculates the model bounds and applies a
-                        smaller starting scale so the object can be used
-                        at a more reasonable size.
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    AUTO SCALE IS NOT A UNIVERSAL NORMALIZER
-                </div>
-
-                Auto Scale does not try to resize every imported object.
-                Its main purpose is to prevent unusually large models from
-                entering CIGA at an impractical size. Smaller or normally
-                sized models may keep a scale much closer to their original
-                dimensions.
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    IMPORTANT
-                </div>
-
-                CIGA does its best to calculate a useful result, but every
-                3D model is different. The importer cannot understand every
-                modelling decision automatically, so always check the
-                preview and adjust the object when necessary.
-            </div>
+            <p>
+                Live2D models do not need to be imported into CIGA.
+                For 2D, CIGA uses its virtual Stickman Calibration while
+                the actual model remains inside VTube Studio.
+            </p>
 
             <div class="steps">
 
@@ -939,8 +881,8 @@
                     </div>
 
                     <div class="step-text">
-                        Import the <strong>GLB</strong> or
-                        <strong>GLTF</strong> object.
+                        Open <strong>IMPORT CHARACTER</strong> and select
+                        your compatible <strong>.VRM</strong> avatar.
                     </div>
 
                 </div>
@@ -952,8 +894,7 @@
                     </div>
 
                     <div class="step-text">
-                        Enable <strong>OPTIMIZER</strong> when you want CIGA
-                        to create an optimized runtime cache.
+                        Load the character into CIGA.
                     </div>
 
                 </div>
@@ -965,25 +906,23 @@
                     </div>
 
                     <div class="step-text">
-                        Enable <strong>AUTO SCALE</strong> when the object is
-                        unusually large and needs a more practical starting
-                        size.
+                        Run <strong>MAP AVATAR</strong> so CIGA can create
+                        the required bone and interaction mapping.
                     </div>
 
                 </div>
 
-                <div class="step">
+            </div>
 
-                    <div class="step-number">
-                        04
-                    </div>
+            <div class="note">
 
-                    <div class="step-text">
-                        Check the <strong>3D PREVIEW</strong> and manually
-                        adjust the scale when required.
-                    </div>
-
+                <div class="note-title">
+                    2D USERS
                 </div>
+
+                You do not import your Live2D model into CIGA.
+                Create and configure the Stickman Calibration avatar
+                instead, then keep your actual model inside VTube Studio.
 
             </div>
 
@@ -993,7 +932,7 @@
 
 
     <!-- =================================================
-         03 INTERACTION
+         03 OBJECTS
     ================================================== -->
 
     <section class="help-section">
@@ -1005,7 +944,7 @@
             </span>
 
             <h2 class="section-title">
-                INTERACTION TESTING
+                INTERACTION OBJECTS
             </h2>
 
         </div>
@@ -1013,61 +952,37 @@
         <div class="section-content">
 
             <p>
-                The Interaction page is a testing environment. It lets you
-                preview how the avatar reacts when an object reaches one of
-                the configured hit points.
+                Interaction objects are separate from character imports.
+                CIGA currently accepts <strong>GLB</strong> and
+                <strong>GLTF</strong> files for 3D objects.
             </p>
 
-            <div class="steps">
+            <div class="feature-grid">
 
-                <div class="step">
+                <div class="feature">
 
-                    <div class="step-number">
-                        01
+                    <div class="feature-title">
+                        GLB / GLTF
                     </div>
 
-                    <div class="step-text">
-                        Choose the object you want to test.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        02
-                    </div>
-
-                    <div class="step-text">
-                        Choose the target hit point, such as the
-                        <strong>HEAD</strong>, <strong>CHEST</strong>,
-                        <strong>SHOULDER</strong>, <strong>ARM</strong>
-                        or <strong>LEG</strong>.
+                    <div class="feature-text">
+                        These formats are used for objects such as
+                        boxes, bricks, balls, props and other items
+                        that can be thrown or used during interactions.
                     </div>
 
                 </div>
 
-                <div class="step">
+                <div class="feature">
 
-                    <div class="step-number">
-                        03
+                    <div class="feature-title">
+                        PREVIEW
                     </div>
 
-                    <div class="step-text">
-                        Choose the object spawn position and configure the
-                        interaction values.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        04
-                    </div>
-
-                    <div class="step-text">
-                        Launch the test object and watch the avatar response.
+                    <div class="feature-text">
+                        Use the object preview to check the model,
+                        starting scale and general appearance before
+                        using it during a live interaction.
                     </div>
 
                 </div>
@@ -1077,12 +992,64 @@
             <div class="note">
 
                 <div class="note-title">
-                    TEST PAGE
+                    IMPORTANT
                 </div>
 
-                The Interaction page is mainly intended for testing and
-                experimentation. It is useful for finding settings that feel
-                correct before using the event system or final viewport.
+                <strong>VRM is for characters.</strong>
+
+                <br>
+
+                <strong>GLB / GLTF are for interaction objects.</strong>
+
+                <br><br>
+
+                These are separate import workflows and should not be
+                confused with one another.
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        OPTIMIZER
+                    </div>
+
+                    <div class="feature-text">
+                        The optimizer prepares imported assets for use
+                        inside CIGA. It can remove unnecessary heavy
+                        lighting data and reduce oversized textures
+                        where appropriate.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        AUTO SCALE
+                    </div>
+
+                    <div class="feature-text">
+                        Auto Scale is mainly intended for unusually large
+                        models. It provides a more practical starting size
+                        without forcing every object into the same scale.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    RECOMMENDED
+                </div>
+
+                Run imported objects through the CIGA optimizer whenever
+                possible, especially when using large textures or complex
+                models.
 
             </div>
 
@@ -1092,7 +1059,7 @@
 
 
     <!-- =================================================
-         04 SETTINGS
+         04 INTERACTION
     ================================================== -->
 
     <section class="help-section">
@@ -1104,7 +1071,7 @@
             </span>
 
             <h2 class="section-title">
-                SETTINGS
+                INTERACTIONS
             </h2>
 
         </div>
@@ -1112,49 +1079,69 @@
         <div class="section-content">
 
             <p>
-                The Settings page contains the configuration used by CIGA
-                during normal operation.
+                The Interaction page is where you test how objects behave
+                when they reach the avatar.
             </p>
 
-            <div class="feature-grid">
+            <div class="workflow">
 
-                <div class="feature">
+                <div class="workflow-item">
 
-                    <div class="feature-title">
-                        OBJECT SETTINGS
+                    <div class="workflow-title">
+                        OBJECT
                     </div>
 
-                    <div class="feature-text">
-                        Configure values such as object speed, lifetime,
-                        bounce behaviour and other object-related parameters.
+                    <div class="workflow-text">
+                        Choose which object should be launched.
                     </div>
 
                 </div>
 
-                <div class="feature">
+                <div class="workflow-item">
 
-                    <div class="feature-title">
-                        IMPACT SETTINGS
+                    <div class="workflow-title">
+                        TARGET
                     </div>
 
-                    <div class="feature-text">
-                        Configure how strongly the avatar reacts when an
-                        object reaches a hit point.
+                    <div class="workflow-text">
+                        Choose the HitPoint, such as Head, Chest,
+                        Arm, Shoulder or Leg.
+                    </div>
+
+                </div>
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        PHYSICS
+                    </div>
+
+                    <div class="workflow-text">
+                        Adjust values such as speed, force,
+                        spawn position and impact behaviour.
                     </div>
 
                 </div>
 
             </div>
 
+            <p style="margin-top:20px;">
+
+                Use this page to find values that feel correct before
+                creating the corresponding stream event.
+
+            </p>
+
             <div class="note">
 
                 <div class="note-title">
-                    TESTING VS FINAL SETTINGS
+                    IMPACT INTENSITY
                 </div>
 
-                Use the Interaction page to experiment with behaviour.
-                Use the Settings page when you want to define the values
-                that CIGA should use during normal operation.
+                Impact Intensity controls how strongly the avatar reacts
+                when an object reaches its target.
+
+                The available range is <strong>0 to 5</strong>.
 
             </div>
 
@@ -1164,7 +1151,7 @@
 
 
     <!-- =================================================
-         05 STREAM ELEMENTS / VMC
+         05 EVENTS
     ================================================== -->
 
     <section class="help-section">
@@ -1176,94 +1163,6 @@
             </span>
 
             <h2 class="section-title">
-                SE / VMC
-            </h2>
-
-        </div>
-
-        <div class="section-content">
-
-            <p>
-                CIGA can connect to external services used for stream
-                integration and avatar output.
-            </p>
-
-            <div class="feature-grid">
-
-                <div class="feature">
-
-                    <div class="feature-title">
-                        STREAM ELEMENTS
-                    </div>
-
-                    <div class="feature-text">
-                        StreamElements can be connected to CIGA for
-                        stream-related events and integrations.
-                    </div>
-
-                </div>
-
-                <div class="feature">
-
-                    <div class="feature-title">
-                        VMC
-                    </div>
-
-                    <div class="feature-text">
-                        VMC is used to send avatar movement and bone data
-                        from CIGA to compatible external applications.
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    VMC PORT
-                </div>
-
-                CIGA currently sends its VMC output through
-                <span class="command">
-                    UDP 127.0.0.1:39539
-                </span>
-
-                on the local computer. This address is intended for
-                communication with software running on the same machine.
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    CONNECTION
-                </div>
-
-                Make sure the external application is running and configured
-                to receive the relevant CIGA output before testing the
-                connection.
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         06 EVENTS
-    ================================================== -->
-
-    <section class="help-section">
-
-        <div class="section-header">
-
-            <span class="section-number">
-                06
-            </span>
-
-            <h2 class="section-title">
                 EVENTS
             </h2>
 
@@ -1272,9 +1171,24 @@
         <div class="section-content">
 
             <p>
-                Events allow CIGA to perform configured actions when a
-                supported trigger occurs.
+                Events connect stream triggers to actions inside CIGA.
+                Instead of configuring every interaction separately,
+                you can build an event containing the effects you want.
             </p>
+
+            <div class="flow">
+
+                TRIGGER
+
+                <span>→</span>
+
+                EVENT
+
+                <span>→</span>
+
+                ACTIONS
+
+            </div>
 
             <div class="steps">
 
@@ -1285,7 +1199,8 @@
                     </div>
 
                     <div class="step-text">
-                        Open the <strong>EVENTS</strong> section.
+                        Open the <strong>EVENTS</strong> section and create
+                        or select an event.
                     </div>
 
                 </div>
@@ -1297,7 +1212,10 @@
                     </div>
 
                     <div class="step-text">
-                        Create or select the event you want to configure.
+                        Choose the event trigger, such as
+                        <strong>FOLLOW</strong>, <strong>SUBSCRIBE</strong>,
+                        <strong>BIT</strong>, <strong>RAID</strong> or a
+                        compatible Channel Point reward.
                     </div>
 
                 </div>
@@ -1309,8 +1227,7 @@
                     </div>
 
                     <div class="step-text">
-                        Configure the trigger and the action that should
-                        happen when that trigger occurs.
+                        Add one or more actions to the event.
                     </div>
 
                 </div>
@@ -1322,8 +1239,77 @@
                     </div>
 
                     <div class="step-text">
-                        Save the event configuration and test it with the
-                        connected integration.
+                        Configure each action and save the event.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        05
+                    </div>
+
+                    <div class="step-text">
+                        Test the event using <strong>Mock Events</strong>
+                        before using it during a live stream.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        INTERACTION
+                    </div>
+
+                    <div class="feature-text">
+                        Launches configured interaction objects with the
+                        selected physics, amount and target settings.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        PLAY_SOUND
+                    </div>
+
+                    <div class="feature-text">
+                        Plays a selected audio file when the event occurs.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        DISPLAY_IMAGE
+                    </div>
+
+                    <div class="feature-text">
+                        Displays an image on a configured avatar target.
+                        Position, scale, rotation and mirroring can be
+                        edited through the 3D image preview.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        EXPRESSIONS
+                    </div>
+
+                    <div class="feature-text">
+                        The event architecture is designed to support
+                        additional avatar reactions such as expressions
+                        as the system continues to develop.
                     </div>
 
                 </div>
@@ -1333,11 +1319,47 @@
             <div class="note">
 
                 <div class="note-title">
-                    EVENTS ARE CONFIGURABLE
+                    MULTIPLE ACTIONS
                 </div>
 
-                The exact behaviour depends on the trigger and actions
-                selected in the event configuration.
+                One event can contain multiple actions.
+
+                <br><br>
+
+                For example:
+
+                <br>
+
+                <strong>FOLLOW</strong>
+
+                <br>
+
+                → Interaction
+
+                <br>
+
+                → Sound
+
+                <br>
+
+                → Image
+
+                <br><br>
+
+                The configured actions can occur together rather than
+                requiring a manually defined sequence.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    CHANNEL POINTS
+                </div>
+
+                Reward filters can be left empty to accept compatible
+                rewards generally, or configured with a specific reward
+                name when you want one event to react only to that reward.
 
             </div>
 
@@ -1347,7 +1369,78 @@
 
 
     <!-- =================================================
-         07 PERFORMANCE
+         06 MOCK EVENTS
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                06
+            </span>
+
+            <h2 class="section-title">
+                MOCK EVENTS
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                Mock Events let you test your configuration without
+                waiting for a real Twitch or StreamElements event.
+            </p>
+
+            <div class="workflow">
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        PHYSICS
+                    </div>
+
+                    <div class="workflow-text">
+                        Test object movement, impact and reaction strength.
+                    </div>
+
+                </div>
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        EVENTS
+                    </div>
+
+                    <div class="workflow-text">
+                        Verify that triggers and multiple actions are
+                        configured correctly.
+                    </div>
+
+                </div>
+
+                <div class="workflow-item">
+
+                    <div class="workflow-title">
+                        MEDIA
+                    </div>
+
+                    <div class="workflow-text">
+                        Test sounds and displayed images before going live.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         07 CONNECTIONS
     ================================================== -->
 
     <section class="help-section">
@@ -1359,33 +1452,25 @@
             </span>
 
             <h2 class="section-title">
-                OBJECTS &amp; PERFORMANCE
+                EXTERNAL CONNECTIONS
             </h2>
 
         </div>
 
         <div class="section-content">
 
-            <p>
-                CIGA is designed so that having many objects in the library
-                does not automatically mean that all of them are being
-                rendered at the same time.
-            </p>
-
             <div class="feature-grid">
 
                 <div class="feature">
 
                     <div class="feature-title">
-                        LIBRARY VS ACTIVE OBJECTS
+                        V TUBE STUDIO
                     </div>
 
                     <div class="feature-text">
-                        You can keep a large number of objects in your CIGA
-                        library. Objects stored in the library are not all
-                        rendered continuously. The heavier part of the work
-                        happens when resources are imported, prepared,
-                        prewarmed or actively displayed.
+                        Start the VTube Studio API and enable
+                        VTube Studio Output in CIGA. Accept the
+                        permission request shown by VTube Studio.
                     </div>
 
                 </div>
@@ -1393,56 +1478,40 @@
                 <div class="feature">
 
                     <div class="feature-title">
-                        PROJECTILES
+                        VMC / VSEE FACE
                     </div>
 
                     <div class="feature-text">
-                        Interaction objects are created from already prepared
-                        resources where possible. This avoids repeatedly
-                        importing the same model during a burst.
+                        Enable VMC Output and configure the receiving
+                        application to listen on UDP port
+                        <strong>39539</strong>.
                     </div>
 
                 </div>
 
-            </div>
+                <div class="feature">
 
-            <div class="workflow">
-
-                <div class="workflow-item">
-
-                    <div class="workflow-title">
-                        CPU
+                    <div class="feature-title">
+                        STREAM ELEMENTS
                     </div>
 
-                    <div class="workflow-text">
-                        Handles tasks such as importing, preparing resources,
-                        application logic, events and other runtime work.
+                    <div class="feature-text">
+                        Connect StreamElements when you want external
+                        stream events to trigger your configured CIGA
+                        events.
                     </div>
 
                 </div>
 
-                <div class="workflow-item">
+                <div class="feature">
 
-                    <div class="workflow-title">
-                        GPU
+                    <div class="feature-title">
+                        LOCAL COMMUNICATION
                     </div>
 
-                    <div class="workflow-text">
-                        Handles the visible avatar, objects, materials,
-                        textures and 3D rendering.
-                    </div>
-
-                </div>
-
-                <div class="workflow-item">
-
-                    <div class="workflow-title">
-                        RAM / VRAM
-                    </div>
-
-                    <div class="workflow-text">
-                        Large models and textures can consume additional
-                        memory, especially during importing and preparation.
+                    <div class="feature-text">
+                        CIGA's runtime communication is designed around
+                        local connections wherever possible.
                     </div>
 
                 </div>
@@ -1452,59 +1521,13 @@
             <div class="note">
 
                 <div class="note-title">
-                    MANY OBJECTS AT ONCE
+                    FIRST VMC CONNECTION
                 </div>
 
-                Launching several objects in a burst is possible, but the
-                practical limit depends on the computer being used and on
-                how complex those models are.
+                After changing VMC settings for the first time,
+                restarting both CIGA and the receiving application
+                may be required.
 
-                Ten simple objects can be very different from ten extremely
-                detailed objects with large textures.
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    FIRST LOADS MAY TAKE LONGER
-                </div>
-
-                When CIGA prepares an object for the first time, loading can
-                take noticeably longer depending on the model.
-
-                Once the relevant resources are prepared and cached,
-                repeated use should avoid doing the same preparation again.
-
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    PRACTICAL GUIDELINE
-                </div>
-
-                A large library is not automatically a performance problem.
-                The biggest impact usually comes from very complex assets,
-                unusually large textures and having many heavy objects active
-                and visible at the same time.
-
-                CIGA can prepare resources efficiently, but the final
-                performance still depends on the hardware running it.
-            </div>
-
-            <div class="note">
-
-                <div class="note-title">
-                    CIGA DOES ITS BEST
-                </div>
-
-                CIGA is designed to handle resources as efficiently as
-                reasonably possible, but different computers and 3D models
-                will always have different limits.
-
-                The goal is to make the system practical and accessible,
-                not to pretend that hardware limitations do not exist.
             </div>
 
         </div>
@@ -1513,7 +1536,7 @@
 
 
     <!-- =================================================
-         08 TROUBLESHOOTING
+         08 PERFORMANCE
     ================================================== -->
 
     <section class="help-section">
@@ -1522,6 +1545,102 @@
 
             <span class="section-number">
                 08
+            </span>
+
+            <h2 class="section-title">
+                PERFORMANCE
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                CIGA prepares imported resources before they are needed
+                during live interaction.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        PRE-WARM
+                    </div>
+
+                    <div class="feature-text">
+                        Resources can be prepared and cached so that
+                        repeated interactions do not need to perform
+                        the same expensive loading operation again.
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        OPTIMIZATION
+                    </div>
+
+                    <div class="feature-text">
+                        Optimizing imported assets is recommended,
+                        particularly for complex objects and large
+                        textures.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    INITIAL LOAD
+                </div>
+
+                The first launch can take anywhere from a short time
+                to several minutes.
+
+                <br><br>
+
+                This depends on the number and complexity of imported
+                assets, texture sizes, storage speed and system hardware.
+
+                <br><br>
+
+                A longer initial load does not necessarily mean CIGA
+                has frozen. The application may still be preparing and
+                caching resources.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    RECOMMENDED
+                </div>
+
+                Keep imported assets optimized and avoid unnecessarily
+                large textures or extremely complex models whenever
+                possible.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         09 TROUBLESHOOTING
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                09
             </span>
 
             <h2 class="section-title">
@@ -1537,33 +1656,13 @@
                 <div class="feature">
 
                     <div class="feature-title">
-                        CIGA TAKES A WHILE TO LOAD
+                        LONG STARTUP
                     </div>
 
                     <div class="feature-text">
-                        This is often caused by a large or complex object
-                        being prepared.
-
-                        Check which object CIGA is currently loading and
-                        give the application some time to finish if the
-                        process is still progressing.
-                    </div>
-
-                </div>
-
-                <div class="feature">
-
-                    <div class="feature-title">
-                        CIGA SEEMS STUCK
-                    </div>
-
-                    <div class="feature-text">
-                        If the application stays on the same object for a
-                        very long time without progressing, that model may
-                        be causing the problem.
-
-                        Try removing that object from the library and start
-                        CIGA again.
+                        CIGA may still be preparing assets. Large
+                        or complex imports can take considerably longer.
+                        The optimizer is recommended for imported objects.
                     </div>
 
                 </div>
@@ -1576,8 +1675,7 @@
 
                     <div class="feature-text">
                         Check that the correct avatar is loaded and mapped,
-                        and make sure the required hit points are available.
-                        Then test the interaction manually before checking
+                        then test the interaction directly before checking
                         the event configuration.
                     </div>
 
@@ -1586,71 +1684,26 @@
                 <div class="feature">
 
                     <div class="feature-title">
-                        EVENTS DO NOT FIRE
+                        EVENT DOES NOT FIRE
                     </div>
 
                     <div class="feature-text">
-                        Check the integration connection first.
-
-                        For StreamElements, confirm that the connection is
-                        active. For VMC, confirm that the receiving software
-                        is listening on the configured local port.
+                        Check the external connection first, then verify
+                        that the event trigger and filters match the event
+                        being received.
                     </div>
 
                 </div>
 
-            </div>
+                <div class="feature">
 
-            <div class="steps">
-
-                <div class="step">
-
-                    <div class="step-number">
-                        01
+                    <div class="feature-title">
+                        OBJECT CAUSES INSTABILITY
                     </div>
 
-                    <div class="step-text">
-                        Restart CIGA and reproduce the problem once more.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        02
-                    </div>
-
-                    <div class="step-text">
-                        Check whether the issue always happens with the same
-                        avatar, object, event or integration.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        03
-                    </div>
-
-                    <div class="step-text">
-                        Check the Godot output for a clear error message.
-                        Relevant errors are much more useful than sending
-                        the entire output log without context.
-                    </div>
-
-                </div>
-
-                <div class="step">
-
-                    <div class="step-number">
-                        04
-                    </div>
-
-                    <div class="step-text">
-                        Test the simplest possible configuration first:
-                        one avatar, one object and one interaction.
+                    <div class="feature-text">
+                        If the problem started after importing a new object,
+                        remove that object and test CIGA again.
                     </div>
 
                 </div>
@@ -1660,28 +1713,48 @@
             <div class="note">
 
                 <div class="note-title">
-                    DEBUGGING INFORMATION
+                    DEBUGGING APPROACH
                 </div>
 
-                When reporting a problem, include what you were doing when
-                it happened, which object or avatar was involved, and any
-                relevant error shown by CIGA or Godot.
+                Test the simplest configuration first:
 
-                This makes it much easier to identify whether the problem is
-                related to the model, configuration, integration or runtime.
+                <br><br>
+
+                One avatar → One object → One interaction
+
+                <br><br>
+
+                Then add events, media and additional objects one at a time.
+                This makes it easier to identify which part is responsible
+                for a problem.
+
             </div>
 
             <div class="note">
 
                 <div class="note-title">
-                    OBJECT LOAD PROBLEMS
+                    FULLSCREEN WINDOW POSITIONING
                 </div>
 
-                If CIGA repeatedly becomes stuck while preparing one specific
-                object, that object is a useful first suspect.
+                When opening the configuration window from a fullscreen
+                launcher, the window may occasionally initialize in an
+                incorrect position.
 
-                Removing the problematic model and restarting the application
-                can help confirm whether the asset itself is responsible.
+                Restarting the affected window normally resolves the issue.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    RAPID REWARD EVENTS
+                </div>
+
+                Some reward-based interactions may currently require a
+                short cooldown between activations. Triggering several
+                rewards immediately one after another may cause a later
+                event to be missed.
+
             </div>
 
         </div>
@@ -1690,7 +1763,7 @@
 
 
     <!-- =================================================
-         09 FINAL VIEWPORT
+         10 FINAL VIEWPORT
     ================================================== -->
 
     <section class="help-section">
@@ -1698,7 +1771,7 @@
         <div class="section-header">
 
             <span class="section-number">
-                09
+                10
             </span>
 
             <h2 class="section-title">
@@ -1710,8 +1783,9 @@
         <div class="section-content">
 
             <p>
-                The final viewport is where the configured CIGA setup is
-                actually used.
+                The Final Viewport brings the configured avatar, camera,
+                interaction objects, events and connected outputs together
+                for actual use during a stream.
             </p>
 
             <div class="steps">
@@ -1723,7 +1797,7 @@
                     </div>
 
                     <div class="step-text">
-                        Make sure your avatar is loaded and mapped.
+                        Load and verify your avatar.
                     </div>
 
                 </div>
@@ -1735,8 +1809,7 @@
                     </div>
 
                     <div class="step-text">
-                        Calibrate and position the camera until the avatar
-                        appears correctly in the viewport.
+                        Check your objects and event configuration.
                     </div>
 
                 </div>
@@ -1748,8 +1821,7 @@
                     </div>
 
                     <div class="step-text">
-                        Make sure the required objects, settings,
-                        integrations and events are ready.
+                        Test the setup using Mock Events.
                     </div>
 
                 </div>
@@ -1761,8 +1833,8 @@
                     </div>
 
                     <div class="step-text">
-                        Press <strong>TAB</strong> to enter/use the final
-                        viewport interface.
+                        Press <strong>TAB</strong> to enter the transparent
+                        overlay workflow when preparing the viewport for OBS.
                     </div>
 
                 </div>
@@ -1772,12 +1844,12 @@
             <div class="note">
 
                 <div class="note-title">
-                    FINAL CHECK
+                    OBS
                 </div>
 
-                The final viewport brings together the avatar, camera,
-                objects, interactions, events and connected outputs into
-                the actual CIGA setup.
+                The CIGA viewport can be captured by OBS as part of the
+                streaming setup. When the interface is hidden, use
+                <strong>Alt+Tab</strong> to return to the CIGA window.
 
             </div>
 
@@ -1802,15 +1874,12 @@
 
         <p class="contact-text">
 
-            CIGA has been tested during development, but there may still be
-            bugs or unusual cases that were not caught.
+            If something does not work as expected, report what happened,
+            what you were doing, which avatar or object was involved,
+            and any useful error information you can provide.
 
-            If something does not work as expected, please report it.
-            Include what happened, what you were doing, and any useful
-            error information you can provide.
-
-            Bug reports and feedback are genuinely useful for improving
-            future versions of CIGA.
+            This makes it much easier to identify whether the problem is
+            related to the asset, configuration, integration or runtime.
 
         </p>
 
@@ -1851,4 +1920,3 @@
 </body>
 
 </html>
-
