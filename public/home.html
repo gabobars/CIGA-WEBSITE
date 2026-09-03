@@ -2665,8 +2665,20 @@
            CIGA MUSIC
         ========================= */
 
+        /*
+            IMPORTANT:
+
+            Put the music file in the same folder
+            as this HTML file and name it:
+
+                music.mp3
+
+            If your file has another name, change
+            ONLY this value.
+        */
+
         const CIGA_MUSIC_SOURCE =
-            "YOUR-MUSIC-FILE.mp3";
+            "./music.mp3";
 
 
         const CIGA_MUSIC_MUTED_KEY =
@@ -2875,14 +2887,26 @@
                     : "MUTE";
 
 
-            cigaMusicStatus.textContent =
+            if (
                 cigaMusic.muted
-                    ? "MUTED"
-                    : (
-                        cigaMusic.paused
-                            ? "READY"
-                            : "ACTIVE"
-                    );
+            ) {
+
+                cigaMusicStatus.textContent =
+                    "MUTED";
+
+            } else if (
+                cigaMusic.paused
+            ) {
+
+                cigaMusicStatus.textContent =
+                    "READY";
+
+            } else {
+
+                cigaMusicStatus.textContent =
+                    "ACTIVE";
+
+            }
 
         }
 
@@ -2938,23 +2962,17 @@
                 );
 
 
-            if (
-                safePosition > 0
-            ) {
+            try {
 
-                try {
+                cigaMusic.currentTime =
+                    safePosition;
 
-                    cigaMusic.currentTime =
-                        safePosition;
+            } catch (error) {
 
-                } catch (error) {
-
-                    console.warn(
-                        "CIGA MUSIC POSITION RESTORE ERROR:",
-                        error
-                    );
-
-                }
+                console.warn(
+                    "CIGA MUSIC POSITION RESTORE ERROR:",
+                    error
+                );
 
             }
 
@@ -2990,13 +3008,13 @@
             } catch (error) {
 
                 console.warn(
-                    "CIGA MUSIC AUTOPLAY BLOCKED:",
+                    "CIGA MUSIC PLAY ERROR:",
                     error
                 );
 
 
                 if (
-                    !shouldUnmute
+                    shouldUnmute
                 ) {
 
                     cigaMusic.muted =
@@ -3032,6 +3050,14 @@
                 cigaGetStoredMusicVolume();
 
 
+            /*
+                Autoplay starts muted because browsers
+                normally block unmuted autoplay.
+
+                The UNMUTE button below is a real user
+                interaction and can therefore start playback.
+            */
+
             cigaMusic.muted =
                 true;
 
@@ -3058,6 +3084,27 @@
             );
 
 
+            cigaMusic.addEventListener(
+                "canplay",
+                function() {
+
+                    if (
+                        cigaMusic.paused
+                    ) {
+
+                        cigaStartMusic(
+                            false
+                        );
+
+                    }
+
+                },
+                {
+                    once: true
+                }
+            );
+
+
             cigaStartMusic(
                 false
             );
@@ -3072,6 +3119,12 @@
                 if (
                     cigaMusic.muted
                 ) {
+
+                    /*
+                        This click is a user gesture.
+                        It is therefore allowed to start
+                        the audio even when autoplay was blocked.
+                    */
 
                     cigaMusic.muted =
                         false;
@@ -3089,6 +3142,10 @@
 
                         cigaMusic.muted =
                             true;
+
+
+                        cigaMusicStatus.textContent =
+                            "AUDIO ERROR";
 
                     }
 
@@ -3110,7 +3167,7 @@
 
         cigaMusicVolume.addEventListener(
             "input",
-            function() {
+            async function() {
 
                 const volume =
                     Number(
@@ -3120,6 +3177,18 @@
 
                 cigaMusic.volume =
                     volume;
+
+
+                if (
+                    volume > 0 &&
+                    cigaMusic.paused
+                ) {
+
+                    await cigaStartMusic(
+                        !cigaMusic.muted
+                    );
+
+                }
 
 
                 cigaSaveMusicState();
@@ -3190,24 +3259,11 @@
 
 
         cigaMusic.addEventListener(
-            "timeupdate",
-            function() {
-
-                /*
-                    Position is intentionally saved
-                    by the one-second interval above.
-                */
-
-            }
-        );
-
-
-        cigaMusic.addEventListener(
             "error",
             function() {
 
                 cigaMusicStatus.textContent =
-                    "AUDIO ERROR.";
+                    "AUDIO ERROR";
 
 
                 console.error(
