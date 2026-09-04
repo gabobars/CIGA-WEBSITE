@@ -480,6 +480,65 @@
             color: #aaa;
         }
 
+        .discord-link {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            padding:
+                12px 16px;
+
+            border:
+                1px solid
+                #555;
+
+            background: #050505;
+
+            color: #fff;
+
+            text-decoration: underline;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .discord-link:hover {
+
+            text-decoration: none;
+        }
+
+        .code-block {
+
+            display: block;
+
+            margin-top: 10px;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid
+                #333;
+
+            background: #050505;
+
+            color: #fff;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            overflow-x: auto;
+        }
+
         .contact {
 
             margin-top: 48px;
@@ -702,6 +761,7 @@
                 align-items:
                     flex-start;
             }
+
         }
 
     </style>
@@ -752,8 +812,9 @@
         <p class="intro-text">
             This page explains the main CIGA workflow:
             importing your avatar, adding interaction objects,
-            connecting your VTuber software, creating events,
-            testing your setup, and preparing the final viewport.
+            connecting your VTuber software, connecting the CIGAIS
+            Discord Worker, creating events, testing your setup,
+            and preparing the final viewport.
         </p>
 
     </section>
@@ -814,7 +875,7 @@
 
                     <div class="feature-text">
                         CIGA works with compatible 3D VTuber workflows
-                        through VMC / OSC. The default VMC port is
+                        through VMC / OSC. The default VMC sender port is
                         <strong>39539</strong>.
                     </div>
 
@@ -834,6 +895,27 @@
 
                 </div>
 
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    VMC IMAGE TRACKING
+                </div>
+
+                Image movement and orientation tracking is only available
+                when CIGA receives valid VMC tracking data.
+
+                <br><br>
+
+                This is intended for VMC-based workflows. Normal 2D
+                Live2D / VTube Studio operation does not use VMC image
+                tracking.
+
+                <br><br>
+
+                When valid VMC tracking is unavailable, tracked images
+                remain at their configured position and rotation.
             </div>
 
         </div>
@@ -1483,7 +1565,7 @@
 
                     <div class="feature-text">
                         Enable VMC Output and configure the receiving
-                        application to listen on UDP port
+                        application to use UDP port
                         <strong>39539</strong>.
                     </div>
 
@@ -1506,15 +1588,46 @@
                 <div class="feature">
 
                     <div class="feature-title">
-                        LOCAL COMMUNICATION
+                        CIGAIS WORKER
                     </div>
 
                     <div class="feature-text">
-                        CIGA's runtime communication is designed around
-                        local connections wherever possible.
+                        Connect the CIGAIS Worker when you want CIGA
+                        to communicate with the CIGA Discord interaction
+                        system.
                     </div>
 
                 </div>
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    VMC PORTS
+                </div>
+
+                <strong>VMC Sender:</strong> UDP 39539
+
+                <br>
+
+                <strong>VMC Receiver:</strong> UDP 39541
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
+                    VMC IMAGE TRACKING
+                </div>
+
+                VMC Image Tracking only operates when CIGA receives
+                valid VMC tracking data.
+
+                <br><br>
+
+                The feature is optional and does not affect normal
+                2D Live2D / VTube Studio operation.
 
             </div>
 
@@ -1536,7 +1649,7 @@
 
 
     <!-- =================================================
-         08 PERFORMANCE
+         08 CIGAIS WORKER
     ================================================== -->
 
     <section class="help-section">
@@ -1545,6 +1658,370 @@
 
             <span class="section-number">
                 08
+            </span>
+
+            <h2 class="section-title">
+                CIGAIS WORKER // DISCORD SETUP
+            </h2>
+
+        </div>
+
+        <div class="section-content">
+
+            <p>
+                The CIGAIS Worker is the Discord connection used by CIGA
+                to communicate with the CIGAIS interaction system.
+            </p>
+
+            <p>
+                Before connecting the Worker in CIGA, the CIGAIS Discord
+                bot must be installed in the Discord server that you
+                want to use.
+            </p>
+
+            <div class="note">
+
+                <div class="note-title">
+                    REQUIRED
+                </div>
+
+                The bot must be a member of the target Discord server.
+
+                <br><br>
+
+                Entering a Guild ID in CIGA without adding the bot to
+                that server will not establish a working Worker
+                connection.
+
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+
+                        Use the official CIGAIS bot invite:
+
+                        <br>
+
+                        <a
+                            href="https://discord.com/oauth2/authorize?client_id=1537372811977302099&permissions=2147568640&integration_type=0&scope=bot+applications.commands"
+                            class="discord-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            ADD CIGAIS BOT TO DISCORD
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Log into the Discord account that owns or has
+                        permission to manage the target server.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Select the server where CIGA will be used and
+                        authorize the CIGAIS bot.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Confirm that the CIGAIS bot appears in the
+                        server member list.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="font-size:16px;color:#fff;margin-top:28px;">
+                BOT OAUTH2 CONFIGURATION
+            </div>
+
+            <p style="margin-top:12px;">
+                The CIGAIS bot uses the following OAuth2 scopes:
+            </p>
+
+            <div class="code-block">
+                bot
+                <br>
+                applications.commands
+            </div>
+
+            <p style="margin-top:20px;">
+                The bot invite also includes the permissions required by
+                the current CIGAIS Worker configuration.
+            </p>
+
+            <div class="note">
+
+                <div class="note-title">
+                    SLASH COMMANDS
+                </div>
+
+                <strong>Use Slash Commands</strong> is the relevant
+                permission for the bot's Discord application commands.
+
+                <br><br>
+
+                The <strong>applications.commands</strong> OAuth2 scope
+                is also included in the invite so Discord application
+                commands can be registered.
+
+            </div>
+
+
+            <div style="font-size:16px;color:#fff;margin-top:28px;">
+                FIND YOUR GUILD ID
+            </div>
+
+            <p style="margin-top:12px;">
+                CIGA needs the Discord <strong>Guild ID</strong> of the
+                server where the CIGAIS bot has been installed.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Open Discord <strong>User Settings</strong>.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Open <strong>Advanced</strong> and enable
+                        <strong>Developer Mode</strong>.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Right-click the Discord server you want to use.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Select <strong>Copy Server ID</strong>.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p style="margin-top:20px;">
+                The copied number is your <strong>Guild ID</strong>.
+            </p>
+
+
+            <div style="font-size:16px;color:#fff;margin-top:28px;">
+                CONFIGURE CIGA
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-text">
+                        Open the <strong>OUTPUT</strong> configuration
+                        in CIGA.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-text">
+                        Open the <strong>CIGAIS WORKER</strong> source.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-text">
+                        Enter the copied Discord
+                        <strong>Guild ID</strong>.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-text">
+                        Save the configuration and connect the
+                        <strong>CIGAIS Worker</strong>.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="flow">
+
+                DISCORD SERVER
+
+                <span>→</span>
+
+                CIGAIS BOT
+
+                <span>→</span>
+
+                GUILD ID
+
+                <span>→</span>
+
+                CIGAIS WORKER
+
+                <span>→</span>
+
+                CIGA
+
+            </div>
+
+
+            <div class="note">
+
+                <div class="note-title">
+                    AUTO CONNECT
+                </div>
+
+                CIGA supports automatic connection for the CIGAIS Worker.
+
+                <br><br>
+
+                Enable <strong>AUTO CONNECT ON LAUNCH</strong> in the
+                CIGAIS Worker source configuration after the Guild ID
+                has been configured.
+
+                <br><br>
+
+                If no Guild ID is provided, CIGA intentionally skips the
+                Worker connection instead of attempting an unnecessary
+                connection.
+
+            </div>
+
+
+            <div class="note">
+
+                <div class="note-title">
+                    SECURITY
+                </div>
+
+                The Discord bot invite link can be shared with people
+                who need to add the CIGAIS bot to their server.
+
+                <br><br>
+
+                Never share the Discord <strong>Bot Token</strong>,
+                <strong>Client Secret</strong>, or other private
+                authentication credentials.
+
+            </div>
+
+
+            <div class="note">
+
+                <div class="note-title">
+                    BOT STATUS
+                </div>
+
+                The Worker connection requires the Discord bot to remain
+                present in the selected server.
+
+                <br><br>
+
+                Removing the bot from the server prevents the CIGAIS
+                Worker from operating with that server.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         09 PERFORMANCE
+    ================================================== -->
+
+    <section class="help-section">
+
+        <div class="section-header">
+
+            <span class="section-number">
+                09
             </span>
 
             <h2 class="section-title">
@@ -1632,7 +2109,7 @@
 
 
     <!-- =================================================
-         09 TROUBLESHOOTING
+         10 TROUBLESHOOTING
     ================================================== -->
 
     <section class="help-section">
@@ -1640,7 +2117,7 @@
         <div class="section-header">
 
             <span class="section-number">
-                09
+                10
             </span>
 
             <h2 class="section-title">
@@ -1713,6 +2190,37 @@
             <div class="note">
 
                 <div class="note-title">
+                    CIGAIS WORKER
+                </div>
+
+                If the Worker does not connect:
+
+                <br><br>
+
+                1. Confirm that the CIGAIS bot is inside the Discord server.
+
+                <br>
+
+                2. Confirm that the Guild ID belongs to that server.
+
+                <br>
+
+                3. Confirm that the Guild ID is entered correctly in CIGA.
+
+                <br>
+
+                4. Check that the bot has the permissions required by
+                the Worker.
+
+                <br>
+
+                5. Check the CIGA Worker connection log.
+
+            </div>
+
+            <div class="note">
+
+                <div class="note-title">
                     DEBUGGING APPROACH
                 </div>
 
@@ -1763,7 +2271,7 @@
 
 
     <!-- =================================================
-         10 FINAL VIEWPORT
+         11 FINAL VIEWPORT
     ================================================== -->
 
     <section class="help-section">
@@ -1771,7 +2279,7 @@
         <div class="section-header">
 
             <span class="section-number">
-                10
+                11
             </span>
 
             <h2 class="section-title">
@@ -1830,6 +2338,20 @@
 
                     <div class="step-number">
                         04
+                    </div>
+
+                    <div class="step-text">
+                        Confirm external connections such as
+                        StreamElements, VTube Studio, VMC and
+                        CIGAIS Worker when required.
+                    </div>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+                        05
                     </div>
 
                     <div class="step-text">
